@@ -31,7 +31,9 @@ public class Vampire extends Warrior {
         int healthBeforeHit = opponent.getHealth();
         super.hits(opponent);
         int healthAfterHit = opponent.getHealth();
-        healthRestored(healthBeforeHit - healthAfterHit);
+        int damageDealt = (healthAfterHit < 0) ? healthBeforeHit : (healthBeforeHit - healthAfterHit);
+        healthRestored(damageDealt);
+
     }
 
     private void healthRestored(int damageDealt) {

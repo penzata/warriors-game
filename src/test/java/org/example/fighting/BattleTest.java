@@ -1,9 +1,6 @@
 package org.example.fighting;
 
-import org.example.battleunits.Army;
-import org.example.battleunits.Defender;
-import org.example.battleunits.Knight;
-import org.example.battleunits.Warrior;
+import org.example.battleunits.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -55,9 +52,45 @@ class BattleTest {
                 arguments(army7, army8, false));
     }
 
+    static Stream<Arguments> armiesWithVampires() {
+        Army army1 = new Army(Defender::new, 5)
+                .addBattleUnits(Vampire::new, 6)
+                .addBattleUnits(Warrior::new, 7);
+        Army army2 = new Army(Warrior::new, 6)
+                .addBattleUnits(Defender::new, 6)
+                .addBattleUnits(Vampire::new, 6);
+
+        Army army3 = new Army(Defender::new, 2)
+                .addBattleUnits(Vampire::new, 3)
+                .addBattleUnits(Warrior::new, 4);
+        Army army4 = new Army(Warrior::new, 4)
+                .addBattleUnits(Defender::new, 4)
+                .addBattleUnits(Vampire::new, 3);
+
+        Army army5 = new Army(Defender::new, 11)
+                .addBattleUnits(Vampire::new, 3)
+                .addBattleUnits(Warrior::new, 4);
+        Army army6 = new Army(Warrior::new, 4)
+                .addBattleUnits(Defender::new, 4)
+                .addBattleUnits(Vampire::new, 13);
+
+        Army army7 = new Army(Defender::new, 9)
+                .addBattleUnits(Vampire::new, 3)
+                .addBattleUnits(Warrior::new, 8);
+        Army army8 = new Army(Warrior::new, 4)
+                .addBattleUnits(Defender::new, 4)
+                .addBattleUnits(Vampire::new, 13);
+
+        return Stream.of(
+                arguments(army1, army2, false),
+                arguments(army3, army4, false),
+                arguments(army5, army6, true),
+                arguments(army7, army8, true));
+    }
+
     @DisplayName("different battles between two armies")
     @ParameterizedTest(name = "battle{index}:  {0} vs {1} --> attacker army wins? --> {2}")
-    @MethodSource({"differentBattleArmies", "fullDefenderBattleArmies"})
+    @MethodSource({"differentBattleArmies", "fullDefenderBattleArmies", "armiesWithVampires"})
     void BattleOneArmyAgainstAnotherWhoWinsOrLoses(Army army1, Army army2, Boolean expectedBattleResult) {
         boolean battleResult = Battle.fight(army1, army2);
         assertEquals(expectedBattleResult, battleResult);

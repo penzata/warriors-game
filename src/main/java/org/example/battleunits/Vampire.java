@@ -4,6 +4,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class Vampire extends Warrior {
     private int vampirism;
+    /**
+     * health cap for healing
+     */
     private int healthBeforeFight;
 
     /**

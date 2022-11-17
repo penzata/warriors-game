@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class Vampire extends Warrior {
     private int vampirism;
+    private int healthBeforeFight;
 
     /**
      * Constructs default Vampire object with default health(40), attack(4) & vampirism(50).
@@ -11,11 +12,13 @@ public class Vampire extends Warrior {
     public Vampire() {
         super(40, 4);
         this.vampirism = 50;
+        this.healthBeforeFight = 40;
     }
 
-    public Vampire(int health, int attack, int vampirism) {
+    protected Vampire(int health, int attack, int vampirism) {
         super(health, attack);
         this.vampirism = vampirism;
+        this.healthBeforeFight = health;
     }
 
     /**
@@ -33,12 +36,11 @@ public class Vampire extends Warrior {
         int healthAfterHit = opponent.getHealth();
         int damageDealt = (healthAfterHit < 0) ? healthBeforeHit : (healthBeforeHit - healthAfterHit);
         healthRestored(damageDealt);
-
     }
 
     private void healthRestored(int damageDealt) {
-        int heal = (damageDealt * this.vampirism) / 100;
-        setHealth(Math.min(getHealth() + heal, 40));
+        int heal = (damageDealt * vampirism) / 100;
+        setHealth(Math.min(getHealth() + heal, healthBeforeFight));
     }
 
     @Override

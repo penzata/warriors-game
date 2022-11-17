@@ -23,7 +23,7 @@ public class Defender extends Warrior {
      */
     Defender(@NotNull Defender defender) {
         super(defender);
-        this.defence = getDefence();
+        this.defence = defender.defence;
     }
 
     public int getDefence() {

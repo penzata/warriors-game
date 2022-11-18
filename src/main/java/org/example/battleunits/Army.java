@@ -12,6 +12,7 @@ public class Army {
      * Constructs default Army with two Warriors.
      */
     public Army() {
+
         this(Warrior::new, 2);
     }
 
@@ -31,11 +32,13 @@ public class Army {
      * @return unmodifiable (read-only) army list
      */
     public List<Warrior> getArmy() {
+
         return Collections.unmodifiableList(army);
     }
 
     @Override
     public String toString() {
+
         return "Army{" + army.size() + "}";
     }
 

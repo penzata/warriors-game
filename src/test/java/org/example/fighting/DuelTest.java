@@ -54,7 +54,7 @@ class DuelTest {
         Knight knight = new Knight();
         Duel.fight(warrior, knight);
 
-        assertEquals(-6, warrior.getHealth());
+        assertEquals(0, warrior.getHealth());
         assertEquals(10, knight.getHealth());
     }
 
@@ -64,7 +64,7 @@ class DuelTest {
         Defender defender = new Defender();
 
         assertFalse(Duel.fight(warrior, defender));
-        assertEquals(-1, warrior.getHealth());
+        assertEquals(0, warrior.getHealth());
         assertEquals(9, defender.getHealth());
     }
 
@@ -75,6 +75,6 @@ class DuelTest {
 
         assertTrue(Duel.fight(defender, vampire));
         assertEquals(22, defender.getHealth());
-        assertEquals(-1, vampire.getHealth());
+        assertEquals(0, vampire.getHealth());
     }
 }

@@ -13,7 +13,7 @@ public class Warrior {
         this(50, 5);
     }
 
-    protected Warrior(int health, int attack) {
+    Warrior(int health, int attack) {
         this.health = health;
         this.attack = attack;
     }
@@ -54,7 +54,7 @@ public class Warrior {
 
     protected void takeDamage(int damage) {
 
-        setHealth(getHealth() - damage);
+        setHealth(Math.max((getHealth() - damage), 0));
     }
 
     @Override

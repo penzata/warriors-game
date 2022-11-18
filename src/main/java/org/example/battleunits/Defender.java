@@ -2,7 +2,7 @@ package org.example.battleunits;
 
 import org.jetbrains.annotations.NotNull;
 
-public class Defender extends Warrior {
+public class Defender extends Warrior implements HasDefence {
     private int defence;
 
     /**
@@ -26,7 +26,17 @@ public class Defender extends Warrior {
         this.defence = defender.defence;
     }
 
+    @Override
+    public void receiveDamage(CanAttack damageDealer) {
+        super.receiveDamage(() -> Math.max(0, damageDealer.getAttack() - getDefence()));
+    }
+
+    @Override
     public int getDefence() {
+        return defence;
+    }
+
+/*    public int getDefence() {
         return defence;
     }
 
@@ -48,5 +58,5 @@ public class Defender extends Warrior {
                 ", a=" + getAttack() +
                 ", d=" + getDefence() +
                 '}';
-    }
+    }*/
 }

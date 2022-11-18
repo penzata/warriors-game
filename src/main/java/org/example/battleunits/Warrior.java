@@ -2,7 +2,7 @@ package org.example.battleunits;
 
 import org.jetbrains.annotations.NotNull;
 
-public class Warrior {
+public class Warrior implements BattleUnit {
     private int health;
     private int attack;
 
@@ -26,7 +26,7 @@ public class Warrior {
         this.attack = warrior.attack;
     }
 
-    public int getHealth() {
+/*    public int getHealth() {
         return health;
     }
 
@@ -55,10 +55,30 @@ public class Warrior {
     protected void takeDamage(int damage) {
 
         setHealth(Math.max((getHealth() - damage), 0));
-    }
+    }*/
 
     @Override
     public String toString() {
         return getClass().getSimpleName();
+    }
+
+    @Override
+    public int getAttack() {
+        return attack;
+    }
+
+    @Override
+    public int getHealth() {
+        return health;
+    }
+
+    @Override
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    @Override
+    public void reduceHealthBasedOnDamage(int damage) {
+        setHealth(Math.max(getHealth() - damage, 0));
     }
 }

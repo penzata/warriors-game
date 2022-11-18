@@ -56,4 +56,9 @@ public class Warrior implements BattleUnit {
 
         setHealth(Math.max(getHealth() - damage, 0));
     }
+
+    @Override
+    public void healthRestored(CanAttack damageDealer) {
+
+    }
 }

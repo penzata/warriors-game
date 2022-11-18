@@ -35,28 +35,4 @@ public class Defender extends Warrior implements HasDefence {
     public int getDefence() {
         return defence;
     }
-
-/*    public int getDefence() {
-        return defence;
-    }
-
-    protected void setDefence(int defence) {
-        this.defence = defence;
-    }
-
-    @Override
-    protected void takeDamage(int damage) {
-        if (damage > getDefence()) {
-            setHealth(getHealth() - (damage - getDefence()));
-        }
-    }
-
-    @Override
-    public String toString() {
-        return getClass().getSimpleName() + "{" +
-                "h=" + getHealth() +
-                ", a=" + getAttack() +
-                ", d=" + getDefence() +
-                '}';
-    }*/
 }

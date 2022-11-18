@@ -37,27 +37,9 @@ public class Vampire extends Warrior {
         int healthBeforeHit = opponent.getHealth();
         super.hit(opponent);
         int healthAfterHit = opponent.getHealth();
+        int damageDealt = Math.min(healthBeforeHit, healthBeforeHit - healthAfterHit);
+        final int PERCENT = 100;
+        int heal = damageDealt * vampirism / PERCENT;
+        healthRestored(heal);
     }
-
-/*    @Override
-    public void hits(Warrior opponent) {
-        int healthBeforeHit = opponent.getHealth();
-        super.hits(opponent);
-        int healthAfterHit = opponent.getHealth();
-        int damageDealt = (healthAfterHit < 0) ? healthBeforeHit : (healthBeforeHit - healthAfterHit);
-        healthRestored(damageDealt);
-    }
-
-    private void healthRestored(int damageDealt) {
-        int heal = damageDealt * vampirism / 100;
-        setHealth(Math.min(getHealth() + heal, healthBeforeFight));
-    }
-
-    public int getVampirism() {
-        return vampirism;
-    }
-
-    protected void setVampirism(int vampirism) {
-        this.vampirism = vampirism;
-    }*/
 }

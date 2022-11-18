@@ -30,15 +30,15 @@ public class Army {
         return this;
     }
 
+    private void addBattleUnit(Warrior warrior) {
+        this.army.add(warrior);
+    }
+
     @Override
     public String toString() {
         return "Army{" +
                 "units: " + army.size() +
                 '}';
-    }
-
-    private void addBattleUnit(Warrior warrior) {
-        this.army.add(warrior);
     }
 
     public Iterator<Warrior> getAliveUnit() {
@@ -47,7 +47,7 @@ public class Army {
 
     private class GetAliveUnitIterate implements Iterator<Warrior> {
         Iterator<Warrior> it = army.iterator();
-        Warrior warrior;
+        Warrior champion;
 
         @Override
         public Warrior next() {
@@ -58,21 +58,21 @@ public class Army {
                     System.out.println(e);
                 }
             }
-            return warrior;
+            return champion;
         }
 
         @Override
         public boolean hasNext() {
-            if (warrior == null || !warrior.isAlive()) {
-                if (it.hasNext()) {
-                    warrior = it.next();
+            if (champion != null && champion.isAlive()) {
+                return true;
+            }
+            while (it.hasNext()) {
+                champion = it.next();
+                if (champion.isAlive()) {
                     return true;
-                } else {
-                    return false;
                 }
             }
-            return true;
+            return false;
         }
     }
-
 }

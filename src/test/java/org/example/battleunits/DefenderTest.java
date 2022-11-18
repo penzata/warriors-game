@@ -14,12 +14,12 @@ class DefenderTest {
         defender = new Defender();
     }
 
-    @Test
-    void takeDamage() {
-        defender.receiveDamage(10);
-
-        assertEquals(52, defender.getHealth());
-    }
+//    @Test
+//    void takeDamage() {
+//        defender.receiveDamage(10);
+//
+//        assertEquals(52, defender.getHealth());
+//    }
 
     @Test
     void takeDamageFromRookie() {

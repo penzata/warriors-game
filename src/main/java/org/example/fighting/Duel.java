@@ -12,7 +12,7 @@ public class Duel {
      * @param warrior2 second warrior
      * @return TRUE if the first warrior is alive (and thus the other one is not anymore), else - FALSE
      */
-    static boolean fight(Warrior warrior1, Warrior warrior2) {
+    public static boolean fight(Warrior warrior1, Warrior warrior2) {
         while (warrior1.isAlive() && warrior2.isAlive()) {
             warrior1.hits(warrior2);
             if(warrior2.isAlive()) {

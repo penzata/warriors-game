@@ -15,7 +15,7 @@ public class Battle {
      * @param army2 - defending army
      * @return TRUE if there is someone still alive from the first army (and thus everyone is dead from the other), else - FALSE
      */
-    static boolean fight(Army army1, Army army2) {
+    public static boolean fight(Army army1, Army army2) {
         List<Warrior> firstArmy = army1.getArmy();
         List<Warrior> secondArmy = army2.getArmy();
         boolean firstArmyWins = true;

@@ -1,9 +1,6 @@
 package org.example.fighting;
 
 import org.example.battleunits.Army;
-import org.example.battleunits.Warrior;
-
-import java.util.List;
 
 public class Battle {
 

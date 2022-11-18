@@ -1,12 +1,14 @@
 package org.example.battleunits;
 
+import org.example.exceptions.DoesntExistException;
+
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.function.Supplier;
 
 public class Army {
-    private List<Warrior> army;
+    private Collection<Warrior> army;
 
     /**
      * Constructs default Army with two Warriors.
@@ -23,23 +25,54 @@ public class Army {
 
     public Army addBattleUnits(Supplier<Warrior> factory, Integer numberOfUnits) {
         for (int i = 0; i < numberOfUnits; i++) {
-            army.add(factory.get());
+            addBattleUnit(factory.get());
         }
         return this;
     }
 
-    /**
-     * @return unmodifiable (read-only) army list
-     */
-    public List<Warrior> getArmy() {
-
-        return Collections.unmodifiableList(army);
-    }
-
     @Override
     public String toString() {
+        return "Army{" +
+                "units: " + army.size() +
+                '}';
+    }
 
-        return "Army{" + army.size() + "}";
+    private void addBattleUnit(Warrior warrior) {
+        this.army.add(warrior);
+    }
+
+    public Iterator<Warrior> getAliveUnit() {
+        return new GetAliveUnitIterate();
+    }
+
+    private class GetAliveUnitIterate implements Iterator<Warrior> {
+        Iterator<Warrior> it = army.iterator();
+        Warrior warrior;
+
+        @Override
+        public Warrior next() {
+            if (!hasNext()) {
+                try {
+                    throw new DoesntExistException("no more army units left");
+                } catch (DoesntExistException e) {
+                    System.out.println(e);
+                }
+            }
+            return warrior;
+        }
+
+        @Override
+        public boolean hasNext() {
+            if (warrior == null || !warrior.isAlive()) {
+                if (it.hasNext()) {
+                    warrior = it.next();
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 
 }

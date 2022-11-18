@@ -1,17 +1,17 @@
 package org.example.fighting;
 
-import org.example.battleunits.*;
+import org.example.battleunits.Army;
+import org.example.battleunits.Defender;
+import org.example.battleunits.Vampire;
+import org.example.battleunits.Warrior;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.List;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class BattleTest {
@@ -94,19 +94,5 @@ class BattleTest {
     void BattleOneArmyAgainstAnotherWhoWinsOrLoses(Army army1, Army army2, Boolean expectedBattleResult) {
         boolean battleResult = Battle.fight(army1, army2);
         assertEquals(expectedBattleResult, battleResult);
-    }
-
-    @Test
-    @DisplayName("One army of warrior & 2 knights fights against another army of two warriors and a knight")
-    void TwoArmiesOfThreeFight() {
-        Army army1 = new Army(Warrior::new, 1)
-                .addBattleUnits(Knight::new, 2);
-        Army army2 = new Army(Warrior::new, 2)
-                .addBattleUnits(Knight::new, 1);
-
-        assertTrue(Battle.fight(army1, army2));
-
-        List<Warrior> listOfArmy1 = army1.getArmy();
-        assertEquals(22, listOfArmy1.get(2).getHealth());
     }
 }

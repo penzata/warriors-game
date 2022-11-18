@@ -59,9 +59,6 @@ public class Warrior {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "{" +
-                "h=" + health +
-                ", a=" + attack +
-                '}';
+        return getClass().getSimpleName();
     }
 }

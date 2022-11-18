@@ -12,12 +12,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class ArmyTest {
 
     private Army testArmy;
-    private List<Warrior> unmodifiableArmy;
+
 
     @BeforeEach
     void startUp() {
         testArmy = new Army();
-        unmodifiableArmy = testArmy.getArmy();
     }
 
     @Test
@@ -30,19 +29,7 @@ class ArmyTest {
         testArmy.addBattleUnits(Defender::new, 4);
         testArmy.addBattleUnits(Warrior::new, 1);
 
-        assertEquals(15, unmodifiableArmy.size());
-
-        unmodifiableArmy.forEach(System.out::println);
+        System.out.println(testArmy);
     }
 
-    @Test
-    @DisplayName("testing read-only army collection")
-    void ChangingCollectionThrowsException() {
-        Warrior newWarrior = new Warrior();
-        Warrior warrior = unmodifiableArmy.get(0);
-
-        assertThrows(UnsupportedOperationException.class, () -> unmodifiableArmy.add(newWarrior));
-        assertThrows(UnsupportedOperationException.class, () -> unmodifiableArmy.remove(warrior));
-        assertThrows(UnsupportedOperationException.class, () -> unmodifiableArmy.set(1, newWarrior));
-    }
 }

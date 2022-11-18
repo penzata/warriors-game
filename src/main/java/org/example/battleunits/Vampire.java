@@ -18,7 +18,7 @@ public class Vampire extends Warrior {
         this.healthBeforeFight = 40;
     }
 
-    protected Vampire(int health, int attack, int vampirism) {
+    Vampire(int health, int attack, int vampirism) {
         super(health, attack);
         this.vampirism = vampirism;
         this.healthBeforeFight = health;
@@ -42,7 +42,7 @@ public class Vampire extends Warrior {
     }
 
     private void healthRestored(int damageDealt) {
-        int heal = (damageDealt * vampirism) / 100;
+        int heal = damageDealt * vampirism / 100;
         setHealth(Math.min(getHealth() + heal, healthBeforeFight));
     }
 
@@ -51,7 +51,7 @@ public class Vampire extends Warrior {
         return getClass().getSimpleName() + "{" +
                 "h=" + getHealth() +
                 ", a=" + getAttack() +
-                ", v=" + vampirism +
+                ", v=" + getVampirism() +
                 '}';
     }
 

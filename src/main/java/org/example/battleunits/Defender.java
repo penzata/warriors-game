@@ -13,7 +13,7 @@ public class Defender extends Warrior {
         this.defence = 2;
     }
 
-    protected Defender(int health, int attack, int defence) {
+    Defender(int health, int attack, int defence) {
         super(health, attack);
         this.defence = defence;
     }
@@ -36,8 +36,8 @@ public class Defender extends Warrior {
 
     @Override
     protected void takeDamage(int damage) {
-        if (damage > defence) {
-            setHealth(getHealth() - (damage - defence));
+        if (damage > getDefence()) {
+            setHealth(getHealth() - (damage - getDefence()));
         }
     }
 
@@ -46,7 +46,7 @@ public class Defender extends Warrior {
         return getClass().getSimpleName() + "{" +
                 "h=" + getHealth() +
                 ", a=" + getAttack() +
-                ", d=" + defence +
+                ", d=" + getDefence() +
                 '}';
     }
 }

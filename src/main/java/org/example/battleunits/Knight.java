@@ -12,7 +12,7 @@ public class Knight extends Warrior {
         super(50, 7);
     }
 
-    protected Knight(int health, int attack) {
+    Knight(int health, int attack) {
 
         super(health, attack);
     }

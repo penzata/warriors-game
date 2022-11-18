@@ -60,5 +60,6 @@ public class Warrior implements BattleUnit {
     @Override
     public void healthRestored(CanAttack damageDealer) {
 
+        setHealth(Math.min(getHealth() + healingPoints, initialHealth));
     }
 }

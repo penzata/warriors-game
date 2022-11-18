@@ -16,7 +16,7 @@ class DefenderTest {
 
     @Test
     void takeDamage() {
-        defender.takeDamage(10);
+        defender.receiveDamage(10);
 
         assertEquals(52, defender.getHealth());
     }
@@ -24,7 +24,7 @@ class DefenderTest {
     @Test
     void takeDamageFromRookie() {
         Rookie rookie = new Rookie();
-        rookie.hits(defender);
+        rookie.hit(defender);
 
         assertEquals(60, defender.getHealth());
     }

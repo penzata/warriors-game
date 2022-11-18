@@ -6,7 +6,7 @@ public class Warrior implements BattleUnit {
     private int health;
     private int attack;
 
-    private int initHealth;
+    private int initialHealth;
 
     /**
      * Constructs default Warrior object with default health(50) & attack(5).
@@ -14,11 +14,11 @@ public class Warrior implements BattleUnit {
     public Warrior() {
 
         this(50, 5);
-        initHealth = this.health;
+        initialHealth = this.health;
     }
 
     Warrior(int health, int attack) {
-        initHealth = this.health = health;
+        initialHealth = this.health = health;
         this.attack = attack;
     }
 
@@ -48,7 +48,7 @@ public class Warrior implements BattleUnit {
     @Override
     public void setHealth(int health) {
 
-        Math.min(this.health = health, initHealth);
+        this.health = Math.min(initialHealth, health);
     }
 
     @Override

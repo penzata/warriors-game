@@ -14,9 +14,9 @@ public class Duel {
      */
     public static boolean fight(Warrior warrior1, Warrior warrior2) {
         while (warrior1.isAlive() && warrior2.isAlive()) {
-            warrior1.hits(warrior2);
+            warrior1.hit(warrior2);
             if(warrior2.isAlive()) {
-                warrior2.hits(warrior1);
+                warrior2.hit(warrior1);
             }
         }
             return warrior1.isAlive();

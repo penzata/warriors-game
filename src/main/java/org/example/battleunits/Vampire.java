@@ -5,23 +5,16 @@ import org.jetbrains.annotations.NotNull;
 public class Vampire extends Warrior {
     private int vampirism;
     /**
-     * health cap for healing
-     */
-    private int healthBeforeFight;
-
-    /**
      * Constructs default Vampire object with default health(40), attack(4) & vampirism(50).
      */
     public Vampire() {
         super(40, 4);
         this.vampirism = 50;
-        this.healthBeforeFight = 40;
     }
 
     Vampire(int health, int attack, int vampirism) {
         super(health, attack);
         this.vampirism = vampirism;
-        this.healthBeforeFight = health;
     }
 
     /**

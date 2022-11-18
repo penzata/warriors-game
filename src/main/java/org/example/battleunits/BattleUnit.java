@@ -6,6 +6,7 @@ public interface BattleUnit extends CanAttack, HasHealth {
     }
 
     default void receiveDamage(CanAttack damageDealer) {
+
         reduceHealthBasedOnDamage(damageDealer.getAttack());
     }
 }

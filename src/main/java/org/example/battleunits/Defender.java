@@ -26,14 +26,6 @@ public class Defender extends Warrior {
         this.defence = defender.defence;
     }
 
-    public int getDefence() {
-        return defence;
-    }
-
-    protected void setDefence(int defence) {
-        this.defence = defence;
-    }
-
     @Override
     protected void takeDamage(int damage) {
         if (damage > getDefence()) {
@@ -41,12 +33,14 @@ public class Defender extends Warrior {
         }
     }
 
-    @Override
-    public String toString() {
-        return getClass().getSimpleName() + "{" +
-                "h=" + getHealth() +
-                ", a=" + getAttack() +
-                ", d=" + getDefence() +
-                '}';
+    public int getDefence() {
+
+        return defence;
     }
+
+    protected void setDefence(int defence) {
+
+        this.defence = defence;
+    }
+
 }

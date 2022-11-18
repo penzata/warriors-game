@@ -46,20 +46,13 @@ public class Vampire extends Warrior {
         setHealth(Math.min(getHealth() + heal, healthBeforeFight));
     }
 
-    @Override
-    public String toString() {
-        return getClass().getSimpleName() + "{" +
-                "h=" + getHealth() +
-                ", a=" + getAttack() +
-                ", v=" + getVampirism() +
-                '}';
-    }
-
     public int getVampirism() {
+
         return vampirism;
     }
 
     protected void setVampirism(int vampirism) {
+
         this.vampirism = vampirism;
     }
 }

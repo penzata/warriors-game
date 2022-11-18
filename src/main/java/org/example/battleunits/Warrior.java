@@ -27,14 +27,17 @@ public class Warrior {
     }
 
     public int getHealth() {
+
         return health;
     }
 
     protected void setHealth(int health) {
+
         this.health = health;
     }
 
     public int getAttack() {
+
         return attack;
     }
 
@@ -49,6 +52,7 @@ public class Warrior {
     }
 
     public boolean isAlive() {
+
         return getHealth() > 0;
     }
 
@@ -59,9 +63,6 @@ public class Warrior {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "{" +
-                "h=" + health +
-                ", a=" + attack +
-                '}';
+        return getClass().getSimpleName();
     }
 }

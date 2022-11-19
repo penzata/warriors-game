@@ -1,6 +1,6 @@
-package org.example.battleunits;
+package org.example.battleunits.characteristic;
 
-public interface HasHealth {
+public interface Health {
     int getHealth();
     void setHealth(int health);
     void reduceHealthBasedOnDamage(int damage);

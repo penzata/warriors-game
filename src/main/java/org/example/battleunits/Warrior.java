@@ -5,7 +5,6 @@ import org.jetbrains.annotations.NotNull;
 public class Warrior implements BattleUnit {
     private int health;
     private int attack;
-
     private int initialHealth;
 
     /**
@@ -28,6 +27,7 @@ public class Warrior implements BattleUnit {
     Warrior(@NotNull Warrior warrior) {
         this.health = warrior.health;
         this.attack = warrior.attack;
+        this.initialHealth = warrior.initialHealth;
     }
 
     @Override

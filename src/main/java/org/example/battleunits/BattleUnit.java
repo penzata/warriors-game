@@ -1,11 +1,15 @@
 package org.example.battleunits;
 
-public interface BattleUnit extends CanAttack, HasHealth {
+import org.example.battleunits.characteristic.Attack;
+import org.example.battleunits.characteristic.Health;
+
+public interface BattleUnit extends Attack, Health {
     default void hit(BattleUnit opponent) {
+
         opponent.receiveDamage(this);
     }
 
-    default void receiveDamage(CanAttack damageDealer) {
+    default void receiveDamage(Attack damageDealer) {
 
         reduceHealthBasedOnDamage(damageDealer.getAttack());
     }

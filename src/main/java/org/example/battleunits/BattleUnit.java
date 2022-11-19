@@ -11,6 +11,6 @@ public interface BattleUnit extends Attack, Health {
 
     default void receiveDamage(Attack damageDealer) {
 
-        reduceHealthBasedOnDamage(damageDealer.getAttack());
+        reduceHealth(damageDealer.getAttack());
     }
 }

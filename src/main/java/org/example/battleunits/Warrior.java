@@ -52,7 +52,7 @@ public class Warrior implements BattleUnit {
     }
 
     @Override
-    public void reduceHealthBasedOnDamage(int damage) {
+    public void reduceHealth(int damage) {
 
         setHealth(Math.max(getHealth() - damage, 0));
     }

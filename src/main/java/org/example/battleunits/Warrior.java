@@ -13,11 +13,11 @@ public class Warrior implements BattleUnit {
     public Warrior() {
 
         this(50, 5);
-        initialHealth = this.health;
+        this.initialHealth = this.health;
     }
 
     Warrior(int health, int attack) {
-        initialHealth = this.health = health;
+        this.initialHealth = this.health = health;
         this.attack = attack;
     }
 

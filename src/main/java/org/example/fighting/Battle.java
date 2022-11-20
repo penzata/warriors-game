@@ -14,10 +14,10 @@ public class Battle {
      */
     public static boolean fight(Army army1, Army army2) {
         var attacker = army1.getAliveUnit();
-        var opponent = army2.getAliveUnit();
+        var defender = army2.getAliveUnit();
 
-        while(attacker.hasNext() && opponent.hasNext()) {
-            Duel.fight(attacker.next(), opponent.next());
+        while(attacker.hasNext() && defender.hasNext()) {
+            Duel.fight(attacker.next(), defender.next());
         }
         return attacker.hasNext();
     }

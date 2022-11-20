@@ -1,5 +1,6 @@
 package org.example.battleunits;
 
+import org.example.battleunits.common.InfGenerator;
 import org.example.exceptions.DoesntExistException;
 
 import java.util.ArrayList;
@@ -45,7 +46,7 @@ public class Army {
         return new GetAliveUnitIterate();
     }
 
-    private class GetAliveUnitIterate implements Iterator<Warrior> {
+    private class GetAliveUnitIterate implements InfGenerator<Warrior> {
         Iterator<Warrior> it = army.iterator();
         Warrior champion;
 

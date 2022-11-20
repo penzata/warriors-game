@@ -13,4 +13,5 @@ public interface BattleUnit extends Attack, Health {
 
         reduceHealth(damageDealer.getAttack());
     }
+
 }

@@ -21,6 +21,11 @@ public class Lancer extends Warrior {
 
         super(lancer);
     }
+
+    @Override
+    public void hit(BattleUnit opponent) {
+        super.hit(opponent);
+    }
 }
 
 

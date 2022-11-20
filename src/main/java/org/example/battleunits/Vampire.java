@@ -1,9 +1,8 @@
 package org.example.battleunits;
 
-import org.example.battleunits.characteristic.Vampirism;
 import org.jetbrains.annotations.NotNull;
 
-public class Vampire extends Warrior implements Vampirism {
+public class Vampire extends Warrior {
     private int vampirism;
     /**
      * Constructs default Vampire object with default health(40), attack(4) & vampirism(50).
@@ -37,8 +36,4 @@ public class Vampire extends Warrior implements Vampirism {
         healthRestored(heal);
     }
 
-    @Override
-    public int getVampirism() {
-        return vampirism;
-    }
 }

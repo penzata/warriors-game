@@ -1,7 +1,7 @@
 package org.example.battleunits;
 
-import org.example.battleunits.characteristic.Attack;
-import org.example.battleunits.characteristic.Defence;
+import org.example.battleunits.characteristics.Attack;
+import org.example.battleunits.characteristics.Defence;
 import org.jetbrains.annotations.NotNull;
 
 public class Defender extends Warrior implements Defence {

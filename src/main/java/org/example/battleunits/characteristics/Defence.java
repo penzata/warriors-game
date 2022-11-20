@@ -1,4 +1,4 @@
-package org.example.battleunits.characteristic;
+package org.example.battleunits.characteristics;
 
 public interface Defence {
     int getDefence();

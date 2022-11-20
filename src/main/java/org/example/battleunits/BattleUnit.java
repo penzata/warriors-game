@@ -1,7 +1,7 @@
 package org.example.battleunits;
 
-import org.example.battleunits.characteristic.Attack;
-import org.example.battleunits.characteristic.Health;
+import org.example.battleunits.characteristics.Attack;
+import org.example.battleunits.characteristics.Health;
 
 public interface BattleUnit extends Attack, Health {
     default void hit(BattleUnit opponent) {

@@ -6,7 +6,7 @@ import org.example.battleunits.characteristics.Vampirism;
 public interface VampireUnit extends WarriorUnit, Vampirism {
     @Override
     default int hit(WarriorUnit opponent) {
-       int damageDealt =  WarriorUnit.super.hit(opponent);
+        int damageDealt =  WarriorUnit.super.hit(opponent);
         final int PERCENTS = 100;
         int healingPoints = damageDealt * getVampirism() / PERCENTS;
         healthRestored(healingPoints);

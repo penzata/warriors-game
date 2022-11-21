@@ -4,14 +4,14 @@ import java.util.Iterator;
 
 public class ArmyDecorator implements ArmyUnit {
 
-    protected WarriorUnit warriorUnit;
+    protected ArmyUnit army;
 
-    public ArmyDecorator(WarriorUnit warriorUnit) {
-        this.warriorUnit = warriorUnit;
+    public ArmyDecorator(ArmyUnit army) {
+        this.army = army;
     }
 
     @Override
     public Iterator<WarriorUnit> getAliveUnit() {
-        return null;
+        return army.iterator();
     }
 }

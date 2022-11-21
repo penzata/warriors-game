@@ -1,8 +1,9 @@
 package org.example.battleunits;
 
+import org.example.battleunits.units.WarriorUnit;
 import org.jetbrains.annotations.NotNull;
 
-public class Warrior implements BattleUnit {
+public class Warrior implements WarriorUnit {
     private int health;
     private int attack;
     private final int initialHealth;

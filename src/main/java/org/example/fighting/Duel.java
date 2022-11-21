@@ -1,6 +1,6 @@
 package org.example.fighting;
 
-import org.example.battleunits.BattleUnit;
+import org.example.battleunits.units.WarriorUnit;
 
 public class Duel {
 
@@ -12,7 +12,7 @@ public class Duel {
      * @param defender second warrior
      * @return TRUE if the first warrior is alive (and thus the other one is not anymore), else - FALSE
      */
-    public static boolean fight(BattleUnit attacker, BattleUnit defender) {
+    public static boolean fight(WarriorUnit attacker, WarriorUnit defender) {
         while (attacker.isAlive() && defender.isAlive()) {
             attacker.hit(defender);
             if (defender.isAlive()) {

@@ -1,8 +1,9 @@
 package org.example.battleunits;
 
+import org.example.battleunits.units.KnightUnit;
 import org.jetbrains.annotations.NotNull;
 
-public class Knight extends Warrior {
+public class Knight extends Warrior implements KnightUnit {
 
     /**
      * Constructs default Knight object with default health(50) & attack(7).

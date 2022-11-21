@@ -1,8 +1,9 @@
 package org.example.battleunits;
 
+import org.example.battleunits.units.VampireUnit;
 import org.jetbrains.annotations.NotNull;
 
-public class Vampire extends Warrior {
+public class Vampire extends Warrior implements VampireUnit {
     private int vampirism;
     /**
      * Constructs default Vampire object with default health(40), attack(4) & vampirism(50).
@@ -26,14 +27,7 @@ public class Vampire extends Warrior {
     }
 
     @Override
-    public void hit(BattleUnit opponent) {
-        int healthBeforeHit = opponent.getHealth();
-        super.hit(opponent);
-        int healthAfterHit = opponent.getHealth();
-        int damageDealt = Math.min(healthBeforeHit, healthBeforeHit - healthAfterHit);
-        final int PERCENT = 100;
-        int healingPoints = damageDealt * vampirism / PERCENT;
-        healthRestored(healingPoints);
+    public int getVampirism() {
+        return this.vampirism;
     }
-
 }

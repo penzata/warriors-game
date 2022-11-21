@@ -1,9 +1,7 @@
 package org.example.fighting;
 
-import org.example.battleunits.Defender;
-import org.example.battleunits.Knight;
-import org.example.battleunits.Vampire;
-import org.example.battleunits.Warrior;
+import org.example.battleunits.*;
+import org.example.battleunits.units.WarriorUnit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -60,8 +58,12 @@ class DuelTest {
 
     @Test
     void WarriorFightsDefenderAndLoses() {
-        Warrior warrior = new Warrior();
-        Defender defender = new Defender();
+//        Warrior warrior = new Warrior();
+        Warrior warrior = (Warrior) WarriorUnit.newWarrior();
+        System.out.println(warrior);
+//        Defender defender = new Defender();
+        Defender defender = (Defender) WarriorUnit.newDefender();
+        System.out.println(defender);
 
         assertFalse(Duel.fight(warrior, defender));
         assertEquals(0, warrior.getHealth());

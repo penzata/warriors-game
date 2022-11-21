@@ -1,5 +1,7 @@
 package org.example.battleunits.units;
 
+import java.util.Iterator;
+
 public class ArmyDecorator implements ArmyUnit {
 
     protected WarriorUnit warriorUnit;
@@ -8,4 +10,8 @@ public class ArmyDecorator implements ArmyUnit {
         this.warriorUnit = warriorUnit;
     }
 
+    @Override
+    public Iterator<WarriorUnit> getAliveUnit() {
+        return null;
+    }
 }

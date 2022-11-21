@@ -59,11 +59,9 @@ class DuelTest {
 
     @Test
     void WarriorFightsDefenderAndLoses() {
-//        Warrior warrior = new Warrior();
-        Warrior warrior = (Warrior) WarriorUnit.newWarrior();
+        Warrior warrior = WarriorUnit.newWarrior();
         System.out.println(warrior);
-//        Defender defender = new Defender();
-        Defender defender = (Defender) DefenderUnit.newDefender();
+        Defender defender = DefenderUnit.newDefender();
         System.out.println(defender);
 
         assertFalse(Duel.fight(warrior, defender));

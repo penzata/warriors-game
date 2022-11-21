@@ -17,7 +17,10 @@ public interface WarriorUnit extends Attack, Health {
         reduceHealth(damageDealer.getAttack());
     }
 
-    static WarriorUnit newWarrior() {
+    /**
+     * @return default Warrior object with default health(50) & attack(5).
+     */
+    static Warrior newWarrior() {
         return new Warrior();
     }
 

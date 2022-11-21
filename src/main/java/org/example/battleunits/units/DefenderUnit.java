@@ -11,7 +11,10 @@ public interface DefenderUnit extends WarriorUnit, Defence {
         WarriorUnit.super.receiveDamage(() -> Math.max(0, damageDealer.getAttack() - getDefence()));
     }
 
-    static DefenderUnit newDefender() {
+    /**
+     * @return default Defender object with default health(60), attack(3) & defence(2).
+     */
+    static Defender newDefender() {
         return new Defender();
     }
 }

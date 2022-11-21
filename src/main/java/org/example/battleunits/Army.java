@@ -2,6 +2,7 @@ package org.example.battleunits;
 
 import org.example.battleunits.common.InfGenerator;
 import org.example.battleunits.units.ArmyUnit;
+import org.example.battleunits.units.WarriorUnit;
 import org.example.exceptions.DoesntExistException;
 
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.Iterator;
 import java.util.function.Supplier;
 
 public class Army implements ArmyUnit {
-    private Collection<Warrior> army;
+    private Collection<WarriorUnit> army;
 
     /**
      * Constructs default Army with two Warriors.
@@ -43,16 +44,16 @@ public class Army implements ArmyUnit {
                 '}';
     }
 
-    public Iterator<Warrior> getAliveUnit() {
+    public Iterator<WarriorUnit> getAliveUnit() {
         return new GetAliveUnitIterate();
     }
 
-    private class GetAliveUnitIterate implements InfGenerator<Warrior> {
-        Iterator<Warrior> it = army.iterator();
-        Warrior champion;
+    private class GetAliveUnitIterate implements InfGenerator<WarriorUnit> {
+        Iterator<WarriorUnit> it = army.iterator();
+        WarriorUnit champion;
 
         @Override
-        public Warrior next() {
+        public WarriorUnit next() {
             if (!hasNext()) {
                 try {
                     throw new DoesntExistException("no more army units left");

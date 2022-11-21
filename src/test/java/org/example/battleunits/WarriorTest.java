@@ -41,6 +41,6 @@ class WarriorTest {
         warrior.hit(opponentWarrior);
 
         assertEquals(45, opponentWarrior.getHealth());
-
     }
+
 }

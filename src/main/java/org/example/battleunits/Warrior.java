@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 public class Warrior implements BattleUnit {
     private int health;
     private int attack;
-    private int initialHealth;
+    private final int initialHealth;
 
     /**
      * Constructs default Warrior object with default health(50) & attack(5).
@@ -13,7 +13,6 @@ public class Warrior implements BattleUnit {
     public Warrior() {
 
         this(50, 5);
-        this.initialHealth = this.health;
     }
 
     Warrior(int health, int attack) {
@@ -32,7 +31,7 @@ public class Warrior implements BattleUnit {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName();
+        return getClass().getSimpleName() + " h:" + getHealth();
     }
 
     @Override

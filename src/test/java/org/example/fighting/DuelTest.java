@@ -1,15 +1,18 @@
 package org.example.fighting;
 
-import org.example.battleunits.*;
+import org.example.battleunits.Defender;
+import org.example.battleunits.Knight;
+import org.example.battleunits.Vampire;
+import org.example.battleunits.Warrior;
 import org.example.battleunits.units.DefenderUnit;
+import org.example.battleunits.units.KnightUnit;
+import org.example.battleunits.units.VampireUnit;
 import org.example.battleunits.units.WarriorUnit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.stream.Stream;
 
@@ -17,18 +20,17 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class DuelTest {
-    static Logger log = LoggerFactory.getLogger(DuelTest.class);
 
     static Stream<Arguments> differentDuelUnits() {
         return Stream.of(
-                arguments(new Warrior(), new Knight(), false),
-                arguments(new Knight(), new Warrior(), true),
-                arguments(new Warrior(), new Warrior(), true),
-                arguments(new Knight(), new Knight(), true),
-                arguments(new Defender(), new Knight(), false),
-                arguments(new Defender(), new Warrior(), true),
-                arguments(new Vampire(), new Defender(), false),
-                arguments(new Warrior(), new Vampire(), true));
+                arguments(WarriorUnit.newWarrior(), KnightUnit.newKnight(), false),
+                arguments(KnightUnit.newKnight(), WarriorUnit.newWarrior(), true),
+                arguments(WarriorUnit.newWarrior(), WarriorUnit.newWarrior(), true),
+                arguments(KnightUnit.newKnight(), KnightUnit.newKnight(), true),
+                arguments(DefenderUnit.newDefender(), KnightUnit.newKnight(), false),
+                arguments(DefenderUnit.newDefender(), WarriorUnit.newWarrior(), true),
+                arguments(VampireUnit.newVampire(), DefenderUnit.newDefender(), false),
+                arguments(WarriorUnit.newWarrior(), VampireUnit.newVampire(), true));
     }
 
     @DisplayName("different duels")
@@ -42,9 +44,9 @@ class DuelTest {
 
     @Test
     void WhenWarriorFightsKnight_ThenKnightFightsAnotherWarriorAndLoses() {
-        Warrior warrior = new Warrior();
-        Warrior secondWarrior = new Warrior();
-        Knight knight = new Knight();
+        Warrior warrior = WarriorUnit.newWarrior();
+        Warrior secondWarrior = WarriorUnit.newWarrior();
+        Knight knight = KnightUnit.newKnight();
         Duel.fight(warrior, knight);
 
         assertFalse(Duel.fight(knight, secondWarrior));
@@ -52,8 +54,8 @@ class DuelTest {
 
     @Test
     void WarriorFightsKnightAndLosesAndBothLoseBlood() {
-        Warrior warrior = new Warrior();
-        Knight knight = new Knight();
+        Warrior warrior = WarriorUnit.newWarrior();
+        Knight knight = KnightUnit.newKnight();
         Duel.fight(warrior, knight);
 
         assertEquals(0, warrior.getHealth());
@@ -63,9 +65,7 @@ class DuelTest {
     @Test
     void WarriorFightsDefenderAndLoses() {
         Warrior warrior = WarriorUnit.newWarrior();
-        System.out.println(warrior);
         Defender defender = DefenderUnit.newDefender();
-        System.out.println(defender);
 
         assertFalse(Duel.fight(warrior, defender));
         assertEquals(0, warrior.getHealth());
@@ -74,8 +74,8 @@ class DuelTest {
 
     @Test
     void DefenderFightsVampireAndWins() {
-        Defender defender = new Defender();
-        Vampire vampire = new Vampire();
+        Defender defender = DefenderUnit.newDefender();
+        Vampire vampire = VampireUnit.newVampire();
 
         assertTrue(Duel.fight(defender, vampire));
         assertEquals(22, defender.getHealth());

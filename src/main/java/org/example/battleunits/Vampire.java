@@ -4,7 +4,7 @@ import org.example.battleunits.units.VampireUnit;
 import org.jetbrains.annotations.NotNull;
 
 public class Vampire extends Warrior implements VampireUnit {
-    private int vampirism;
+    private final int vampirism;
     /**
      * Constructs default Vampire object with default health(40), attack(4) & vampirism(50).
      */

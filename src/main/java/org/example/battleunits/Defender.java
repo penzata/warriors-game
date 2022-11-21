@@ -4,7 +4,7 @@ import org.example.battleunits.units.DefenderUnit;
 import org.jetbrains.annotations.NotNull;
 
 public class Defender extends Warrior implements DefenderUnit {
-    private int defence;
+    private final int defence;
 
     /**
      * Constructs default Defender object with default health(60), attack(3) & defence(2).

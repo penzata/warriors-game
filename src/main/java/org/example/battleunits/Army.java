@@ -2,6 +2,7 @@ package org.example.battleunits;
 
 import org.example.battleunits.common.InfGenerator;
 import org.example.battleunits.units.ArmyUnit;
+import org.example.battleunits.units.WarriorBehind;
 import org.example.battleunits.units.WarriorUnit;
 import org.example.exceptions.DoesntExistException;
 
@@ -12,29 +13,35 @@ import java.util.function.Supplier;
 
 public class Army implements ArmyUnit {
     private Collection<WarriorUnit> army;
+    private WarriorUnitDecorator lastWarrior;
 
     /**
-     * Constructs default Army with two Warriors.
+     * Constructs default Army with one Warrior.
      */
     public Army() {
 
-        this(Warrior::new, 2);
+        this(Warrior::new, 1);
     }
 
-    public Army(Supplier<Warrior> factory, Integer numberOfUnits) {
+    public Army(Supplier<WarriorUnit> factory, Integer numberOfUnits) {
         this.army = new ArrayList<>();
         addBattleUnits(factory, numberOfUnits);
     }
 
-    public Army addBattleUnits(Supplier<Warrior> factory, Integer numberOfUnits) {
+    public Army addBattleUnits(Supplier<WarriorUnit> factory, Integer numberOfUnits) {
         for (int i = 0; i < numberOfUnits; i++) {
             addBattleUnit(factory.get());
         }
         return this;
     }
 
-    private void addBattleUnit(Warrior warrior) {
-        this.army.add(warrior);
+    private void addBattleUnit(WarriorUnit warrior) {
+        WarriorUnitDecorator wrapped = new WarriorUnitDecorator(warrior);
+        if (lastWarrior != null) {
+            lastWarrior.setNextWarrior(wrapped);
+            lastWarrior = wrapped;
+        }
+        this.army.add(wrapped);
     }
 
     @Override
@@ -46,6 +53,44 @@ public class Army implements ArmyUnit {
 
     public Iterator<WarriorUnit> getAliveUnit() {
         return new GetAliveUnitIterate();
+    }
+
+    static class WarriorUnitDecorator implements WarriorUnit, WarriorBehind {
+        WarriorUnit warriorUnit;
+        WarriorUnit nextWarrior;
+
+        WarriorUnitDecorator(WarriorUnit warriorUnit) {
+            this.warriorUnit = warriorUnit;
+        }
+
+        @Override
+        public int getAttack() {
+            return warriorUnit.getAttack();
+        }
+
+        @Override
+        public int getHealth() {
+            return warriorUnit.getHealth();
+        }
+
+        @Override
+        public void reduceHealth(int damage) {
+            warriorUnit.reduceHealth(damage);
+        }
+
+        @Override
+        public void vampirism(int healingPoints) {
+            warriorUnit.vampirism(healingPoints);
+        }
+
+        @Override
+        public WarriorUnit getWarriorBehind() {
+            return nextWarrior;
+        }
+
+        private void setNextWarrior(WarriorUnit nextWarrior) {
+            this.nextWarrior = nextWarrior;
+        }
     }
 
     private class GetAliveUnitIterate implements InfGenerator<WarriorUnit> {

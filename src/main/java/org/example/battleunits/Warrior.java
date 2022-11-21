@@ -40,21 +40,24 @@ public class Warrior implements BattleUnit {
         return attack;
     }
 
-    @Override
-    public int getHealth() {
-        return health;
-    }
-
-    @Override
-    public void setHealth(int health) {
-
-        this.health = Math.min(initialHealth, health);
+    void setAttack(int attack) {
+        this.attack = attack;
     }
 
     @Override
     public void reduceHealth(int damage) {
 
         setHealth(Math.max(getHealth() - damage, 0));
+    }
+
+    @Override
+    public int getHealth() {
+        return health;
+    }
+
+    private void setHealth(int health) {
+
+        this.health = Math.min(initialHealth, health);
     }
 
     @Override

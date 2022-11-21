@@ -15,23 +15,25 @@ class WarriorTest {
 
     @Test
     void isAlive() {
-        warrior.setHealth(0);
-        assertFalse(warrior.isAlive());
+        Warrior warrior1 = new Warrior(0, 5);
+        assertFalse(warrior1.isAlive());
 
-        warrior.setHealth(-1);
-        assertFalse(warrior.isAlive());
+        Warrior warrior2 = new Warrior(-1, 5);
+        assertFalse(warrior2.isAlive());
 
-        warrior.setHealth(10);
-        assertTrue(warrior.isAlive());
+        Warrior warrior3 = new Warrior(1, 5);
+        assertTrue(warrior3.isAlive());
     }
 
-//    @Test
-//    void takeDamage() {
-//        warrior.receiveDamage(7);
-//        int currentHealth = warrior.getHealth();
-//
-//        assertEquals(43, currentHealth);
-//    }
+    @Test
+    void takeDamage() {
+        Knight damageDealer = new Knight();
+
+        warrior.receiveDamage(damageDealer);
+        int currentHealth = warrior.getHealth();
+
+        assertEquals(43, currentHealth);
+    }
 
     @Test
     void hits() {

@@ -15,4 +15,9 @@ public interface InfGenerator<T> extends Iterable<T>, Iterator<T> {
         return false;
     }
 
+    @Override
+    default T next() {
+        return null;
+    }
+
 }

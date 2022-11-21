@@ -1,6 +1,7 @@
 package org.example.battleunits;
 
 import org.example.battleunits.common.InfGenerator;
+import org.example.battleunits.units.ArmyUnit;
 import org.example.exceptions.DoesntExistException;
 
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.function.Supplier;
 
-public class Army {
+public class Army implements ArmyUnit {
     private Collection<Warrior> army;
 
     /**

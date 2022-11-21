@@ -5,9 +5,11 @@ import org.example.battleunits.characteristics.Attack;
 import org.example.battleunits.characteristics.Health;
 
 public interface WarriorUnit extends Attack, Health {
-    default void hit(WarriorUnit opponent) {
-
+    default int hit(WarriorUnit opponent) {
+        int healthBeforeHit = opponent.getHealth();
         opponent.receiveDamage(this);
+        int healthAfterHit = opponent.getHealth();
+        return Math.min(healthBeforeHit, healthBeforeHit - healthAfterHit);
     }
 
     default void receiveDamage(Attack damageDealer) {

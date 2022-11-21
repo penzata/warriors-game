@@ -28,15 +28,13 @@ class WarriorTest {
     @Test
     void takeDamage() {
         Knight damageDealer = new Knight();
-
         warrior.receiveDamage(damageDealer);
-        int currentHealth = warrior.getHealth();
 
-        assertEquals(43, currentHealth);
+        assertEquals(43, warrior.getHealth());
     }
 
     @Test
-    void hits() {
+    void hit() {
         Warrior opponentWarrior = new Warrior();
         warrior.hit(opponentWarrior);
 

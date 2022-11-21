@@ -32,8 +32,8 @@ public class Vampire extends Warrior {
         int healthAfterHit = opponent.getHealth();
         int damageDealt = Math.min(healthBeforeHit, healthBeforeHit - healthAfterHit);
         final int PERCENT = 100;
-        int heal = damageDealt * vampirism / PERCENT;
-        healthRestored(heal);
+        int healingPoints = damageDealt * vampirism / PERCENT;
+        healthRestored(healingPoints);
     }
 
 }

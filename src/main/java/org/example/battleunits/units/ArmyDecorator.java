@@ -12,6 +12,6 @@ public class ArmyDecorator implements ArmyUnit {
 
     @Override
     public Iterator<WarriorUnit> getAliveUnit() {
-        return army.iterator();
+        return null;
     }
 }

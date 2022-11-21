@@ -9,7 +9,7 @@ public interface VampireUnit extends WarriorUnit, Vampirism {
         int damageDealt =  WarriorUnit.super.hit(opponent);
         final int PERCENTS = 100;
         int healingPoints = damageDealt * getVampirism() / PERCENTS;
-        healthRestored(healingPoints);
+        vampirism(healingPoints);
         return damageDealt;
     }
 

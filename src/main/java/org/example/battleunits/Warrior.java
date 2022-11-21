@@ -61,7 +61,7 @@ public class Warrior implements WarriorUnit {
     }
 
     @Override
-    public void healthRestored(int healingPoints) {
+    public void vampirism(int healingPoints) {
 
         setHealth(Math.min(getHealth() + healingPoints, initialHealth));
     }

@@ -1,6 +1,9 @@
 package org.example.fighting;
 
 import org.example.battleunits.units.WarriorUnit;
+import org.example.main.Main;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Duel {
 

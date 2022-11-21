@@ -1,6 +1,7 @@
 package org.example.fighting;
 
 import org.example.battleunits.Army;
+import org.example.battleunits.units.ArmyUnit;
 
 public class Battle {
 
@@ -12,7 +13,7 @@ public class Battle {
      * @param army2 - defending army
      * @return TRUE if there is someone still alive from the first army (and thus everyone is dead from the other), else - FALSE
      */
-    public static boolean fight(Army army1, Army army2) {
+    public static boolean fight(ArmyUnit army1, ArmyUnit army2) {
         var attacker = army1.getAliveUnit();
         var defender = army2.getAliveUnit();
 

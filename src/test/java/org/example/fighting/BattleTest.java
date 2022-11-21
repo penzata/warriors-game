@@ -4,6 +4,7 @@ import org.example.battleunits.Army;
 import org.example.battleunits.Defender;
 import org.example.battleunits.Vampire;
 import org.example.battleunits.Warrior;
+import org.example.battleunits.units.WarriorUnit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -18,7 +19,7 @@ class BattleTest {
 
     static Stream<Arguments> differentBattleArmies() {
         return Stream.of(
-                arguments(new Army(Warrior::new, 1), new Army(Warrior::new, 2), false),
+                arguments(new Army(WarriorUnit::newWarrior, 1), new Army(Warrior::new, 2), false),
                 arguments(new Army(Warrior::new, 2), new Army(Warrior::new, 3), false),
                 arguments(new Army(Warrior::new, 5), new Army(Warrior::new, 7), false),
                 arguments(new Army(Warrior::new, 20), new Army(Warrior::new, 21), true),

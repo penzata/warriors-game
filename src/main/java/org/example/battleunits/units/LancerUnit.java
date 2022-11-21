@@ -15,6 +15,7 @@ public interface LancerUnit extends WarriorUnit {
     default int hit(WarriorUnit opponent) {
         int damageDealt = WarriorUnit.super.hit(opponent);
 
+//        piercingDamage(damageDealt);
         return damageDealt;
     }
 

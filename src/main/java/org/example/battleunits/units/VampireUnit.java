@@ -1,5 +1,6 @@
 package org.example.battleunits.units;
 
+import org.example.battleunits.Vampire;
 import org.example.battleunits.characteristics.Vampirism;
 
 public interface VampireUnit extends WarriorUnit, Vampirism {
@@ -12,5 +13,9 @@ public interface VampireUnit extends WarriorUnit, Vampirism {
         final int PERCENTS = 100;
         int healingPoints = damageDealt * getVampirism() / PERCENTS;
         healthRestored(healingPoints);
+    }
+
+    static VampireUnit newVampire() {
+        return new Vampire();
     }
 }

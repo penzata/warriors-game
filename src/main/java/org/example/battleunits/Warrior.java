@@ -65,4 +65,5 @@ public class Warrior implements WarriorUnit {
 
         setHealth(Math.min(getHealth() + healingPoints, initialHealth));
     }
+
 }

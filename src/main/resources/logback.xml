@@ -12,5 +12,6 @@
     <root level="trace">
         <appender-ref ref="STDOUT" />
     </root>
-    <logger name="org.example.Main" level="trace"/>
+
+<!--    <logger name="org.example.Main" level="TRACE"/>-->
 </configuration>

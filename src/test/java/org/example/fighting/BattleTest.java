@@ -129,9 +129,18 @@ class BattleTest {
 
     @Test
     void OneLancerArmyAttacksWarriorAndKnightAndLoses() {
-        ArmyUnit army1 = new Army(LancerUnit::newLancer, 1);
+        ArmyUnit army1 = new Army(Lancer::new, 1);
         ArmyUnit army2 = new Army(WarriorUnit::newWarrior, 1)
-                .addBattleUnits(KnightUnit::newKnight, 1);
+                .addBattleUnits(KnightUnit::newKnight, 2);
+
+        assertFalse(Battle.fight(army1, army2));
+    }
+
+    @Test
+    void OneVampireArmyAttacksWarriorAndKnightAndLoses() {
+        ArmyUnit army1 = new Army(Vampire::new, 1);
+        ArmyUnit army2 = new Army(WarriorUnit::newWarrior, 1)
+                .addBattleUnits(KnightUnit::newKnight, 2);
 
         assertFalse(Battle.fight(army1, army2));
     }

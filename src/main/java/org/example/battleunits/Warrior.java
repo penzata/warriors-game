@@ -40,6 +40,15 @@ public class Warrior implements WarriorUnit {
         return health;
     }
 
+    @Override
+    public int hit(WarriorUnit opponent) {
+            int healthBeforeHit = opponent.getHealth();
+            opponent.receiveDamage(this);
+            int healthAfterHit = opponent.getHealth();
+
+            return Math.min(healthBeforeHit, healthBeforeHit - healthAfterHit);
+        }
+
     private void setHealth(int health) {
 
         this.health = Math.min(initialHealth, health);

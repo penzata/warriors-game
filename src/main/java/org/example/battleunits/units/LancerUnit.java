@@ -16,17 +16,6 @@ public interface LancerUnit extends WarriorUnit {
         return new Lancer();
     }
 
-    @Override
-    default int hit(WarriorUnit opponent) {
-        int damageDealt = WarriorUnit.super.hit(opponent);
-        int reducedDamage = damageDealt * PIERCING_DAMAGE / PERCENTS;
-        if (opponent instanceof WarriorBehind opponentBehind) {
-            WarriorUnit nextOpponent = opponentBehind.getWarriorBehind();
-            if (nextOpponent != null) {
-                nextOpponent.receiveDamage(() -> reducedDamage);
-            }
-        }
-        return damageDealt;
-    }
+
 
 }

@@ -11,12 +11,4 @@ public interface VampireUnit extends WarriorUnit, Vampirism {
         return new Vampire();
     }
 
-    @Override
-    default int hit(WarriorUnit opponent) {
-        int damageDealt = WarriorUnit.super.hit(opponent);
-        int healingPoints = damageDealt * getVampirism() / Vampirism.PERCENTS;
-        vampirism(healingPoints);
-
-        return damageDealt;
-    }
 }

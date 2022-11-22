@@ -1,6 +1,8 @@
 package org.example.battleunits;
 
+import org.example.battleunits.characteristics.Vampirism;
 import org.example.battleunits.units.VampireUnit;
+import org.example.battleunits.units.WarriorUnit;
 import org.jetbrains.annotations.NotNull;
 
 public class Vampire extends Warrior implements VampireUnit {
@@ -12,6 +14,15 @@ public class Vampire extends Warrior implements VampireUnit {
     public Vampire() {
         super(40, 4);
         this.vampirism = 50;
+    }
+
+    @Override
+    public int hit(WarriorUnit opponent) {
+        int damageDealt = hit(opponent);
+        int healingPoints = damageDealt * getVampirism() / Vampirism.PERCENTS;
+        vampirism(healingPoints);
+
+        return damageDealt;
     }
 
     Vampire(int health, int attack, int vampirism) {

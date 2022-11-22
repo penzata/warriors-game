@@ -1,6 +1,8 @@
 package org.example.battleunits;
 
 import org.example.battleunits.units.LancerUnit;
+import org.example.battleunits.units.WarriorBehind;
+import org.example.battleunits.units.WarriorUnit;
 import org.jetbrains.annotations.NotNull;
 
 public class Lancer extends Warrior implements LancerUnit {
@@ -21,6 +23,19 @@ public class Lancer extends Warrior implements LancerUnit {
     public Lancer(@NotNull Lancer lancer) {
 
         super(lancer);
+    }
+
+    @Override
+    public int hit(WarriorUnit opponent) {
+        int damageDealt = hit(opponent);
+        if (opponent instanceof WarriorBehind opponentBehind) {
+            WarriorUnit nextOpponent = opponentBehind.getWarriorBehind();
+            if (nextOpponent != null) {
+                int reducedDamage = damageDealt * PIERCING_DAMAGE / PERCENTS;
+                nextOpponent.receiveDamage(() -> reducedDamage);
+            }
+        }
+        return damageDealt;
     }
 
 }

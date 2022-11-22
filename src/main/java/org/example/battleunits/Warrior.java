@@ -4,9 +4,9 @@ import org.example.battleunits.units.WarriorUnit;
 import org.jetbrains.annotations.NotNull;
 
 public class Warrior implements WarriorUnit {
+    private final int initialHealth;
     private int health;
     private int attack;
-    private final int initialHealth;
 
     /**
      * Constructs default Warrior object with default health(50) & attack(5).
@@ -36,6 +36,16 @@ public class Warrior implements WarriorUnit {
     }
 
     @Override
+    public int getHealth() {
+        return health;
+    }
+
+    private void setHealth(int health) {
+
+        this.health = Math.min(initialHealth, health);
+    }
+
+    @Override
     public int getAttack() {
         return attack;
     }
@@ -48,16 +58,6 @@ public class Warrior implements WarriorUnit {
     public void reduceHealth(int damage) {
 
         setHealth(Math.max(getHealth() - damage, 0));
-    }
-
-    @Override
-    public int getHealth() {
-        return health;
-    }
-
-    private void setHealth(int health) {
-
-        this.health = Math.min(initialHealth, health);
     }
 
     @Override

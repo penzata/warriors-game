@@ -5,6 +5,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class Vampire extends Warrior implements VampireUnit {
     private final int vampirism;
+
     /**
      * Constructs default Vampire object with default health(40), attack(4) & vampirism(50).
      */

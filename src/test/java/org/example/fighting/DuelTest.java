@@ -1,13 +1,7 @@
 package org.example.fighting;
 
-import org.example.battleunits.Defender;
-import org.example.battleunits.Knight;
-import org.example.battleunits.Vampire;
-import org.example.battleunits.Warrior;
-import org.example.battleunits.units.DefenderUnit;
-import org.example.battleunits.units.KnightUnit;
-import org.example.battleunits.units.VampireUnit;
-import org.example.battleunits.units.WarriorUnit;
+import org.example.battleunits.*;
+import org.example.battleunits.units.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -30,7 +24,8 @@ class DuelTest {
                 arguments(DefenderUnit.newDefender(), KnightUnit.newKnight(), false),
                 arguments(DefenderUnit.newDefender(), WarriorUnit.newWarrior(), true),
                 arguments(VampireUnit.newVampire(), DefenderUnit.newDefender(), false),
-                arguments(WarriorUnit.newWarrior(), VampireUnit.newVampire(), true));
+                arguments(WarriorUnit.newWarrior(), VampireUnit.newVampire(), true),
+                arguments(LancerUnit.newLancer(), VampireUnit.newVampire(), true));
     }
 
     @DisplayName("different duels")
@@ -81,4 +76,15 @@ class DuelTest {
         assertEquals(22, defender.getHealth());
         assertEquals(0, vampire.getHealth());
     }
+
+    @Test
+    void LancerFightsWarriorAndWins() {
+        Lancer lancer = LancerUnit.newLancer();
+        Warrior warrior = WarriorUnit.newWarrior();
+
+        assertTrue(Duel.fight(lancer, warrior));
+        assertEquals(10, lancer.getHealth());
+        assertEquals(0, warrior.getHealth());
+    }
+
 }

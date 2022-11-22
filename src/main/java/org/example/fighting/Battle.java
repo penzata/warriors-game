@@ -17,7 +17,7 @@ public class Battle {
         var attacker = army1.getAliveUnit();
         var defender = army2.getAliveUnit();
 
-        while(attacker.hasNext() && defender.hasNext()) {
+        while (attacker.hasNext() && defender.hasNext()) {
             Duel.fight(attacker.next(), defender.next());
         }
         return attacker.hasNext();

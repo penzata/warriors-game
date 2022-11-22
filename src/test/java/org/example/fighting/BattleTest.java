@@ -90,9 +90,38 @@ class BattleTest {
                 arguments(army7, army8, true));
     }
 
+    static Stream<Arguments> armiesWithLancers() {
+        ArmyUnit army1 = new Army(Lancer::new, 5)
+                .addBattleUnits(Vampire::new, 3)
+                .addBattleUnits(Warrior::new, 4)
+                .addBattleUnits(Defender::new, 2);
+        ArmyUnit army2 = new Army(Warrior::new, 4)
+                .addBattleUnits(Defender::new, 4)
+                .addBattleUnits(Vampire::new, 6)
+                .addBattleUnits(Lancer::new, 5);
+
+        ArmyUnit army3 = new Army(Lancer::new, 7)
+                .addBattleUnits(Vampire::new, 3)
+                .addBattleUnits(Warrior::new, 4)
+                .addBattleUnits(Defender::new, 2);
+        ArmyUnit army4 = new Army(Warrior::new, 4)
+                .addBattleUnits(Defender::new, 4)
+                .addBattleUnits(Vampire::new, 6)
+                .addBattleUnits(Lancer::new, 4);
+
+        ArmyUnit army5 = new Army(Warrior::new, 2);
+        ArmyUnit army6 = new Army(Lancer::new, 1)
+                .addBattleUnits(Warrior::new, 1);
+
+        return Stream.of(
+                arguments(army1, army2, false),
+                arguments(army3, army4, true),
+                arguments(army5, army6, false));
+    }
+
     @DisplayName("different battles between two armies")
     @ParameterizedTest(name = "battle{index}:  {0} vs {1} --> attacker army wins? --> {2}")
-    @MethodSource({"differentBattleArmies", "fullDefenderBattleArmies", "armiesWithVampires"})
+    @MethodSource({"differentBattleArmies", "fullDefenderBattleArmies", "armiesWithVampires", "armiesWithLancers"})
     void BattleOneArmyAgainstAnotherWhoWinsOrLoses(Army army1, Army army2, Boolean expectedBattleResult) {
         boolean battleResult = Battle.fight(army1, army2);
         assertEquals(expectedBattleResult, battleResult);

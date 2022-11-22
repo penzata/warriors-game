@@ -4,15 +4,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Main {
-    private static final Logger log = LoggerFactory.getLogger(Main.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) {
-        log.trace("tracing");
-        log.debug("debugging");
-        log.info("info");
-        log.warn("warning");
-        log.error("error");
+        LOGGER.trace("tracing");
+        LOGGER.debug("debugging");
+        LOGGER.info("info");
+        LOGGER.warn("warning");
+        LOGGER.error("error");
 
-        log.info("Logger name: {}", log.getName());
+        LOGGER.info("Logger name: {}", LOGGER.getName());
     }
 }

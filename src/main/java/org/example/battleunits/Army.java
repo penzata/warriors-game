@@ -6,6 +6,8 @@ import org.example.battleunits.units.ArmyUnit;
 import org.example.battleunits.units.WarriorUnitBehind;
 import org.example.battleunits.units.WarriorUnit;
 import org.example.exceptions.DoesntExistException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,6 +15,7 @@ import java.util.Iterator;
 import java.util.function.Supplier;
 
 public class Army implements ArmyUnit {
+    private static final Logger LOGGER = LoggerFactory.getLogger(Army.class);
     private Collection<WarriorUnit> army;
     private WarriorUnitDecorator lastWarrior;
 
@@ -122,7 +125,7 @@ public class Army implements ArmyUnit {
                 try {
                     throw new DoesntExistException("no more army units left");
                 } catch (DoesntExistException e) {
-                    System.out.println(e);
+                    LOGGER.error("insufficient funds.");
                 }
             }
             return champion;

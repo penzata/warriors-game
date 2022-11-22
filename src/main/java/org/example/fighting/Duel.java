@@ -5,7 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Duel {
-    private static final Logger log = LoggerFactory.getLogger(Duel.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Duel.class);
 
     private Duel() {
     }
@@ -18,11 +18,11 @@ public class Duel {
     public static boolean fight(WarriorUnit attacker, WarriorUnit defender) {
         while (attacker.isAlive() && defender.isAlive()) {
             attacker.hit(defender);
-            log.info("Vampire health after getting hit: {}", defender.getHealth());
+            LOGGER.info("Vampire health after getting hit: {}", defender.getHealth());
             if (defender.isAlive()) {
                 defender.hit(attacker);
-                log.info("Defender health after getting hit: {}", attacker.getHealth());
-                log.info("vampire health after vampirism: {}", defender.getHealth());
+                LOGGER.info("Defender health after getting hit: {}", attacker.getHealth());
+                LOGGER.info("vampire health after vampirism: {}", defender.getHealth());
             }
         }
         return attacker.isAlive();

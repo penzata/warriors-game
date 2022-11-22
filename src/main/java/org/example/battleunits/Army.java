@@ -125,7 +125,7 @@ public class Army implements ArmyUnit {
                 try {
                     throw new DoesntExistException("no more army units left");
                 } catch (DoesntExistException e) {
-                    LOGGER.error("insufficient funds.");
+                    LOGGER.error("insufficient army units funds.");
                 }
             }
             return champion;

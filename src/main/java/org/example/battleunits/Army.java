@@ -38,8 +38,13 @@ public class Army implements ArmyUnit {
 
     private void addBattleUnit(WarriorUnit warrior) {
         WarriorUnitDecorator wrapped = new WarriorUnitDecorator(warrior);
-        lastWarrior = wrapped;
-        lastWarrior.setWarriorBehind(wrapped);
+        if(lastWarrior != null) {
+            lastWarrior.setWarriorBehind(wrapped);
+            lastWarrior = wrapped;
+        }
+        if(lastWarrior == null) {
+            lastWarrior = wrapped;
+        }
         this.army.add(wrapped);
     }
 

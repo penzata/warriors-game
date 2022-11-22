@@ -3,7 +3,6 @@ package org.example.fighting;
 import org.example.battleunits.*;
 import org.example.battleunits.units.ArmyUnit;
 import org.example.battleunits.units.KnightUnit;
-import org.example.battleunits.units.LancerUnit;
 import org.example.battleunits.units.WarriorUnit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,7 +12,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class BattleTest {
@@ -144,4 +144,5 @@ class BattleTest {
 
         assertFalse(Battle.fight(army1, army2));
     }
+
 }

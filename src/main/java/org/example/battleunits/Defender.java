@@ -1,6 +1,8 @@
 package org.example.battleunits;
 
+import org.example.battleunits.characteristics.Attack;
 import org.example.battleunits.units.DefenderUnit;
+import org.example.battleunits.units.WarriorUnit;
 import org.jetbrains.annotations.NotNull;
 
 public class Defender extends Warrior implements DefenderUnit {
@@ -12,6 +14,11 @@ public class Defender extends Warrior implements DefenderUnit {
     public Defender() {
         super(60, 3);
         this.defence = 2;
+    }
+
+    @Override
+    public void receiveDamage(Attack damageDealer) {
+        super.receiveDamage(() -> Math.max(0, damageDealer.getAttack() - getDefence()));
     }
 
     Defender(int health, int attack, int defence) {

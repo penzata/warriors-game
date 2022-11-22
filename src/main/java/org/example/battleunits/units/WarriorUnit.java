@@ -5,16 +5,10 @@ import org.example.battleunits.characteristics.Attack;
 import org.example.battleunits.characteristics.Health;
 
 public interface WarriorUnit extends Attack, Health {
-    /**
-     * @param opponent - to be hit.
-     * @return the damage dealt to the opponent.
-     */
-    int hit(WarriorUnit opponent);
 
-    default void receiveDamage(Attack damageDealer) {
+    void hit(WarriorUnit opponent);
 
-        reduceHealth(damageDealer.getAttack());
-    }
+    void receiveDamage(Attack damageDealer);
 
     /**
      * @return default Warrior object with default health(50) & attack(5).

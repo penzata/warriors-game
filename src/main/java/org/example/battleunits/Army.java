@@ -1,7 +1,10 @@
 package org.example.battleunits;
 
+import org.example.battleunits.characteristics.Attack;
 import org.example.battleunits.common.InfGenerator;
-import org.example.battleunits.units.*;
+import org.example.battleunits.units.ArmyUnit;
+import org.example.battleunits.units.WarriorBehind;
+import org.example.battleunits.units.WarriorUnit;
 import org.example.exceptions.DoesntExistException;
 
 import java.util.ArrayList;
@@ -35,12 +38,9 @@ public class Army implements ArmyUnit {
 
     private void addBattleUnit(WarriorUnit warrior) {
         WarriorUnitDecorator wrapped = new WarriorUnitDecorator(warrior);
-        if (lastWarrior != null) {
-            lastWarrior.setNextWarriorBehind(wrapped);
-            lastWarrior = wrapped;
-        }
+        lastWarrior = wrapped;
+        lastWarrior.setWarriorBehind(wrapped);
         this.army.add(wrapped);
-//        this.army.add(warrior);
     }
 
     @Override
@@ -67,8 +67,38 @@ public class Army implements ArmyUnit {
             return nextWarrior;
         }
 
-        private void setNextWarriorBehind(WarriorUnit nextWarrior) {
+        private void setWarriorBehind(WarriorUnit nextWarrior) {
             this.nextWarrior = nextWarrior;
+        }
+
+        @Override
+        public int getAttack() {
+            return warriorUnit.getAttack();
+        }
+
+        @Override
+        public void reduceHealth(int damage) {
+            warriorUnit.reduceHealth(damage);
+        }
+
+        @Override
+        public void vampirism(int healingPoints) {
+            warriorUnit.vampirism(healingPoints);
+        }
+
+        @Override
+        public int getHealth() {
+            return warriorUnit.getHealth();
+        }
+
+        @Override
+        public void hit(WarriorUnit opponent) {
+            warriorUnit.hit(opponent);
+        }
+
+        @Override
+        public void receiveDamage(Attack damageDealer) {
+            warriorUnit.receiveDamage(damageDealer);
         }
     }
 

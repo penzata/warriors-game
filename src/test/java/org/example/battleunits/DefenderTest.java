@@ -22,13 +22,12 @@ class DefenderTest {
     }
 
     @Test
-    void takeDamageFromRookie() {
+    void receiveDamageFromRookie() {
         Rookie rookie = new Rookie();
         rookie.hit(defender);
 
         assertEquals(60, defender.getHealth());
     }
-
 
     class Rookie extends Warrior {
         @Override

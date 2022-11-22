@@ -1,5 +1,6 @@
 package org.example.battleunits;
 
+import org.example.battleunits.characteristics.Attack;
 import org.example.battleunits.units.WarriorUnit;
 import org.jetbrains.annotations.NotNull;
 
@@ -41,13 +42,16 @@ public class Warrior implements WarriorUnit {
     }
 
     @Override
-    public int hit(WarriorUnit opponent) {
-            int healthBeforeHit = opponent.getHealth();
-            opponent.receiveDamage(this);
-            int healthAfterHit = opponent.getHealth();
+    public void hit(WarriorUnit opponent) {
 
-            return Math.min(healthBeforeHit, healthBeforeHit - healthAfterHit);
+            opponent.receiveDamage(this);
         }
+
+    @Override
+    public void receiveDamage(Attack damageDealer) {
+
+        reduceHealth(damageDealer.getAttack());
+    }
 
     private void setHealth(int health) {
 

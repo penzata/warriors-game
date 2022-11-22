@@ -6,6 +6,11 @@ import org.example.battleunits.units.WarriorUnit;
 import org.jetbrains.annotations.NotNull;
 
 public class Lancer extends Warrior implements LancerUnit {
+    private final int PERCENTS = 100;
+    /**
+     * piercing damage to unit behind (second unit) - 50% of the dealt damage to the first enemy unit.
+     */
+    private final int PIERCING_DAMAGE = 50;
 
     /**
      * Constructs default Lancer object with default health(50) & attack(6).
@@ -26,16 +31,18 @@ public class Lancer extends Warrior implements LancerUnit {
     }
 
     @Override
-    public int hit(WarriorUnit opponent) {
-        int damageDealt = hit(opponent);
+    public void hit(WarriorUnit opponent) {
+        int healthBeforeHit = opponent.getHealth();
+        super.hit(opponent);
         if (opponent instanceof WarriorBehind opponentBehind) {
             WarriorUnit nextOpponent = opponentBehind.getWarriorBehind();
             if (nextOpponent != null) {
+                int healthAfterHit = opponent.getHealth();
+                int damageDealt = Math.min(healthBeforeHit, healthBeforeHit - healthAfterHit);
                 int reducedDamage = damageDealt * PIERCING_DAMAGE / PERCENTS;
                 nextOpponent.receiveDamage(() -> reducedDamage);
             }
         }
-        return damageDealt;
     }
 
 }

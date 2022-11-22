@@ -1,6 +1,5 @@
 package org.example.fighting;
 
-import org.example.battleunits.Army;
 import org.example.battleunits.units.ArmyUnit;
 
 public class Battle {

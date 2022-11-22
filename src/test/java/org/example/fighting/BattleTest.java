@@ -130,7 +130,8 @@ class BattleTest {
     @Test
     void OneLancerArmyAttacksWarriorAndKnightAndLoses() {
         ArmyUnit army1 = new Army(LancerUnit::newLancer, 1);
-        ArmyUnit army2 = new Army(WarriorUnit::newWarrior, 1).addBattleUnits(KnightUnit::newKnight, 1);
+        ArmyUnit army2 = new Army(WarriorUnit::newWarrior, 1)
+                .addBattleUnits(KnightUnit::newKnight, 1);
 
         assertFalse(Battle.fight(army1, army2));
     }

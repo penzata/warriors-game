@@ -79,4 +79,9 @@ public class Warrior implements WarriorUnit {
         setHealth(Math.min(getHealth() + healingPoints, initialHealth));
     }
 
+    @Override
+    public void heal() {
+        setHealth(Math.max(getHealth() + 2, initialHealth));
+    }
+
 }

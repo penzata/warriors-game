@@ -3,7 +3,7 @@ package org.example.battleunits;
 import org.example.battleunits.characteristics.Attack;
 import org.example.battleunits.common.InfGenerator;
 import org.example.battleunits.units.ArmyUnit;
-import org.example.battleunits.units.WarriorBehind;
+import org.example.battleunits.units.WarriorUnitBehind;
 import org.example.battleunits.units.WarriorUnit;
 import org.example.exceptions.DoesntExistException;
 
@@ -59,7 +59,7 @@ public class Army implements ArmyUnit {
         return new GetAliveUnitIterate();
     }
 
-    static class WarriorUnitDecorator implements WarriorUnit, WarriorBehind {
+    static class WarriorUnitDecorator implements WarriorUnit, WarriorUnitBehind {
         WarriorUnit warriorUnit;
         WarriorUnit nextWarrior;
 
@@ -89,6 +89,11 @@ public class Army implements ArmyUnit {
         @Override
         public void vampirism(int healingPoints) {
             warriorUnit.vampirism(healingPoints);
+        }
+
+        @Override
+        public void heal() {
+            warriorUnit.heal();
         }
 
         @Override

@@ -5,7 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Duel {
-    static Logger log = LoggerFactory.getLogger(Duel.class);
+    private static final Logger log = LoggerFactory.getLogger(Duel.class);
 
     private Duel() {
     }

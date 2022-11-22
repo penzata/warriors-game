@@ -1,6 +1,6 @@
 package org.example.battleunits.units;
 
-public interface WarriorBehind {
+public interface WarriorUnitBehind {
 
     WarriorUnit getWarriorBehind();
 }

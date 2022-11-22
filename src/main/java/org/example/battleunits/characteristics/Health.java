@@ -9,6 +9,8 @@ public interface Health {
      */
     void vampirism(int healingPoints);
 
+    void heal();
+
     default boolean isAlive() {
         return getHealth() > 0;
     }

@@ -1,7 +1,7 @@
 package org.example.battleunits;
 
 import org.example.battleunits.units.LancerUnit;
-import org.example.battleunits.units.WarriorBehind;
+import org.example.battleunits.units.WarriorUnitBehind;
 import org.example.battleunits.units.WarriorUnit;
 import org.jetbrains.annotations.NotNull;
 
@@ -25,6 +25,9 @@ public class Lancer extends Warrior implements LancerUnit {
         super(health, attack);
     }
 
+    /**
+     * @param lancer - copy constructor
+     */
     public Lancer(@NotNull Lancer lancer) {
 
         super(lancer);
@@ -34,7 +37,7 @@ public class Lancer extends Warrior implements LancerUnit {
     public void hit(WarriorUnit opponent) {
         int healthBeforeHit = opponent.getHealth();
         super.hit(opponent);
-        if (opponent instanceof WarriorBehind opponentBehind) {
+        if (opponent instanceof WarriorUnitBehind opponentBehind) {
             WarriorUnit nextOpponent = opponentBehind.getWarriorBehind();
             if (nextOpponent != null) {
                 int healthAfterHit = opponent.getHealth();

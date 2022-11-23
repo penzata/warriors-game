@@ -17,12 +17,13 @@ public class Duel {
      */
     public static boolean fight(WarriorUnit attacker, WarriorUnit defender) {
         while (attacker.isAlive() && defender.isAlive()) {
+            LOGGER.info("attacker hits ------>");
             attacker.hit(defender);
-            LOGGER.info("Vampire health after getting hit: {}", defender.getHealth());
+            LOGGER.info("defender health after getting hit: {}", defender.getHealth());
             if (defender.isAlive()) {
+                LOGGER.info("defender hits ------>");
                 defender.hit(attacker);
-                LOGGER.info("Defender health after getting hit: {}", attacker.getHealth());
-                LOGGER.info("vampire health after vampirism: {}", defender.getHealth());
+                LOGGER.info("attacker health after getting hit: {}", attacker.getHealth());
             }
         }
         return attacker.isAlive();

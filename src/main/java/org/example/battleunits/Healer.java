@@ -18,17 +18,17 @@ public class Healer extends Warrior implements HealerUnit {
     }
 
     @Override
-    public void heal() {
-        if(medKits > 0) {
-            super.heal();
+    public void increaseHealth() {
+        if (medKits > 0) {
+            super.increaseHealth();
             medKits--;
         }
     }
 
-    /**
-     * @param healer - copy constructor
-     */
+        /**
+         * @param healer - copy constructor
+         */
     public Healer(@NotNull Healer healer) {
-        super(healer);
+            super(healer);
+        }
     }
-}

@@ -31,7 +31,7 @@ class DuelTest {
     @DisplayName("different duels")
     @ParameterizedTest(name = "duel{index}:  {0} vs {1} --> attacker wins? --> {2}")
     @MethodSource("differentDuelUnits")
-    void FightBetweenWarriorAndKnightOrViceVersaAndWhoWinsOrLoses(Warrior warrior1, Warrior warrior2, Boolean expectedDuelResult) {
+    void FightBetweenDifferentWarriorUnitsWhoWinsOrLoses(Warrior warrior1, Warrior warrior2, Boolean expectedDuelResult) {
         boolean duelResult = Duel.fight(warrior1, warrior2);
 
         assertEquals(expectedDuelResult, duelResult);

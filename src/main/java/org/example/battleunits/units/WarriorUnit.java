@@ -20,7 +20,7 @@ public interface WarriorUnit extends Attack, Health {
         if (opponent instanceof WarriorUnitBehind opponentBehind) {
             WarriorUnit nextOpponent = opponentBehind.getWarriorBehind();
             if (nextOpponent instanceof HealerUnit healer) {
-                healer.heal();
+                healer.heal(opponent);
             }
         }
     }
@@ -28,6 +28,11 @@ public interface WarriorUnit extends Attack, Health {
     default void receiveDamage(Attack damageDealer) {
 
         reduceHealth(damageDealer.getAttack());
+    }
+
+    default void heal(WarriorUnit unitToHeal) {
+
+        unitToHeal.increaseHealth();
     }
 
 }

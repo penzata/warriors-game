@@ -21,7 +21,7 @@ class LancerTest {
     }
 
     @Test
-    void LancerFightsTwoRookieArmy_AlwaysSetRookieHealthToOne_BreakProgramTest() {
+    void LancerFightsTwoRookieArmy_AlwaysSetRookieHealthToOne_AndLoses_BreakProgramTest() {
         ArmyUnit lancerArmy = new Army(LancerUnit::newLancer, 1);
         ArmyUnit rookiesArmy = new Army(Rookie::new, 1)
                 .addBattleUnits(Rookie::new, 1);

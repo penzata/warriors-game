@@ -5,9 +5,9 @@ public interface Health {
     void reduceHealth(int damage);
 
     /**
-     * @param healingPoints - self-healing (restores health by 50% of the dealt damage)
+     * @param healingPoints - self-healing (restores health by 50% of the dealt damage).
      */
-    void vampirism(int healingPoints);
+    void vampireSelfHeal(int healingPoints);
 
     default boolean isAlive() {
         return getHealth() > 0;

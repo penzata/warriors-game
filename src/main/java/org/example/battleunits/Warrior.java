@@ -1,6 +1,5 @@
 package org.example.battleunits;
 
-import org.example.battleunits.characteristics.Attack;
 import org.example.battleunits.units.WarriorUnit;
 import org.jetbrains.annotations.NotNull;
 
@@ -62,8 +61,7 @@ public class Warrior implements WarriorUnit {
     }
 
     @Override
-    public void vampirism(int healingPoints) {
-
+    public void vampireSelfHeal(int healingPoints) {
         setHealth(Math.min(getHealth() + healingPoints, initialHealth));
     }
 

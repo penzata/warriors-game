@@ -1,6 +1,7 @@
 package org.example.battleunits.units;
 
 import org.example.battleunits.Vampire;
+import org.example.battleunits.characteristics.Health;
 import org.example.battleunits.characteristics.Vampirism;
 
 public interface VampireUnit extends WarriorUnit, Vampirism {
@@ -10,5 +11,4 @@ public interface VampireUnit extends WarriorUnit, Vampirism {
     static Vampire newVampire() {
         return new Vampire();
     }
-
 }

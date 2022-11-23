@@ -2,9 +2,8 @@ package org.example.battleunits;
 
 import org.example.battleunits.characteristics.Attack;
 import org.example.battleunits.common.InfGenerator;
-import org.example.battleunits.units.ArmyUnit;
-import org.example.battleunits.units.WarriorUnit;
-import org.example.battleunits.units.WarriorUnitBehind;
+import org.example.battleunits.subsidiary.WarriorUnitBehind;
+import org.example.battleunits.units.*;
 import org.example.exceptions.DoesntExistException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +17,7 @@ public class Army implements ArmyUnit {
     private static final Logger LOGGER = LoggerFactory.getLogger(Army.class);
     private Collection<WarriorUnit> army;
     private WarriorUnitDecorator lastWarrior;
+    private WarriorUnitDecorator warriorToHeal;
 
     /**
      * Constructs default Army with one Warrior.
@@ -87,8 +87,8 @@ public class Army implements ArmyUnit {
         }
 
         @Override
-        public void vampirism(int healingPoints) {
-            warriorUnit.vampirism(healingPoints);
+        public void vampireSelfHeal(int healingPoints) {
+            warriorUnit.vampireSelfHeal(healingPoints);
         }
 
         @Override

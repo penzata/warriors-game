@@ -1,11 +1,12 @@
 package org.example.battleunits;
 
+import org.example.battleunits.subsidiary.DealtDamageAwareness;
 import org.example.battleunits.units.LancerUnit;
 import org.example.battleunits.units.WarriorUnit;
-import org.example.battleunits.units.WarriorUnitBehind;
+import org.example.battleunits.subsidiary.WarriorUnitBehind;
 import org.jetbrains.annotations.NotNull;
 
-public class Lancer extends Warrior implements LancerUnit {
+public class Lancer extends Warrior implements LancerUnit, DealtDamageAwareness {
     private final int PERCENTS = 100;
     /**
      * piercing damage to unit behind (second unit) - 50% of the dealt damage to the first enemy unit.
@@ -35,13 +36,10 @@ public class Lancer extends Warrior implements LancerUnit {
 
     @Override
     public void hit(WarriorUnit opponent) {
-        int healthBeforeHit = opponent.getHealth();
-        super.hit(opponent);
+        int damageDealt = getDealtDamage(opponent);
         if (opponent instanceof WarriorUnitBehind opponentBehind) {
             WarriorUnit nextOpponent = opponentBehind.getWarriorBehind();
             if (nextOpponent != null) {
-                int healthAfterHit = opponent.getHealth();
-                int damageDealt = Math.min(healthBeforeHit, healthBeforeHit - healthAfterHit);
                 int reducedDamage = damageDealt * PIERCING_DAMAGE / PERCENTS;
                 nextOpponent.receiveDamage(() -> reducedDamage);
             }

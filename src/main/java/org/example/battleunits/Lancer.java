@@ -21,7 +21,7 @@ public class Lancer extends Warrior implements LancerUnit, DealtDamageAwareness 
         super(50, 6);
     }
 
-    public Lancer(int health, int attack) {
+    Lancer(int health, int attack) {
 
         super(health, attack);
     }
@@ -29,7 +29,7 @@ public class Lancer extends Warrior implements LancerUnit, DealtDamageAwareness 
     /**
      * @param lancer - copy constructor
      */
-    public Lancer(@NotNull Lancer lancer) {
+    Lancer(@NotNull Lancer lancer) {
 
         super(lancer);
     }

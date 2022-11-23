@@ -12,14 +12,14 @@ public class Healer extends Warrior implements HealerUnit {
         super(60, 0);
     }
 
-    public Healer(int health, int attack) {
+    Healer(int health, int attack) {
         super(health, attack);
     }
 
     /**
          * @param healer - copy constructor
          */
-    public Healer(@NotNull Healer healer) {
+    Healer(@NotNull Healer healer) {
             super(healer);
         }
     }

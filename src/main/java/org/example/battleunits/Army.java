@@ -2,8 +2,10 @@ package org.example.battleunits;
 
 import org.example.battleunits.characteristics.Attack;
 import org.example.battleunits.common.InfGenerator;
+import org.example.battleunits.subsidiary.CanHealChain;
 import org.example.battleunits.subsidiary.WarriorUnitBehind;
-import org.example.battleunits.units.*;
+import org.example.battleunits.units.ArmyUnit;
+import org.example.battleunits.units.WarriorUnit;
 import org.example.exceptions.DoesntExistException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +19,6 @@ public class Army implements ArmyUnit {
     private static final Logger LOGGER = LoggerFactory.getLogger(Army.class);
     private Collection<WarriorUnit> army;
     private WarriorUnitDecorator lastWarrior;
-    private WarriorUnitDecorator warriorToHeal;
 
     /**
      * Constructs default Army with one Warrior.
@@ -59,9 +60,11 @@ public class Army implements ArmyUnit {
         return new GetAliveUnitIterate();
     }
 
-    static class WarriorUnitDecorator implements WarriorUnit, WarriorUnitBehind {
-        WarriorUnit warriorUnit;
-        WarriorUnit nextWarrior;
+    static class WarriorUnitDecorator implements WarriorUnit, WarriorUnitBehind, CanHealChain {
+        private WarriorUnit warriorUnit;
+        private WarriorUnit nextWarrior;
+        private CanHealChain chain;
+
 
         WarriorUnitDecorator(WarriorUnit warriorUnit) {
             this.warriorUnit = warriorUnit;
@@ -74,6 +77,18 @@ public class Army implements ArmyUnit {
 
         private void setWarriorBehind(WarriorUnit nextWarrior) {
             this.nextWarrior = nextWarrior;
+        }
+
+        @Override
+        public void setNextChain(CanHealChain nextChain) {
+            this.chain = nextChain;
+        }
+
+        @Override
+        public void canHeal(WarriorUnit unitInFront) {
+            warriorUnit = unitInFront;
+
+            this.chain.canHeal(unitInFront);
         }
 
         @Override

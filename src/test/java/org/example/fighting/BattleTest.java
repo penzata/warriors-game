@@ -1,9 +1,7 @@
 package org.example.fighting;
 
 import org.example.battleunits.*;
-import org.example.battleunits.units.ArmyUnit;
-import org.example.battleunits.units.KnightUnit;
-import org.example.battleunits.units.WarriorUnit;
+import org.example.battleunits.units.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -129,9 +127,10 @@ class BattleTest {
 
     @Test
     void OneLancerArmyAttacksWarriorAndKnightAndLoses() {
-        ArmyUnit army1 = new Army(Lancer::new, 1);
+        ArmyUnit army1 = new Army(Lancer::new, 1)
+                .addBattleUnits(VampireUnit::newVampire, 1);
         ArmyUnit army2 = new Army(WarriorUnit::newWarrior, 1)
-                .addBattleUnits(KnightUnit::newKnight, 2);
+                .addBattleUnits(DefenderUnit::newDefender, 2);
 
         assertFalse(Battle.fight(army1, army2));
     }

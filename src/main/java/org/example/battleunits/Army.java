@@ -3,8 +3,8 @@ package org.example.battleunits;
 import org.example.battleunits.characteristics.Attack;
 import org.example.battleunits.common.InfGenerator;
 import org.example.battleunits.units.ArmyUnit;
-import org.example.battleunits.units.WarriorUnitBehind;
 import org.example.battleunits.units.WarriorUnit;
+import org.example.battleunits.units.WarriorUnitBehind;
 import org.example.exceptions.DoesntExistException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,13 +41,10 @@ public class Army implements ArmyUnit {
 
     private void addBattleUnit(WarriorUnit warrior) {
         WarriorUnitDecorator wrapped = new WarriorUnitDecorator(warrior);
-        if(lastWarrior != null) {
+        if (lastWarrior != null) {
             lastWarrior.setWarriorBehind(wrapped);
-            lastWarrior = wrapped;
         }
-        if(lastWarrior == null) {
-            lastWarrior = wrapped;
-        }
+        lastWarrior = wrapped;
         this.army.add(wrapped);
     }
 

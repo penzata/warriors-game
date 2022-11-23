@@ -1,8 +1,8 @@
 package org.example.battleunits;
 
 import org.example.battleunits.units.LancerUnit;
-import org.example.battleunits.units.WarriorUnitBehind;
 import org.example.battleunits.units.WarriorUnit;
+import org.example.battleunits.units.WarriorUnitBehind;
 import org.jetbrains.annotations.NotNull;
 
 public class Lancer extends Warrior implements LancerUnit {
@@ -47,7 +47,6 @@ public class Lancer extends Warrior implements LancerUnit {
             }
         }
     }
-
 }
 
 

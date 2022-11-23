@@ -41,18 +41,6 @@ public class Warrior implements WarriorUnit {
         return health;
     }
 
-    @Override
-    public void hit(WarriorUnit opponent) {
-
-            opponent.receiveDamage(this);
-        }
-
-    @Override
-    public void receiveDamage(Attack damageDealer) {
-
-        reduceHealth(damageDealer.getAttack());
-    }
-
     private void setHealth(int health) {
 
         this.health = Math.min(initialHealth, health);

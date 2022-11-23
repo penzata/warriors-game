@@ -1,5 +1,6 @@
 package org.example.battleunits;
 
+import org.example.fighting.Battle;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -39,6 +40,13 @@ class WarriorTest {
         warrior.hit(opponentWarrior);
 
         assertEquals(45, opponentWarrior.getHealth());
+    }
+
+    @Test
+    void stuff() {
+        Army arm1 = new Army(Warrior::new, 2);
+        Army arm2 = new Army(Warrior::new, 3);
+        Battle.fight(arm1, arm2);
     }
 
 }

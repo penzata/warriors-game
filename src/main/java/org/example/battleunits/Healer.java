@@ -1,8 +1,10 @@
 package org.example.battleunits;
 
+import org.example.battleunits.units.HealerUnit;
 import org.jetbrains.annotations.NotNull;
 
-public class Healer extends Warrior {
+public class Healer extends Warrior implements HealerUnit {
+    private int medKits = 15;
 
     /**
      * Constructs default Healer object with default health(60) & attack(0).
@@ -13,6 +15,14 @@ public class Healer extends Warrior {
 
     public Healer(int health, int attack) {
         super(health, attack);
+    }
+
+    @Override
+    public void heal() {
+        if(medKits > 0) {
+            super.heal();
+            medKits--;
+        }
     }
 
     /**

@@ -4,7 +4,7 @@ import org.example.battleunits.units.HealerUnit;
 import org.jetbrains.annotations.NotNull;
 
 public class Healer extends Warrior implements HealerUnit {
-    private int medKits = 15;
+    private int medKits = 20;
 
     /**
      * Constructs default Healer object with default health(60) & attack(0).

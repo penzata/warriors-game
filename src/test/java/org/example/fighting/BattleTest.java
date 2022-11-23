@@ -107,19 +107,45 @@ class BattleTest {
                 .addBattleUnits(Vampire::new, 6)
                 .addBattleUnits(Lancer::new, 4);
 
-        ArmyUnit army5 = new Army(Warrior::new, 2);
-        ArmyUnit army6 = new Army(Lancer::new, 1)
-                .addBattleUnits(Warrior::new, 1);
-
         return Stream.of(
                 arguments(army1, army2, false),
-                arguments(army3, army4, true),
-                arguments(army5, army6, false));
+                arguments(army3, army4, true));
+    }
+
+    static Stream<Arguments> armiesWithHealers() {
+        ArmyUnit army1 = new Army(LancerUnit::newLancer, 7)
+                .addBattleUnits(VampireUnit::newVampire, 3)
+                .addBattleUnits(HealerUnit::newHealer, 1)
+                .addBattleUnits(WarriorUnit::newWarrior, 4)
+                .addBattleUnits(HealerUnit::newHealer, 1)
+                .addBattleUnits(DefenderUnit::newDefender, 2);
+        ArmyUnit army2 = new Army(Warrior::new, 4)
+                .addBattleUnits(Defender::new, 1)
+                .addBattleUnits(Healer::new, 1)
+                .addBattleUnits(Vampire::new, 6)
+                .addBattleUnits(Lancer::new, 4);
+
+        Army army3 = new Army(Lancer::new, 1)
+                .addBattleUnits(Warrior::new, 3)
+                .addBattleUnits(Healer::new, 1)
+                .addBattleUnits(Warrior::new, 4)
+                .addBattleUnits(Healer::new, 1)
+                .addBattleUnits(Knight::new, 2);
+        Army army4 = new Army(Warrior::new,  4)
+                .addBattleUnits(Defender::new, 4)
+                .addBattleUnits(Healer::new, 1)
+                .addBattleUnits(Vampire::new, 6)
+                .addBattleUnits(Lancer::new, 4);
+
+        return Stream.of(
+                arguments(army1, army2, true),
+                arguments(army3, army4, false));
     }
 
     @DisplayName("different battles between two armies")
     @ParameterizedTest(name = "battle{index}:  {0} vs {1} --> attacker army wins? --> {2}")
-    @MethodSource({"differentBattleArmies", "fullDefenderBattleArmies", "armiesWithVampires", "armiesWithLancers"})
+    @MethodSource({"differentBattleArmies", "fullDefenderBattleArmies",
+            "armiesWithVampires", "armiesWithLancers", "armiesWithHealers"})
     void BattleOneArmyAgainstAnotherWhoWinsOrLoses(Army army1, Army army2, Boolean expectedBattleResult) {
         boolean battleResult = Battle.fight(army1, army2);
         assertEquals(expectedBattleResult, battleResult);

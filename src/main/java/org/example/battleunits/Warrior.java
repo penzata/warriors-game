@@ -60,13 +60,7 @@ public class Warrior implements WarriorUnit {
         setHealth(Math.max(getHealth() - damage, 0));
     }
 
-    @Override
-    public void vampireSelfHeal(int healingPoints) {
-        setHealth(Math.min(getHealth() + healingPoints, initialHealth));
-    }
-
-    @Override
-    public void healedByMedKit(int healingPoints) {
+    protected void healedBy(int healingPoints) {
         setHealth(Math.min(getHealth() + healingPoints, initialHealth));
     }
 

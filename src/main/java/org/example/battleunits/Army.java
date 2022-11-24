@@ -1,6 +1,5 @@
 package org.example.battleunits;
 
-import org.example.battleunits.characteristics.Attack;
 import org.example.battleunits.common.InfGenerator;
 import org.example.battleunits.subsidiary.Command;
 import org.example.battleunits.subsidiary.ProcessCommandChain;
@@ -63,7 +62,7 @@ public class Army implements ArmyUnit {
     }
 
     static class ArmyWarriorUnitDecorator implements WarriorUnit, WarriorUnitBehind, ProcessCommandChain {
-        private final WarriorUnit warriorUnit;
+        private WarriorUnit warriorUnit;
         private ArmyWarriorUnitDecorator nextWarrior;
 
         ArmyWarriorUnitDecorator(WarriorUnit warriorUnit) {
@@ -75,6 +74,10 @@ public class Army implements ArmyUnit {
             return nextWarrior;
         }
 
+        private void setWarriorBehind(ArmyWarriorUnitDecorator nextWarrior) {
+            this.nextWarrior = nextWarrior;
+        }
+
         @Override
         public void processCommand(Command command, WarriorUnit commandSender) {
             if (warriorUnit instanceof ProcessCommandChain processor) {
@@ -83,13 +86,14 @@ public class Army implements ArmyUnit {
             nextWarrior.processCommand(command, this);
         }
 
-        private void setWarriorBehind(ArmyWarriorUnitDecorator nextWarrior) {
-            this.nextWarrior = nextWarrior;
-        }
-
         @Override
         public int getAttack() {
             return warriorUnit.getAttack();
+        }
+
+        @Override
+        public void reduceHealth(int damage) {
+            warriorUnit.reduceHealth(damage);
         }
 
         @Override

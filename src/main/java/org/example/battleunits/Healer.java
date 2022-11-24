@@ -30,15 +30,22 @@ public class Healer extends Warrior implements HealerUnit {
 
     @Override
     public void processCommand(Command command, WarriorUnit commandSender) {
-        if (command == WarriorUnitHitCommand.HEAL) {
-           heal(commandSender, getHealthPointsFromMedKit());
+        if (command.equals(WarriorUnitHitCommand.HEAL)) {
+           heal(commandSender);
            setMedKitsPerHealer(this.medKitsPerHealer--);
         }
     }
 
     @Override
+    public void heal(WarriorUnit warriorUnit) {
+        if (warriorUnit instanceof Warrior unwrappedWarrior) {
+            unwrappedWarrior.healedBy(getHealthPointsFromMedKit());
+    }
+    }
+
+    @Override
     public int getHealthPointsFromMedKit() {
-        return 2;
+        return healthPointsFromMedKit;
     }
 
     private void setHealthPointsFromMedKit(int healthPoints) {

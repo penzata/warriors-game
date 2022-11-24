@@ -45,6 +45,10 @@ public class Warrior implements WarriorUnit {
         this.health = Math.min(initialHealth, health);
     }
 
+    protected void healedBy(int healthPointsFromMedKit) {
+        setHealth(Math.min(getHealth() + healthPointsFromMedKit, initialHealth));
+    }
+
     @Override
     public int getAttack() {
         return attack;
@@ -58,10 +62,6 @@ public class Warrior implements WarriorUnit {
     public void reduceHealth(int damage) {
 
         setHealth(Math.max(getHealth() - damage, 0));
-    }
-
-    protected void healedBy(int healingPoints) {
-        setHealth(Math.min(getHealth() + healingPoints, initialHealth));
     }
 
 }

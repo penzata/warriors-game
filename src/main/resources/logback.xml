@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <configuration>
 
-    <appender name="file" class="ch.qos.logback.core.FileAppender">
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <file>${user.dir}/logs/example.log</file>
         <encoder>
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
 
-<!--    <logger name="org.example.battleunits.Army" level="error"/>-->
-<!--    <logger name="org.example.fighting.Duel" level="info"/>-->
+    <logger name="org.example.battleunits.Army" level="error"/>
+    <logger name="org.example.fighting.Duel" level="info"/>
+    <logger name="org.example.battleunits.Lancer" level="info"/>
+    <logger name="org.example.battleunits.Healer" level="info"/>
+    <logger name="org.example.battleunits.Vampire" level="info"/>
 
     <root level="info">
-        <appender-ref ref="file" />
+        <appender-ref ref="console" />
     </root>
 
 </configuration>

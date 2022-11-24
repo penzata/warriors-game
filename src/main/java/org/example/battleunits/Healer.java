@@ -3,11 +3,12 @@ package org.example.battleunits;
 import org.example.battleunits.subsidiary.Command;
 import org.example.battleunits.subsidiary.WarriorUnitHitCommand;
 import org.example.battleunits.units.HealerUnit;
-import org.example.battleunits.units.WarriorUnit;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Healer extends Warrior implements HealerUnit {
-    private int medKitsPerHealer = 20;
+    private static final Logger LOGGER = LoggerFactory.getLogger(Healer.class);
     private int healthPointsFromMedKit = 2;
 
     /**
@@ -22,25 +23,29 @@ public class Healer extends Warrior implements HealerUnit {
     }
 
     /**
-         * @param healer - copy constructor
-         */
+     * @param healer - copy constructor
+     */
     Healer(@NotNull Healer healer) {
-            super(healer);
-        }
+        super(healer);
+    }
 
     @Override
-    public void processCommand(Command command, WarriorUnit commandSender) {
+    public void processCommand(Command command, Army.ArmyWarriorUnitDecorator commandSender) {
         if (command.equals(WarriorUnitHitCommand.HEAL)) {
-           heal(commandSender);
-           setMedKitsPerHealer(this.medKitsPerHealer--);
+            heal(commandSender);
+            LOGGER.info("(healer's chain healing by 2pts every unit in front of him)");
+//           setMedKitsPerHealer(this.medKitsPerHealer--);
         }
     }
 
     @Override
-    public void heal(WarriorUnit warriorUnit) {
-        if (warriorUnit instanceof Warrior unwrappedWarrior) {
-            unwrappedWarrior.healedBy(getHealthPointsFromMedKit());
-    }
+    public void heal(Army.ArmyWarriorUnitDecorator warriorUnit) {
+        Warrior unwrapped = warriorUnit.unwrap();
+        LOGGER.info("health before healer's healing: {}", unwrapped.getHealth());
+        unwrapped.healedBy(getHealthPointsFromMedKit());
+        LOGGER.info("health after healer's healing: {}", unwrapped.getHealth());
+        int medKitsPerHealer = 20;
+        medKitsPerHealer--;
     }
 
     @Override
@@ -52,12 +57,12 @@ public class Healer extends Warrior implements HealerUnit {
         this.healthPointsFromMedKit = healthPoints;
     }
 
-    @Override
-    public int getMedKitsPerHealer() {
-        return medKitsPerHealer;
-    }
-
-    private void setMedKitsPerHealer(int medKitsPerHealer) {
-        this.medKitsPerHealer = medKitsPerHealer;
-    }
+//    @Override
+//    public int getMedKitsPerHealer() {
+//        return medKitsPerHealer;
+//    }
+//
+//    private void setMedKitsPerHealer(int medKitsPerHealer) {
+//        this.medKitsPerHealer = medKitsPerHealer;
+//    }
 }

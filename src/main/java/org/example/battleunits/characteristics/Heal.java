@@ -1,12 +1,12 @@
 package org.example.battleunits.characteristics;
 
-import org.example.battleunits.units.WarriorUnit;
+import org.example.battleunits.Army;
 
 public interface Heal {
 
-    void heal(WarriorUnit warriorUnit);
+    void heal(Army.ArmyWarriorUnitDecorator warriorUnit);
 
     int getHealthPointsFromMedKit();
 
-    int getMedKitsPerHealer();
+//    int getMedKitsPerHealer();
 }

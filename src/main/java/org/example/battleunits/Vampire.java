@@ -1,12 +1,14 @@
 package org.example.battleunits;
 
-import org.example.battleunits.characteristics.Health;
 import org.example.battleunits.subsidiary.DealtDamageAwareness;
 import org.example.battleunits.units.VampireUnit;
 import org.example.battleunits.units.WarriorUnit;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Vampire extends Warrior implements VampireUnit, DealtDamageAwareness {
+    private static final Logger LOGGER = LoggerFactory.getLogger(Vampire.class);
     private final int vampirism;
 
     /**
@@ -35,7 +37,9 @@ public class Vampire extends Warrior implements VampireUnit, DealtDamageAwarenes
         int damageDealt = getDealtDamage(opponent);
         final int PERCENTS = 100;
         int healingPoints = damageDealt * getVampirism() / PERCENTS;
+        LOGGER.info("vampire's health before hit: {}", getHealth());
         vampirism(healingPoints);
+        LOGGER.info("vampire's health after vampirism({})", getHealth());
     }
 
     @Override

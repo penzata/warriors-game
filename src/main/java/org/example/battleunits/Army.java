@@ -61,7 +61,7 @@ public class Army implements ArmyUnit {
         return new GetAliveUnitIterate();
     }
 
-    static class ArmyWarriorUnitDecorator implements WarriorUnit, WarriorUnitBehind, ProcessCommandChain {
+    public static class ArmyWarriorUnitDecorator implements WarriorUnit, WarriorUnitBehind, ProcessCommandChain {
         private WarriorUnit warriorUnit;
         private ArmyWarriorUnitDecorator nextWarrior;
 
@@ -79,11 +79,17 @@ public class Army implements ArmyUnit {
         }
 
         @Override
-        public void processCommand(Command command, WarriorUnit commandSender) {
+        public void processCommand(Command command, ArmyWarriorUnitDecorator commandSender) {
             if (warriorUnit instanceof ProcessCommandChain processor) {
                 processor.processCommand(command, commandSender);
             }
-            nextWarrior.processCommand(command, this);
+            if (nextWarrior != null) {
+                nextWarrior.processCommand(command, this);
+            }
+        }
+
+        protected Warrior unwrap() {
+            return (Warrior) warriorUnit;
         }
 
         @Override
@@ -106,11 +112,6 @@ public class Army implements ArmyUnit {
             warriorUnit.hit(opponent);
             processCommand(WarriorUnitHitCommand.HEAL, this);
         }
-//TODO check if defender tests work without overriding this
-/*        @Override
-        public void receiveDamage(Attack damageDealer) {
-            warriorUnit.receiveDamage(damageDealer);
-        }*/
     }
 
     private class GetAliveUnitIterate implements InfGenerator<WarriorUnit> {

@@ -16,4 +16,15 @@ class HealerTest {
         assertFalse(Battle.fight(warrior, warriorWithHealer));
     }
 
+    @Test
+    void WhenLancerAttacksWarriorUnitWithTwoHealersBehind_ThenHealersChainHealing() {
+        Army army1 = new Army(Lancer::new, 1).
+                addBattleUnits(Warrior::new, 1);
+        Army army2 = new Army(Vampire::new, 1).
+                addBattleUnits(Healer::new, 2);
+        boolean result = Battle.fight(army1, army2);
+
+        assertTrue(result);
+    }
+
 }

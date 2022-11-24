@@ -1,5 +1,6 @@
 package org.example.battleunits;
 
+import org.example.battleunits.characteristics.Attack;
 import org.example.battleunits.common.InfGenerator;
 import org.example.battleunits.subsidiary.Command;
 import org.example.battleunits.subsidiary.ProcessCommandChain;
@@ -111,6 +112,11 @@ public class Army implements ArmyUnit {
         public void hit(WarriorUnit opponent) {
             warriorUnit.hit(opponent);
             processCommand(WarriorUnitHitCommand.HEAL, this);
+        }
+
+        @Override
+        public void receiveDamage(Attack damageDealer) {
+            warriorUnit.receiveDamage(damageDealer);
         }
     }
 

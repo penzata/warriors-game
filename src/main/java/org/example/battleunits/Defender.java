@@ -2,10 +2,12 @@ package org.example.battleunits;
 
 import org.example.battleunits.characteristics.Attack;
 import org.example.battleunits.units.DefenderUnit;
-import org.example.battleunits.units.WarriorUnit;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Defender extends Warrior implements DefenderUnit {
+    private final static Logger LOGGER = LoggerFactory.getLogger(Defender.class);
     private final int defence;
 
     /**
@@ -14,11 +16,6 @@ public class Defender extends Warrior implements DefenderUnit {
     public Defender() {
         super(60, 3);
         this.defence = 2;
-    }
-
-    @Override
-    public void receiveDamage(Attack damageDealer) {
-        super.receiveDamage(() -> Math.max(0, damageDealer.getAttack() - getDefence()));
     }
 
     Defender(int health, int attack, int defence) {
@@ -32,6 +29,13 @@ public class Defender extends Warrior implements DefenderUnit {
     Defender(@NotNull Defender defender) {
         super(defender);
         this.defence = defender.defence;
+    }
+
+    @Override
+    public void receiveDamage(Attack damageDealer) {
+        LOGGER.info("defender's health before taking damage: {}", getHealth());
+        super.receiveDamage(() -> Math.max(0, damageDealer.getAttack() - getDefence()));
+        LOGGER.info("defender's health after deflecting damage({}): {}", getDefence(), getHealth());
     }
 
     @Override

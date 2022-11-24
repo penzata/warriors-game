@@ -3,6 +3,7 @@ package org.example.battleunits;
 import org.example.battleunits.subsidiary.Command;
 import org.example.battleunits.subsidiary.WarriorUnitHitCommand;
 import org.example.battleunits.units.HealerUnit;
+import org.example.battleunits.units.WarriorUnit;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,9 +32,9 @@ public class Healer extends Warrior implements HealerUnit {
 
     @Override
     public void processCommand(Command command, Army.ArmyWarriorUnitDecorator commandSender) {
-        if (command.equals(WarriorUnitHitCommand.HEAL)) {
+        if (isAlive() && command.equals(WarriorUnitHitCommand.HEAL)) {
             heal(commandSender);
-            LOGGER.info("(healer's chain healing by 2pts every unit in front of him)");
+            LOGGER.info("(chain healing by 2pts for every unit in front of healer)");
 //           setMedKitsPerHealer(this.medKitsPerHealer--);
         }
     }
@@ -51,6 +52,11 @@ public class Healer extends Warrior implements HealerUnit {
     @Override
     public int getHealthPointsFromMedKit() {
         return healthPointsFromMedKit;
+    }
+
+    @Override
+    public void hit(WarriorUnit opponent) {
+        //do nothing, cannot hit
     }
 
     private void setHealthPointsFromMedKit(int healthPoints) {

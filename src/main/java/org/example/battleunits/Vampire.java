@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 public class Vampire extends Warrior implements VampireUnit, DealtDamageAwareness {
     private static final Logger LOGGER = LoggerFactory.getLogger(Vampire.class);
-    private final int vampirism;
+    private int vampirism;
 
     /**
      * Constructs default Vampire object with default health(40), attack(4) & vampirism(50).

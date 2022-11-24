@@ -1,7 +1,7 @@
 package org.example.battleunits.subsidiary;
 
 /**
- * execute when warriorUnit hits another Unit.
+ * execute when WarriorUnit hits another Unit.
  */
 public enum WarriorUnitHitCommand implements Command {
     HEAL

@@ -1,7 +1,6 @@
 package org.example.battleunits;
 
 import org.example.fighting.Battle;
-import org.example.fighting.Duel;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -29,10 +28,11 @@ class HealerTest {
     }
 
     @Test
-    void WarriorVersusHealer() {
+    void WarriorVersusHealerAndHealerDoesNotHealHimself() {
         Army warrior = new Army(Warrior::new, 1);
         Army healer = new Army(Healer::new, 1);
-        Battle.fight(warrior, healer);
+
+        assertTrue(Battle.fight(warrior, healer));
     }
 
 }

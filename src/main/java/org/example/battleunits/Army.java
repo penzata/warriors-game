@@ -80,8 +80,8 @@ public class Army implements ArmyUnit {
         }
 
         @Override
-        public void processCommand(Command command, ArmyWarriorUnitDecorator commandSender) {
-            if (warriorUnit instanceof ProcessCommandChain processor) {
+        public void processCommand(Command command, Army.ArmyWarriorUnitDecorator commandSender) {
+            if (warriorUnit instanceof ProcessCommandChain processor && !warriorUnit.equals(commandSender.unwrap())) {
                 processor.processCommand(command, commandSender);
             }
             if (nextWarrior != null) {

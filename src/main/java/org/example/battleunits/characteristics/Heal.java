@@ -7,6 +7,4 @@ public interface Heal {
     void heal(Army.ArmyWarriorUnitDecorator warriorUnit);
 
     int getHealthPointsFromMedKit();
-
-//    int getMedKitsPerHealer();
 }

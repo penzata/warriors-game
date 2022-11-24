@@ -34,8 +34,7 @@ public class Healer extends Warrior implements HealerUnit {
     public void processCommand(Command command, Army.ArmyWarriorUnitDecorator commandSender) {
         if (isAlive() && command.equals(WarriorUnitHitCommand.HEAL)) {
             heal(commandSender);
-            LOGGER.info("(chain healing by 2pts for every unit in front of healer)");
-//           setMedKitsPerHealer(this.medKitsPerHealer--);
+            LOGGER.info("(proceed with chain healing if army has more healers)");
         }
     }
 
@@ -45,8 +44,6 @@ public class Healer extends Warrior implements HealerUnit {
         LOGGER.info("health before healer's healing: {}", unwrapped.getHealth());
         unwrapped.healedBy(getHealthPointsFromMedKit());
         LOGGER.info("health after healer's healing: {}", unwrapped.getHealth());
-        int medKitsPerHealer = 20;
-        medKitsPerHealer--;
     }
 
     @Override
@@ -56,19 +53,11 @@ public class Healer extends Warrior implements HealerUnit {
 
     @Override
     public void hit(WarriorUnit opponent) {
-        //do nothing, cannot hit
+        //do nothing, has no attack pts
     }
 
     private void setHealthPointsFromMedKit(int healthPoints) {
         this.healthPointsFromMedKit = healthPoints;
     }
 
-//    @Override
-//    public int getMedKitsPerHealer() {
-//        return medKitsPerHealer;
-//    }
-//
-//    private void setMedKitsPerHealer(int medKitsPerHealer) {
-//        this.medKitsPerHealer = medKitsPerHealer;
-//    }
 }

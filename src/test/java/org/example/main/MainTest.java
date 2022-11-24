@@ -7,6 +7,7 @@ import org.example.battleunits.Warrior;
 import org.example.fighting.Battle;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class MainTest {
@@ -21,6 +22,6 @@ class MainTest {
                 .addBattleUnits(Vampire::new, 3);
         boolean result = Battle.fight(army3, army4);
 
-        assertTrue(result);
+        assertFalse(result);
     }
 }

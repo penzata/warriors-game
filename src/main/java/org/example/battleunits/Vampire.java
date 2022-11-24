@@ -37,9 +37,9 @@ public class Vampire extends Warrior implements VampireUnit, DealtDamageAwarenes
         int damageDealt = getDealtDamage(opponent);
         final int PERCENTS = 100;
         int healingPoints = damageDealt * getVampirism() / PERCENTS;
-        LOGGER.info("vampire's health before hit: {}", getHealth());
+        LOGGER.info("vampire's health before taking hit: {}", getHealth());
         vampirism(healingPoints);
-        LOGGER.info("vampire's health after vampirism({})", getHealth());
+        LOGGER.info("vampire's health after vampirism: {}", getHealth());
     }
 
     @Override

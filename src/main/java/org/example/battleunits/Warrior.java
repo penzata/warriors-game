@@ -50,7 +50,7 @@ public class Warrior implements WarriorUnit {
         return attack;
     }
 
-    void setAttack(int attack) {
+    private void setAttack(int attack) {
         this.attack = attack;
     }
 
@@ -62,6 +62,11 @@ public class Warrior implements WarriorUnit {
 
     @Override
     public void vampireSelfHeal(int healingPoints) {
+        setHealth(Math.min(getHealth() + healingPoints, initialHealth));
+    }
+
+    @Override
+    public void healedByMedKit(int healingPoints) {
         setHealth(Math.min(getHealth() + healingPoints, initialHealth));
     }
 

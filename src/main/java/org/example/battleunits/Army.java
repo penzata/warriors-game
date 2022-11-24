@@ -2,8 +2,10 @@ package org.example.battleunits;
 
 import org.example.battleunits.characteristics.Attack;
 import org.example.battleunits.common.InfGenerator;
-import org.example.battleunits.subsidiary.CanHealChain;
+import org.example.battleunits.subsidiary.Command;
+import org.example.battleunits.subsidiary.ProcessCommandChain;
 import org.example.battleunits.subsidiary.WarriorUnitBehind;
+import org.example.battleunits.subsidiary.WarriorUnitHitCommand;
 import org.example.battleunits.units.ArmyUnit;
 import org.example.battleunits.units.WarriorUnit;
 import org.example.exceptions.DoesntExistException;
@@ -18,7 +20,7 @@ import java.util.function.Supplier;
 public class Army implements ArmyUnit {
     private static final Logger LOGGER = LoggerFactory.getLogger(Army.class);
     private Collection<WarriorUnit> army;
-    private WarriorUnitDecorator lastWarrior;
+    private ArmyWarriorUnitDecorator lastWarrior;
 
     /**
      * Constructs default Army with one Warrior.
@@ -41,7 +43,7 @@ public class Army implements ArmyUnit {
     }
 
     private void addBattleUnit(WarriorUnit warrior) {
-        WarriorUnitDecorator wrapped = new WarriorUnitDecorator(warrior);
+        ArmyWarriorUnitDecorator wrapped = new ArmyWarriorUnitDecorator(warrior);
         if (lastWarrior != null) {
             lastWarrior.setWarriorBehind(wrapped);
         }
@@ -60,50 +62,34 @@ public class Army implements ArmyUnit {
         return new GetAliveUnitIterate();
     }
 
-    static class WarriorUnitDecorator implements WarriorUnit, WarriorUnitBehind, CanHealChain {
-        private WarriorUnit warriorUnit;
-        private WarriorUnit nextWarrior;
-        private CanHealChain chain;
+    static class ArmyWarriorUnitDecorator implements WarriorUnit, WarriorUnitBehind, ProcessCommandChain {
+        private final WarriorUnit warriorUnit;
+        private ArmyWarriorUnitDecorator nextWarrior;
 
-
-        WarriorUnitDecorator(WarriorUnit warriorUnit) {
+        ArmyWarriorUnitDecorator(WarriorUnit warriorUnit) {
             this.warriorUnit = warriorUnit;
         }
 
         @Override
-        public WarriorUnit getWarriorBehind() {
+        public ArmyWarriorUnitDecorator getWarriorBehind() {
             return nextWarrior;
         }
 
-        private void setWarriorBehind(WarriorUnit nextWarrior) {
+        @Override
+        public void processCommand(Command command, WarriorUnit commandSender) {
+            if (warriorUnit instanceof ProcessCommandChain processor) {
+                processor.processCommand(command, commandSender);
+            }
+            nextWarrior.processCommand(command, this);
+        }
+
+        private void setWarriorBehind(ArmyWarriorUnitDecorator nextWarrior) {
             this.nextWarrior = nextWarrior;
-        }
-
-        @Override
-        public void setNextChain(CanHealChain nextChain) {
-            this.chain = nextChain;
-        }
-
-        @Override
-        public void canHeal(WarriorUnit unitInFront) {
-            warriorUnit = unitInFront;
-
-            this.chain.canHeal(unitInFront);
         }
 
         @Override
         public int getAttack() {
             return warriorUnit.getAttack();
-        }
-
-        @Override
-        public void reduceHealth(int damage) {
-            warriorUnit.reduceHealth(damage);
-        }
-
-        @Override
-        public void vampireSelfHeal(int healingPoints) {
-            warriorUnit.vampireSelfHeal(healingPoints);
         }
 
         @Override
@@ -114,17 +100,18 @@ public class Army implements ArmyUnit {
         @Override
         public void hit(WarriorUnit opponent) {
             warriorUnit.hit(opponent);
+            processCommand(WarriorUnitHitCommand.HEAL, this);
         }
-
-        @Override
+//TODO check if defender tests work without overriding this
+/*        @Override
         public void receiveDamage(Attack damageDealer) {
             warriorUnit.receiveDamage(damageDealer);
-        }
+        }*/
     }
 
     private class GetAliveUnitIterate implements InfGenerator<WarriorUnit> {
         Iterator<WarriorUnit> it = army.iterator();
-        WarriorUnit champion;
+        WarriorUnit hitter;
 
         @Override
         public WarriorUnit next() {
@@ -135,17 +122,17 @@ public class Army implements ArmyUnit {
                     LOGGER.error("insufficient army units funds.");
                 }
             }
-            return champion;
+            return hitter;
         }
 
         @Override
         public boolean hasNext() {
-            if (champion != null && champion.isAlive()) {
+            if (hitter != null && hitter.isAlive()) {
                 return true;
             }
             while (it.hasNext()) {
-                champion = it.next();
-                if (champion.isAlive()) {
+                hitter = it.next();
+                if (hitter.isAlive()) {
                     return true;
                 }
             }

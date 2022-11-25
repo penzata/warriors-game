@@ -161,4 +161,15 @@ class BattleTest {
         assertFalse(Battle.fight(army1, army2));
     }
 
+/*    @Test
+    void stuff() {
+        ArmyUnit army1 = new Army(Warrior::new, 1)
+                .addBattleUnits(Knight::new, 1)
+                .addBattleUnits(Vampire:: new, 1)
+                .addBattleUnits(Lancer::new, 1);
+        ArmyUnit army2 = new Army(Vampire::new, 1)
+                .addBattleUnits(Warrior::new, 1);
+        Battle.straightFight(army1, army2);
+    }*/
+
 }

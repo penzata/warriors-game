@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.function.Supplier;
 
 public class Army implements ArmyUnit {
@@ -52,6 +53,11 @@ public class Army implements ArmyUnit {
     }
 
     @Override
+    public Iterator<WarriorUnit> iterator() {
+        return new StraightIterator();
+    }
+
+    @Override
     public String toString() {
         return "Army{" +
                 "units: " + army.size() +
@@ -60,6 +66,18 @@ public class Army implements ArmyUnit {
 
     public Iterator<WarriorUnit> getAliveUnit() {
         return new GetAliveUnitIterate();
+    }
+
+    @Override
+    public void removeDeadBodies() {
+        army.removeIf(warriorUnit -> !warriorUnit.isAlive());
+
+//        var it = army.iterator();
+//        while(it.hasNext()) {
+//            if(!it.next().isAlive()) {
+//                it.remove();
+//            }
+//        }
     }
 
     public static class ArmyWarriorUnitDecorator implements WarriorUnit, WarriorUnitBehind, ProcessCommandChain {
@@ -118,6 +136,31 @@ public class Army implements ArmyUnit {
         public void receiveDamage(Attack damageDealer) {
             warriorUnit.receiveDamage(damageDealer);
         }
+    }
+
+    private class StraightIterator implements InfGenerator<WarriorUnit> {
+        Iterator<WarriorUnit> straightIterator = army.iterator();
+        WarriorUnit attacker;
+
+        @Override
+        public WarriorUnit next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            return ((ArmyWarriorUnitDecorator) attacker).unwrap();
+        }
+
+        @Override
+        public boolean hasNext() {
+            while (straightIterator.hasNext()) {
+                attacker = straightIterator.next();
+                if (attacker.isAlive()) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
     }
 
     private class GetAliveUnitIterate implements InfGenerator<WarriorUnit> {

@@ -34,16 +34,16 @@ public class Healer extends Warrior implements HealerUnit {
     public void processCommand(Command command, Army.ArmyWarriorUnitDecorator commandSender) {
         if (isAlive() && command.equals(WarriorUnitHitCommand.HEAL)) {
             heal(commandSender);
-            LOGGER.info("-->(proceed with chain healing if army has more healers)-->");
+            LOGGER.debug("-->(proceed with chain healing if army has more healers)-->");
         }
     }
 
     @Override
     public void heal(Army.ArmyWarriorUnitDecorator warriorUnit) {
         Warrior unwrapped = warriorUnit.unwrap();
-        LOGGER.info("health before healer's healing: {}", unwrapped.getHealth());
+        LOGGER.debug("health before healer's healing: {}", unwrapped.getHealth());
         unwrapped.healedBy(getHealthPointsFromMedKit());
-        LOGGER.info("health after healer's healing: {}", unwrapped.getHealth());
+        LOGGER.debug("health after healer's healing: {}", unwrapped.getHealth());
     }
 
     @Override

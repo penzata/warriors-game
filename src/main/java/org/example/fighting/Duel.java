@@ -18,13 +18,13 @@ public class Duel {
     public static boolean fight(WarriorUnit attacker, WarriorUnit defender) {
         String lineSeparator = System.getProperty("line.separator");
         while (attacker.isAlive() && defender.isAlive()) {
-            LOGGER.info("attacker hits ------>");
+            LOGGER.debug("attacker hits ------>");
             attacker.hit(defender);
-            LOGGER.info("defender health after getting hit: {}", defender.getHealth());
+            LOGGER.debug("defender health after getting hit: {}", defender.getHealth());
             if (defender.isAlive()) {
-                LOGGER.info("defender hits ------>");
+                LOGGER.debug("defender hits ------>");
                 defender.hit(attacker);
-                LOGGER.info("attacker health after getting hit: {}{}", attacker.getHealth(), lineSeparator);
+                LOGGER.debug("attacker health after getting hit: {}{}", attacker.getHealth(), lineSeparator);
             }
         }
         return attacker.isAlive();

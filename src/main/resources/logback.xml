@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <configuration>
 
-    <appender name="file" class="ch.qos.logback.core.FileAppender">
+    <appender name="file" class="ch.qos.logback.core.ConsoleAppender">
         <param name="Append" value="false" />
         <file>${user.dir}/logs/example.log</file>
         <encoder>
@@ -10,13 +10,13 @@
     </appender>
 
     <logger name="org.example.battleunits.Army" level="error"/>
-    <logger name="org.example.fighting.Duel" level="info"/>
-    <logger name="org.example.battleunits.Lancer" level="info"/>
-    <logger name="org.example.battleunits.Healer" level="info"/>
-    <logger name="org.example.battleunits.Vampire" level="info"/>
-    <logger name="org.example.battleunits.Defender" level="info"/>
+    <logger name="org.example.fighting.Duel" level="debug"/>
+    <logger name="org.example.battleunits.Lancer" level="debug"/>
+    <logger name="org.example.battleunits.Healer" level="debug"/>
+    <logger name="org.example.battleunits.Vampire" level="debug"/>
+    <logger name="org.example.battleunits.Defender" level="debug"/>
 
-    <root level="info">
+    <root level="debug">
         <appender-ref ref="file" />
     </root>
 

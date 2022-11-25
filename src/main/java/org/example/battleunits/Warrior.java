@@ -45,8 +45,8 @@ public class Warrior implements WarriorUnit {
         this.health = Math.min(initialHealth, health);
     }
 
-    protected void healedBy(int healthPointsFromMedKit) {
-        setHealth(Math.min(getHealth() + healthPointsFromMedKit, initialHealth));
+    protected void healedBy(int healingPoints) {
+        setHealth(Math.min(getHealth() + healingPoints, initialHealth));
     }
 
     @Override

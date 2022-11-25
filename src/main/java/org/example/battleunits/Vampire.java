@@ -52,4 +52,7 @@ public class Vampire extends Warrior implements VampireUnit, DealtDamageAwarenes
         healedBy(selfHealing);
     }
 
+    private void setVampirism(int vampirism) {
+        this.vampirism = vampirism;
+    }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <configuration>
 
-    <appender name="console" class="ch.qos.logback.core.FileAppender">
+    <appender name="file" class="ch.qos.logback.core.FileAppender">
         <param name="Append" value="false" />
         <file>${user.dir}/logs/example.log</file>
         <encoder>
@@ -17,7 +17,7 @@
     <logger name="org.example.battleunits.Defender" level="info"/>
 
     <root level="info">
-        <appender-ref ref="console" />
+        <appender-ref ref="file" />
     </root>
 
 </configuration>

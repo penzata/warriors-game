@@ -34,7 +34,7 @@ public class Healer extends Warrior implements HealerUnit {
     public void processCommand(Command command, Army.ArmyWarriorUnitDecorator commandSender) {
         if (isAlive() && command.equals(WarriorUnitHitCommand.HEAL)) {
             heal(commandSender);
-            LOGGER.debug("-->(proceed with chain healing if army has more healers)-->");
+            LOGGER.debug("----->proceed with chain healing if army has more healers----->");
         }
     }
 

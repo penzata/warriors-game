@@ -16,13 +16,13 @@ public class Duel {
      * @return TRUE if the first warrior is alive (and thus the other one is not anymore), else - FALSE
      */
     public static boolean fight(WarriorUnit attacker, WarriorUnit defender) {
+        //next four variables are used for logging simplicity
         var attackerName = attacker.getClass().getSimpleName();
         var attackerHashCode = attacker.hashCode();
-
         var defenderName = defender.getClass().getSimpleName();
         var defenderHashCode = defender.hashCode();
-
         String lineSeparator = System.getProperty("line.separator");
+
         LOGGER.debug("Fight between {}({})(health:{}) and {}({})(health:{}):", attackerName, attackerHashCode, attacker.getHealth(),
                 defenderName, defenderHashCode, defender.getHealth());
         while (attacker.isAlive() && defender.isAlive()) {

@@ -131,7 +131,7 @@ class BattleTest {
                 .addBattleUnits(Warrior::new, 4)
                 .addBattleUnits(Healer::new, 1)
                 .addBattleUnits(Knight::new, 2);
-        Army army4 = new Army(Warrior::new,  4)
+        Army army4 = new Army(Warrior::new, 4)
                 .addBattleUnits(Defender::new, 4)
                 .addBattleUnits(Healer::new, 1)
                 .addBattleUnits(Vampire::new, 6)
@@ -140,6 +140,58 @@ class BattleTest {
         return Stream.of(
                 arguments(army1, army2, true),
                 arguments(army3, army4, false));
+    }
+
+    static Stream<Arguments> straightBattle() {
+        ArmyUnit army1 = new Army(LancerUnit::newLancer, 5)
+                .addBattleUnits(VampireUnit::newVampire, 3)
+                .addBattleUnits(WarriorUnit::newWarrior, 4)
+                .addBattleUnits(DefenderUnit::newDefender, 2);
+        ArmyUnit army2 = new Army(WarriorUnit::newWarrior, 4)
+                .addBattleUnits(DefenderUnit::newDefender, 4)
+                .addBattleUnits(DefenderUnit::newDefender, 4)
+                .addBattleUnits(VampireUnit::newVampire, 6)
+                .addBattleUnits(LancerUnit::newLancer, 5);
+
+        ArmyUnit army3 = new Army(LancerUnit::newLancer, 7)
+                .addBattleUnits(VampireUnit::newVampire, 3)
+                .addBattleUnits(WarriorUnit::newWarrior, 4)
+                .addBattleUnits(DefenderUnit::newDefender, 2);
+        ArmyUnit army4 = new Army(WarriorUnit::newWarrior, 4)
+                .addBattleUnits(DefenderUnit::newDefender, 4)
+                .addBattleUnits(VampireUnit::newVampire, 6)
+                .addBattleUnits(LancerUnit::newLancer, 4);
+
+        ArmyUnit army5 = new Army(LancerUnit::newLancer, 7)
+                .addBattleUnits(VampireUnit::newVampire, 3)
+                .addBattleUnits(HealerUnit::newHealer, 1)
+                .addBattleUnits(WarriorUnit::newWarrior, 4)
+                .addBattleUnits(HealerUnit::newHealer, 1)
+                .addBattleUnits(DefenderUnit::newDefender, 2);
+        ArmyUnit army6 = new Army(WarriorUnit::newWarrior, 4)
+                .addBattleUnits(DefenderUnit::newDefender, 4)
+                .addBattleUnits(HealerUnit::newHealer, 1)
+                .addBattleUnits(VampireUnit::newVampire, 6)
+                .addBattleUnits(LancerUnit::newLancer, 4);
+
+        ArmyUnit army7 = new Army(LancerUnit::newLancer, 4)
+                .addBattleUnits(WarriorUnit::newWarrior, 3)
+                .addBattleUnits(HealerUnit::newHealer, 1)
+                .addBattleUnits(WarriorUnit::newWarrior, 4)
+                .addBattleUnits(HealerUnit::newHealer, 1)
+                .addBattleUnits(KnightUnit::newKnight, 2);
+        ArmyUnit army8 = new Army(WarriorUnit::newWarrior, 4)
+                .addBattleUnits(DefenderUnit::newDefender, 4)
+                .addBattleUnits(HealerUnit::newHealer, 1)
+                .addBattleUnits(VampireUnit::newVampire, 2)
+                .addBattleUnits(LancerUnit::newLancer, 4);
+
+
+        return Stream.of(
+                arguments(army1, army2, false),
+                arguments(army3, army4, true),
+                arguments(army5, army6, true),
+                arguments(army7, army8, true));
     }
 
     @DisplayName("different battles between two armies")
@@ -151,6 +203,18 @@ class BattleTest {
         assertEquals(expectedBattleResult, battleResult);
     }
 
+/*    @Test
+    void stuff() {
+        ArmyUnit army1 = new Army(Warrior::new, 1)
+                .addBattleUnits(Knight::new, 1)
+                .addBattleUnits(Vampire:: new, 1)
+                .addBattleUnits(Lancer::new, 1);
+        ArmyUnit army2 = new Army(Vampire::new, 1)
+                .addBattleUnits(Warrior::new, 1);
+
+        Battle.straightFight(army1, army2);
+    }*/
+
     @Test
     void LancerAndVampireAttackWarriorAndTwoDefendersAndLoses() {
         ArmyUnit army1 = new Army(Lancer::new, 1)
@@ -161,15 +225,26 @@ class BattleTest {
         assertFalse(Battle.fight(army1, army2));
     }
 
-/*    @Test
-    void stuff() {
-        ArmyUnit army1 = new Army(Warrior::new, 1)
-                .addBattleUnits(Knight::new, 1)
-                .addBattleUnits(Vampire:: new, 1)
-                .addBattleUnits(Lancer::new, 1);
-        ArmyUnit army2 = new Army(Vampire::new, 1)
-                .addBattleUnits(Warrior::new, 1);
-        Battle.straightFight(army1, army2);
-    }*/
+    @Test
+    void TryOutTrialForStraightFight() {
+        ArmyUnit army1 = new Army(WarriorUnit::newWarrior, 1)
+                .addBattleUnits(LancerUnit::newLancer, 1)
+                .addBattleUnits(HealerUnit::newHealer, 1);
+        ArmyUnit army2 = new Army(VampireUnit::newVampire, 1)
+                .addBattleUnits(KnightUnit::newKnight, 1)
+                .addBattleUnits(WarriorUnit::newWarrior, 1)
+                .addBattleUnits(LancerUnit::newLancer, 1);
+
+        assertFalse(Battle.straightFight(army1, army2));
+
+    }
+
+    @DisplayName("straight battles between two armies")
+    @ParameterizedTest(name = "straight battle{index}:  {0} vs {1} --> attacker army wins? --> {2}")
+    @MethodSource({"straightBattle"})
+    void StraightBattle_WhoWinsOrLoses(Army army1, Army army2, Boolean expectedBattleResult) {
+        boolean battleResult = Battle.straightFight(army1, army2);
+        assertEquals(expectedBattleResult, battleResult);
+    }
 
 }

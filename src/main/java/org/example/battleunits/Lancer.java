@@ -42,15 +42,15 @@ public class Lancer extends Warrior implements LancerUnit, DealtDamageAwareness 
     @Override
     public void hit(WarriorUnit opponent) {
         int damageDealt = getDealtDamage(opponent);
-//        LOGGER.debug("health of Lancer's first opponent after being hit: {}", opponent.getHealth());
+        LOGGER.debug("health of Lancer's first opponent after being hit: {}", opponent.getHealth());
         if (opponent instanceof WarriorUnitBehind opponentBehind) {
             WarriorUnit nextOpponent = opponentBehind.getWarriorBehind();
             if (nextOpponent != null) {
                 final int PERCENTS = 100;
                 int reducedDamage = damageDealt * getPiercingAttack() / PERCENTS;
                 nextOpponent.receiveDamage(() -> reducedDamage);
-//                LOGGER.debug("health of Lancer's next opponent after piercing damage({}): {}",
-//                        reducedDamage, nextOpponent.getHealth());
+                LOGGER.debug("health of Lancer's next opponent after piercing damage({}): {}",
+                        reducedDamage, nextOpponent.getHealth());
             }
         }
     }

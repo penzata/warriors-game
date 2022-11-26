@@ -11,10 +11,11 @@
 
     <logger name="org.example.battleunits.Army" level="error"/>
     <logger name="org.example.fighting.Duel" level="debug"/>
-    <logger name="org.example.battleunits.Lancer" level="debug"/>
-    <logger name="org.example.battleunits.Healer" level="debug"/>
+    <logger name="org.example.fighting.Battle" level="debug"/>
+    <logger name="org.example.battleunits.Lancer" level="info"/>
+    <logger name="org.example.battleunits.Healer" level="info"/>
     <logger name="org.example.battleunits.Vampire" level="debug"/>
-    <logger name="org.example.battleunits.Defender" level="debug"/>
+    <logger name="org.example.battleunits.Defender" level="info"/>
 
     <root level="debug">
         <appender-ref ref="file" />

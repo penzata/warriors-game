@@ -33,9 +33,9 @@ public class Defender extends Warrior implements DefenderUnit {
 
     @Override
     public void receiveDamage(Attack damageDealer) {
-//        LOGGER.debug("defender's health before taking damage: {}", getHealth());
+        LOGGER.debug("defender's health before taking damage: {}", getHealth());
         super.receiveDamage(() -> Math.max(0, damageDealer.getAttack() - getDefence()));
-//        LOGGER.debug("defender's health after deflecting damage({}): {}", getDefence(), getHealth());
+        LOGGER.debug("defender's health after deflecting damage({}): {}", getDefence(), getHealth());
     }
 
     @Override

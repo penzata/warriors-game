@@ -51,7 +51,7 @@ public class Battle {
             }
             army1.removeDeadBodies();
             army2.removeDeadBodies();
-            LOGGER.debug("end of round!!!{}{}", lineSeparator, lineSeparator);
+            LOGGER.debug("end of round!!!{}{}{}", lineSeparator, lineSeparator, lineSeparator);
         }
     }
 

@@ -26,11 +26,11 @@ public class Duel {
         LOGGER.debug("Fight between {}({})(health:{}) and {}({})(health:{}):", attackerName, attackerHashCode, attacker.getHealth(),
                 defenderName, defenderHashCode, defender.getHealth());
         while (attacker.isAlive() && defender.isAlive()) {
-            LOGGER.debug("{} hits ------>", attackerName);
+            LOGGER.debug("{} hits(+{}) ------>", attackerName, attacker.getAttack());
             attacker.hit(defender);
             LOGGER.debug("{} health after being hit: {}", defenderName, defender.getHealth());
             if (defender.isAlive()) {
-                LOGGER.debug("{} hits ------>", defenderName);
+                LOGGER.debug("{} hits(+{}) ------>", defenderName, defender.getAttack());
                 defender.hit(attacker);
                 LOGGER.debug("{} health after being hit: {}", attackerName, attacker.getHealth());
             }

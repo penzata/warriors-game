@@ -1,6 +1,7 @@
 package org.example.main;
 
 import org.example.battleunits.Army;
+import org.example.battleunits.Warrior;
 import org.example.battleunits.units.*;
 import org.example.fighting.Battle;
 import org.junit.jupiter.api.Test;
@@ -23,9 +24,20 @@ class MainTest {
                 .addBattleUnits(HealerUnit::newHealer, 1)
                 .addBattleUnits(VampireUnit::newVampire, 6)
                 .addBattleUnits(LancerUnit::newLancer, 4);
-       boolean result = Battle.straightFight(army5, army6);
+       boolean straightFightResult = Battle.straightFight(army5, army6);
 
-       assertTrue(result);
+       assertTrue(straightFightResult);
+
+//       ArmyUnit army7 = new Army(Rookie::new, 1);
+//       boolean fightResult = Battle.fight(army5, army7);
 
     }
+
+/*    class Rookie extends Warrior {
+        @Override
+        public int getAttack() {
+
+            return 1;
+        }
+    }*/
 }

@@ -16,17 +16,27 @@ public class Duel {
      * @return TRUE if the first warrior is alive (and thus the other one is not anymore), else - FALSE
      */
     public static boolean fight(WarriorUnit attacker, WarriorUnit defender) {
+        var attackerName = attacker.getClass().getSimpleName();
+        var attackerHashCode = attacker.hashCode();
+
+        var defenderName = defender.getClass().getSimpleName();
+        var defenderHashCode = defender.hashCode();
+
         String lineSeparator = System.getProperty("line.separator");
+        LOGGER.debug("Fight between {}({})(health:{}) and {}({})(health:{}):", attackerName, attackerHashCode, attacker.getHealth(),
+                defenderName, defenderHashCode, defender.getHealth());
         while (attacker.isAlive() && defender.isAlive()) {
-            LOGGER.debug("attacker hits ------>");
+            LOGGER.debug("{} hits ------>", attackerName);
             attacker.hit(defender);
-            LOGGER.debug("defender health after getting hit: {}", defender.getHealth());
+            LOGGER.debug("{} health after being hit: {}", defenderName, defender.getHealth());
             if (defender.isAlive()) {
-                LOGGER.debug("defender hits ------>");
+                LOGGER.debug("{} hits ------>", defenderName);
                 defender.hit(attacker);
-                LOGGER.debug("attacker health after getting hit: {}{}", attacker.getHealth(), lineSeparator);
+                LOGGER.debug("{} health after being hit: {}", attackerName, attacker.getHealth());
             }
         }
+        LOGGER.debug("Health after fight: {}({}): {}pts;  {}({}): {}pts.{}{}", attackerName, attackerHashCode, attacker.getHealth(),
+                defenderName, defenderHashCode, defender.getHealth(), lineSeparator, lineSeparator);
         return attacker.isAlive();
     }
 

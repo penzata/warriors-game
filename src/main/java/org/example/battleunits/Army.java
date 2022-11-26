@@ -15,7 +15,6 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 import java.util.function.Supplier;
 
 public class Army implements ArmyUnit {
@@ -53,7 +52,7 @@ public class Army implements ArmyUnit {
     }
 
     @Override
-    public Iterator<WarriorUnit> iterator() {
+    public Iterator<WarriorUnit> nextInLine() {
         return new StraightIterator();
     }
 
@@ -64,6 +63,7 @@ public class Army implements ArmyUnit {
                 '}';
     }
 
+    @Override
     public Iterator<WarriorUnit> getAliveUnit() {
         return new GetAliveUnitIterate();
     }
@@ -71,13 +71,6 @@ public class Army implements ArmyUnit {
     @Override
     public void removeDeadBodies() {
         army.removeIf(warriorUnit -> !warriorUnit.isAlive());
-
-//        var it = army.iterator();
-//        while(it.hasNext()) {
-//            if(!it.next().isAlive()) {
-//                it.remove();
-//            }
-//        }
     }
 
     public static class ArmyWarriorUnitDecorator implements WarriorUnit, WarriorUnitBehind, ProcessCommandChain {
@@ -139,28 +132,26 @@ public class Army implements ArmyUnit {
     }
 
     private class StraightIterator implements InfGenerator<WarriorUnit> {
-        Iterator<WarriorUnit> straightIterator = army.iterator();
-        WarriorUnit attacker;
+        Iterator<WarriorUnit> itr = army.iterator();
+        WarriorUnit nextUnitInLine;
 
         @Override
         public WarriorUnit next() {
             if (!hasNext()) {
-                throw new NoSuchElementException();
+                try {
+                    throw new DoesntExistException("no more army units left");
+                } catch (DoesntExistException e) {
+                    LOGGER.error("insufficient army units funds.");
+                }
             }
-            return ((ArmyWarriorUnitDecorator) attacker).unwrap();
+            nextUnitInLine = itr.next();
+            return ((ArmyWarriorUnitDecorator) nextUnitInLine).unwrap();
         }
 
         @Override
         public boolean hasNext() {
-            while (straightIterator.hasNext()) {
-                attacker = straightIterator.next();
-                if (attacker.isAlive()) {
-                    return true;
-                }
-            }
-            return false;
+            return itr.hasNext();
         }
-
     }
 
     private class GetAliveUnitIterate implements InfGenerator<WarriorUnit> {

@@ -8,5 +8,8 @@ public interface ArmyUnit extends InfGenerator<WarriorUnit> {
 
     Iterator<WarriorUnit> getAliveUnit();
 
+    Iterator<WarriorUnit> nextInLine();
+
     void removeDeadBodies();
+
     }

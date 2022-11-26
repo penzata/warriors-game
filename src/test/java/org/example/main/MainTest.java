@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class MainTest {
 
     @Test
-    void Trials() {
+    void TrialForBattle21() {
         ArmyUnit army5 = new Army(LancerUnit::newLancer, 7)
                 .addBattleUnits(VampireUnit::newVampire, 3)
                 .addBattleUnits(HealerUnit::newHealer, 1)

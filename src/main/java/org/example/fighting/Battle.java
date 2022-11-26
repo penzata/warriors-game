@@ -1,8 +1,6 @@
 package org.example.fighting;
 
-import org.example.battleunits.Army;
 import org.example.battleunits.units.ArmyUnit;
-import org.example.battleunits.units.WarriorUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

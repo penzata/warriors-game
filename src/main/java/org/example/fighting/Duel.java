@@ -23,19 +23,19 @@ public class Duel {
         var defenderHashCode = defender.hashCode();
         String lineSeparator = System.getProperty("line.separator");
 
-        LOGGER.debug("Fight between {}({})(health:{}) and {}({})(health:{}):", attackerName, attackerHashCode, attacker.getHealth(),
+        LOGGER.debug("Fight between {}({})[health:{}] and {}({})[health:{}]:", attackerName, attackerHashCode, attacker.getHealth(),
                 defenderName, defenderHashCode, defender.getHealth());
         while (attacker.isAlive() && defender.isAlive()) {
-            LOGGER.debug("{} hits(+{}) ------>", attackerName, attacker.getAttack());
+            LOGGER.debug("{} hits(+{})  ------> ", attackerName, attacker.getAttack());
             attacker.hit(defender);
-            LOGGER.debug("{} health after being hit: {}", defenderName, defender.getHealth());
+            LOGGER.debug("-> {}'s health after being hit: {}", defenderName, defender.getHealth());
             if (defender.isAlive()) {
-                LOGGER.debug("{} hits(+{}) ------>", defenderName, defender.getAttack());
+                LOGGER.debug("{} hits(+{})  ------> ", defenderName, defender.getAttack());
                 defender.hit(attacker);
-                LOGGER.debug("{} health after being hit: {}", attackerName, attacker.getHealth());
+                LOGGER.debug("-> {}'s health after being hit: {}", attackerName, attacker.getHealth());
             }
         }
-        LOGGER.debug("Health after fight: {}({}): {}pts;  {}({}): {}pts.{}{}", attackerName, attackerHashCode, attacker.getHealth(),
+        LOGGER.debug("Health after fight: {}({})[health:{}];  {}({})[health:{}]{}{}", attackerName, attackerHashCode, attacker.getHealth(),
                 defenderName, defenderHashCode, defender.getHealth(), lineSeparator, lineSeparator);
         return attacker.isAlive();
     }

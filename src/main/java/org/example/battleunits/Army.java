@@ -52,15 +52,13 @@ public class Army implements ArmyUnit {
     }
 
     @Override
-    public Iterator<WarriorUnit> nextInLine() {
-        return new StraightIterator();
+    public String toString() {
+        return "Army{units: " + army.size() + " " + army + '}';
     }
 
     @Override
-    public String toString() {
-        return "Army{" +
-                "units: " + army.size() +
-                '}';
+    public Iterator<WarriorUnit> nextInLine() {
+        return new StraightIterator();
     }
 
     @Override
@@ -88,6 +86,11 @@ public class Army implements ArmyUnit {
 
         private void setWarriorBehind(ArmyWarriorUnitDecorator nextWarrior) {
             this.nextWarrior = nextWarrior;
+        }
+
+        @Override
+        public String toString() {
+            return "" + warriorUnit;
         }
 
         @Override

@@ -1,11 +1,11 @@
 package org.example.battleunits;
 
-import org.example.battleunits.characteristics.Attack;
-import org.example.battleunits.subsidiary.Command;
-import org.example.battleunits.subsidiary.ProcessCommandChain;
-import org.example.battleunits.subsidiary.CombatUnitBehind;
-import org.example.battleunits.subsidiary.CombatUnitHitCommand;
-import org.example.battleunits.weapons.Weapon;
+import org.example.characteristics.Attack;
+import org.example.subsidiary.Command;
+import org.example.subsidiary.ProcessCommandChain;
+import org.example.subsidiary.CombatUnitBehind;
+import org.example.subsidiary.CombatUnitHitCommand;
+import org.example.weapons.Weapon;
 
 public class CombatUnitInArmyDecorator implements CombatUnit, CombatUnitBehind, ProcessCommandChain {
     private CombatUnit warriorUnit;

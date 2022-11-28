@@ -1,8 +1,8 @@
 package org.example.battleunits;
 
-import org.example.battleunits.characteristics.Vampirism;
-import org.example.battleunits.subsidiary.DealtDamageAwareness;
-import org.example.battleunits.weapons.Weapon;
+import org.example.characteristics.Vampirism;
+import org.example.subsidiary.DealtDamageAwareness;
+import org.example.weapons.Weapon;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

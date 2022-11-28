@@ -1,4 +1,4 @@
-package org.example.battleunits.characteristics;
+package org.example.characteristics;
 
 @FunctionalInterface
 public interface PiercingAttack {

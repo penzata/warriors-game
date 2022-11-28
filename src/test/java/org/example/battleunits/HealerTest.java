@@ -1,7 +1,7 @@
 package org.example.battleunits;
 
-import org.example.battleunits.weapons.CustomWeapon;
-import org.example.battleunits.weapons.Weapon;
+import org.example.weapons.CustomWeapon;
+import org.example.weapons.Weapon;
 import org.example.fighting.Battle;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

@@ -1,10 +1,10 @@
 package org.example.battleunits;
 
-import org.example.battleunits.characteristics.Heal;
-import org.example.battleunits.subsidiary.CombatUnitHitCommand;
-import org.example.battleunits.subsidiary.Command;
-import org.example.battleunits.subsidiary.ProcessCommandChain;
-import org.example.battleunits.weapons.Weapon;
+import org.example.characteristics.Heal;
+import org.example.subsidiary.CombatUnitHitCommand;
+import org.example.subsidiary.Command;
+import org.example.subsidiary.ProcessCommandChain;
+import org.example.weapons.Weapon;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

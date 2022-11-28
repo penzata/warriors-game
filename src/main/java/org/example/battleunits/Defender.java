@@ -1,8 +1,8 @@
 package org.example.battleunits;
 
-import org.example.battleunits.characteristics.Attack;
-import org.example.battleunits.characteristics.Defence;
-import org.example.battleunits.weapons.Weapon;
+import org.example.characteristics.Attack;
+import org.example.characteristics.Defence;
+import org.example.weapons.Weapon;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

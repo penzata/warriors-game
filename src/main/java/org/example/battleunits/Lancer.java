@@ -1,8 +1,8 @@
 package org.example.battleunits;
 
-import org.example.battleunits.characteristics.PiercingAttack;
-import org.example.battleunits.subsidiary.DealtDamageAwareness;
-import org.example.battleunits.subsidiary.CombatUnitBehind;
+import org.example.characteristics.PiercingAttack;
+import org.example.subsidiary.DealtDamageAwareness;
+import org.example.subsidiary.CombatUnitBehind;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

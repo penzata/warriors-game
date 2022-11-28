@@ -1,8 +1,8 @@
 package org.example.battleunits;
 
-import org.example.battleunits.characteristics.Attack;
-import org.example.battleunits.characteristics.Health;
-import org.example.battleunits.weapons.Weapon;
+import org.example.characteristics.Attack;
+import org.example.characteristics.Health;
+import org.example.weapons.Weapon;
 
 public interface CombatUnit extends Attack, Health {
 

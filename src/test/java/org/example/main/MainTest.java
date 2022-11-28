@@ -3,7 +3,7 @@ package org.example.main;
 import org.example.battleunits.Army;
 import org.example.battleunits.ArmyUnit;
 import org.example.battleunits.CombatUnit;
-import org.example.battleunits.weapons.Weapon;
+import org.example.weapons.Weapon;
 import org.example.fighting.Battle;
 import org.junit.jupiter.api.Test;
 

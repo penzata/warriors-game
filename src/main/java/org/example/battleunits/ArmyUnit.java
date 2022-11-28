@@ -1,6 +1,6 @@
 package org.example.battleunits;
 
-import org.example.battleunits.iterators.InfGenerator;
+import org.example.iterators.InfGenerator;
 
 import java.util.Iterator;
 

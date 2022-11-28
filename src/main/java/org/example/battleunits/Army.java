@@ -1,7 +1,7 @@
 package org.example.battleunits;
 
-import org.example.battleunits.iterators.AliveUnitIterate;
-import org.example.battleunits.iterators.StraightIterate;
+import org.example.iterators.AliveUnitIterate;
+import org.example.iterators.StraightIterate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

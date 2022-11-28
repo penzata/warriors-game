@@ -1,4 +1,4 @@
-package org.example.battleunits.weapons;
+package org.example.weapons;
 
 public interface Weapon {
 

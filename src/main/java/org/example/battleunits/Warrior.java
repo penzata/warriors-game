@@ -1,7 +1,7 @@
 package org.example.battleunits;
 
-import org.example.battleunits.characteristics.Attack;
-import org.example.battleunits.weapons.Weapon;
+import org.example.characteristics.Attack;
+import org.example.weapons.Weapon;
 import org.jetbrains.annotations.NotNull;
 
 public class Warrior implements CombatUnit {

@@ -1,4 +1,4 @@
-package org.example.battleunits.iterators;
+package org.example.iterators;
 
 import org.example.battleunits.CombatUnit;
 import org.example.exceptions.DoesntExistException;

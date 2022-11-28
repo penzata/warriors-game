@@ -5,13 +5,6 @@ import org.example.battleunits.characteristics.Health;
 
 public interface CombatUnit extends Attack, Health {
 
-    default void hit(CombatUnit opponent) {
-
-        opponent.receiveDamage(this);
-    }
-
-    void receiveDamage(Attack damageDealer);
-
     /**
      * @return Warrior object with default health(50) & attack(5).
      */
@@ -54,4 +47,10 @@ public interface CombatUnit extends Attack, Health {
         return new Healer();
     }
 
+    default void hit(CombatUnit opponent) {
+
+        opponent.receiveDamage(this);
+    }
+
+    void receiveDamage(Attack damageDealer);
 }

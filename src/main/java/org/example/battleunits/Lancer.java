@@ -21,7 +21,6 @@ public class Lancer extends Warrior implements PiercingAttack, DealtDamageAwaren
     }
 
     Lancer(int health, int attack, int piercingDamage) {
-
         super(health, attack);
         this.piercingDamage = piercingDamage;
     }
@@ -30,7 +29,6 @@ public class Lancer extends Warrior implements PiercingAttack, DealtDamageAwaren
      * @param lancer - copy constructor
      */
     Lancer(@NotNull Lancer lancer) {
-
         super(lancer);
         this.piercingDamage = lancer.piercingDamage;
     }

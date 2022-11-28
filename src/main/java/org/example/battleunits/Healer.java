@@ -13,13 +13,11 @@ public class Healer extends Warrior implements Heal, ProcessCommandChain {
     private int healPower;
 
     Healer() {
-
         super(60, 0);
         this.healPower = 2;
     }
 
     Healer(int health, int attack) {
-
         super(health, attack);
         this.healPower = 2;
     }
@@ -51,13 +49,13 @@ public class Healer extends Warrior implements Heal, ProcessCommandChain {
         return healPower;
     }
 
+    private void setHealPower(int healthPoints) {
+        this.healPower = healthPoints;
+    }
+
     @Override
     public void hit(CombatUnit opponent) {
         //do nothing, has no attack points
-    }
-
-    private void setHealPower(int healthPoints) {
-        this.healPower = healthPoints;
     }
 
 }

@@ -1,6 +1,8 @@
 package org.example.fighting;
 
-import org.example.battleunits.*;
+import org.example.battleunits.Army;
+import org.example.battleunits.ArmyUnit;
+import org.example.battleunits.CombatUnit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

@@ -1,20 +1,20 @@
-package org.example.battleunits.units;
+package org.example.battleunits;
 
-import org.example.battleunits.common.InfGenerator;
+import org.example.battleunits.iterators.InfGenerator;
 
 import java.util.Iterator;
 
-public interface ArmyUnit extends InfGenerator<WarriorUnit> {
+public interface ArmyUnit extends InfGenerator<CombatUnit> {
 
     /**
      * @return iterator over Army for put in army-in-line order turn-based fight.
      */
-    Iterator<WarriorUnit> getAliveUnit();
+    Iterator<CombatUnit> getAliveUnit();
 
     /**
      * @return iterator over Army for one-on-one duel fights between army units based on theirs position in army.
      */
-    Iterator<WarriorUnit> nextInLine();
+    Iterator<CombatUnit> nextInLine();
 
     void removeDeadBodies();
 

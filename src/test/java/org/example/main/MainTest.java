@@ -1,30 +1,30 @@
 package org.example.main;
 
 import org.example.battleunits.Army;
-import org.example.battleunits.Warrior;
-import org.example.battleunits.units.*;
+import org.example.battleunits.ArmyUnit;
+import org.example.battleunits.CombatUnit;
 import org.example.fighting.Battle;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class MainTest {
 
     @Test
     void TrialForBattle21() {
-        ArmyUnit army5 = new Army(LancerUnit::newLancer, 7)
-                .addBattleUnits(VampireUnit::newVampire, 3)
-                .addBattleUnits(HealerUnit::newHealer, 1)
-                .addBattleUnits(WarriorUnit::newWarrior, 4)
-                .addBattleUnits(HealerUnit::newHealer, 1)
-                .addBattleUnits(DefenderUnit::newDefender, 2);
-        ArmyUnit army6 = new Army(WarriorUnit::newWarrior, 4)
-                .addBattleUnits(DefenderUnit::newDefender, 4)
-                .addBattleUnits(HealerUnit::newHealer, 1)
-                .addBattleUnits(VampireUnit::newVampire, 6)
-                .addBattleUnits(LancerUnit::newLancer, 4);
+        ArmyUnit army5 = new Army(CombatUnit::newLancer, 7)
+                .addBattleUnits(CombatUnit::newVampire, 3)
+                .addBattleUnits(CombatUnit::newHealer, 1)
+                .addBattleUnits(CombatUnit::newWarrior, 4)
+                .addBattleUnits(CombatUnit::newHealer, 1)
+                .addBattleUnits(CombatUnit::newDefender, 2);
+        ArmyUnit army6 = new Army(CombatUnit::newWarrior, 4)
+                .addBattleUnits(CombatUnit::newDefender, 4)
+                .addBattleUnits(CombatUnit::newHealer, 1)
+                .addBattleUnits(CombatUnit::newVampire, 6)
+                .addBattleUnits(CombatUnit::newLancer, 4);
         boolean straightFightResult = Battle.straightFight(army5, army6);
 
-        assertTrue(straightFightResult);
+        assertFalse(straightFightResult);
     }
 }

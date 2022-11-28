@@ -1,18 +1,14 @@
 package org.example.battleunits;
 
-import org.example.battleunits.units.WarriorUnit;
+import org.example.battleunits.characteristics.Attack;
 import org.jetbrains.annotations.NotNull;
 
-public class Warrior implements WarriorUnit {
+public class Warrior implements CombatUnit {
     private final int initialHealth;
     private int health;
     private int attack;
 
-    /**
-     * Constructs default Warrior object with default health(50) & attack(5).
-     */
-    public Warrior() {
-
+    Warrior() {
         this(50, 5);
     }
 
@@ -45,7 +41,17 @@ public class Warrior implements WarriorUnit {
         this.health = Math.min(initialHealth, health);
     }
 
-    protected void healedBy(int healingPoints) {
+    @Override
+    public void receiveDamage(Attack damageDealer) {
+
+        reduceHealth(damageDealer.getAttack());
+    }
+
+    private void reduceHealth(int damage) {
+        setHealth(getHealth() - damage);
+    }
+
+    void healedBy(int healingPoints) {
         setHealth(Math.min(getHealth() + healingPoints, initialHealth));
     }
 
@@ -56,12 +62,6 @@ public class Warrior implements WarriorUnit {
 
     private void setAttack(int attack) {
         this.attack = attack;
-    }
-
-    @Override
-    public void reduceHealth(int damage) {
-
-        setHealth(Math.max(getHealth() - damage, 0));
     }
 
 }

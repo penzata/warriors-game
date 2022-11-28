@@ -1,9 +1,9 @@
 package org.example.battleunits.subsidiary;
 
-import org.example.battleunits.units.WarriorUnit;
+import org.example.battleunits.CombatUnit;
 
 @FunctionalInterface
 public interface WarriorUnitBehind {
 
-    WarriorUnit getWarriorBehind();
+    CombatUnit getWarriorBehind();
 }

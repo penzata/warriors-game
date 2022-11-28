@@ -1,8 +1,5 @@
 package org.example.battleunits;
 
-import org.example.battleunits.units.ArmyUnit;
-import org.example.battleunits.units.LancerUnit;
-import org.example.battleunits.units.WarriorUnit;
 import org.example.fighting.Battle;
 import org.junit.jupiter.api.Test;
 
@@ -13,8 +10,8 @@ class LancerTest {
 
     @Test
     void LancerFightsArmyOfTwoAndMakesPiercingDamage() {
-        ArmyUnit oneLancerArmy = new Army(LancerUnit::newLancer, 1);
-        ArmyUnit army = new Army(WarriorUnit::newWarrior, 1)
+        ArmyUnit oneLancerArmy = new Army(CombatUnit::newLancer, 1);
+        ArmyUnit army = new Army(CombatUnit::newWarrior, 1)
                 .addBattleUnits(() -> new Knight(25, 7), 1);
 
         assertTrue(Battle.fight(oneLancerArmy, army));
@@ -22,7 +19,7 @@ class LancerTest {
 
     @Test
     void LancerFightsTwoRookieArmy_AlwaysSetRookieHealthToOne_AndLoses_BreakProgramTest() {
-        ArmyUnit lancerArmy = new Army(LancerUnit::newLancer, 1);
+        ArmyUnit lancerArmy = new Army(CombatUnit::newLancer, 1);
         ArmyUnit rookiesArmy = new Army(Rookie::new, 1)
                 .addBattleUnits(Rookie::new, 1);
 

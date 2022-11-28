@@ -1,19 +1,16 @@
 package org.example.battleunits;
 
 import org.example.battleunits.characteristics.Attack;
-import org.example.battleunits.units.DefenderUnit;
+import org.example.battleunits.characteristics.Defence;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Defender extends Warrior implements DefenderUnit {
+public class Defender extends Warrior implements Defence {
     private final static Logger LOGGER = LoggerFactory.getLogger(Defender.class);
     private final int defence;
 
-    /**
-     * Constructs default Defender object with default health(60), attack(3) & defence(2).
-     */
-    public Defender() {
+    Defender() {
         super(60, 3);
         this.defence = 2;
     }

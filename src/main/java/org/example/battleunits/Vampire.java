@@ -1,20 +1,16 @@
 package org.example.battleunits;
 
+import org.example.battleunits.characteristics.Vampirism;
 import org.example.battleunits.subsidiary.DealtDamageAwareness;
-import org.example.battleunits.units.VampireUnit;
-import org.example.battleunits.units.WarriorUnit;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Vampire extends Warrior implements VampireUnit, DealtDamageAwareness {
+public class Vampire extends Warrior implements Vampirism, DealtDamageAwareness {
     private static final Logger LOGGER = LoggerFactory.getLogger(Vampire.class);
     private int vampirism;
 
-    /**
-     * Constructs default Vampire object with default health(40), attack(4) & vampirism(50).
-     */
-    public Vampire() {
+    Vampire() {
         super(40, 4);
         this.vampirism = 50;
     }
@@ -33,7 +29,7 @@ public class Vampire extends Warrior implements VampireUnit, DealtDamageAwarenes
     }
 
     @Override
-    public void hit(WarriorUnit opponent) {
+    public void hit(CombatUnit opponent) {
         int damageDealt = getDealtDamage(opponent);
         final int PERCENTS = 100;
         int healingPoints = damageDealt * getVampirism() / PERCENTS;

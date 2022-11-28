@@ -1,23 +1,20 @@
 package org.example.battleunits;
 
-import org.example.battleunits.units.ArmyUnit;
-import org.example.battleunits.units.KnightUnit;
-import org.example.battleunits.units.VampireUnit;
-import org.example.battleunits.units.WarriorUnit;
 import org.example.fighting.Battle;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.example.battleunits.CombatUnit.newVampire;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class VampireTest {
-    VampireUnit vampire;
+    CombatUnit vampire;
     Rookie rookie;
 
     @BeforeEach
     void init() {
-        vampire = VampireUnit.newVampire();
+        vampire = newVampire();
         rookie = new Rookie();
     }
 
@@ -32,9 +29,9 @@ class VampireTest {
 
     @Test
     void OneVampireArmyAttacksWarriorAndKnightAndLoses() {
-        ArmyUnit army1 = new Army(Vampire::new, 1);
-        ArmyUnit army2 = new Army(WarriorUnit::newWarrior, 1)
-                .addBattleUnits(KnightUnit::newKnight, 2);
+        ArmyUnit army1 = new Army(CombatUnit::newVampire, 1);
+        ArmyUnit army2 = new Army(CombatUnit::newWarrior, 1)
+                .addBattleUnits(CombatUnit::newKnight, 2);
 
         assertFalse(Battle.fight(army1, army2));
     }

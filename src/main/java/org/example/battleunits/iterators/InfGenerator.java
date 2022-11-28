@@ -1,4 +1,4 @@
-package org.example.battleunits.common;
+package org.example.battleunits.iterators;
 
 import java.util.Iterator;
 

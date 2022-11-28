@@ -42,8 +42,10 @@ public class Vampire extends Warrior implements Vampirism, DealtDamageAwareness 
         return this.vampirism;
     }
 
-    @Override
-    public void vampirism(int selfHealing) {
+    /**
+     * @param selfHealing - vampire's self-healing (restores health by 50% of the dealt damage).
+     */
+    private void vampirism(int selfHealing) {
         healedBy(selfHealing);
     }
 

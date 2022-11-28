@@ -13,7 +13,7 @@ import java.util.function.Supplier;
 public class Army implements ArmyUnit {
     private static final Logger LOGGER = LoggerFactory.getLogger(Army.class);
     private Collection<CombatUnit> army;
-    private ArmyCombatUnitDecorator lastWarrior;
+    private CombatUnitInArmyDecorator lastWarrior;
 
 
     public Army(Supplier<CombatUnit> factory, Integer numberOfUnits) {
@@ -29,17 +29,12 @@ public class Army implements ArmyUnit {
     }
 
     private void addBattleUnit(CombatUnit warrior) {
-        ArmyCombatUnitDecorator wrapped = new ArmyCombatUnitDecorator(warrior);
+        CombatUnitInArmyDecorator wrapped = new CombatUnitInArmyDecorator(warrior);
         if (lastWarrior != null) {
             lastWarrior.setWarriorBehind(wrapped);
         }
         lastWarrior = wrapped;
         this.army.add(wrapped);
-    }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
     }
 
     @Override

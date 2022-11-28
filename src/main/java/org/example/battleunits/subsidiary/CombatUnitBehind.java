@@ -3,7 +3,7 @@ package org.example.battleunits.subsidiary;
 import org.example.battleunits.CombatUnit;
 
 @FunctionalInterface
-public interface WarriorUnitBehind {
+public interface CombatUnitBehind {
 
     CombatUnit getWarriorBehind();
 }

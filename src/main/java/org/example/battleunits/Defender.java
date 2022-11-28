@@ -2,13 +2,14 @@ package org.example.battleunits;
 
 import org.example.battleunits.characteristics.Attack;
 import org.example.battleunits.characteristics.Defence;
+import org.example.battleunits.weapons.Weapon;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Defender extends Warrior implements Defence {
     private final static Logger LOGGER = LoggerFactory.getLogger(Defender.class);
-    private final int defence;
+    private int defence;
 
     Defender() {
         super(60, 3);
@@ -36,7 +37,25 @@ public class Defender extends Warrior implements Defence {
     }
 
     @Override
+    public void equipWeapon(Weapon weapon) {
+        super.equipWeapon(weapon);
+        setDefence(Math.max(getDefence() + weapon.getWeaponDefence(), 0));
+    }
+
+    @Override
     public int getDefence() {
         return this.defence;
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() +
+                "{h:" + getHealth() +
+                ", a:" + getAttack() +
+                ", d:" + getDefence() + "}";
+    }
+
+    private void setDefence(int defence) {
+        this.defence = defence;
     }
 }

@@ -1,6 +1,6 @@
 package org.example.battleunits.iterators;
 
-import org.example.battleunits.ArmyCombatUnitDecorator;
+import org.example.battleunits.CombatUnitInArmyDecorator;
 import org.example.battleunits.CombatUnit;
 import org.example.exceptions.DoesntExistException;
 import org.slf4j.Logger;
@@ -30,7 +30,7 @@ public class StraightIterate implements InfGenerator<CombatUnit> {
             }
         }
         nextUnitInLine = itr.next();
-        return ((ArmyCombatUnitDecorator) nextUnitInLine).unwrap();
+        return ((CombatUnitInArmyDecorator) nextUnitInLine).unwrap();
     }
 
     @Override

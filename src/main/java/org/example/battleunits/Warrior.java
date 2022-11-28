@@ -1,6 +1,7 @@
 package org.example.battleunits;
 
 import org.example.battleunits.characteristics.Attack;
+import org.example.battleunits.weapons.Weapon;
 import org.jetbrains.annotations.NotNull;
 
 public class Warrior implements CombatUnit {
@@ -27,24 +28,32 @@ public class Warrior implements CombatUnit {
     }
 
     @Override
-    public String toString() {
-        return getClass().getSimpleName() + " h:" + getHealth();
-    }
-
-    @Override
     public int getHealth() {
         return health;
     }
 
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() +
+                "{h:" + getHealth() +
+                ", a:" + getAttack() + "}";
+    }
+
     private void setHealth(int health) {
 
-        this.health = Math.min(initialHealth, health);
+        this.health = health;
     }
 
     @Override
     public void receiveDamage(Attack damageDealer) {
 
         reduceHealth(damageDealer.getAttack());
+    }
+
+    @Override
+    public void equipWeapon(Weapon weapon) {
+        setHealth(Math.max(getHealth() + weapon.getWeaponHealth(), 0));
+        setAttack(Math.max(getAttack() + weapon.getWeaponAttack(), 0));
     }
 
     private void reduceHealth(int damage) {

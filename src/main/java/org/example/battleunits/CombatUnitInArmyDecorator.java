@@ -3,23 +3,24 @@ package org.example.battleunits;
 import org.example.battleunits.characteristics.Attack;
 import org.example.battleunits.subsidiary.Command;
 import org.example.battleunits.subsidiary.ProcessCommandChain;
-import org.example.battleunits.subsidiary.WarriorUnitBehind;
-import org.example.battleunits.subsidiary.WarriorUnitHitCommand;
+import org.example.battleunits.subsidiary.CombatUnitBehind;
+import org.example.battleunits.subsidiary.CombatUnitHitCommand;
+import org.example.battleunits.weapons.Weapon;
 
-public class ArmyCombatUnitDecorator implements CombatUnit, WarriorUnitBehind, ProcessCommandChain {
+public class CombatUnitInArmyDecorator implements CombatUnit, CombatUnitBehind, ProcessCommandChain {
     private CombatUnit warriorUnit;
-    private ArmyCombatUnitDecorator nextWarrior;
+    private CombatUnitInArmyDecorator nextWarrior;
 
-    public ArmyCombatUnitDecorator(CombatUnit warriorUnit) {
+    public CombatUnitInArmyDecorator(CombatUnit warriorUnit) {
         this.warriorUnit = warriorUnit;
     }
 
     @Override
-    public ArmyCombatUnitDecorator getWarriorBehind() {
+    public CombatUnitInArmyDecorator getWarriorBehind() {
         return nextWarrior;
     }
 
-    public void setWarriorBehind(ArmyCombatUnitDecorator nextWarrior) {
+    public void setWarriorBehind(CombatUnitInArmyDecorator nextWarrior) {
         this.nextWarrior = nextWarrior;
     }
 
@@ -29,7 +30,7 @@ public class ArmyCombatUnitDecorator implements CombatUnit, WarriorUnitBehind, P
     }
 
     @Override
-    public void processCommand(Command command, ArmyCombatUnitDecorator commandSender) {
+    public void processCommand(Command command, CombatUnitInArmyDecorator commandSender) {
         if (warriorUnit instanceof ProcessCommandChain processor && !warriorUnit.equals(commandSender.unwrap())) {
             processor.processCommand(command, commandSender);
         }
@@ -55,11 +56,16 @@ public class ArmyCombatUnitDecorator implements CombatUnit, WarriorUnitBehind, P
     @Override
     public void hit(CombatUnit opponent) {
         warriorUnit.hit(opponent);
-        processCommand(WarriorUnitHitCommand.HEAL, this);
+        processCommand(CombatUnitHitCommand.HEAL, this);
     }
 
     @Override
     public void receiveDamage(Attack damageDealer) {
         warriorUnit.receiveDamage(damageDealer);
+    }
+
+    @Override
+    public void equipWeapon(Weapon weapon) {
+        warriorUnit.equipWeapon(weapon);
     }
 }

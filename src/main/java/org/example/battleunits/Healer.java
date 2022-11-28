@@ -1,9 +1,10 @@
 package org.example.battleunits;
 
 import org.example.battleunits.characteristics.Heal;
+import org.example.battleunits.subsidiary.CombatUnitHitCommand;
 import org.example.battleunits.subsidiary.Command;
 import org.example.battleunits.subsidiary.ProcessCommandChain;
-import org.example.battleunits.subsidiary.WarriorUnitHitCommand;
+import org.example.battleunits.weapons.Weapon;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,8 +31,23 @@ public class Healer extends Warrior implements Heal, ProcessCommandChain {
     }
 
     @Override
-    public void processCommand(Command command, ArmyCombatUnitDecorator commandSender) {
-        if (isAlive() && command.equals(WarriorUnitHitCommand.HEAL)) {
+    public void equipWeapon(Weapon weapon) {
+        super.equipWeapon(weapon);
+        setHealPower(Math.max(getHealPower() + weapon.getWeaponHealPower(), 0));
+    }
+
+    @Override
+    public int getHealPower() {
+        return healPower;
+    }
+
+    private void setHealPower(int healthPoints) {
+        this.healPower = healthPoints;
+    }
+
+    @Override
+    public void processCommand(Command command, CombatUnitInArmyDecorator commandSender) {
+        if (isAlive() && command.equals(CombatUnitHitCommand.HEAL)) {
             Warrior unwrapped = commandSender.unwrap();
             heal(unwrapped);
             LOGGER.debug("----->proceed with chain healing if army has more healers----->");
@@ -45,12 +61,11 @@ public class Healer extends Warrior implements Heal, ProcessCommandChain {
     }
 
     @Override
-    public int getHealPower() {
-        return healPower;
-    }
-
-    private void setHealPower(int healthPoints) {
-        this.healPower = healthPoints;
+    public String toString() {
+        return getClass().getSimpleName() +
+                "{h:" + getHealth() +
+                ", a:" + getAttack() +
+                ", heal:" + getHealPower() + "}";
     }
 
     @Override

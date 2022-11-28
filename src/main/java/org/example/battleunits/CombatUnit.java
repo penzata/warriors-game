@@ -2,6 +2,7 @@ package org.example.battleunits;
 
 import org.example.battleunits.characteristics.Attack;
 import org.example.battleunits.characteristics.Health;
+import org.example.battleunits.weapons.Weapon;
 
 public interface CombatUnit extends Attack, Health {
 
@@ -53,4 +54,6 @@ public interface CombatUnit extends Attack, Health {
     }
 
     void receiveDamage(Attack damageDealer);
+
+    void equipWeapon(Weapon weapon);
 }

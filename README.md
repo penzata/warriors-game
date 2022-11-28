@@ -6,3 +6,5 @@ Simple game about fighting:
 4) vampire's kiss
 5) the lancer strikes back
 6) here comes the healer
+7) one-on-one straight fights based on position in army
+8) equip weapons

@@ -1,9 +1,9 @@
 package org.example.battleunits.subsidiary;
 
-import org.example.battleunits.ArmyCombatUnitDecorator;
+import org.example.battleunits.CombatUnitInArmyDecorator;
 
 @FunctionalInterface
 public interface ProcessCommandChain {
 
-    void processCommand(Command command, ArmyCombatUnitDecorator commandSender);
+    void processCommand(Command command, CombatUnitInArmyDecorator commandSender);
 }

@@ -3,6 +3,7 @@ package org.example.main;
 import org.example.battleunits.Army;
 import org.example.battleunits.ArmyUnit;
 import org.example.battleunits.CombatUnit;
+import org.example.battleunits.weapons.Weapon;
 import org.example.fighting.Battle;
 import org.junit.jupiter.api.Test;
 
@@ -27,4 +28,12 @@ class MainTest {
 
         assertFalse(straightFightResult);
     }
+
+    @Test
+    void print() {
+        CombatUnit vampire = CombatUnit.newVampire();
+        vampire.equipWeapon(Weapon.katana());
+        System.out.println(vampire);
+    }
+
 }

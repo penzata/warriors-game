@@ -1,6 +1,7 @@
 package org.example.fighting;
 
 import org.example.battleunits.*;
+import org.example.battleunits.weapons.Weapon;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -85,6 +86,19 @@ class DuelTest {
         assertTrue(Duel.fight(lancer, warrior));
         assertEquals(10, lancer.getHealth());
         assertEquals(-4, warrior.getHealth());
+    }
+
+    @Test
+    void DuelWithWeaponsBetweenWarriorAndKnight_AndKnightLoses() {
+        CombatUnit warrior = CombatUnit.newWarrior();
+        CombatUnit knight = CombatUnit.newKnight();
+        warrior.equipWeapon(Weapon.sword());
+        knight.equipWeapon(Weapon.katana());
+        boolean result = Duel.fight(warrior, knight);
+
+        assertEquals(true, result);
+        assertEquals(3, warrior.getHealth());
+        assertEquals(-5, knight.getHealth());
     }
 
 }

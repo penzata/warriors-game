@@ -1,10 +1,20 @@
 package org.example.battleunits;
 
-import org.example.fighting.Battle;
+import org.example.battleunits.characteristics.Attack;
+import org.example.battleunits.characteristics.Health;
+import org.example.battleunits.weapons.CustomWeapon;
+import org.example.battleunits.weapons.Weapon;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class WarriorTest {
     private Warrior warrior;
@@ -42,11 +52,24 @@ class WarriorTest {
         assertEquals(45, opponentWarrior.getHealth());
     }
 
-    @Test
-    void stuff() {
-        Army arm1 = new Army(Warrior::new, 2);
-        Army arm2 = new Army(Warrior::new, 3);
-        Battle.fight(arm1, arm2);
+    @DisplayName("different weapons equipped by Warrior")
+    @ParameterizedTest(name = "equipped {0}")
+    @MethodSource({"equipWeapon"})
+    void EquipDifferentWeaponsOnWarriorAndVerifyItsStats (Weapon weapon, int expectedHealth, int expectedAttack) {
+        warrior.equipWeapon(weapon);
+
+        assertEquals(expectedHealth, warrior.getHealth());
+        assertEquals(expectedAttack, warrior.getAttack());
+    }
+
+    static Stream<Arguments> equipWeapon() {
+        return Stream.of(
+                arguments(Weapon.sword(), 55, 7),
+                arguments(Weapon.shield(), 70, 4),
+                arguments(Weapon.greatAxe(), 35, 10),
+                arguments(Weapon.katana(), 30, 11),
+                arguments(Weapon.magicWand(), 80, 8),
+                arguments(new CustomWeapon(-100, -100, -100, -100, -100), 0, 0));
     }
 
 }

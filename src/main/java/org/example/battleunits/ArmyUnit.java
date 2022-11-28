@@ -7,7 +7,7 @@ import java.util.Iterator;
 public interface ArmyUnit extends InfGenerator<CombatUnit> {
 
     /**
-     * @return iterator over Army for army-in-line order for turn-based fight.
+     * @return iterator over Army for units-in-line order for turn-based fight.
      */
     Iterator<CombatUnit> getAliveUnit();
 

@@ -2,7 +2,7 @@ package org.example.battleunits;
 
 import org.example.battleunits.characteristics.PiercingAttack;
 import org.example.battleunits.subsidiary.DealtDamageAwareness;
-import org.example.battleunits.subsidiary.WarriorUnitBehind;
+import org.example.battleunits.subsidiary.CombatUnitBehind;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,11 +37,11 @@ public class Lancer extends Warrior implements PiercingAttack, DealtDamageAwaren
     public void hit(CombatUnit opponent) {
         int damageDealt = getDealtDamage(opponent);
         LOGGER.debug("health of Lancer's first opponent after being hit: {}", opponent.getHealth());
-        if (opponent instanceof WarriorUnitBehind opponentBehind) {
+        if (opponent instanceof CombatUnitBehind opponentBehind) {
             CombatUnit nextOpponent = opponentBehind.getWarriorBehind();
             if (nextOpponent != null) {
                 final int PERCENTS = 100;
-                int reducedDamage = damageDealt * getPiercingAttack() / PERCENTS;
+                int reducedDamage = (int) (damageDealt * getPiercingAttack() / PERCENTS);
                 nextOpponent.receiveDamage(() -> reducedDamage);
                 LOGGER.debug("health of Lancer's next opponent after piercing damage({}): {}",
                         reducedDamage, nextOpponent.getHealth());
@@ -52,6 +52,14 @@ public class Lancer extends Warrior implements PiercingAttack, DealtDamageAwaren
     @Override
     public int getPiercingAttack() {
         return piercingDamage;
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() +
+                "{h:" + getHealth() +
+                ", a:" + getAttack() +
+                ", pierce:" + getPiercingAttack() + "%}";
     }
 
     private void setPiercingAttack(int piercingDamage) {

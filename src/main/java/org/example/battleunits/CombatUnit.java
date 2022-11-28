@@ -55,5 +55,5 @@ public interface CombatUnit extends Attack, Health {
 
     void receiveDamage(Attack damageDealer);
 
-    void equipWeapon(Weapon weapon);
+    CombatUnit equipWeapon(Weapon weapon);
 }

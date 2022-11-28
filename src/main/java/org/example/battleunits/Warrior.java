@@ -4,12 +4,12 @@ import org.example.characteristics.Attack;
 import org.example.weapons.Weapon;
 import org.jetbrains.annotations.NotNull;
 
-public class Warrior implements CombatUnit {
+    public class Warrior implements CombatUnit {
     private final int initialHealth;
     private int health;
     private int attack;
 
-    Warrior() {
+    public Warrior() {
         this(50, 5);
     }
 
@@ -28,40 +28,20 @@ public class Warrior implements CombatUnit {
     }
 
     @Override
-    public int getHealth() {
-        return health;
-    }
-
-    @Override
     public String toString() {
         return getClass().getSimpleName() +
                 "{h:" + getHealth() +
                 ", a:" + getAttack() + "}";
     }
 
+    @Override
+    public int getHealth() {
+        return health;
+    }
+
     private void setHealth(int health) {
 
         this.health = health;
-    }
-
-    @Override
-    public void receiveDamage(Attack damageDealer) {
-
-        reduceHealth(damageDealer.getAttack());
-    }
-
-    @Override
-    public void equipWeapon(Weapon weapon) {
-        setHealth(Math.max(getHealth() + weapon.getWeaponHealth(), 0));
-        setAttack(Math.max(getAttack() + weapon.getWeaponAttack(), 0));
-    }
-
-    private void reduceHealth(int damage) {
-        setHealth(getHealth() - damage);
-    }
-
-    void healedBy(int healingPoints) {
-        setHealth(Math.min(getHealth() + healingPoints, initialHealth));
     }
 
     @Override
@@ -71,6 +51,27 @@ public class Warrior implements CombatUnit {
 
     private void setAttack(int attack) {
         this.attack = attack;
+    }
+
+    @Override
+    public void receiveDamage(Attack damageDealer) {
+
+        reduceHealth(damageDealer.getAttack());
+    }
+
+    private void reduceHealth(int damage) {
+        setHealth(getHealth() - damage);
+    }
+
+    @Override
+    public CombatUnit equipWeapon(Weapon weapon) {
+        setHealth(Math.max(getHealth() + weapon.getWeaponHealth(), 0));
+        setAttack(Math.max(getAttack() + weapon.getWeaponAttack(), 0));
+        return this;
+    }
+
+    void healedBy(int healingPoints) {
+        setHealth(Math.min(getHealth() + healingPoints, initialHealth));
     }
 
 }

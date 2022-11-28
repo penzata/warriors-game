@@ -17,9 +17,10 @@ public class Vampire extends Warrior implements Vampirism, DealtDamageAwareness 
     }
 
     @Override
-    public void equipWeapon(Weapon weapon) {
+    public CombatUnit equipWeapon(Weapon weapon) {
         super.equipWeapon(weapon);
         setVampirism(Math.max(getVampirism() + weapon.getWeaponVampirism(), 0));
+        return this;
     }
 
     Vampire(int health, int attack, int vampirism) {

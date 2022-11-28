@@ -1,6 +1,7 @@
 package org.example.battleunits;
 
 import org.example.iterators.InfGenerator;
+import org.example.weapons.Weapon;
 
 import java.util.Iterator;
 
@@ -17,5 +18,7 @@ public interface ArmyUnit extends InfGenerator<CombatUnit> {
     Iterator<CombatUnit> nextInLine();
 
     void removeDeadBodies();
+
+    void equipWarriorAtPosition(int position, Weapon weapon);
 
 }

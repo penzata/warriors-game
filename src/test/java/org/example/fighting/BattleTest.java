@@ -1,8 +1,8 @@
 package org.example.fighting;
 
-import org.example.battleunits.Army;
-import org.example.battleunits.ArmyUnit;
-import org.example.battleunits.CombatUnit;
+import org.example.battleunits.*;
+import org.example.weapons.CustomWeapon;
+import org.example.weapons.Weapon;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -195,6 +195,52 @@ class BattleTest {
                 arguments(army7, army8, true));
     }
 
+    static Stream<Arguments> battleWithWeapons() {
+        ArmyUnit army1 = new Army(CombatUnit::newKnight, 1)
+                .addBattleUnits(CombatUnit::newLancer, 1);
+        army1.equipWarriorAtPosition(0, Weapon.magicWand());
+        army1.equipWarriorAtPosition(1, Weapon.greatAxe());
+        ArmyUnit army2 = new Army(CombatUnit::newVampire, 1)
+                .addBattleUnits(CombatUnit::newHealer, 1);
+        army2.equipWarriorAtPosition(0, Weapon.magicWand());
+        army2.equipWarriorAtPosition(1, Weapon.greatAxe());
+
+        ArmyUnit army3 = new Army(CombatUnit::newDefender, 1)
+                .addBattleUnits(CombatUnit::newWarrior, 1);
+        army3.equipWarriorAtPosition(0, Weapon.greatAxe());
+        army3.equipWarriorAtPosition(1, Weapon.greatAxe());
+        ArmyUnit army4 = new Army(CombatUnit::newKnight, 1)
+                .addBattleUnits(CombatUnit::newHealer, 1);
+        army4.equipWarriorAtPosition(0, Weapon.sword());
+        army4.equipWarriorAtPosition(1, Weapon.sword());
+
+        ArmyUnit army5 = new Army(CombatUnit::newDefender, 2);
+        army5.equipWarriorAtPosition(0, Weapon.katana());
+        army5.equipWarriorAtPosition(1, Weapon.katana());
+        ArmyUnit army6 = new Army(CombatUnit::newKnight, 1)
+                .addBattleUnits(CombatUnit::newVampire, 1);
+        army6.equipWarriorAtPosition(0, Weapon.katana());
+        army6.equipWarriorAtPosition(1, Weapon.katana());
+
+        CustomWeapon customWeapon1 = new CustomWeapon(-20, 6, 1, 40, -2);
+        CustomWeapon customWeapon2 = new CustomWeapon(20, -2, 2, -55, 3);
+        ArmyUnit army7 = new Army(CombatUnit::newKnight, 3);
+        army7.equipWarriorAtPosition(0, customWeapon1);
+        army7.equipWarriorAtPosition(1, customWeapon1);
+        army7.equipWarriorAtPosition(2, customWeapon2);
+        ArmyUnit army8 = new Army(CombatUnit::newWarrior, 1)
+                .addBattleUnits(CombatUnit::newDefender, 2);
+        army7.equipWarriorAtPosition(0, customWeapon1);
+        army7.equipWarriorAtPosition(1, customWeapon2);
+        army7.equipWarriorAtPosition(2, customWeapon2);
+
+        return Stream.of(
+                arguments(army1, army2, true),
+                arguments(army3, army4, true),
+                arguments(army5, army6, false),
+                arguments(army7, army8, true));
+    }
+
     @DisplayName("different battles between two armies")
     @ParameterizedTest(name = "battle{index}:  {0} vs {1} --> attacker army wins? --> {2}")
     @MethodSource({"differentBattleArmies", "fullDefenderBattleArmies",
@@ -234,6 +280,79 @@ class BattleTest {
     void StraightBattle_WhoWinsOrLoses(Army army1, Army army2, Boolean expectedBattleResult) {
         boolean battleResult = Battle.straightFight(army1, army2);
         assertEquals(expectedBattleResult, battleResult);
+    }
+
+    @DisplayName("battles between weapon equipped armies")
+    @ParameterizedTest(name = "battle{index} with weapons:  {0} vs {1} --> attacker army wins? --> {2}")
+    @MethodSource({"battleWithWeapons"})
+    void BattleWithWeapons_WhoWinsOrLoses(Army army1, Army army2, Boolean expectedBattleResult) {
+        boolean battleResult = Battle.straightFight(army1, army2);
+        assertEquals(expectedBattleResult, battleResult);
+    }
+
+    @DisplayName("straight battles between weapon equipped armies")
+    @ParameterizedTest(name = "straight battle{index} with weapons:  {0} vs {1} --> attacker army wins? --> {2}")
+    @MethodSource({"straightBattleWithWeapons"})
+    void StraightBattleWithWeapons_WhoWinsOrLoses(Army army1, Army army2, Boolean expectedBattleResult) {
+        boolean battleResult = Battle.straightFight(army1, army2);
+        assertEquals(expectedBattleResult, battleResult);
+    }
+
+    static Stream<Arguments> straightBattleWithWeapons() {
+        CustomWeapon customWeapon1 = new CustomWeapon(-20, 1, 1, 40, -2);
+        CustomWeapon customWeapon2 = new CustomWeapon(20, 2, 2, -55, 3);
+        ArmyUnit army1 = new Army(CombatUnit::newVampire, 1);
+        army1.equipWarriorAtPosition(0, customWeapon1);
+        army1.equipWarriorAtPosition(1, customWeapon1);
+        army1.equipWarriorAtPosition(2, customWeapon2);
+        ArmyUnit army2 = new Army(CombatUnit::newWarrior, 1)
+                .addBattleUnits(CombatUnit::newDefender, 2);
+        army2.equipWarriorAtPosition(0, customWeapon1);
+        army2.equipWarriorAtPosition(1, customWeapon2);
+        army2.equipWarriorAtPosition(2, customWeapon2);
+
+        ArmyUnit army3 = new Army(CombatUnit::newVampire, 2)
+                .addBattleUnits(Rookie::new, 2);
+        army3.equipWarriorAtPosition(0, Weapon.katana());
+        army3.equipWarriorAtPosition(1, Weapon.katana());
+        army3.equipWarriorAtPosition(2, Weapon.shield());
+        ArmyUnit army4 = new Army(CombatUnit::newWarrior, 1)
+                .addBattleUnits(CombatUnit::newDefender, 2);
+        army4.equipWarriorAtPosition(0, Weapon.katana());
+        army4.equipWarriorAtPosition(1, Weapon.shield());
+        army4.equipWarriorAtPosition(2, Weapon.shield());
+
+        ArmyUnit army5 = new Army(CombatUnit::newVampire, 3);
+        army5.equipWarriorAtPosition(0, Weapon.greatAxe());
+        army5.equipWarriorAtPosition(1, Weapon.greatAxe());
+        army5.equipWarriorAtPosition(2, Weapon.greatAxe());
+        ArmyUnit army6 = new Army(CombatUnit::newWarrior, 1)
+                .addBattleUnits(CombatUnit::newDefender, 1);
+        army6.equipWarriorAtPosition(0, Weapon.sword());
+        army6.equipWarriorAtPosition(1, Weapon.sword());
+
+        ArmyUnit army7 = new Army(Rookie::new, 3);
+        army7.equipWarriorAtPosition(0, Weapon.katana());
+        army7.equipWarriorAtPosition(1, Weapon.katana());
+        army7.equipWarriorAtPosition(2, Weapon.katana());
+        ArmyUnit army8 = new Army(CombatUnit::newDefender, 1)
+                .addBattleUnits(CombatUnit::newHealer, 1);
+        army8.equipWarriorAtPosition(0, Weapon.magicWand());
+        army8.equipWarriorAtPosition(1, Weapon.magicWand());
+
+        return Stream.of(
+                arguments(army1, army2, false),
+                arguments(army3, army4, true),
+                arguments(army5, army6, true),
+                arguments(army7, army8, false));
+    }
+
+    static class Rookie extends Warrior {
+
+        @Override
+        public int getAttack() {
+            return 1;
+        }
     }
 
 }

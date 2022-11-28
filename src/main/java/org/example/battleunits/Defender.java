@@ -37,9 +37,10 @@ public class Defender extends Warrior implements Defence {
     }
 
     @Override
-    public void equipWeapon(Weapon weapon) {
+    public CombatUnit equipWeapon(Weapon weapon) {
         super.equipWeapon(weapon);
         setDefence(Math.max(getDefence() + weapon.getWeaponDefence(), 0));
+        return this;
     }
 
     @Override

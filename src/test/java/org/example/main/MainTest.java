@@ -3,6 +3,7 @@ package org.example.main;
 import org.example.battleunits.Army;
 import org.example.battleunits.ArmyUnit;
 import org.example.battleunits.CombatUnit;
+import org.example.battleunits.Warrior;
 import org.example.weapons.Weapon;
 import org.example.fighting.Battle;
 import org.junit.jupiter.api.Test;
@@ -34,6 +35,31 @@ class MainTest {
         CombatUnit vampire = CombatUnit.newVampire();
         vampire.equipWeapon(Weapon.katana());
         System.out.println(vampire);
+        CombatUnit lancer = CombatUnit.newLancer();
+    }
+
+    @Test
+    void RookieTesting() {
+        ArmyUnit army3 = new Army(CombatUnit::newVampire, 2)
+                .addBattleUnits(Rookie::new, 2);
+        army3.equipWarriorAtPosition(0, Weapon.katana());
+        army3.equipWarriorAtPosition(1, Weapon.katana());
+        army3.equipWarriorAtPosition(2, Weapon.shield());
+        ArmyUnit army4 = new Army(CombatUnit::newWarrior, 1)
+                .addBattleUnits(CombatUnit::newDefender, 2);
+        army4.equipWarriorAtPosition(0, Weapon.katana());
+        army4.equipWarriorAtPosition(1, Weapon.shield());
+        army4.equipWarriorAtPosition(2, Weapon.shield());
+
+        Battle.straightFight(army3, army4);
+    }
+
+    class Rookie extends Warrior {
+
+        @Override
+        public int getAttack() {
+            return 1;
+        }
     }
 
 }

@@ -31,9 +31,10 @@ public class Healer extends Warrior implements Heal, ProcessCommandChain {
     }
 
     @Override
-    public void equipWeapon(Weapon weapon) {
+    public CombatUnit equipWeapon(Weapon weapon) {
         super.equipWeapon(weapon);
         setHealPower(Math.max(getHealPower() + weapon.getWeaponHealPower(), 0));
+        return this;
     }
 
     @Override

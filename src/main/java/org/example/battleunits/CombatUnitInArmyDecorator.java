@@ -65,7 +65,7 @@ public class CombatUnitInArmyDecorator implements CombatUnit, CombatUnitBehind, 
     }
 
     @Override
-    public void equipWeapon(Weapon weapon) {
-        warriorUnit.equipWeapon(weapon);
+    public CombatUnit equipWeapon(Weapon weapon) {
+        return warriorUnit.equipWeapon(weapon);
     }
 }

@@ -1,6 +1,9 @@
 package org.example.fighting;
 
-import org.example.battleunits.*;
+import org.example.battleunits.Army;
+import org.example.battleunits.ArmyUnit;
+import org.example.battleunits.CombatUnit;
+import org.example.battleunits.Warrior;
 import org.example.weapons.CustomWeapon;
 import org.example.weapons.Weapon;
 import org.junit.jupiter.api.DisplayName;
@@ -28,19 +31,20 @@ class BattleTest {
     }
 
     static Stream<Arguments> fullDefenderBattleArmies() {
+//battle7
         Army army1 = new Army(CombatUnit::newWarrior, 5)
                 .addBattleUnits(CombatUnit::newDefender, 9);
         Army army2 = new Army(CombatUnit::newWarrior, 4);
-
+//battle8
         Army army3 = new Army(CombatUnit::newDefender, 5)
                 .addBattleUnits(CombatUnit::newWarrior, 20)
                 .addBattleUnits(CombatUnit::newDefender, 4);
         Army army4 = new Army(CombatUnit::newWarrior, 21);
-
+//battle9
         Army army5 = new Army(CombatUnit::newWarrior, 10)
                 .addBattleUnits(CombatUnit::newDefender, 15);
         Army army6 = new Army(CombatUnit::newWarrior, 5);
-
+//battle10
         Army army7 = new Army(CombatUnit::newDefender, 2)
                 .addBattleUnits(CombatUnit::newWarrior, 1)
                 .addBattleUnits(CombatUnit::newDefender, 1);
@@ -54,27 +58,28 @@ class BattleTest {
     }
 
     static Stream<Arguments> armiesWithVampires() {
+//battle11
         Army army1 = new Army(CombatUnit::newDefender, 5)
                 .addBattleUnits(CombatUnit::newVampire, 6)
                 .addBattleUnits(CombatUnit::newWarrior, 7);
         Army army2 = new Army(CombatUnit::newWarrior, 6)
                 .addBattleUnits(CombatUnit::newDefender, 6)
                 .addBattleUnits(CombatUnit::newVampire, 6);
-
+//battle12
         Army army3 = new Army(CombatUnit::newDefender, 2)
                 .addBattleUnits(CombatUnit::newVampire, 3)
                 .addBattleUnits(CombatUnit::newWarrior, 4);
         Army army4 = new Army(CombatUnit::newWarrior, 4)
                 .addBattleUnits(CombatUnit::newDefender, 4)
                 .addBattleUnits(CombatUnit::newVampire, 3);
-
+//battle13
         Army army5 = new Army(CombatUnit::newDefender, 11)
                 .addBattleUnits(CombatUnit::newVampire, 3)
                 .addBattleUnits(CombatUnit::newWarrior, 4);
         Army army6 = new Army(CombatUnit::newWarrior, 4)
                 .addBattleUnits(CombatUnit::newDefender, 4)
                 .addBattleUnits(CombatUnit::newVampire, 13);
-
+//battle14
         Army army7 = new Army(CombatUnit::newDefender, 9)
                 .addBattleUnits(CombatUnit::newVampire, 3)
                 .addBattleUnits(CombatUnit::newWarrior, 8);
@@ -90,6 +95,7 @@ class BattleTest {
     }
 
     static Stream<Arguments> armiesWithLancers() {
+//battle15
         ArmyUnit army1 = new Army(CombatUnit::newLancer, 5)
                 .addBattleUnits(CombatUnit::newVampire, 3)
                 .addBattleUnits(CombatUnit::newWarrior, 4)
@@ -98,7 +104,7 @@ class BattleTest {
                 .addBattleUnits(CombatUnit::newDefender, 4)
                 .addBattleUnits(CombatUnit::newVampire, 6)
                 .addBattleUnits(CombatUnit::newLancer, 5);
-
+//battle16
         ArmyUnit army3 = new Army(CombatUnit::newLancer, 7)
                 .addBattleUnits(CombatUnit::newVampire, 3)
                 .addBattleUnits(CombatUnit::newWarrior, 4)
@@ -114,6 +120,7 @@ class BattleTest {
     }
 
     static Stream<Arguments> armiesWithHealers() {
+//battle17
         ArmyUnit army1 = new Army(CombatUnit::newLancer, 7)
                 .addBattleUnits(CombatUnit::newVampire, 3)
                 .addBattleUnits(CombatUnit::newHealer, 1)
@@ -125,7 +132,7 @@ class BattleTest {
                 .addBattleUnits(CombatUnit::newHealer, 1)
                 .addBattleUnits(CombatUnit::newVampire, 6)
                 .addBattleUnits(CombatUnit::newLancer, 4);
-
+//battle18
         Army army3 = new Army(CombatUnit::newLancer, 1)
                 .addBattleUnits(CombatUnit::newWarrior, 3)
                 .addBattleUnits(CombatUnit::newHealer, 1)
@@ -144,6 +151,7 @@ class BattleTest {
     }
 
     static Stream<Arguments> straightBattle() {
+//straight battle1
         ArmyUnit army1 = new Army(CombatUnit::newLancer, 5)
                 .addBattleUnits(CombatUnit::newVampire, 3)
                 .addBattleUnits(CombatUnit::newWarrior, 4)
@@ -153,7 +161,7 @@ class BattleTest {
                 .addBattleUnits(CombatUnit::newDefender, 4)
                 .addBattleUnits(CombatUnit::newVampire, 6)
                 .addBattleUnits(CombatUnit::newLancer, 5);
-
+//straight battle2
         ArmyUnit army3 = new Army(CombatUnit::newLancer, 7)
                 .addBattleUnits(CombatUnit::newVampire, 3)
                 .addBattleUnits(CombatUnit::newWarrior, 4)
@@ -162,7 +170,7 @@ class BattleTest {
                 .addBattleUnits(CombatUnit::newDefender, 4)
                 .addBattleUnits(CombatUnit::newVampire, 6)
                 .addBattleUnits(CombatUnit::newLancer, 4);
-
+//straight battle3
         ArmyUnit army5 = new Army(CombatUnit::newLancer, 7)
                 .addBattleUnits(CombatUnit::newVampire, 3)
                 .addBattleUnits(CombatUnit::newHealer, 1)
@@ -174,7 +182,7 @@ class BattleTest {
                 .addBattleUnits(CombatUnit::newHealer, 1)
                 .addBattleUnits(CombatUnit::newVampire, 6)
                 .addBattleUnits(CombatUnit::newLancer, 4);
-
+//straight battle4
         ArmyUnit army7 = new Army(CombatUnit::newLancer, 4)
                 .addBattleUnits(CombatUnit::newWarrior, 3)
                 .addBattleUnits(CombatUnit::newHealer, 1)
@@ -196,6 +204,7 @@ class BattleTest {
     }
 
     static Stream<Arguments> battleWithWeapons() {
+//battle1 with weapons
         ArmyUnit army1 = new Army(CombatUnit::newKnight, 1)
                 .addBattleUnits(CombatUnit::newLancer, 1);
         army1.equipWarriorAtPosition(0, Weapon.magicWand());
@@ -204,7 +213,7 @@ class BattleTest {
                 .addBattleUnits(CombatUnit::newHealer, 1);
         army2.equipWarriorAtPosition(0, Weapon.magicWand());
         army2.equipWarriorAtPosition(1, Weapon.greatAxe());
-
+//battle2 with weapons
         ArmyUnit army3 = new Army(CombatUnit::newDefender, 1)
                 .addBattleUnits(CombatUnit::newWarrior, 1);
         army3.equipWarriorAtPosition(0, Weapon.greatAxe());
@@ -213,7 +222,7 @@ class BattleTest {
                 .addBattleUnits(CombatUnit::newHealer, 1);
         army4.equipWarriorAtPosition(0, Weapon.sword());
         army4.equipWarriorAtPosition(1, Weapon.sword());
-
+//battle3 with weapons
         ArmyUnit army5 = new Army(CombatUnit::newDefender, 2);
         army5.equipWarriorAtPosition(0, Weapon.katana());
         army5.equipWarriorAtPosition(1, Weapon.katana());
@@ -221,7 +230,7 @@ class BattleTest {
                 .addBattleUnits(CombatUnit::newVampire, 1);
         army6.equipWarriorAtPosition(0, Weapon.katana());
         army6.equipWarriorAtPosition(1, Weapon.katana());
-
+//battle4 with weapons
         CustomWeapon customWeapon1 = new CustomWeapon(-20, 6, 1, 40, -2);
         CustomWeapon customWeapon2 = new CustomWeapon(20, -2, 2, -55, 3);
         ArmyUnit army7 = new Army(CombatUnit::newKnight, 3);
@@ -239,6 +248,56 @@ class BattleTest {
                 arguments(army3, army4, true),
                 arguments(army5, army6, false),
                 arguments(army7, army8, true));
+    }
+
+    static Stream<Arguments> straightBattleWithWeapons() {
+//straight battle1 with weapons
+        CustomWeapon customWeapon1 = new CustomWeapon(-20, 1, 1, 40, -2);
+        CustomWeapon customWeapon2 = new CustomWeapon(20, 2, 2, -55, 3);
+        ArmyUnit army1 = new Army(CombatUnit::newVampire, 1);
+        army1.equipWarriorAtPosition(0, customWeapon1);
+        army1.equipWarriorAtPosition(1, customWeapon1);
+        army1.equipWarriorAtPosition(2, customWeapon2);
+        ArmyUnit army2 = new Army(CombatUnit::newWarrior, 1)
+                .addBattleUnits(CombatUnit::newDefender, 2);
+        army2.equipWarriorAtPosition(0, customWeapon1);
+        army2.equipWarriorAtPosition(1, customWeapon2);
+        army2.equipWarriorAtPosition(2, customWeapon2);
+//straight battle2 with weapons
+        ArmyUnit army3 = new Army(CombatUnit::newVampire, 2)
+                .addBattleUnits(Rookie::new, 2);
+        army3.equipWarriorAtPosition(0, Weapon.katana());
+        army3.equipWarriorAtPosition(1, Weapon.katana());
+        army3.equipWarriorAtPosition(2, Weapon.shield());
+        ArmyUnit army4 = new Army(CombatUnit::newWarrior, 1)
+                .addBattleUnits(CombatUnit::newDefender, 2);
+        army4.equipWarriorAtPosition(0, Weapon.katana());
+        army4.equipWarriorAtPosition(1, Weapon.shield());
+        army4.equipWarriorAtPosition(2, Weapon.shield());
+//straight battle3 with weapons
+        ArmyUnit army5 = new Army(CombatUnit::newVampire, 3);
+        army5.equipWarriorAtPosition(0, Weapon.greatAxe());
+        army5.equipWarriorAtPosition(1, Weapon.greatAxe());
+        army5.equipWarriorAtPosition(2, Weapon.greatAxe());
+        ArmyUnit army6 = new Army(CombatUnit::newWarrior, 1)
+                .addBattleUnits(CombatUnit::newDefender, 1);
+        army6.equipWarriorAtPosition(0, Weapon.sword());
+        army6.equipWarriorAtPosition(1, Weapon.sword());
+//straight battle4 with weapons
+        ArmyUnit army7 = new Army(Rookie::new, 3);
+        army7.equipWarriorAtPosition(0, Weapon.katana());
+        army7.equipWarriorAtPosition(1, Weapon.katana());
+        army7.equipWarriorAtPosition(2, Weapon.katana());
+        ArmyUnit army8 = new Army(CombatUnit::newDefender, 1)
+                .addBattleUnits(CombatUnit::newHealer, 1);
+        army8.equipWarriorAtPosition(0, Weapon.magicWand());
+        army8.equipWarriorAtPosition(1, Weapon.magicWand());
+
+        return Stream.of(
+                arguments(army1, army2, false),
+                arguments(army3, army4, true),
+                arguments(army5, army6, true),
+                arguments(army7, army8, false));
     }
 
     @DisplayName("different battles between two armies")
@@ -296,55 +355,6 @@ class BattleTest {
     void StraightBattleWithWeapons_WhoWinsOrLoses(Army army1, Army army2, Boolean expectedBattleResult) {
         boolean battleResult = Battle.straightFight(army1, army2);
         assertEquals(expectedBattleResult, battleResult);
-    }
-
-    static Stream<Arguments> straightBattleWithWeapons() {
-        CustomWeapon customWeapon1 = new CustomWeapon(-20, 1, 1, 40, -2);
-        CustomWeapon customWeapon2 = new CustomWeapon(20, 2, 2, -55, 3);
-        ArmyUnit army1 = new Army(CombatUnit::newVampire, 1);
-        army1.equipWarriorAtPosition(0, customWeapon1);
-        army1.equipWarriorAtPosition(1, customWeapon1);
-        army1.equipWarriorAtPosition(2, customWeapon2);
-        ArmyUnit army2 = new Army(CombatUnit::newWarrior, 1)
-                .addBattleUnits(CombatUnit::newDefender, 2);
-        army2.equipWarriorAtPosition(0, customWeapon1);
-        army2.equipWarriorAtPosition(1, customWeapon2);
-        army2.equipWarriorAtPosition(2, customWeapon2);
-
-        ArmyUnit army3 = new Army(CombatUnit::newVampire, 2)
-                .addBattleUnits(Rookie::new, 2);
-        army3.equipWarriorAtPosition(0, Weapon.katana());
-        army3.equipWarriorAtPosition(1, Weapon.katana());
-        army3.equipWarriorAtPosition(2, Weapon.shield());
-        ArmyUnit army4 = new Army(CombatUnit::newWarrior, 1)
-                .addBattleUnits(CombatUnit::newDefender, 2);
-        army4.equipWarriorAtPosition(0, Weapon.katana());
-        army4.equipWarriorAtPosition(1, Weapon.shield());
-        army4.equipWarriorAtPosition(2, Weapon.shield());
-
-        ArmyUnit army5 = new Army(CombatUnit::newVampire, 3);
-        army5.equipWarriorAtPosition(0, Weapon.greatAxe());
-        army5.equipWarriorAtPosition(1, Weapon.greatAxe());
-        army5.equipWarriorAtPosition(2, Weapon.greatAxe());
-        ArmyUnit army6 = new Army(CombatUnit::newWarrior, 1)
-                .addBattleUnits(CombatUnit::newDefender, 1);
-        army6.equipWarriorAtPosition(0, Weapon.sword());
-        army6.equipWarriorAtPosition(1, Weapon.sword());
-
-        ArmyUnit army7 = new Army(Rookie::new, 3);
-        army7.equipWarriorAtPosition(0, Weapon.katana());
-        army7.equipWarriorAtPosition(1, Weapon.katana());
-        army7.equipWarriorAtPosition(2, Weapon.katana());
-        ArmyUnit army8 = new Army(CombatUnit::newDefender, 1)
-                .addBattleUnits(CombatUnit::newHealer, 1);
-        army8.equipWarriorAtPosition(0, Weapon.magicWand());
-        army8.equipWarriorAtPosition(1, Weapon.magicWand());
-
-        return Stream.of(
-                arguments(army1, army2, false),
-                arguments(army3, army4, true),
-                arguments(army5, army6, true),
-                arguments(army7, army8, false));
     }
 
     static class Rookie extends Warrior {

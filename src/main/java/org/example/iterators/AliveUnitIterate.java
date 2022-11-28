@@ -5,18 +5,17 @@ import org.example.exceptions.DoesntExistException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Collection;
-import java.util.Iterator;
+import java.util.*;
 
 public class AliveUnitIterate implements InfGenerator<CombatUnit> {
     private static final Logger LOGGER = LoggerFactory.getLogger(AliveUnitIterate.class);
-    private Collection<CombatUnit> army;
+    private Map<Integer, CombatUnit> army;
     private Iterator<CombatUnit> it;
     private CombatUnit hitter;
 
-    public AliveUnitIterate(Collection<CombatUnit> army) {
+    public AliveUnitIterate(Map<Integer, CombatUnit> army) {
         this.army = army;
-        this.it = army.iterator();
+        this.it = army.values().iterator();
     }
 
     @Override

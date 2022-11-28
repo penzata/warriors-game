@@ -1,23 +1,24 @@
 package org.example.iterators;
 
-import org.example.battleunits.CombatUnitInArmyDecorator;
 import org.example.battleunits.CombatUnit;
+import org.example.battleunits.CombatUnitInArmyDecorator;
 import org.example.exceptions.DoesntExistException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Collection;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class StraightIterate implements InfGenerator<CombatUnit> {
     private static final Logger LOGGER = LoggerFactory.getLogger(StraightIterate.class);
-    private Collection<CombatUnit> army;
+    private Map<Integer, CombatUnit> army;
     private Iterator<CombatUnit> itr;
     private CombatUnit nextUnitInLine;
 
-    public StraightIterate(Collection<CombatUnit> army) {
+    public StraightIterate(Map<Integer, CombatUnit> army) {
         this.army = army;
-        this.itr = army.iterator();
+        this.itr = army.values().iterator();
     }
 
     @Override

@@ -4,8 +4,8 @@ import org.example.battleunits.Army;
 import org.example.battleunits.ArmyUnit;
 import org.example.battleunits.CombatUnit;
 import org.example.battleunits.Warrior;
-import org.example.weapons.Weapon;
 import org.example.fighting.Battle;
+import org.example.weapons.Weapon;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -52,6 +52,20 @@ class MainTest {
         army4.equipWarriorAtPosition(2, Weapon.shield());
 
         Battle.straightFight(army3, army4);
+    }
+
+    @Test
+    void TrialForBattle11() {
+        Army army1 = new Army(CombatUnit::newDefender, 5)
+                .addBattleUnits(CombatUnit::newVampire, 6)
+                .addBattleUnits(CombatUnit::newWarrior, 7);
+        Army army2 = new Army(CombatUnit::newWarrior, 6)
+                .addBattleUnits(CombatUnit::newDefender, 6)
+                .addBattleUnits(CombatUnit::newVampire, 6);
+
+        boolean fightResult = Battle.fight(army1, army2);
+
+        assertFalse(fightResult);
     }
 
     class Rookie extends Warrior {

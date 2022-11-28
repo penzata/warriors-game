@@ -11,14 +11,12 @@ import java.util.function.Supplier;
 
 public class Army implements ArmyUnit {
     private static final Logger LOGGER = LoggerFactory.getLogger(Army.class);
-    private Collection<CombatUnit> army;
     private CombatUnitInArmyDecorator lastWarrior;
-    private Map<Integer, CombatUnit> positionInArmy;
+    private Map<Integer, CombatUnit> army;
 
 
     public Army(Supplier<CombatUnit> factory, Integer numberOfUnits) {
-        this.army = new ArrayList<>();
-        this.positionInArmy = new HashMap<>();
+        this.army = new LinkedHashMap<>();
         addBattleUnits(factory, numberOfUnits);
     }
 
@@ -35,8 +33,7 @@ public class Army implements ArmyUnit {
             lastWarrior.setWarriorBehind(wrapped);
         }
         lastWarrior = wrapped;
-        this.army.add(wrapped);
-        this.positionInArmy.put(position, wrapped);
+        this.army.put(position, wrapped);
     }
 
     @Override
@@ -62,13 +59,13 @@ public class Army implements ArmyUnit {
 
     @Override
     public void removeDeadBodies() {
-        army.removeIf(warriorUnit -> !warriorUnit.isAlive());
+        army.values().removeIf(combatUnit -> !combatUnit.isAlive());
     }
 
     @Override
     public void equipWarriorAtPosition(int position, Weapon weapon) {
-        if (positionInArmy.containsKey(position)) {
-            positionInArmy.get(position).equipWeapon(weapon);
+        if (army.containsKey(position)) {
+            army.get(position).equipWeapon(weapon);
         }
     }
 

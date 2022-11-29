@@ -38,13 +38,6 @@ class DefenderTest {
         assertEquals(60, defender.getHealth());
     }
 
-    class Rookie extends WarriorImpl {
-        @Override
-        public int getAttack() {
-            return 1;
-        }
-    }
-
     @DisplayName("different weapons equipped by Defender")
     @ParameterizedTest(name = "equipped {0}")
     @MethodSource({"equipWeapon"})

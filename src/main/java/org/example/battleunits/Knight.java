@@ -4,7 +4,7 @@ public interface Knight extends Warrior {
     /**
      * @return Knight object with default health(50) & attack(7).
      */
-    static Warrior create() {
+    static Knight create() {
         return new KnightImpl();
     }
 

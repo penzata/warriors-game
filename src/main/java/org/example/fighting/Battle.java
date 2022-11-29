@@ -47,13 +47,11 @@ public class Battle {
             while (it1.hasNext() && it2.hasNext()) {
                 Duel.fight(it1.next(), it2.next());
             }
-            LOGGER.debug("Army1 before removing fallen units from battlefield: {}{}", lineSeparator, army1);
-            LOGGER.debug("Army2 before removing fallen units from battlefield: {}{}", lineSeparator, army2);
+
             army1.removeDeadBodies();
             army2.removeDeadBodies();
-            LOGGER.debug("end of round!!!{}{}{}", lineSeparator, lineSeparator, lineSeparator);
-            roundCount++;
         }
+        return res;
     }
 
 }

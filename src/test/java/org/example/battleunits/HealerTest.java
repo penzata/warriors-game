@@ -17,18 +17,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class HealerTest {
-    private Warrior healer;
+    private Healer healer;
 
     @BeforeEach
     void init() {
-        healer = Warrior.newHealer();
+        healer = Healer.create();
     }
 
     @Test
     void WarriorFightsWarriorWithHealerAndLoses() {
-        ArmyImpl warrior = new ArmyImpl(WarriorImpl::new, 1);
-        ArmyImpl warriorWithHealer = new ArmyImpl(WarriorImpl::new, 1)
-                .addBattleUnits(HealerImpl::new, 1);
+        ArmyImpl warrior = new ArmyImpl(Warrior::create, 1);
+        ArmyImpl warriorWithHealer = new ArmyImpl(Warrior::create, 1)
+                .addBattleUnits(Healer::create, 1);
 
         assertFalse(Battle.fight(warrior, warriorWithHealer));
     }
@@ -58,9 +58,10 @@ class HealerTest {
     void EquipDifferentWeaponsOnWarriorAndVerifyItsStats (Weapon weapon, int expectedHealth,
                                                           int expectedAttack, int expectedHealPower) {
         healer.equipWeapon(weapon);
-//TODO see why getHealPower() doesn't show
+
         assertEquals(expectedHealth, healer.getHealth());
         assertEquals(expectedAttack, healer.getAttack());
+        assertEquals(expectedHealPower, healer.getHealPower());
     }
 
     static Stream<Arguments> equipWeapon() {

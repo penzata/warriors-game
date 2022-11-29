@@ -1,11 +1,9 @@
 package org.example.battleunits;
 
 import org.example.weapons.Weapon;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class HealerImpl extends WarriorImpl implements Healer {
-    private static final Logger LOGGER = LoggerFactory.getLogger(HealerImpl.class);
+
     private int healPower;
 
     HealerImpl() {

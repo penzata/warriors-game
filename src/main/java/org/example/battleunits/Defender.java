@@ -7,7 +7,7 @@ public interface Defender extends Warrior, Defence {
     /**
      * @return Defender object with default health(60), attack(3) & defence(2).
      */
-    static DefenderImpl newDefender() {
+    static Defender create() {
         return new DefenderImpl();
     }
 

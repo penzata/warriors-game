@@ -10,7 +10,7 @@ public interface Healer extends Warrior, HealPower, ProcessCommandChain {
     /**
      * @return Healer object with default health(60), attack(0) & heal power(2).
      */
-    static Healer newHealer() {
+    static Healer create() {
         return new HealerImpl();
     }
 

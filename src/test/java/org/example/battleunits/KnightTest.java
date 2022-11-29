@@ -14,11 +14,11 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class KnightTest {
-    private Warrior knight;
+    private Knight knight;
 
     @BeforeEach
     void init() {
-        knight = Warrior.newKnight();
+        knight = Knight.create();
     }
 
     @DisplayName("different weapons equipped by Knight")

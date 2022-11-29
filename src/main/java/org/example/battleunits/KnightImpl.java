@@ -1,7 +1,7 @@
 package org.example.battleunits;
 
 
-public class KnightImpl extends WarriorImpl {
+public class KnightImpl extends WarriorImpl implements Knight{
 
     KnightImpl() {
         super(50, 7);

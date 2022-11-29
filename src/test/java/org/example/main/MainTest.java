@@ -11,17 +11,17 @@ class MainTest {
 
     @Test
     void TrialForBattle21() {
-        Army army5 = new ArmyImpl(Warrior::newLancer, 7)
-                .addBattleUnits(Warrior::newVampire, 3)
-                .addBattleUnits(Warrior::newHealer, 1)
+        Army army5 = new ArmyImpl(Lancer::create, 7)
+                .addBattleUnits(Vampire::create, 3)
+                .addBattleUnits(Healer::create, 1)
                 .addBattleUnits(Warrior::create, 4)
-                .addBattleUnits(Warrior::newHealer, 1)
-                .addBattleUnits(Warrior::newDefender, 2);
+                .addBattleUnits(Healer::create, 1)
+                .addBattleUnits(Defender::create, 2);
         Army army6 = new ArmyImpl(Warrior::create, 4)
-                .addBattleUnits(Warrior::newDefender, 4)
-                .addBattleUnits(Warrior::newHealer, 1)
-                .addBattleUnits(Warrior::newVampire, 6)
-                .addBattleUnits(Warrior::newLancer, 4);
+                .addBattleUnits(Defender::create, 4)
+                .addBattleUnits(Healer::create, 1)
+                .addBattleUnits(Vampire::create, 6)
+                .addBattleUnits(Lancer::create, 4);
         boolean straightFightResult = Battle.straightFight(army5, army6);
 
         assertFalse(straightFightResult);
@@ -29,15 +29,15 @@ class MainTest {
 
     @Test
     void print() {
-        Warrior vampire = Warrior.newVampire();
+        Warrior vampire = Vampire.create();
         vampire.equipWeapon(Weapon.katana());
         System.out.println(vampire);
-        Warrior lancer = Warrior.newLancer();
+        Warrior lancer = Lancer.create();
     }
 
-    @Test
+/*    @Test
     void RookieTesting() {
-        Army army3 = new ArmyImpl(Warrior::newVampire, 2)
+        Army army3 = new ArmyImpl(Vampire::create, 2)
                 .addBattleUnits(Rookie::new, 2);
         army3.equipWarriorAtPosition(0, Weapon.katana());
         army3.equipWarriorAtPosition(1, Weapon.katana());
@@ -49,34 +49,31 @@ class MainTest {
         army4.equipWarriorAtPosition(2, Weapon.shield());
 
         Battle.straightFight(army3, army4);
-    }
+    }*/
 
     @Test
     void TrialForBattle11() {
-        ArmyImpl army1 = new ArmyImpl(Warrior::newDefender, 5)
-                .addBattleUnits(Warrior::newVampire, 6)
+        ArmyImpl army1 = new ArmyImpl(Defender::create, 5)
+                .addBattleUnits(Vampire::create, 6)
                 .addBattleUnits(Warrior::create, 7);
         ArmyImpl army2 = new ArmyImpl(Warrior::create, 6)
-                .addBattleUnits(Warrior::newDefender, 6)
-                .addBattleUnits(Warrior::newVampire, 6);
+                .addBattleUnits(Defender::create, 6)
+                .addBattleUnits(Vampire::create, 6);
 
         boolean fightResult = Battle.fight(army1, army2);
 
         assertFalse(fightResult);
     }
 
-    class Rookie extends WarriorImpl {
-
-        @Override
-        public int getAttack() {
-            return 1;
-        }
-    }
-
     @Test
     void stuff() {
         Vampire vampire = Vampire.create();
-
+        vampire.getVampirism();
+        Lancer lancer = Lancer.create();
+        lancer.getPiercingAttack();
+        Healer healer = Healer.create();
+        healer.getHealPower();
+        Warrior healer2 = Healer.create();
     }
 
 }

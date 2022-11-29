@@ -1,12 +1,10 @@
 package org.example.fighting;
 
-import org.example.battleunits.ArmyUnit;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
+import org.example.battleunits.Army;
 
+@Slf4j
 public class Battle {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(Battle.class);
 
     private Battle() {
     }
@@ -16,7 +14,7 @@ public class Battle {
      * @param army2 - defending army
      * @return TRUE if there is someone still alive from the first army (and thus everyone is dead from the other), else - FALSE
      */
-    public static boolean fight(ArmyUnit army1, ArmyUnit army2) {
+    public static boolean fight(Army army1, Army army2) {
         var attacker = army1.getAliveUnit();
         var defender = army2.getAliveUnit();
 
@@ -26,25 +24,26 @@ public class Battle {
         return attacker.hasNext();
     }
 
-    public static boolean straightFight(ArmyUnit army1, ArmyUnit army2) {
-        String lineSeparator = System.getProperty("line.separator");
+    public static boolean straightFight(Army army1, Army army2) {
+        log.atDebug().log("Straight Fight!!!");
+        log.atDebug().log("Army1's lineup: {}", army1);
+        log.atDebug().log("Army2's lineup: {}", army2);
         int roundCount = 1;
+        boolean res;
 
         while (true) {
             var it1 = army1.nextInLine();
             var it2 = army2.nextInLine();
 
             if (!it1.hasNext()) {
-                return false;
+                res = false;
+                break;
             }
             if (!it2.hasNext()) {
-                return true;
+                res = true;
+                break;
             }
-
-            LOGGER.debug("Straight Fight Round: {}{}", roundCount, lineSeparator);
-            LOGGER.debug("Army1's lineup: {}{}", lineSeparator, army1);
-            LOGGER.debug("Army2's lineup: {}{}{}", lineSeparator, army2, lineSeparator);
-
+            log.atDebug().log("Round {}", roundCount++);
             while (it1.hasNext() && it2.hasNext()) {
                 Duel.fight(it1.next(), it2.next());
             }

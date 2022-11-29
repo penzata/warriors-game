@@ -16,11 +16,11 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class DefenderTest {
 
-    private Defender defender;
+    private DefenderImpl defender;
 
     @BeforeEach
     void init() {
-        defender = new Defender();
+        defender = new DefenderImpl();
     }
 
     @Test
@@ -38,7 +38,7 @@ class DefenderTest {
         assertEquals(60, defender.getHealth());
     }
 
-    class Rookie extends Warrior {
+    class Rookie extends WarriorImpl {
         @Override
         public int getAttack() {
             return 1;

@@ -1,26 +1,26 @@
 package org.example.battleunits;
 
 import org.example.characteristics.Attack;
-import org.example.subsidiary.Command;
-import org.example.subsidiary.ProcessCommandChain;
 import org.example.subsidiary.CombatUnitBehind;
 import org.example.subsidiary.CombatUnitHitCommand;
+import org.example.subsidiary.Command;
+import org.example.subsidiary.ProcessCommandChain;
 import org.example.weapons.Weapon;
 
-public class CombatUnitInArmyDecorator implements CombatUnit, CombatUnitBehind, ProcessCommandChain {
-    private CombatUnit warriorUnit;
-    private CombatUnitInArmyDecorator nextWarrior;
+public class WarriorInArmyDecorator implements Warrior, CombatUnitBehind, ProcessCommandChain {
+    private Warrior warriorUnit;
+    private WarriorInArmyDecorator nextWarrior;
 
-    public CombatUnitInArmyDecorator(CombatUnit warriorUnit) {
+    public WarriorInArmyDecorator(Warrior warriorUnit) {
         this.warriorUnit = warriorUnit;
     }
 
     @Override
-    public CombatUnitInArmyDecorator getWarriorBehind() {
+    public WarriorInArmyDecorator getWarriorBehind() {
         return nextWarrior;
     }
 
-    public void setWarriorBehind(CombatUnitInArmyDecorator nextWarrior) {
+    public void setWarriorBehind(WarriorInArmyDecorator nextWarrior) {
         this.nextWarrior = nextWarrior;
     }
 
@@ -30,17 +30,17 @@ public class CombatUnitInArmyDecorator implements CombatUnit, CombatUnitBehind, 
     }
 
     @Override
-    public void processCommand(Command command, CombatUnitInArmyDecorator commandSender) {
-        if (warriorUnit instanceof ProcessCommandChain processor && !warriorUnit.equals(commandSender.unwrap())) {
+    public void processCommand(Command command, Warrior commandSender) {
+        if (warriorUnit instanceof ProcessCommandChain processor) {
             processor.processCommand(command, commandSender);
         }
         if (nextWarrior != null) {
-            nextWarrior.processCommand(command, this);
+            nextWarrior.processCommand(command, nextWarrior.unwrap());
         }
     }
 
-    public Warrior unwrap() {
-        return (Warrior) warriorUnit;
+    public WarriorImpl unwrap() {
+        return (WarriorImpl) warriorUnit;
     }
 
     @Override
@@ -54,9 +54,9 @@ public class CombatUnitInArmyDecorator implements CombatUnit, CombatUnitBehind, 
     }
 
     @Override
-    public void hit(CombatUnit opponent) {
+    public void hit(Warrior opponent) {
         warriorUnit.hit(opponent);
-        processCommand(CombatUnitHitCommand.HEAL, this);
+        processCommand(CombatUnitHitCommand.HEAL, warriorUnit);
     }
 
     @Override
@@ -65,7 +65,7 @@ public class CombatUnitInArmyDecorator implements CombatUnit, CombatUnitBehind, 
     }
 
     @Override
-    public CombatUnit equipWeapon(Weapon weapon) {
+    public Warrior equipWeapon(Weapon weapon) {
         return warriorUnit.equipWeapon(weapon);
     }
 }

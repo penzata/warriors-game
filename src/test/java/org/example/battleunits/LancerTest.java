@@ -17,32 +17,32 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class LancerTest {
-    private CombatUnit lancer;
+    private Warrior lancer;
 
     @BeforeEach
     void init() {
-        lancer = CombatUnit.newLancer();
+        lancer = Warrior.newLancer();
     }
 
     @Test
     void LancerFightsArmyOfTwoAndMakesPiercingDamage() {
-        ArmyUnit oneLancerArmy = new Army(CombatUnit::newLancer, 1);
-        ArmyUnit army = new Army(CombatUnit::newWarrior, 1)
-                .addBattleUnits(() -> new Knight(25, 7), 1);
+        Army oneLancerArmy = new ArmyImpl(Warrior::newLancer, 1);
+        Army army = new ArmyImpl(Warrior::create, 1)
+                .addBattleUnits(() -> new KnightImpl(25, 7), 1);
 
         assertTrue(Battle.fight(oneLancerArmy, army));
     }
 
     @Test
     void LancerFightsTwoRookieArmy_AlwaysSetRookieHealthToOne_AndLoses_BreakProgramTest() {
-        ArmyUnit lancerArmy = new Army(CombatUnit::newLancer, 1);
-        ArmyUnit rookiesArmy = new Army(Rookie::new, 1)
+        Army lancerArmy = new ArmyImpl(Warrior::newLancer, 1);
+        Army rookiesArmy = new ArmyImpl(Rookie::new, 1)
                 .addBattleUnits(Rookie::new, 1);
 
         assertFalse(Battle.fight(lancerArmy, rookiesArmy));
     }
 
-    class Rookie extends Warrior {
+    class Rookie extends WarriorImpl {
 
         @Override
         public int getHealth() {

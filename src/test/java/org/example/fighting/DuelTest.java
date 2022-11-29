@@ -1,6 +1,7 @@
 package org.example.fighting;
 
 import org.example.battleunits.*;
+import org.example.battleunits.KnightImpl;
 import org.example.weapons.CustomWeapon;
 import org.example.weapons.Weapon;
 import org.junit.jupiter.api.DisplayName;
@@ -11,7 +12,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static org.example.battleunits.CombatUnit.*;
 import static org.example.weapons.Weapon.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
@@ -20,20 +20,20 @@ class DuelTest {
 
     static Stream<Arguments> differentDuelUnits() {
         return Stream.of(
-                arguments(newWarrior(), newKnight(), false),
-                arguments(newKnight(), newWarrior(), true),
-                arguments(newWarrior(), newWarrior(), true),
+                arguments(Warrior.create(), newKnight(), false),
+                arguments(newKnight(), create(), true),
+                arguments(create(), create(), true),
                 arguments(newKnight(), newKnight(), true),
                 arguments(newDefender(), newKnight(), false),
-                arguments(newDefender(), newWarrior(), true),
+                arguments(newDefender(), create(), true),
                 arguments(newVampire(), newDefender(), false),
-                arguments(newWarrior(), newVampire(), true),
+                arguments(create(), newVampire(), true),
                 arguments(newLancer(), newVampire(), true));
     }
 
     static Stream<Arguments> duelWithWeapons() {
         return Stream.of(
-                arguments(newWarrior(), new CustomWeapon(-10, 5, 0, 40, 0),
+                arguments(create(), new CustomWeapon(-10, 5, 0, 40, 0),
                         newVampire(), sword(), true),
                 arguments(newDefender(), shield(), newLancer(), greatAxe(), false),
                 arguments(newHealer(), magicWand(), newKnight(), katana(), false));
@@ -42,7 +42,7 @@ class DuelTest {
     @DisplayName("different duels")
     @ParameterizedTest(name = "duel{index}:  {0} vs {1} --> attacker wins? --> {2}")
     @MethodSource("differentDuelUnits")
-    void FightBetweenDifferentWarriorUnitsWhoWinsOrLoses(CombatUnit warrior1, CombatUnit warrior2, Boolean expectedDuelResult) {
+    void FightBetweenDifferentWarriorUnitsWhoWinsOrLoses(Warrior warrior1, Warrior warrior2, Boolean expectedDuelResult) {
         boolean duelResult = Duel.fight(warrior1, warrior2);
 
         assertEquals(expectedDuelResult, duelResult);
@@ -50,9 +50,9 @@ class DuelTest {
 
     @Test
     void WhenWarriorFightsKnight_ThenKnightFightsAnotherWarriorAndLoses() {
-        CombatUnit warrior = newWarrior();
-        CombatUnit secondWarrior = newWarrior();
-        Knight knight = newKnight();
+        Warrior warrior = create();
+        Warrior secondWarrior = create();
+        KnightImpl knight = newKnight();
         Duel.fight(warrior, knight);
 
         assertFalse(Duel.fight(knight, secondWarrior));
@@ -60,8 +60,8 @@ class DuelTest {
 
     @Test
     void WarriorFightsKnightAndLosesAndBothLoseBlood() {
-        CombatUnit warrior = newWarrior();
-        Knight knight = newKnight();
+        Warrior warrior = create();
+        KnightImpl knight = newKnight();
         Duel.fight(warrior, knight);
 
         assertEquals(-6, warrior.getHealth());
@@ -70,8 +70,8 @@ class DuelTest {
 
     @Test
     void WarriorFightsDefenderAndLoses() {
-        CombatUnit warrior = newWarrior();
-        CombatUnit defender = newDefender();
+        Warrior warrior = create();
+        Warrior defender = newDefender();
 
         assertFalse(Duel.fight(warrior, defender));
         assertEquals(-1, warrior.getHealth());
@@ -80,8 +80,8 @@ class DuelTest {
 
     @Test
     void DefenderFightsVampireAndWins() {
-        CombatUnit defender = newDefender();
-        CombatUnit vampire = newVampire();
+        Warrior defender = newDefender();
+        Warrior vampire = newVampire();
 
         assertTrue(Duel.fight(defender, vampire));
         assertEquals(22, defender.getHealth());
@@ -90,8 +90,8 @@ class DuelTest {
 
     @Test
     void LancerFightsWarriorAndWins() {
-        CombatUnit lancer = newLancer();
-        CombatUnit warrior = newWarrior();
+        Warrior lancer = newLancer();
+        Warrior warrior = create();
 
         assertTrue(Duel.fight(lancer, warrior));
         assertEquals(10, lancer.getHealth());
@@ -100,8 +100,8 @@ class DuelTest {
 
     @Test
     void DuelWithWeaponsBetweenWarriorAndKnight_AndKnightLoses() {
-        CombatUnit warrior = CombatUnit.newWarrior();
-        CombatUnit knight = CombatUnit.newKnight();
+        Warrior warrior = Warrior.create();
+        Warrior knight = Warrior.newKnight();
         warrior.equipWeapon(Weapon.sword());
         knight.equipWeapon(Weapon.katana());
         boolean result = Duel.fight(warrior, knight);
@@ -114,8 +114,8 @@ class DuelTest {
     @DisplayName("different duels with weapons")
     @ParameterizedTest(name = "duel{index} with weapons:  {0} with {1} vs {2} with {3} --> attacker wins? --> {4}")
     @MethodSource("duelWithWeapons")
-    void FightBetweenDifferentCombatUnitsEquippedWithWeaponsAndWhoWinsOrLoses(CombatUnit warrior1, Weapon weapon1,
-                                                                              CombatUnit warrior2, Weapon weapon2,
+    void FightBetweenDifferentCombatUnitsEquippedWithWeaponsAndWhoWinsOrLoses(Warrior warrior1, Weapon weapon1,
+                                                                              Warrior warrior2, Weapon weapon2,
                                                                               Boolean expectedDuelResult) {
         warrior1.equipWeapon(weapon1);
         warrior2.equipWeapon(weapon2);
@@ -126,9 +126,9 @@ class DuelTest {
 
     @Test
     void DefenderWithShieldAndMagicWandFightsVampireWithShieldAndKatanaAndLoses() {
-        CombatUnit defender = newDefender();
+        Warrior defender = newDefender();
         defender.equipWeapon(shield()).equipWeapon(magicWand());
-        CombatUnit vampire = newVampire();
+        Warrior vampire = newVampire();
         vampire.equipWeapon(shield()).equipWeapon(katana());
 
         assertFalse(Duel.fight(defender, vampire));

@@ -1,6 +1,6 @@
 package org.example.characteristics;
 
 @FunctionalInterface
-public interface Heal {
+public interface HealPower {
     int getHealPower();
 }

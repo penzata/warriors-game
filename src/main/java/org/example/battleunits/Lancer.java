@@ -1,70 +1,27 @@
 package org.example.battleunits;
 
 import org.example.characteristics.PiercingAttack;
-import org.example.subsidiary.DealtDamageAwareness;
 import org.example.subsidiary.CombatUnitBehind;
-import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.example.subsidiary.DealtDamageAwareness;
 
-public class Lancer extends Warrior implements PiercingAttack, DealtDamageAwareness {
-    private static final Logger LOGGER = LoggerFactory.getLogger(Lancer.class);
+public interface Lancer extends Warrior, PiercingAttack, DealtDamageAwareness {
     /**
-     * piercing damage to unit behind (second unit) - 50% of the dealt damage to the first enemy unit.
+     * @return Lancer object with default health(50), attack(6) & piercing attack(50%).
      */
-    private int piercingDamage;
-
-
-    Lancer() {
-        super(50, 6);
-        this.piercingDamage = 50;
-    }
-
-    Lancer(int health, int attack, int piercingDamage) {
-        super(health, attack);
-        this.piercingDamage = piercingDamage;
-    }
-
-    /**
-     * @param lancer - copy constructor
-     */
-    Lancer(@NotNull Lancer lancer) {
-        super(lancer);
-        this.piercingDamage = lancer.piercingDamage;
+    static Lancer create() {
+        return new LancerImpl();
     }
 
     @Override
-    public void hit(CombatUnit opponent) {
+    default void hit(Warrior opponent) {
         int damageDealt = getDealtDamage(opponent);
-        LOGGER.debug("health of Lancer's first opponent after being hit: {}", opponent.getHealth());
         if (opponent instanceof CombatUnitBehind opponentBehind) {
-            CombatUnit nextOpponent = opponentBehind.getWarriorBehind();
+            Warrior nextOpponent = opponentBehind.getWarriorBehind();
             if (nextOpponent != null) {
                 final int PERCENTS = 100;
                 int reducedDamage = (int) (damageDealt * getPiercingAttack() / PERCENTS);
                 nextOpponent.receiveDamage(() -> reducedDamage);
-                LOGGER.debug("health of Lancer's next opponent after piercing damage({}): {}",
-                        reducedDamage, nextOpponent.getHealth());
             }
         }
     }
-
-    @Override
-    public int getPiercingAttack() {
-        return piercingDamage;
-    }
-
-    @Override
-    public String toString() {
-        return getClass().getSimpleName() +
-                "{h:" + getHealth() +
-                ", a:" + getAttack() +
-                ", pierce:" + getPiercingAttack() + "%}";
-    }
-
-    private void setPiercingAttack(int piercingDamage) {
-        this.piercingDamage = piercingDamage;
-    }
 }
-
-

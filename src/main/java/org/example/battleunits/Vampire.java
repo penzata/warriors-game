@@ -2,70 +2,25 @@ package org.example.battleunits;
 
 import org.example.characteristics.Vampirism;
 import org.example.subsidiary.DealtDamageAwareness;
-import org.example.weapons.Weapon;
-import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-public class Vampire extends Warrior implements Vampirism, DealtDamageAwareness {
-    private static final Logger LOGGER = LoggerFactory.getLogger(Vampire.class);
-    private int vampirism;
 
-    Vampire() {
-        super(40, 4);
-        this.vampirism = 50;
-    }
-
-    @Override
-    public CombatUnit equipWeapon(Weapon weapon) {
-        super.equipWeapon(weapon);
-        setVampirism(Math.max(getVampirism() + weapon.getWeaponVampirism(), 0));
-        return this;
-    }
-
-    Vampire(int health, int attack, int vampirism) {
-        super(health, attack);
-        this.vampirism = vampirism;
-    }
+public interface Vampire extends Warrior, Vampirism, DealtDamageAwareness {
 
     /**
-     * @param vampire - copy constructor
+     * @return Vampire object with default health(40), attack(4) & vampirism(50%).
      */
-    public Vampire(@NotNull Vampire vampire) {
-        super(vampire);
-        this.vampirism = vampire.vampirism;
+    static Vampire create() {
+        return new VampireImpl();
     }
 
     @Override
-    public void hit(CombatUnit opponent) {
+    default void hit(Warrior opponent) {
         int damageDealt = getDealtDamage(opponent);
         final int PERCENTS = 100;
         int healingPoints = (int) (damageDealt * getVampirism() / PERCENTS);
         vampirism(healingPoints);
-        LOGGER.debug("health after vampirism: {}", getHealth());
     }
 
-    @Override
-    public String toString() {
-        return getClass().getSimpleName() +
-                "{h:" + getHealth() +
-                ", a:" + getAttack() +
-                ", v:" + getVampirism() + "%}";
-    }
+    void vampirism(int selfHealing);
 
-    @Override
-    public int getVampirism() {
-        return vampirism;
-    }
-
-    /**
-     * @param selfHealing - vampire's self-healing (restores health by 50% of the dealt damage).
-     */
-    private void vampirism(int selfHealing) {
-        healedBy(selfHealing);
-    }
-
-    private void setVampirism(int vampirism) {
-        this.vampirism = vampirism;
-    }
 }

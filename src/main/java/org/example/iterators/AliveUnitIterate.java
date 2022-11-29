@@ -1,45 +1,39 @@
 package org.example.iterators;
 
-import org.example.battleunits.CombatUnit;
+import lombok.extern.slf4j.Slf4j;
+import org.example.battleunits.Warrior;
+import org.example.battleunits.WarriorInArmyDecorator;
 import org.example.exceptions.DoesntExistException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.util.*;
+@Slf4j
+public class AliveUnitIterate implements InfGenerator<Warrior> {
 
-public class AliveUnitIterate implements InfGenerator<CombatUnit> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(AliveUnitIterate.class);
-    private Map<Integer, CombatUnit> army;
-    private Iterator<CombatUnit> it;
-    private CombatUnit hitter;
+    private WarriorInArmyDecorator nextAlive;
 
-    public AliveUnitIterate(Map<Integer, CombatUnit> army) {
-        this.army = army;
-        this.it = army.values().iterator();
+    public AliveUnitIterate(WarriorInArmyDecorator warriorInFront) {
+        this.nextAlive = warriorInFront;
     }
 
+
     @Override
-    public CombatUnit next() {
+    public Warrior next() {
         if (!hasNext()) {
             try {
                 throw new DoesntExistException("no more army units left");
             } catch (DoesntExistException e) {
-                LOGGER.error("insufficient army units funds.");
+                log.atError().log("insufficient army units funds.");
             }
         }
-        return hitter;
+        return nextAlive;
     }
 
     @Override
     public boolean hasNext() {
-        if (hitter != null && hitter.isAlive()) {
-            return true;
-        }
-        while (it.hasNext()) {
-            hitter = it.next();
-            if (hitter.isAlive()) {
+        while (nextAlive != null) {
+            if (nextAlive.isAlive()) {
                 return true;
             }
+            nextAlive = nextAlive.getWarriorBehind();
         }
         return false;
     }

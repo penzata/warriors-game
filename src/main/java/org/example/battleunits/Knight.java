@@ -1,21 +1,11 @@
 package org.example.battleunits;
 
-import org.jetbrains.annotations.NotNull;
-
-public class Knight extends Warrior {
-
-    Knight() {
-        super(50, 7);
-    }
-
-    Knight(int health, int attack) {
-        super(health, attack);
-    }
-
+public interface Knight extends Warrior {
     /**
-     * @param knight - copy constructor
+     * @return Knight object with default health(50) & attack(7).
      */
-    Knight(@NotNull Knight knight) {
-        super(knight);
+    static Warrior create() {
+        return new KnightImpl();
     }
+
 }

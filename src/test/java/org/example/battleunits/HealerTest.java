@@ -17,28 +17,28 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class HealerTest {
-    private CombatUnit healer;
+    private Warrior healer;
 
     @BeforeEach
     void init() {
-        healer = CombatUnit.newHealer();
+        healer = Warrior.newHealer();
     }
 
     @Test
     void WarriorFightsWarriorWithHealerAndLoses() {
-        Army warrior = new Army(Warrior::new, 1);
-        Army warriorWithHealer = new Army(Warrior::new, 1)
-                .addBattleUnits(Healer::new, 1);
+        ArmyImpl warrior = new ArmyImpl(WarriorImpl::new, 1);
+        ArmyImpl warriorWithHealer = new ArmyImpl(WarriorImpl::new, 1)
+                .addBattleUnits(HealerImpl::new, 1);
 
         assertFalse(Battle.fight(warrior, warriorWithHealer));
     }
 
     @Test
     void WhenLancerAttacksWarriorUnitWithTwoHealersBehind_ThenHealersChainHealing() {
-        Army army1 = new Army(Lancer::new, 1).
-                addBattleUnits(Warrior::new, 1);
-        Army army2 = new Army(Vampire::new, 1).
-                addBattleUnits(Healer::new, 2);
+        ArmyImpl army1 = new ArmyImpl(LancerImpl::new, 1).
+                addBattleUnits(WarriorImpl::new, 1);
+        ArmyImpl army2 = new ArmyImpl(VampireImpl::new, 1).
+                addBattleUnits(HealerImpl::new, 2);
         boolean result = Battle.fight(army1, army2);
 
         assertTrue(result);
@@ -46,8 +46,8 @@ class HealerTest {
 
     @Test
     void WarriorVersusHealerAndHealerDoesNotHealHimself() {
-        Army warrior = new Army(Warrior::new, 1);
-        Army healer = new Army(Healer::new, 1);
+        ArmyImpl warrior = new ArmyImpl(WarriorImpl::new, 1);
+        ArmyImpl healer = new ArmyImpl(HealerImpl::new, 1);
 
         assertTrue(Battle.fight(warrior, healer));
     }

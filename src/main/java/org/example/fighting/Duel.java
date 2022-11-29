@@ -1,6 +1,6 @@
 package org.example.fighting;
 
-import org.example.battleunits.CombatUnit;
+import org.example.battleunits.Warrior;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,7 +15,7 @@ public class Duel {
      * @param defender second warrior
      * @return TRUE if the first warrior is alive (and thus the other one is not anymore), else - FALSE
      */
-    public static boolean fight(CombatUnit attacker, CombatUnit defender) {
+    public static boolean fight(Warrior attacker, Warrior defender) {
         //next four variables are used for logging simplicity
         var attackerName = attacker.getClass().getSimpleName();
         var attackerHashCode = attacker.hashCode();

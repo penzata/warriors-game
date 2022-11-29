@@ -17,12 +17,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class VampireTest {
-    CombatUnit vampire;
+    Warrior vampire;
     Rookie rookie;
 
     @BeforeEach
     void init() {
-        vampire = CombatUnit.newVampire();
+        vampire = Warrior.newVampire();
         rookie = new Rookie();
     }
 
@@ -37,14 +37,14 @@ class VampireTest {
 
     @Test
     void OneVampireArmyAttacksWarriorAndKnightAndLoses() {
-        ArmyUnit army1 = new Army(CombatUnit::newVampire, 1);
-        ArmyUnit army2 = new Army(CombatUnit::newWarrior, 1)
-                .addBattleUnits(CombatUnit::newKnight, 2);
+        Army army1 = new ArmyImpl(Warrior::newVampire, 1);
+        Army army2 = new ArmyImpl(Warrior::create, 1)
+                .addBattleUnits(Warrior::newKnight, 2);
 
         assertFalse(Battle.fight(army1, army2));
     }
 
-    class Rookie extends Warrior {
+    class Rookie extends WarriorImpl {
         @Override
         public int getAttack() {
 

@@ -15,28 +15,28 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class WarriorTest {
-    private Warrior warrior;
+    private WarriorImpl warrior;
 
     @BeforeEach
     void init() {
-        warrior = new Warrior();
+        warrior = new WarriorImpl();
     }
 
     @Test
     void isAlive() {
-        Warrior warrior1 = new Warrior(0, 5);
+        WarriorImpl warrior1 = new WarriorImpl(0, 5);
         assertFalse(warrior1.isAlive());
 
-        Warrior warrior2 = new Warrior(-1, 5);
+        WarriorImpl warrior2 = new WarriorImpl(-1, 5);
         assertFalse(warrior2.isAlive());
 
-        Warrior warrior3 = new Warrior(1, 5);
+        WarriorImpl warrior3 = new WarriorImpl(1, 5);
         assertTrue(warrior3.isAlive());
     }
 
     @Test
     void takeDamage() {
-        Knight damageDealer = new Knight();
+        KnightImpl damageDealer = new KnightImpl();
         warrior.receiveDamage(damageDealer);
 
         assertEquals(43, warrior.getHealth());
@@ -44,7 +44,7 @@ class WarriorTest {
 
     @Test
     void hit() {
-        Warrior opponentWarrior = new Warrior();
+        WarriorImpl opponentWarrior = new WarriorImpl();
         warrior.hit(opponentWarrior);
 
         assertEquals(45, opponentWarrior.getHealth());

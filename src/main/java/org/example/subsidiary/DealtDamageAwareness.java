@@ -1,12 +1,12 @@
 package org.example.subsidiary;
 
-import org.example.battleunits.CombatUnit;
+import org.example.battleunits.Warrior;
 
-public interface DealtDamageAwareness extends CombatUnit {
+public interface DealtDamageAwareness extends Warrior {
 
-    default int getDealtDamage(CombatUnit opponent) {
+    default int getDealtDamage(Warrior opponent) {
         int healthBeforeHit = opponent.getHealth();
-        CombatUnit.super.hit(opponent);
+        Warrior.super.hit(opponent);
         int healthAfterHit = opponent.getHealth();
         return healthBeforeHit - healthAfterHit;
     }

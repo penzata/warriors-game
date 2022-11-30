@@ -25,13 +25,6 @@ public class DefenderImpl extends WarriorImpl implements Defender {
     }
 
     @Override
-    public Warrior equipWeapon(Weapon weapon) {
-        super.equipWeapon(weapon);
-        setDefence(Math.max(getDefence() + weapon.getWeaponDefence(), 0));
-        return this;
-    }
-
-    @Override
     public int getDefence() {
         return this.defence;
     }

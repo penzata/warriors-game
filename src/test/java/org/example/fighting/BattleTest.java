@@ -1,7 +1,6 @@
 package org.example.fighting;
 
 import org.example.battleunits.*;
-import org.example.weapons.CustomWeapon;
 import org.example.weapons.Weapon;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -200,7 +199,7 @@ class BattleTest {
                 arguments(army7, army8, true));
     }
 
-    static Stream<Arguments> battleWithWeapons() {
+/*    static Stream<Arguments> battleWithWeapons() {
 //battle1 with weapons
         Army army1 = new ArmyImpl(Knight::create, 1)
                 .addBattleUnits(Lancer::create, 1);
@@ -295,7 +294,7 @@ class BattleTest {
                 arguments(army3, army4, true),
                 arguments(army5, army6, true),
                 arguments(army7, army8, false));
-    }
+    }*/
 
     @DisplayName("different battles between two armies")
     @ParameterizedTest(name = "battle{index}:  {0} vs {1} --> attacker army wins? --> {2}")
@@ -326,7 +325,6 @@ class BattleTest {
                 .addBattleUnits(Warrior::create, 1)
                 .addBattleUnits(Lancer::create, 1)
                 .addBattleUnits(Healer::create, 1);
-        System.out.println(army2);
 
         assertFalse(Battle.straightFight(army1, army2));
 

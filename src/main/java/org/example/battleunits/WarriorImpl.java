@@ -57,15 +57,6 @@ public class WarriorImpl implements Warrior {
     }
 
     @Override
-    public Warrior equipWeapon(Weapon weapon) {
-        if (isAlive()) {
-            setHealth(Math.max(getHealth() + weapon.getWeaponHealth(), 0));
-            setAttack(Math.max(getAttack() + weapon.getWeaponAttack(), 0));
-        }
-        return this;
-    }
-
-    @Override
     public int getAttack() {
         return attack;
     }

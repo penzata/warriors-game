@@ -65,11 +65,6 @@ public class WarriorInArmyDecorator implements Warrior, CombatUnitBehind, Proces
     }
 
     @Override
-    public Warrior equipWeapon(Weapon weapon) {
-        return warriorUnit.equipWeapon(weapon);
-    }
-
-    @Override
     public String toString() {
         return warriorUnit.toString();
     }

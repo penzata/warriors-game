@@ -48,7 +48,7 @@ public class Battle {
                 res = true;
                 break;
             }
-            log.atDebug().log("Round {}", roundCount++);
+            log.atDebug().log("\nRound {}", roundCount++);
             while (it1.hasNext() && it2.hasNext()) {
                 Duel.fight(it1.next(), it2.next());
             }

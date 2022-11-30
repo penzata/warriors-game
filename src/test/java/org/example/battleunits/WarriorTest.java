@@ -1,6 +1,5 @@
 package org.example.battleunits;
 
-import org.example.weapons.CustomWeapon;
 import org.example.weapons.Weapon;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

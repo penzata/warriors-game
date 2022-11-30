@@ -24,13 +24,6 @@ public class HealerImpl extends WarriorImpl implements Healer {
     }
 
     @Override
-    public Warrior equipWeapon(Weapon weapon) {
-        super.equipWeapon(weapon);
-        setHealPower(Math.max(getHealPower() + weapon.getWeaponHealPower(), 0));
-        return this;
-    }
-
-    @Override
     public int getHealPower() {
         return healPower;
     }

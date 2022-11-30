@@ -16,12 +16,13 @@ public class StraightIterate implements InfGenerator<Warrior> {
 
     @Override
     public Warrior next() {
-        if (!hasNext()) {
-            try {
+        try {
+            if (!hasNext()) {
                 throw new DoesntExistException("no more army units left");
-            } catch (DoesntExistException e) {
-                log.atError().log("insufficient army units funds.");
             }
+        } catch (DoesntExistException e) {
+            log.atError().log("{}", e.getMessage());
+            e.printStackTrace();
         }
         WarriorInArmyDecorator res = nextUnitInLine;
         nextUnitInLine = nextUnitInLine.getWarriorBehind();

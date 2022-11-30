@@ -4,7 +4,6 @@ import java.util.Iterator;
 
 public interface InfGenerator<T> extends Iterable<T>, Iterator<T> {
 
-
     @Override
     default boolean hasNext() {
         return false;

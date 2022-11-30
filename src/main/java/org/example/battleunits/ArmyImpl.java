@@ -46,9 +46,9 @@ public class ArmyImpl implements Army {
 
     @Override
     public String toString() {
-        StringJoiner sj = new StringJoiner(",\n", "Army#%3d[%n ".formatted(id), "\n]");
-        sj.setEmptyValue("Army#%3d[ DEAD ]".formatted(id));
-        for (Warrior warrior : this) {
+        StringJoiner sj = new StringJoiner(",\n  ", "Army#%2d [%n  ".formatted(id), " ]");
+        sj.setEmptyValue("Army#%2d[ DEAD ]".formatted(id));
+        for (var warrior : army.values()) {
             sj.add(warrior.toString());
         }
         return sj.toString();
@@ -65,15 +65,8 @@ public class ArmyImpl implements Army {
     }
 
     @Override
-    public void removeDeadBodies() {
-        army.values().removeIf(combatUnit -> !combatUnit.isAlive());
-    }
-
-    @Override
     public void equipWarriorAtPosition(int position, Weapon weapon) {
-        if (army.containsKey(position)) {
-            army.get(position).equipWeapon(weapon);
-        }
+//        army.computeIfPresent(position, (k, v) -> army.get(position).equipWeapon(weapon));
     }
 
 }

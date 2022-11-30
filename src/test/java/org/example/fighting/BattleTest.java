@@ -19,7 +19,7 @@ class BattleTest {
 
     static Stream<Arguments> differentBattleArmies() {
         return Stream.of(
-                arguments(Warrior.create(), 1, new ArmyImpl(Warrior::create, 2), false),
+                arguments(new ArmyImpl(Warrior::create, 1), new ArmyImpl(Warrior::create, 2), false),
                 arguments(new ArmyImpl(Warrior::create, 2), new ArmyImpl(Warrior::create, 3), false),
                 arguments(new ArmyImpl(Warrior::create, 5), new ArmyImpl(Warrior::create, 7), false),
                 arguments(new ArmyImpl(Warrior::create, 20), new ArmyImpl(Warrior::create, 21), true),
@@ -324,7 +324,9 @@ class BattleTest {
         Army army2 = new ArmyImpl(Vampire::create, 1)
                 .addBattleUnits(Knight::create, 1)
                 .addBattleUnits(Warrior::create, 1)
-                .addBattleUnits(Lancer::create, 1);
+                .addBattleUnits(Lancer::create, 1)
+                .addBattleUnits(Healer::create, 1);
+        System.out.println(army2);
 
         assertFalse(Battle.straightFight(army1, army2));
 

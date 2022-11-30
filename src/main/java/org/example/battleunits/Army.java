@@ -17,8 +17,6 @@ public interface Army extends InfGenerator<Warrior> {
      */
     Iterator<Warrior> nextInLine();
 
-    void removeDeadBodies();
-
     void equipWarriorAtPosition(int position, Weapon weapon);
 
 }

@@ -25,11 +25,6 @@ public class WarriorInArmyDecorator implements Warrior, CombatUnitBehind, Proces
     }
 
     @Override
-    public String toString() {
-        return "" + warriorUnit;
-    }
-
-    @Override
     public void processCommand(Command command, Warrior commandSender) {
         if (warriorUnit instanceof ProcessCommandChain processor) {
             processor.processCommand(command, commandSender);
@@ -72,5 +67,10 @@ public class WarriorInArmyDecorator implements Warrior, CombatUnitBehind, Proces
     @Override
     public Warrior equipWeapon(Weapon weapon) {
         return warriorUnit.equipWeapon(weapon);
+    }
+
+    @Override
+    public String toString() {
+        return warriorUnit.toString();
     }
 }

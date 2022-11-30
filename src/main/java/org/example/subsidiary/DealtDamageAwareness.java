@@ -10,5 +10,4 @@ public interface DealtDamageAwareness extends Warrior {
         int healthAfterHit = opponent.getHealth();
         return healthBeforeHit - healthAfterHit;
     }
-
 }

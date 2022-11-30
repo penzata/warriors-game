@@ -33,7 +33,7 @@ public class WarriorImpl implements Warrior {
     @Override
     public String toString() {
         return getClass().getSimpleName().replace("Impl", "") +
-                "#%03d".formatted(id) +
+                " #%02d".formatted(id) +
                 "{hp:" + getHealth() + "}";
     }
 

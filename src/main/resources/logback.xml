@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <configuration>
 
-    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="file" class="ch.qos.logback.core.FileAppender">
         <param name="Append" value="false" />
         <file>${user.dir}/logs/example.log</file>
         <encoder>

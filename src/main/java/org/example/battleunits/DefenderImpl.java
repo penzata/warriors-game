@@ -1,5 +1,6 @@
 package org.example.battleunits;
 
+import org.example.characteristics.Attack;
 import org.example.weapons.Weapon;
 
 public class DefenderImpl extends WarriorImpl implements Defender {
@@ -39,11 +40,4 @@ public class DefenderImpl extends WarriorImpl implements Defender {
         this.defence = defence;
     }
 
-    @Override
-    public String toString() {
-        return getClass().getSimpleName() +
-                "{h:" + getHealth() +
-                ", a:" + getAttack() +
-                ", d:" + getDefence() + "}";
-    }
 }

@@ -12,6 +12,9 @@ import java.util.function.Supplier;
 
 public class ArmyImpl implements Army {
     private static int idSequence = 0;
+    /**
+     * used to keep track on created objects at debugging
+     */
     private final int id = ++idSequence;
     private WarriorInArmyDecorator warriorInFront;
     private WarriorInArmyDecorator warriorBehind;

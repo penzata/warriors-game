@@ -40,14 +40,6 @@ public class HealerImpl extends WarriorImpl implements Healer {
     }
 
     @Override
-    public String toString() {
-        return getClass().getSimpleName() +
-                "{h:" + getHealth() +
-                ", a:" + getAttack() +
-                ", heal:" + getHealPower() + "}";
-    }
-
-    @Override
     public void heal(Warrior commandSender) {
         WarriorImpl sender = (WarriorImpl) commandSender;
         sender.healedBy(getHealPower());

@@ -1,9 +1,13 @@
 package org.example.battleunits;
 
-import org.example.characteristics.Attack;
 import org.example.weapons.Weapon;
 
 public class WarriorImpl implements Warrior {
+    private static int idSequence = 0;
+    /**
+     * used to keep track on created objects at debugging
+     */
+    private final int id = ++idSequence;
     private final int initialHealth;
     private int health;
     private int attack;
@@ -28,9 +32,9 @@ public class WarriorImpl implements Warrior {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() +
-                "{h:" + getHealth() +
-                ", a:" + getAttack() + "}";
+        return getClass().getSimpleName().replace("Impl", "") +
+                "#%03d".formatted(id) +
+                "{hp:" + getHealth() + "}";
     }
 
     @Override
@@ -38,9 +42,25 @@ public class WarriorImpl implements Warrior {
         return health;
     }
 
+    private int getInitialHealth() {
+        return initialHealth;
+    }
+
     private void setHealth(int health) {
 
         this.health = health;
+    }
+
+    @Override
+    public void reduceHealth(int damage) {
+        setHealth(getHealth() - damage);
+    }
+
+    @Override
+    public Warrior equipWeapon(Weapon weapon) {
+        setHealth(Math.max(getHealth() + weapon.getWeaponHealth(), 0));
+        setAttack(Math.max(getAttack() + weapon.getWeaponAttack(), 0));
+        return this;
     }
 
     @Override
@@ -52,25 +72,8 @@ public class WarriorImpl implements Warrior {
         this.attack = attack;
     }
 
-    @Override
-    public void receiveDamage(Attack damageDealer) {
-
-        reduceHealth(damageDealer.getAttack());
-    }
-
-    private void reduceHealth(int damage) {
-        setHealth(getHealth() - damage);
-    }
-
-    @Override
-    public Warrior equipWeapon(Weapon weapon) {
-        setHealth(Math.max(getHealth() + weapon.getWeaponHealth(), 0));
-        setAttack(Math.max(getAttack() + weapon.getWeaponAttack(), 0));
-        return this;
-    }
-
     void healedBy(int healingPoints) {
-        setHealth(Math.min(getHealth() + healingPoints, initialHealth));
+        setHealth(Math.min(getHealth() + healingPoints, getInitialHealth()));
     }
 
 }

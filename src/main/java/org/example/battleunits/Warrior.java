@@ -19,7 +19,10 @@ public interface Warrior extends Attack, Health {
     }
 
     default void receiveDamage(Attack damageDealer) {
+        reduceHealth(damageDealer.getAttack());
     }
+
+    void reduceHealth(int damage);
 
     Warrior equipWeapon(Weapon weapon);
 }

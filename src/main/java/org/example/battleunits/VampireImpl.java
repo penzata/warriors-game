@@ -50,11 +50,4 @@ public class VampireImpl extends WarriorImpl implements Vampire {
         log.atTrace().log("health after vampirism: {}", getHealth());
     }
 
-    @Override
-    public String toString() {
-        return getClass().getSimpleName() +
-                "{h:" + getHealth() +
-                ", a:" + getAttack() +
-                ", v:" + getVampirism() + "%}";
-    }
 }

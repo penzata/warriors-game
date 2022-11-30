@@ -26,14 +26,6 @@ public class LancerImpl extends WarriorImpl implements Lancer {
     }
 
     @Override
-    public String toString() {
-        return getClass().getSimpleName() +
-                "{h:" + getHealth() +
-                ", a:" + getAttack() +
-                ", pierce:" + getPiercingAttack() + "%}";
-    }
-
-    @Override
     public int getPiercingAttack() {
         return piercingDamage;
     }

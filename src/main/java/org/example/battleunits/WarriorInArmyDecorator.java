@@ -65,6 +65,11 @@ public class WarriorInArmyDecorator implements Warrior, CombatUnitBehind, Proces
     }
 
     @Override
+    public void reduceHealth(int damage) {
+        warriorUnit.reduceHealth(damage);
+    }
+
+    @Override
     public Warrior equipWeapon(Weapon weapon) {
         return warriorUnit.equipWeapon(weapon);
     }

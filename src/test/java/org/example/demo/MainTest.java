@@ -1,4 +1,4 @@
-package org.example.main;
+package org.example.demo;
 
 import org.example.battleunits.*;
 import org.example.fighting.Battle;
@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class MainTest {
 

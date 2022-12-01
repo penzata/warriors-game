@@ -2,8 +2,7 @@
 <configuration>
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <param name="Append" value="false" />
-        <file>${user.dir}/logs/example.log</file>
+        <pattern>%logger - %msg %n</pattern>
         <encoder>
             <pattern>%msg%n</pattern>
         </encoder>

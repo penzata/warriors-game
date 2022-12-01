@@ -2,7 +2,6 @@ package org.example.demo;
 
 import org.example.battleunits.*;
 import org.example.fighting.Battle;
-import org.example.weapons.Weapon;
 import org.example.weapons.WeaponType;
 import org.junit.jupiter.api.Test;
 
@@ -67,14 +66,17 @@ class MainTest {
     }
 
     @Test
-    void stuff() {
-        Vampire vampire = Vampire.create();
-        vampire.getVampirism();
-        Lancer lancer = Lancer.create();
-        lancer.getPiercingAttack();
-        Healer healer = Healer.create();
-        healer.getHealPower();
-        Warrior healer2 = Healer.create();
-    }
+    void Battle3WithWeapons() {
+        //battle3 with weapons
+        Army army5 = new ArmyImpl(Defender::create, 2);
+        army5.equipWarriorAtPosition(0, WeaponType.KATANA);
+        army5.equipWarriorAtPosition(1, WeaponType.KATANA);
+        Army army6 = new ArmyImpl(Knight::create, 1)
+                .addBattleUnits(Vampire::create, 1);
+        army6.equipWarriorAtPosition(0, WeaponType.KATANA);
+        army6.equipWarriorAtPosition(1, WeaponType.KATANA);
 
+        assertFalse(Battle.fight(army5, army6));
+
+    }
 }

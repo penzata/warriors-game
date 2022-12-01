@@ -2,10 +2,10 @@ package org.example.battleunits;
 
 import org.example.characteristics.Attack;
 import org.example.characteristics.Health;
-import org.example.weapons.EquipWeapon;
+import org.example.weapons.EquippedWeaponBonusStats;
 import org.example.weapons.Weapon;
 
-public interface Warrior extends Attack, Health, EquipWeapon {
+public interface Warrior extends Attack, Health, EquippedWeaponBonusStats {
 
     /**
      * @return Warrior object with default health(50) & attack(5).
@@ -20,6 +20,7 @@ public interface Warrior extends Attack, Health, EquipWeapon {
     }
 
     default void receiveDamage(Attack damageDealer) {
+
         reduceHealth(damageDealer.getAttack());
     }
 

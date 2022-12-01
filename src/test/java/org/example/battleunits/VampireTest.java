@@ -59,10 +59,10 @@ class VampireTest {
         return Stream.of(
                 arguments(WeaponType.SWORD, 45, 6, 50),
                 arguments(WeaponType.SHIELD, 60, 3, 50),
-                arguments(WeaponType.GREAT_AXE, 25, 9, 50),
+                arguments(WeaponType.GREAT_AXE, 25, 9, 60),
                 arguments(WeaponType.KATANA, 20, 10, 100),
                 arguments(WeaponType.MAGIC_WAND, 70, 7, 50),
                 arguments(Weapon.builder().healthStat(-100).attackStat(-100).defenceStat(-100)
-                        .vampirismStat(-100).healPowerStat(-100).build(), 0, 0, 0));
+                        .vampirismStat(-100).healPowerStat(-100).build(), -60, 0, 0));
     }
 }

@@ -68,6 +68,6 @@ class WarriorTest {
                 arguments(WeaponType.KATANA, 30, 11),
                 arguments(WeaponType.MAGIC_WAND, 80, 8),
                 arguments(Weapon.builder().healthStat(-100).attackStat(-100).defenceStat(-100)
-                        .vampirismStat(-100).healPowerStat(-100).build(), 0, 0, 0));
+                        .vampirismStat(-100).healPowerStat(-100).build(), -50, 0, 0));
     }
 }

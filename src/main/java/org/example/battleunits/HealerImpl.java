@@ -24,17 +24,8 @@ public class HealerImpl extends WarriorImpl implements Healer {
     }
 
     @Override
-    public int getHealPower() {
-        return healPower;
-    }
-
-    @Override
     public String toString() {
-        return super.toString() + "{heal:" + healPower + "}";
-    }
-
-    private void setHealPower(int healthPoints) {
-        this.healPower = healthPoints;
+        return super.toString() + "{heal:" + getHealPower() + "}";
     }
 
     @Override
@@ -43,4 +34,12 @@ public class HealerImpl extends WarriorImpl implements Healer {
         sender.healedBy(getHealPower());
     }
 
+    @Override
+    public int getHealPower() {
+        return Math.max(healPower + healPowerBonusFromWeapon(), 0);
+    }
+
+    private void setHealPower(int healthPoints) {
+        this.healPower = healthPoints;
+    }
 }

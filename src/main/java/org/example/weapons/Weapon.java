@@ -63,6 +63,11 @@ public interface Weapon {
         public Weapon build() {
             return new Weapon() {
                 @Override
+                public String toString() {
+                    return "CUSTOM_WEAPON";
+                }
+
+                @Override
                 public int getHealthStat() {
                     return health;
                 }

@@ -16,11 +16,11 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class DefenderTest {
 
-    private DefenderImpl defender;
+    private Defender defender;
 
     @BeforeEach
     void init() {
-        defender = new DefenderImpl();
+        defender = Defender.create();
     }
 
     @Test
@@ -58,6 +58,6 @@ class DefenderTest {
                 arguments(WeaponType.KATANA, 40, 9, 0),
                 arguments(WeaponType.MAGIC_WAND, 90, 6, 2),
                 arguments(Weapon.builder().healthStat(-100).attackStat(-100).defenceStat(-100)
-                        .vampirismStat(-100).healPowerStat(-100).build(), 0, 0, 0));
+                        .vampirismStat(-100).healPowerStat(-100).build(), -40, 0, 0));
     }
 }

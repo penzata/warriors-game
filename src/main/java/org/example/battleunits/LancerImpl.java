@@ -1,5 +1,7 @@
 package org.example.battleunits;
 
+import org.example.weapons.Weapon;
+
 public class LancerImpl extends WarriorImpl implements Lancer {
     /**
      * piercing damage to unit behind (second unit) - 50% of the dealt damage to the first enemy unit.
@@ -27,12 +29,19 @@ public class LancerImpl extends WarriorImpl implements Lancer {
 
     @Override
     public int getPiercingAttack() {
-        return piercingDamage;
+        return Math.max(piercingDamage + piercingAttackBonusFromWeapon(), 0);
     }
 
     @Override
     public String toString() {
-        return super.toString() + "{pierce:" + piercingDamage + "%}";
+        return super.toString() + "{pierce:" + getPiercingAttack() + "%}";
+    }
+
+    @Override
+    public Warrior equipWeapon(Weapon weapon) {
+        super.equipWeapon(weapon);
+        setPiercingAttack(getPiercingAttack());
+        return this;
     }
 
     private void setPiercingAttack(int piercingDamage) {

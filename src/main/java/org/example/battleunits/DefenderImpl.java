@@ -24,17 +24,12 @@ public class DefenderImpl extends WarriorImpl implements Defender {
     @Override
     public int getDefence() {
 
-        return defence + defenceBonusFromWeapon();
+        return Math.max(defence + defenceBonusFromWeapon(), 0);
     }
 
     @Override
     public String toString() {
-        return super.toString() + "{d:" + defence + "}";
-    }
-
-    @Override
-    public int defenceBonusFromWeapon() {
-        return super.defenceBonusFromWeapon();
+        return super.toString() + "{d:" + getDefence() + "}";
     }
 
     private void setDefence(int defence) {

@@ -51,7 +51,7 @@ class LancerTest {
                 arguments(WeaponType.KATANA, 30, 12),
                 arguments(WeaponType.MAGIC_WAND, 80, 9),
                 arguments(Weapon.builder().healthStat(-100).attackStat(-100).defenceStat(-100)
-                        .vampirismStat(-100).healPowerStat(-100).build(), 0, 0, 0));
+                        .vampirismStat(-100).healPowerStat(-100).build(), -50, 0, 0));
     }
 
 }

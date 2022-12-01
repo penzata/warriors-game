@@ -1,6 +1,6 @@
 package org.example.weapons;
 
-public interface EquipWeapon {
+public interface EquippedWeaponBonusStats {
     int healthBonusFromWeapon();
     int attackBonusFromWeapon();
     int defenceBonusFromWeapon();

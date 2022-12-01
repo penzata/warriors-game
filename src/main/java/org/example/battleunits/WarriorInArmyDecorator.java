@@ -5,6 +5,7 @@ import org.example.subsidiary.CombatUnitBehind;
 import org.example.subsidiary.CombatUnitHitCommand;
 import org.example.subsidiary.Command;
 import org.example.subsidiary.ProcessCommandChain;
+import org.example.weapons.Weapon;
 
 public class WarriorInArmyDecorator implements Warrior, CombatUnitBehind, ProcessCommandChain {
     private Warrior warriorUnit;
@@ -61,6 +62,11 @@ public class WarriorInArmyDecorator implements Warrior, CombatUnitBehind, Proces
     @Override
     public void reduceHealth(int damage) {
         warriorUnit.reduceHealth(damage);
+    }
+
+    @Override
+    public Warrior equipWeapon(Weapon weapon) {
+        return warriorUnit.equipWeapon(weapon);
     }
 
     @Override

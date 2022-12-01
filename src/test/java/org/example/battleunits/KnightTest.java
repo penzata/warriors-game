@@ -37,8 +37,8 @@ class KnightTest {
                 arguments(WeaponType.SHIELD, 70, 6),
                 arguments(WeaponType.GREAT_AXE, 35, 12),
                 arguments(WeaponType.KATANA, 30, 13),
-                arguments(WeaponType.MAGIC_WAND, 80, 100),
+                arguments(WeaponType.MAGIC_WAND, 80, 10),
                         arguments(Weapon.builder().healthStat(-100).attackStat(-100).defenceStat(-100)
-                                .vampirismStat(-100).healPowerStat(-100).build(), 0, 0, 0));
+                                .vampirismStat(-100).healPowerStat(-100).build(), -50, 0, 0));
     }
 }

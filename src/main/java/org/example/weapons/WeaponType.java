@@ -18,7 +18,7 @@ public enum WeaponType implements Weapon {
             .attackStat(-1)
             .defenceStat(2)),
     /**
-     * Great Axe with -15 health, +5 attack, -2 defence.
+     * Great Axe with -15 health, +5 attack, -2 defence, +10% vampirism.
      */
     GREAT_AXE(Weapon.builder()
             .healthStat(-15)
@@ -26,7 +26,7 @@ public enum WeaponType implements Weapon {
             .defenceStat(-2)
             .vampirismStat(10)),
     /**
-     * Katana with -20 health, +6 attack, -5 defence, +50 vampirism.
+     * Katana with -20 health, +6 attack, -5 defence, +50% vampirism.
      */
     KATANA(Weapon.builder()
             .healthStat(-20)

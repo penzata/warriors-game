@@ -55,7 +55,7 @@ public class WarriorImpl implements Warrior {
     @Override
     public int getAttack() {
 
-        return attack + attackBonusFromWeapon();
+        return Math.max(attack + attackBonusFromWeapon(), 0);
     }
 
     @Override
@@ -105,7 +105,9 @@ public class WarriorImpl implements Warrior {
 
     @Override
     public Warrior equipWeapon(Weapon weapon) {
-        weapons.add(weapon);
+        if (isAlive()) {
+            weapons.add(weapon);
+        }
         return this;
     }
 

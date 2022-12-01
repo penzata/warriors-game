@@ -27,24 +27,13 @@ public class VampireImpl extends WarriorImpl implements Vampire {
 
     @Override
     public int getVampirism() {
-        return vampirism + vampirismBonusFromWeapon();
+        return Math.max(vampirism + vampirismBonusFromWeapon(), 0);
     }
 
     @Override
     public String toString() {
-        return super.toString() + "{v:" + vampirism + "%}";
+        return super.toString() + "{v:" + getVampirism() + "%}";
     }
-
-    @Override
-    public int vampirismBonusFromWeapon() {
-        return super.vampirismBonusFromWeapon();
-    }
-
-//    @Override
-//    public Warrior equipWeapon(Weapon weapon) {
-//        super.equipWeapon(weapon);
-//        return this;
-//    }
 
     private void setVampirism(int vampirism) {
         this.vampirism = vampirism;

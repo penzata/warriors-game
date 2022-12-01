@@ -4,23 +4,38 @@ import lombok.Getter;
 
 @Getter
 public enum WeaponType implements Weapon {
+    /**
+     * Sword with +5 health, +2 attack.
+     */
     SWORD(Weapon.builder()
             .healthStat(5)
             .attackStat(2)),
+    /**
+     * Shield with +20 health, -1 attack, +2 defence.
+     */
     SHIELD(Weapon.builder()
             .healthStat(20)
             .attackStat(-1)
             .defenceStat(2)),
+    /**
+     * Great Axe with -15 health, +5 attack, -2 defence.
+     */
     GREAT_AXE(Weapon.builder()
             .healthStat(-15)
             .attackStat(5)
             .defenceStat(-2)
             .vampirismStat(10)),
+    /**
+     * Katana with -20 health, +6 attack, -5 defence, +50 vampirism.
+     */
     KATANA(Weapon.builder()
             .healthStat(-20)
             .attackStat(6)
             .defenceStat(-5)
             .vampirismStat(50)),
+    /**
+     * Magic Wand with +30 health, +3 attack, +3 heal power.
+     */
     MAGIC_WAND(Weapon.builder()
             .healthStat(30)
             .attackStat(3)

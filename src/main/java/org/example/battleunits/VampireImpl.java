@@ -30,6 +30,11 @@ public class VampireImpl extends WarriorImpl implements Vampire {
         return vampirism;
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + "{d:" + vampirism + "}";
+    }
+
     private void setVampirism(int vampirism) {
         this.vampirism = vampirism;
     }

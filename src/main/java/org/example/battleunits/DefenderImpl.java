@@ -1,8 +1,5 @@
 package org.example.battleunits;
 
-import org.example.characteristics.Attack;
-import org.example.weapons.Weapon;
-
 public class DefenderImpl extends WarriorImpl implements Defender {
     private int defence;
 
@@ -26,7 +23,18 @@ public class DefenderImpl extends WarriorImpl implements Defender {
 
     @Override
     public int getDefence() {
-        return this.defence;
+
+        return defence + defenceBonusFromWeapon();
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "{d:" + defence + "}";
+    }
+
+    @Override
+    public int defenceBonusFromWeapon() {
+        return super.defenceBonusFromWeapon();
     }
 
     private void setDefence(int defence) {

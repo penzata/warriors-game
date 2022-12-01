@@ -1,6 +1,7 @@
 package org.example.battleunits;
 
 import org.example.weapons.Weapon;
+import org.example.weapons.WeaponType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -32,12 +33,12 @@ class KnightTest {
 
     static Stream<Arguments> equipWeapon() {
         return Stream.of(
-                arguments(Weapon.sword(), 55, 9),
-                arguments(Weapon.shield(), 70, 6),
-                arguments(Weapon.greatAxe(), 35, 12),
-                arguments(Weapon.katana(), 30, 13),
-                arguments(Weapon.magicWand(), 80, 10),
-                arguments(new CustomWeapon(-100, -100, -100, -100, -100), 0, 0));
+                arguments(WeaponType.SWORD, 55, 9),
+                arguments(WeaponType.SHIELD, 70, 6),
+                arguments(WeaponType.GREAT_AXE, 35, 12),
+                arguments(WeaponType.KATANA, 30, 13),
+                arguments(WeaponType.MAGIC_WAND, 80, 100),
+                        arguments(Weapon.builder().healthStat(-100).attackStat(-100).defenceStat(-100)
+                                .vampirismStat(-100).healPowerStat(-100).build(), 0, 0, 0));
     }
-
 }

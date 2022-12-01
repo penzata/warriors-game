@@ -5,7 +5,6 @@ import org.example.subsidiary.CombatUnitBehind;
 import org.example.subsidiary.CombatUnitHitCommand;
 import org.example.subsidiary.Command;
 import org.example.subsidiary.ProcessCommandChain;
-import org.example.weapons.Weapon;
 
 public class WarriorInArmyDecorator implements Warrior, CombatUnitBehind, ProcessCommandChain {
     private Warrior warriorUnit;
@@ -67,5 +66,35 @@ public class WarriorInArmyDecorator implements Warrior, CombatUnitBehind, Proces
     @Override
     public String toString() {
         return warriorUnit.toString();
+    }
+
+    @Override
+    public int healthBonusFromWeapon() {
+        return warriorUnit.healthBonusFromWeapon();
+    }
+
+    @Override
+    public int attackBonusFromWeapon() {
+        return warriorUnit.attackBonusFromWeapon();
+    }
+
+    @Override
+    public int defenceBonusFromWeapon() {
+        return warriorUnit.defenceBonusFromWeapon();
+    }
+
+    @Override
+    public int vampirismBonusFromWeapon() {
+        return warriorUnit.vampirismBonusFromWeapon();
+    }
+
+    @Override
+    public int healPowerBonusFromWeapon() {
+        return warriorUnit.healPowerBonusFromWeapon();
+    }
+
+    @Override
+    public int piercingAttackBonusFromWeapon() {
+        return warriorUnit.piercingAttackBonusFromWeapon();
     }
 }

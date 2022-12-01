@@ -2,6 +2,7 @@ package org.example.battleunits;
 
 import org.example.weapons.Weapon;
 import org.example.fighting.Battle;
+import org.example.weapons.WeaponType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -32,15 +33,6 @@ class LancerTest {
         assertTrue(Battle.fight(oneLancerArmy, army));
     }
 
-/*    @Test
-    void LancerFightsTwoRookieArmy_AlwaysSetRookieHealthToOne_AndLoses_BreakProgramTest() {
-        Army lancerArmy = new ArmyImpl(Lancer::create, 1);
-        Army rookiesArmy = new ArmyImpl(Rookie::new, 1)
-                .addBattleUnits(Rookie::new, 1);
-
-        assertFalse(Battle.fight(lancerArmy, rookiesArmy));
-    }*/
-
     @DisplayName("different weapons equipped by Lancer")
     @ParameterizedTest(name = "equipped {0}")
     @MethodSource({"equipWeapon"})
@@ -53,11 +45,13 @@ class LancerTest {
 
     static Stream<Arguments> equipWeapon() {
         return Stream.of(
-                arguments(Weapon.sword(), 55, 8),
-                arguments(Weapon.shield(), 70, 5),
-                arguments(Weapon.greatAxe(), 35, 11),
-                arguments(Weapon.katana(), 30, 12),
-                arguments(Weapon.magicWand(), 80, 9),
-                arguments(new CustomWeapon(-100, -100, -100, -100, -100), 0, 0));
+                arguments(WeaponType.SWORD, 55, 8),
+                arguments(WeaponType.SHIELD, 70, 5),
+                arguments(WeaponType.GREAT_AXE, 35, 11),
+                arguments(WeaponType.KATANA, 30, 12),
+                arguments(WeaponType.MAGIC_WAND, 80, 9),
+                arguments(Weapon.builder().healthStat(-100).attackStat(-100).defenceStat(-100)
+                        .vampirismStat(-100).healPowerStat(-100).build(), 0, 0, 0));
     }
+
 }

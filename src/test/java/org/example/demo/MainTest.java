@@ -3,6 +3,7 @@ package org.example.demo;
 import org.example.battleunits.*;
 import org.example.fighting.Battle;
 import org.example.weapons.Weapon;
+import org.example.weapons.WeaponType;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -13,7 +14,7 @@ class MainTest {
     @Test
     void print() {
         Warrior vampire = Vampire.create();
-        vampire.equipWeapon(Weapon.katana());
+        vampire.equipWeapon(WeaponType.KATANA);
         System.out.println(vampire);
     }
 
@@ -21,14 +22,14 @@ class MainTest {
     void RookieTesting() {
         Army army3 = new ArmyImpl(Vampire::create, 2)
                 .addBattleUnits(Rookie::new, 2);
-        army3.equipWarriorAtPosition(0, Weapon.katana());
-        army3.equipWarriorAtPosition(1, Weapon.katana());
-        army3.equipWarriorAtPosition(2, Weapon.shield());
+        army3.equipWarriorAtPosition(0, WeaponType.KATANA);
+        army3.equipWarriorAtPosition(1, WeaponType.KATANA);
+        army3.equipWarriorAtPosition(2, WeaponType.SHIELD);
         Army army4 = new ArmyImpl(Warrior::create, 1)
                 .addBattleUnits(Defender::create, 2);
-        army4.equipWarriorAtPosition(0, Weapon.katana());
-        army4.equipWarriorAtPosition(1, Weapon.shield());
-        army4.equipWarriorAtPosition(2, Weapon.shield());
+        army4.equipWarriorAtPosition(0, WeaponType.KATANA);
+        army4.equipWarriorAtPosition(1, WeaponType.SHIELD);
+        army4.equipWarriorAtPosition(2, WeaponType.SHIELD);
 
         Battle.straightFight(army3, army4);
     }
@@ -50,15 +51,15 @@ class MainTest {
     @Test
     void StraightBattle2WithWeapons() {
         Army army3 = new ArmyImpl(Vampire::create, 2)
-                .addBattleUnits(Lancer::create, 2);
-        army3.equipWarriorAtPosition(0, Weapon.katana());
-        army3.equipWarriorAtPosition(1, Weapon.katana());
-        army3.equipWarriorAtPosition(2, Weapon.shield());
+                .addBattleUnits(Rookie::new, 2);
+        army3.equipWarriorAtPosition(0, WeaponType.KATANA);
+        army3.equipWarriorAtPosition(1, WeaponType.KATANA);
+        army3.equipWarriorAtPosition(2, WeaponType.SWORD);
         Army army4 = new ArmyImpl(Warrior::create, 1)
                 .addBattleUnits(Defender::create, 2);
-        army4.equipWarriorAtPosition(0, Weapon.katana());
-        army4.equipWarriorAtPosition(1, Weapon.shield());
-        army4.equipWarriorAtPosition(2, Weapon.shield());
+        army4.equipWarriorAtPosition(0, WeaponType.KATANA);
+        army4.equipWarriorAtPosition(1, WeaponType.SWORD);
+        army4.equipWarriorAtPosition(2, WeaponType.SWORD);
 
         boolean result = Battle.straightFight(army3, army4);
 

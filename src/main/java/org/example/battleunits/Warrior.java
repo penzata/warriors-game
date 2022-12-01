@@ -2,9 +2,10 @@ package org.example.battleunits;
 
 import org.example.characteristics.Attack;
 import org.example.characteristics.Health;
+import org.example.weapons.EquipWeapon;
 import org.example.weapons.Weapon;
 
-public interface Warrior extends Attack, Health {
+public interface Warrior extends Attack, Health, EquipWeapon {
 
     /**
      * @return Warrior object with default health(50) & attack(5).

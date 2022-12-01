@@ -1,6 +1,7 @@
 package org.example.battleunits;
 
 import org.example.weapons.Weapon;
+import org.example.weapons.WeaponType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -61,12 +62,12 @@ class WarriorTest {
 
     static Stream<Arguments> equipWeapon() {
         return Stream.of(
-                arguments(Weapon.sword(), 55, 7),
-                arguments(Weapon.shield(), 70, 4),
-                arguments(Weapon.greatAxe(), 35, 10),
-                arguments(Weapon.katana(), 30, 11),
-                arguments(Weapon.magicWand(), 80, 8),
-                arguments(new CustomWeapon(-100, -100, -100, -100, -100), 0, 0));
+                arguments(WeaponType.SWORD, 55, 7),
+                arguments(WeaponType.SHIELD, 70, 4),
+                arguments(WeaponType.GREAT_AXE, 35, 10),
+                arguments(WeaponType.KATANA, 30, 11),
+                arguments(WeaponType.MAGIC_WAND, 80, 8),
+                arguments(Weapon.builder().healthStat(-100).attackStat(-100).defenceStat(-100)
+                        .vampirismStat(-100).healPowerStat(-100).build(), 0, 0, 0));
     }
-
 }

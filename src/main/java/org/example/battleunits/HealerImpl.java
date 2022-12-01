@@ -28,6 +28,11 @@ public class HealerImpl extends WarriorImpl implements Healer {
         return healPower;
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + "{heal:" + healPower + "}";
+    }
+
     private void setHealPower(int healthPoints) {
         this.healPower = healthPoints;
     }

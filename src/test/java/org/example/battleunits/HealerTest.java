@@ -2,6 +2,7 @@ package org.example.battleunits;
 
 import org.example.weapons.Weapon;
 import org.example.fighting.Battle;
+import org.example.weapons.WeaponType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -65,12 +66,12 @@ class HealerTest {
 
     static Stream<Arguments> equipWeapon() {
         return Stream.of(
-                arguments(Weapon.sword(), 65, 2, 2),
-                arguments(Weapon.shield(), 80, 0, 2),
-                arguments(Weapon.greatAxe(), 45, 5, 2),
-                arguments(Weapon.katana(), 40, 6, 2),
-                arguments(Weapon.magicWand(), 90, 3, 5),
-                arguments(new CustomWeapon(-100, -100, -100, -100, -100), 0, 0, 0));
+                arguments(WeaponType.SWORD, 65, 2, 2),
+                arguments(WeaponType.SHIELD, 80, 0, 2),
+                arguments(WeaponType.GREAT_AXE, 45, 5, 2),
+                arguments(WeaponType.KATANA, 40, 6, 2),
+                arguments(WeaponType.MAGIC_WAND, 90, 3, 5),
+                arguments(Weapon.builder().healthStat(-100).attackStat(-100).defenceStat(-100)
+                        .vampirismStat(-100).healPowerStat(-100).build(), 0, 0, 0));
     }
-
 }

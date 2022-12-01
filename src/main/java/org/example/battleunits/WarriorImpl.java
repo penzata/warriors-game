@@ -42,14 +42,9 @@ public class WarriorImpl implements Warrior {
                 ", a:" + getAttack() + "}";
     }
 
-    private int getHealthBonusFromWeapon() {
-        return weapons.stream()
-                .mapToInt(Weapon::getHealthStat).sum();
-    }
-
     @Override
     public int getHealth() {
-        return health + getHealthBonusFromWeapon();
+        return health + healthBonusFromWeapon();
     }
 
     private void setHealth(int health) {
@@ -58,13 +53,55 @@ public class WarriorImpl implements Warrior {
     }
 
     @Override
-    public void reduceHealth(int damage) {
-        setHealth(health - damage);
+    public int getAttack() {
+
+        return attack + weapons.stream()
+                .mapToInt(Weapon::getAttackStat).sum();
     }
 
-    private int getInitialHealth() {
+    @Override
+    public int healthBonusFromWeapon() {
+        return weapons.stream()
+                .mapToInt(Weapon::getHealthStat).sum();
+    }
 
-        return initialHealth + getHealthBonusFromWeapon();
+    private void setAttack(int attack) {
+        this.attack = attack;
+    }
+
+    @Override
+    public int attackBonusFromWeapon() {
+        return weapons.stream()
+                .mapToInt(Weapon::getAttackStat).sum();
+    }
+
+    @Override
+    public int defenceBonusFromWeapon() {
+        return weapons.stream()
+                .mapToInt(Weapon::getDefenceStat).sum();
+    }
+
+    @Override
+    public int vampirismBonusFromWeapon() {
+        return weapons.stream()
+                .mapToInt(Weapon::getVampirismStat).sum();
+    }
+
+    @Override
+    public int healPowerBonusFromWeapon() {
+        return weapons.stream()
+                .mapToInt(Weapon::getHealPowerStat).sum();
+    }
+
+    @Override
+    public int piercingAttackBonusFromWeapon() {
+        return weapons.stream()
+                .mapToInt(Weapon::getPiercingAttackStat).sum();
+    }
+
+    @Override
+    public void reduceHealth(int damage) {
+        setHealth(health - damage);
     }
 
     @Override
@@ -73,20 +110,13 @@ public class WarriorImpl implements Warrior {
         return this;
     }
 
-
-    @Override
-    public int getAttack() {
-
-        return attack + weapons.stream()
-                .mapToInt(Weapon::getAttackStat).sum();
-    }
-
-    private void setAttack(int attack) {
-        this.attack = attack;
-    }
-
     void healedBy(int healingPoints) {
         setHealth(Math.min(health + healingPoints, initialHealth));
+    }
+
+    private int getInitialHealth() {
+
+        return initialHealth + healthBonusFromWeapon();
     }
 
 }

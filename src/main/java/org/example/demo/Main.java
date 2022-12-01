@@ -23,5 +23,7 @@ public class Main {
         System.out.println(knight);
         System.out.println(defender);
         System.out.println(vampire);
+
+        Weapon customWeapon = Weapon.builder().healthStat(-10).attackStat(5).vampirismStat(40).build();
     }
 }

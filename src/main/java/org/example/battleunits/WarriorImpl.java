@@ -39,7 +39,7 @@ public class WarriorImpl implements Warrior {
         return getClass().getSimpleName().replace("Impl", "") +
                 " #%02d".formatted(id) +
                 "{hp:" + getHealth() +
-                ", a:" + getAttack() + "}";
+                ", att:" + getAttack() + "}";
     }
 
     @Override
@@ -55,8 +55,7 @@ public class WarriorImpl implements Warrior {
     @Override
     public int getAttack() {
 
-        return attack + weapons.stream()
-                .mapToInt(Weapon::getAttackStat).sum();
+        return attack + attackBonusFromWeapon();
     }
 
     @Override

@@ -32,7 +32,7 @@ public class LancerImpl extends WarriorImpl implements Lancer {
 
     @Override
     public String toString() {
-        return super.toString() + "{d:" + piercingDamage + "}";
+        return super.toString() + "{pierce:" + piercingDamage + "%}";
     }
 
     private void setPiercingAttack(int piercingDamage) {

@@ -6,17 +6,17 @@ public interface Weapon {
         return new WeaponBuilder();
     }
 
-    int getWeaponHealth();
+    int getHealthStat();
 
-    int getWeaponAttack();
+    int getAttackStat();
 
-    int getWeaponDefence();
+    int getDefenceStat();
 
-    int getWeaponVampirism();
+    int getVampirismStat();
 
-    int getWeaponHealPower();
+    int getHealPowerStat();
 
-    int getWeaponPiercingAttack();
+    int getPiercingAttackStat();
 
     default int getCharacteristics(String characteristics) {
         return 0;
@@ -30,65 +30,65 @@ public interface Weapon {
         int healPower;
         int piercingAttack;
 
-        WeaponBuilder healthStat(int health) {
+        public WeaponBuilder healthStat(int health) {
             this.health = health;
             return this;
         }
 
-        WeaponBuilder attackStat(int attack) {
+        public WeaponBuilder attackStat(int attack) {
             this.attack = attack;
             return this;
         }
 
-        WeaponBuilder defenceStat(int defence) {
+        public WeaponBuilder defenceStat(int defence) {
             this.defence = defence;
             return this;
         }
 
-        WeaponBuilder vampirismStat(int vampirism) {
+        public WeaponBuilder vampirismStat(int vampirism) {
             this.vampirism = vampirism;
             return this;
         }
 
-        WeaponBuilder piercingAttackStat(int piercingAttack) {
+        public WeaponBuilder piercingAttackStat(int piercingAttack) {
             this.piercingAttack = piercingAttack;
             return this;
         }
 
-        WeaponBuilder healPowerStat(int healPower) {
+        public WeaponBuilder healPowerStat(int healPower) {
             this.healPower = healPower;
             return this;
         }
 
-        Weapon build() {
+        public Weapon build() {
             return new Weapon() {
                 @Override
-                public int getWeaponHealth() {
+                public int getHealthStat() {
                     return health;
                 }
 
                 @Override
-                public int getWeaponAttack() {
+                public int getAttackStat() {
                     return attack;
                 }
 
                 @Override
-                public int getWeaponDefence() {
+                public int getDefenceStat() {
                     return defence;
                 }
 
                 @Override
-                public int getWeaponVampirism() {
+                public int getVampirismStat() {
                     return vampirism;
                 }
 
                 @Override
-                public int getWeaponHealPower() {
+                public int getHealPowerStat() {
                     return healPower;
                 }
 
                 @Override
-                public int getWeaponPiercingAttack() {
+                public int getPiercingAttackStat() {
                     return piercingAttack;
                 }
             };

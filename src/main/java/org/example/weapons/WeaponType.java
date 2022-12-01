@@ -1,5 +1,8 @@
 package org.example.weapons;
 
+import lombok.Getter;
+
+@Getter
 public enum WeaponType implements Weapon {
     SWORD(Weapon.builder()
             .healthStat(5)
@@ -23,36 +26,20 @@ public enum WeaponType implements Weapon {
             .attackStat(3)
             .healPowerStat(3));
 
+    private int healthStat;
+    private int attackStat;
+    private int defenceStat;
+    private int vampirismStat;
+    private int healPowerStat;
+    private int piercingAttackStat;
+
     WeaponType(WeaponBuilder weaponBuilder) {
+        healthStat = weaponBuilder.health;
+        attackStat = weaponBuilder.attack;
+        defenceStat = weaponBuilder.defence;
+        vampirismStat = weaponBuilder.vampirism;
+        healPowerStat = weaponBuilder.healPower;
+        piercingAttackStat = weaponBuilder.piercingAttack;
     }
 
-    @Override
-    public int getWeaponHealth() {
-        return 0;
-    }
-
-    @Override
-    public int getWeaponAttack() {
-        return 0;
-    }
-
-    @Override
-    public int getWeaponDefence() {
-        return 0;
-    }
-
-    @Override
-    public int getWeaponVampirism() {
-        return 0;
-    }
-
-    @Override
-    public int getWeaponHealPower() {
-        return 0;
-    }
-
-    @Override
-    public int getWeaponPiercingAttack() {
-        return 0;
-    }
 }

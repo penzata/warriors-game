@@ -4,9 +4,9 @@ import org.example.iterators.AliveUnitIterate;
 import org.example.iterators.StraightIterate;
 import org.example.weapons.Weapon;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.ArrayList;
 import java.util.StringJoiner;
 import java.util.function.Supplier;
 
@@ -66,7 +66,9 @@ public class ArmyImpl implements Army {
 
     @Override
     public void equipWarriorAtPosition(int position, Weapon weapon) {
-//        army.computeIfPresent(position, (k, v) -> army.get(position).equipWeapon(weapon));
+        if (position < army.size()) {
+            army.get(position).equipWeapon(weapon);
+        }
     }
 
 }

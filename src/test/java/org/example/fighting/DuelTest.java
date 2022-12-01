@@ -2,6 +2,7 @@ package org.example.fighting;
 
 import org.example.battleunits.*;
 import org.example.weapons.Weapon;
+import org.example.weapons.WeaponType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -30,10 +31,10 @@ class DuelTest {
 
     static Stream<Arguments> duelWithWeapons() {
         return Stream.of(
-                arguments(Warrior.create(), new CustomWeapon(-10, 5, 0, 40, 0),
-                        Vampire.create(), sword(), true),
-                arguments(Defender.create(), shield(), Lancer.create(), greatAxe(), false),
-                arguments(Healer.create(), magicWand(), Knight.create(), katana(), false));
+                arguments(Warrior.create(), Weapon.builder().healthStat(-10).attackStat(5).vampirismStat(40).build(),
+                        Vampire.create(), WeaponType.SWORD, true),
+                arguments(Defender.create(), WeaponType.SHIELD, Lancer.create(), WeaponType.GREAT_AXE, false),
+                arguments(Healer.create(), WeaponType.MAGIC_WAND, Knight.create(), WeaponType.KATANA, false));
     }
 
     @DisplayName("different duels")
@@ -99,8 +100,8 @@ class DuelTest {
     void DuelWithWeaponsBetweenWarriorAndKnight_AndKnightLoses() {
         Warrior warrior = Warrior.create();
         Knight knight = Knight.create();
-        warrior.equipWeapon(Weapon.sword());
-        knight.equipWeapon(Weapon.katana());
+        warrior.equipWeapon(WeaponType.SWORD);
+        knight.equipWeapon(WeaponType.KATANA);
         boolean result = Duel.fight(warrior, knight);
 
         assertEquals(true, result);
@@ -124,9 +125,9 @@ class DuelTest {
     @Test
     void DefenderWithShieldAndMagicWandFightsVampireWithShieldAndKatanaAndLoses() {
         Defender defender = Defender.create();
-        defender.equipWeapon(shield()).equipWeapon(magicWand());
+        defender.equipWeapon(WeaponType.SHIELD).equipWeapon(WeaponType.MAGIC_WAND);
         Vampire vampire = Vampire.create();
-        vampire.equipWeapon(shield()).equipWeapon(katana());
+        vampire.equipWeapon(WeaponType.SHIELD).equipWeapon(WeaponType.KATANA);
 
         assertFalse(Duel.fight(defender, vampire));
     }

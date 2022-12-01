@@ -24,5 +24,7 @@ public interface Warrior extends Attack, Health {
 
     void reduceHealth(int damage);
 
-    default void equipWeapon(Weapon weapon) {}
+    default Warrior equipWeapon(Weapon weapon) {
+        return this;
+    }
 }

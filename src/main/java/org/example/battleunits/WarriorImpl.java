@@ -2,6 +2,9 @@ package org.example.battleunits;
 
 import org.example.weapons.Weapon;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 public class WarriorImpl implements Warrior {
     private static int idSequence = 0;
     /**
@@ -11,6 +14,7 @@ public class WarriorImpl implements Warrior {
     private final int initialHealth;
     private int health;
     private int attack;
+    private Collection<Weapon> weapons = new ArrayList<>();
 
     WarriorImpl() {
         this(50, 5);
@@ -37,28 +41,43 @@ public class WarriorImpl implements Warrior {
                 "{hp:" + getHealth() + "}";
     }
 
-    @Override
-    public int getHealth() {
-        return health;
+    private int getHealthBonusFromWeapon() {
+        return weapons.stream()
+                .mapToInt(Weapon::getHealthStat).sum();
     }
 
-    private int getInitialHealth() {
-        return initialHealth;
+    @Override
+    public int getHealth() {
+        return health + getHealthBonusFromWeapon();
     }
 
     private void setHealth(int health) {
 
-        this.health = health;
+        this.health = Math.min(health, initialHealth);
     }
 
     @Override
     public void reduceHealth(int damage) {
-        setHealth(getHealth() - damage);
+        setHealth(health - damage);
+    }
+
+    private int getInitialHealth() {
+
+        return initialHealth + getHealthBonusFromWeapon();
     }
 
     @Override
+    public Warrior equipWeapon(Weapon weapon) {
+        weapons.add(weapon);
+        return this;
+    }
+
+
+    @Override
     public int getAttack() {
-        return attack;
+
+        return attack + weapons.stream()
+                .mapToInt(Weapon::getAttackStat).sum();
     }
 
     private void setAttack(int attack) {
@@ -66,7 +85,7 @@ public class WarriorImpl implements Warrior {
     }
 
     void healedBy(int healingPoints) {
-        setHealth(Math.min(getHealth() + healingPoints, getInitialHealth()));
+        setHealth(Math.min(health + healingPoints, initialHealth));
     }
 
 }

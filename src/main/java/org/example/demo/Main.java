@@ -8,8 +8,9 @@ public class Main {
 
     public static void main(String[] args) {
         Weapon weapon = WeaponType.SHIELD;
-        System.out.println(weapon.getVampirismStat());
+
         Knight knight = Knight.create();
-        System.out.println(knight.equipWeapon(weapon));
+        knight.equipWeapon(weapon);
+        System.out.println(knight);
     }
 }

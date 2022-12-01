@@ -38,7 +38,8 @@ public class WarriorImpl implements Warrior {
     public String toString() {
         return getClass().getSimpleName().replace("Impl", "") +
                 " #%02d".formatted(id) +
-                "{hp:" + getHealth() + "}";
+                "{hp:" + getHealth() +
+                ", a:" + getAttack() + "}";
     }
 
     private int getHealthBonusFromWeapon() {

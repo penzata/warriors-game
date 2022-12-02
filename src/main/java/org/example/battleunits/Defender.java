@@ -1,7 +1,7 @@
 package org.example.battleunits;
 
-import org.example.characteristics.Attack;
-import org.example.characteristics.Defence;
+import org.example.battleunits.characteristics.Attack;
+import org.example.battleunits.characteristics.Defence;
 
 public interface Defender extends Warrior, Defence {
     /**

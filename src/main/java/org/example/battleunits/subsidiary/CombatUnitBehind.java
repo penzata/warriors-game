@@ -1,4 +1,4 @@
-package org.example.subsidiary;
+package org.example.battleunits.subsidiary;
 
 import org.example.battleunits.Warrior;
 

@@ -2,7 +2,7 @@ package org.example.demo;
 
 import org.example.battleunits.*;
 import org.example.fighting.Battle;
-import org.example.weapons.WeaponType;
+import org.example.battleunits.weapons.WeaponType;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

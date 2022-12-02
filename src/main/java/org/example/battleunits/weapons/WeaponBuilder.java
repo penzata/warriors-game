@@ -1,4 +1,4 @@
-package org.example.weapons;
+package org.example.battleunits.weapons;
 
    public class WeaponBuilder {
        private static int idSequence = 0;

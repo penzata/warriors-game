@@ -1,7 +1,6 @@
-package org.example.subsidiary;
+package org.example.battlecommands;
 
 import org.example.battleunits.Warrior;
-import org.example.battleunits.WarriorInArmyDecorator;
 
 @FunctionalInterface
 public interface ProcessCommandChain {

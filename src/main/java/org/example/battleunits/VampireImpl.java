@@ -1,7 +1,6 @@
 package org.example.battleunits;
 
 import lombok.extern.slf4j.Slf4j;
-import org.example.weapons.Weapon;
 
 @Slf4j
 public class VampireImpl extends WarriorImpl implements Vampire {

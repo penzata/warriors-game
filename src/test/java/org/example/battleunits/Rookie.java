@@ -1,8 +1,8 @@
 package org.example.battleunits;
 
 
-import org.example.weapons.Weapon;
-import org.example.weapons.WeaponType;
+import org.example.battleunits.weapons.Weapon;
+import org.example.battleunits.weapons.WeaponType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

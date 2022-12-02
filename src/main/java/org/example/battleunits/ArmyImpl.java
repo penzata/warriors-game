@@ -2,7 +2,7 @@ package org.example.battleunits;
 
 import org.example.iterators.AliveUnitIterate;
 import org.example.iterators.StraightIterate;
-import org.example.weapons.Weapon;
+import org.example.battleunits.weapons.Weapon;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -66,9 +66,11 @@ public class ArmyImpl implements Army {
 
     @Override
     public void equipWarriorAtPosition(int position, Weapon weapon) {
-        if (position < army.size()) {
+            try {
             army.get(position).equipWeapon(weapon);
-        }
+        } catch (IndexOutOfBoundsException ex) {
+                army.get(army.size() - 1).equipWeapon(weapon);
+            }
     }
 
 }

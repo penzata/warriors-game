@@ -1,4 +1,4 @@
-package org.example.characteristics;
+package org.example.battleunits.characteristics;
 
 public interface Health {
 

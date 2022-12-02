@@ -1,4 +1,4 @@
-package org.example.weapons;
+package org.example.battleunits.weapons;
 
 import lombok.Getter;
 

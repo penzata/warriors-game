@@ -3,8 +3,8 @@ package org.example.demo;
 import org.example.battleunits.Defender;
 import org.example.battleunits.Knight;
 import org.example.battleunits.Vampire;
-import org.example.weapons.Weapon;
-import org.example.weapons.WeaponType;
+import org.example.battleunits.weapons.Weapon;
+import org.example.battleunits.weapons.WeaponType;
 
 public class Main {
 

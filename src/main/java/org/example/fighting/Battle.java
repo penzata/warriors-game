@@ -2,6 +2,9 @@ package org.example.fighting;
 
 import lombok.extern.slf4j.Slf4j;
 import org.example.battleunits.Army;
+import org.example.battleunits.Warrior;
+
+import java.util.Iterator;
 
 @Slf4j
 public class Battle {
@@ -17,8 +20,8 @@ public class Battle {
     public static boolean fight(Army army1, Army army2) {
         log.atDebug().log("Army1's lineup: \n{}", army1);
         log.atDebug().log("Army2's lineup: \n{}", army2);
-        var attacker = army1.getAliveUnit();
-        var defender = army2.getAliveUnit();
+        Iterator<Warrior> attacker = army1.getAliveUnit();
+        Iterator<Warrior> defender = army2.getAliveUnit();
 
         while (attacker.hasNext() && defender.hasNext()) {
             Duel.fight(attacker.next(), defender.next());
@@ -31,14 +34,14 @@ public class Battle {
 
     public static boolean straightFight(Army army1, Army army2) {
         log.atDebug().log("Straight Fight!!!");
-        log.atDebug().log("Army1's lineup: {}", army1);
-        log.atDebug().log("Army2's lineup: {}", army2);
+        log.atDebug().log("First Army's lineup: {}", army1);
+        log.atDebug().log("Second Army's lineup: {}", army2);
         int roundCount = 1;
         boolean res;
 
         while (true) {
-            var it1 = army1.nextInLine();
-            var it2 = army2.nextInLine();
+            Iterator<Warrior> it1 = army1.nextInLine();
+            Iterator<Warrior> it2 = army2.nextInLine();
 
             if (!it1.hasNext()) {
                 res = false;

@@ -1,8 +1,8 @@
 package org.example.battleunits;
 
-import org.example.characteristics.PiercingAttack;
-import org.example.subsidiary.CombatUnitBehind;
-import org.example.subsidiary.DealtDamageAwareness;
+import org.example.battleunits.characteristics.PiercingAttack;
+import org.example.battleunits.subsidiary.CombatUnitBehind;
+import org.example.battleunits.subsidiary.DealtDamageAwareness;
 
 public interface Lancer extends Warrior, PiercingAttack, DealtDamageAwareness {
     /**

@@ -1,7 +1,5 @@
 package org.example.battleunits;
 
-import org.example.weapons.Weapon;
-
 public class HealerImpl extends WarriorImpl implements Healer {
 
     private int healPower;

@@ -1,4 +1,4 @@
-package org.example.subsidiary;
+package org.example.battlecommands;
 
 /**
  * execute when CombatUnit hits another Unit.

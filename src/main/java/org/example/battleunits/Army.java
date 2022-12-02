@@ -1,7 +1,7 @@
 package org.example.battleunits;
 
 import org.example.iterators.InfGenerator;
-import org.example.weapons.Weapon;
+import org.example.battleunits.weapons.Weapon;
 
 import java.util.Iterator;
 

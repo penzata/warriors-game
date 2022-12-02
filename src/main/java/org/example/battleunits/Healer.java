@@ -1,9 +1,9 @@
 package org.example.battleunits;
 
-import org.example.characteristics.HealPower;
-import org.example.subsidiary.CombatUnitHitCommand;
-import org.example.subsidiary.Command;
-import org.example.subsidiary.ProcessCommandChain;
+import org.example.battleunits.characteristics.HealPower;
+import org.example.battlecommands.CombatUnitHitCommand;
+import org.example.battlecommands.Command;
+import org.example.battlecommands.ProcessCommandChain;
 
 public interface Healer extends Warrior, HealPower, ProcessCommandChain {
 

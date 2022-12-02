@@ -1,9 +1,9 @@
 package org.example.battleunits;
 
-import org.example.characteristics.Attack;
-import org.example.characteristics.Health;
-import org.example.weapons.EquippedWeaponBonusStats;
-import org.example.weapons.Weapon;
+import org.example.battleunits.characteristics.Attack;
+import org.example.battleunits.characteristics.Health;
+import org.example.battleunits.weapons.EquippedWeaponBonusStats;
+import org.example.battleunits.weapons.Weapon;
 
 public interface Warrior extends Attack, Health, EquippedWeaponBonusStats {
 

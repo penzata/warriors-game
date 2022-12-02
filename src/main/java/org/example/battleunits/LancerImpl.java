@@ -1,6 +1,6 @@
 package org.example.battleunits;
 
-import org.example.weapons.Weapon;
+import org.example.battleunits.weapons.Weapon;
 
 public class LancerImpl extends WarriorImpl implements Lancer {
     /**

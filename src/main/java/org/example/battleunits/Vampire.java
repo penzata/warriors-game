@@ -1,7 +1,7 @@
 package org.example.battleunits;
 
-import org.example.characteristics.Vampirism;
-import org.example.subsidiary.DealtDamageAwareness;
+import org.example.battleunits.characteristics.Vampirism;
+import org.example.battleunits.subsidiary.DealtDamageAwareness;
 
 
 public interface Vampire extends Warrior, Vampirism, DealtDamageAwareness {

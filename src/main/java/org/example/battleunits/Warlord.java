@@ -1,9 +1,9 @@
 package org.example.battleunits;
 
-import org.example.battlestrategy.CombatStrategy;
 import org.example.battleunits.characteristics.Defence;
+import org.example.iterators.InfGenerator;
 
-public interface Warlord extends Warrior, Defence, CombatStrategy {
+public interface Warlord extends Warrior, Defence {
     /**
      * @return Warlord object with default health(100), attack(4) & defence(2).
      */
@@ -11,5 +11,5 @@ public interface Warlord extends Warrior, Defence, CombatStrategy {
         return new WarlordImpl();
     }
 
-    void setStrategy(CombatStrategy strategy);
+    InfGenerator<Warrior> rearrangeArmy(InfGenerator<Warrior> army);
 }

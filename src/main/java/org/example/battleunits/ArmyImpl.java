@@ -1,8 +1,9 @@
 package org.example.battleunits;
 
-import org.example.iterators.AliveUnitIterate;
-import org.example.iterators.StraightIterate;
 import org.example.battleunits.weapons.Weapon;
+import org.example.iterators.AliveUnitIterate;
+import org.example.iterators.InfGenerator;
+import org.example.iterators.StraightIterate;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -18,7 +19,7 @@ public class ArmyImpl implements Army {
     private final int id = ++idSequence;
     private WarriorInArmyDecorator warriorInFront;
     private WarriorInArmyDecorator warriorBehind;
-    private Warrior onlyOneWarlord;
+    private Warlord onlyOneWarlord;
     private List<Warrior> army;
 
 
@@ -35,6 +36,12 @@ public class ArmyImpl implements Army {
     }
 
     private void addBattleUnit(Warrior warrior) {
+        if (warrior instanceof Warlord) {
+            if (onlyOneWarlord != null) {
+                return;
+            }
+            onlyOneWarlord = (Warlord) warrior;
+        }
         WarriorInArmyDecorator wrapped = new WarriorInArmyDecorator(warrior);
         if (warriorInFront == null) {
             warriorInFront = wrapped;
@@ -67,11 +74,22 @@ public class ArmyImpl implements Army {
 
     @Override
     public void equipWarriorAtPosition(int position, Weapon weapon) {
-            try {
+        try {
             army.get(position).equipWeapon(weapon);
         } catch (IndexOutOfBoundsException ex) {
-                army.get(army.size() - 1).equipWeapon(weapon);
-            }
+            army.get(army.size() - 1).equipWeapon(weapon);
+        }
+    }
+
+    @Override
+    public void moveUnits() {
+        if (onlyOneWarlord != null) {
+            InfGenerator<Warrior> newArragendarmy = onlyOneWarlord.rearrangeArmy(this);
+            warriorInFront = warriorBehind = null;
+             for (var warrior : newArragendarmy) {
+                 addBattleUnit(warrior);
+             }
+        }
     }
 
 }

@@ -1,4 +1,4 @@
-package org.example.battlestrategy;
+package org.example.battleunits.subsidiary;
 
 public enum CombatUnitType {
     WARRIOR,

@@ -1,10 +1,9 @@
 package org.example.battleunits;
 
-import org.example.battlestrategy.CombatStrategy;
+import org.example.iterators.InfGenerator;
 
 public class WarlordImpl extends WarriorImpl implements Warlord {
     private int defence;
-    private CombatStrategy strategy;
 
     WarlordImpl() {
         super(100, 4);
@@ -35,16 +34,7 @@ public class WarlordImpl extends WarriorImpl implements Warlord {
     }
 
     @Override
-    public void setStrategy(CombatStrategy strategy) {
-        this.strategy = strategy;
-    }
-
-    @Override
-    public void strategize() {
-        this.strategy.strategize();
+    public InfGenerator<Warrior> rearrangeArmy(InfGenerator<Warrior> army) {
+        return null;
     }
 }
-/*
-Warlord warlord = new WarlordImpl();
-warlord.setStrategy(new RearrangeArmy());
-warlord.strategize();*/

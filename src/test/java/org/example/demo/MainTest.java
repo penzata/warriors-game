@@ -79,4 +79,11 @@ class MainTest {
         assertFalse(Battle.fight(army5, army6));
 
     }
+
+    @Test
+    void stuff() {
+        Army army = new ArmyImpl(Warlord::create, 3)
+                .addBattleUnits(Knight::create, 1);
+        System.out.println(army);
+    }
 }

@@ -1,6 +1,6 @@
 package org.example.battlestrategy;
 
-public enum CombatUnitType implements CombatStrategy {
+public enum CombatUnitType {
     WARRIOR,
     KNIGHT,
     DEFENDER,

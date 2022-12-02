@@ -18,6 +18,7 @@ public class ArmyImpl implements Army {
     private final int id = ++idSequence;
     private WarriorInArmyDecorator warriorInFront;
     private WarriorInArmyDecorator warriorBehind;
+    private Warrior onlyOneWarlord;
     private List<Warrior> army;
 
 

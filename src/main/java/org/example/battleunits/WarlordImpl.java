@@ -1,7 +1,10 @@
 package org.example.battleunits;
 
+import org.example.battlestrategy.CombatStrategy;
+
 public class WarlordImpl extends WarriorImpl implements Warlord {
     private int defence;
+    private CombatStrategy strategy;
 
     WarlordImpl() {
         super(100, 4);
@@ -30,4 +33,18 @@ public class WarlordImpl extends WarriorImpl implements Warlord {
     public int getDefence() {
         return defence;
     }
+
+    @Override
+    public void setStrategy(CombatStrategy strategy) {
+        this.strategy = strategy;
+    }
+
+    @Override
+    public void strategize() {
+        this.strategy.strategize();
+    }
 }
+/*
+Warlord warlord = new WarlordImpl();
+warlord.setStrategy(new RearrangeArmy());
+warlord.strategize();*/

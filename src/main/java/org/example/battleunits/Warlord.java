@@ -10,7 +10,4 @@ public interface Warlord extends Warrior, Defence {
         return new WarlordImpl();
     }
 
-    default void rearrangeArmy() {
-
-    }
 }

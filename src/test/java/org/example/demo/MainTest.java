@@ -1,17 +1,18 @@
 package org.example.demo;
 
 import org.example.battleunits.*;
+import org.example.battleunits.weapons.Weapon;
 import org.example.fighting.Battle;
 import org.example.battleunits.weapons.WeaponType;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 class MainTest {
 
     @Test
-    void print() {
+    void printVampireWithKatana() {
         Warrior vampire = Vampire.create();
         vampire.equipWeapon(WeaponType.KATANA);
         System.out.println(vampire);
@@ -59,10 +60,9 @@ class MainTest {
         army4.equipWarriorAtPosition(0, WeaponType.KATANA);
         army4.equipWarriorAtPosition(1, WeaponType.SWORD);
         army4.equipWarriorAtPosition(2, WeaponType.SWORD);
-
         boolean result = Battle.straightFight(army3, army4);
 
-        assertEquals(true, result);
+        assertTrue(result);
     }
 
     @Test
@@ -81,9 +81,23 @@ class MainTest {
     }
 
     @Test
+    @DisplayName("testing for miscellaneous stuff")
     void stuff() {
-        Army army = new ArmyImpl(Warlord::create, 3)
-                .addBattleUnits(Knight::create, 1);
-        System.out.println(army);
+        Weapon shield = WeaponType.SHIELD;
+        Weapon katana = WeaponType.KATANA;
+
+        Knight knight = Knight.create();
+        Defender defender = Defender.create();
+        knight.equipWeapon(shield).equipWeapon(shield);
+        defender.equipWeapon(shield);
+        Vampire vampire = Vampire.create();
+        vampire.equipWeapon(katana);
+
+
+        System.out.println(knight);
+        System.out.println(defender);
+        System.out.println(vampire);
+
+        Weapon customWeapon = Weapon.builder().healthStat(-10).attackStat(5).vampirismStat(40).build();
     }
 }

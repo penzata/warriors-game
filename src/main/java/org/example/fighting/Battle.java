@@ -18,6 +18,7 @@ public class Battle {
      * @return TRUE if there is someone still alive from the first army (and thus everyone is dead from the other), else - FALSE
      */
     public static boolean fight(Army army1, Army army2) {
+        log.atDebug().log("Normal Fight!!!");
         log.atDebug().log("First Army's lineup: {}", army1);
         log.atDebug().log("Second Army's lineup: {}", army2);
         Iterator<Warrior> attacker = army1.getAliveUnit();

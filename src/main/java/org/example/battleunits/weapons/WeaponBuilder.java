@@ -3,7 +3,7 @@ package org.example.battleunits.weapons;
    public class WeaponBuilder {
        private static int idSequence = 0;
        /**
-        * used to keep track on created objects at debugging
+        * used to keep track on created custom weapons at debugging
         */
        private final int id = ++idSequence;
         int health;

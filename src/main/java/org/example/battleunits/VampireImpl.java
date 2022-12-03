@@ -44,7 +44,7 @@ public class VampireImpl extends WarriorImpl implements Vampire {
     @Override
     public void vampirism(int selfHealing) {
         healedBy(selfHealing);
-        log.atTrace().log("health after vampirism: {}", getHealth());
+        log.atTrace().log("[health after vampirism: {}]", getHealth());
     }
 
 }

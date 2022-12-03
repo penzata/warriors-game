@@ -37,13 +37,6 @@ public class LancerImpl extends WarriorImpl implements Lancer {
         return super.toString() + "{pierce:" + getPiercingAttack() + "%}";
     }
 
-    @Override
-    public Warrior equipWeapon(Weapon weapon) {
-        super.equipWeapon(weapon);
-        setPiercingAttack(getPiercingAttack());
-        return this;
-    }
-
     private void setPiercingAttack(int piercingDamage) {
         this.piercingDamage = piercingDamage;
     }

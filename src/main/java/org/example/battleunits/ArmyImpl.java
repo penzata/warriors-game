@@ -86,10 +86,9 @@ public class ArmyImpl implements Army {
         if (onlyOneWarlord != null) {
             InfGenerator<Warrior> newArragendarmy = onlyOneWarlord.rearrangeArmy(this);
             warriorInFront = warriorBehind = null;
-             for (var warrior : newArragendarmy) {
+             for (Warrior warrior : newArragendarmy) {
                  addBattleUnit(warrior);
              }
         }
     }
-
 }

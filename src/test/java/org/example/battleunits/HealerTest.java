@@ -46,7 +46,7 @@ class HealerTest {
     }
 
     @Test
-    void WarriorVersusHealerAndHealerDoesNotHealHimself() {
+    void OneWarriorArmyVersusOneHealerArmyAndHealerDoesNotHealHimself() {
         ArmyImpl warrior = new ArmyImpl(WarriorImpl::new, 1);
         ArmyImpl healer = new ArmyImpl(HealerImpl::new, 1);
 

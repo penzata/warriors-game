@@ -26,7 +26,7 @@ public class WarriorInArmyDecorator implements Warrior, CombatUnitBehind, Proces
 
     @Override
     public void processCommand(Command command, Warrior commandSender) {
-        if (warriorUnit instanceof ProcessCommandChain processor) {
+        if (commandSender != this && warriorUnit instanceof ProcessCommandChain processor) {
             processor.processCommand(command, commandSender);
         }
         if (nextWarrior != null) {
@@ -51,7 +51,7 @@ public class WarriorInArmyDecorator implements Warrior, CombatUnitBehind, Proces
     @Override
     public void hit(Warrior opponent) {
         warriorUnit.hit(opponent);
-        processCommand(CombatUnitHitCommand.HEAL, warriorUnit);
+        processCommand(CombatUnitHitCommand.HEAL, this);
     }
 
     @Override

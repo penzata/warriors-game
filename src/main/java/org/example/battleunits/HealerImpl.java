@@ -1,8 +1,11 @@
 package org.example.battleunits;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class HealerImpl extends WarriorImpl implements Healer {
     private int healPower;
-    private int medKit = 5;
+    private int medKit = 10;
 
     HealerImpl() {
         super(60, 0);
@@ -33,6 +36,7 @@ public class HealerImpl extends WarriorImpl implements Healer {
         WarriorImpl sender = (WarriorImpl) commandSender;
         if (sender.getHealth() < sender.getInitialHealth() && getMedKit() > 0) {
             sender.healedBy(getHealPower());
+            log.atTrace().log("[health of {} after been healed by healer]", sender);
             setMedKits(getMedKit() - 1);
         }
     }

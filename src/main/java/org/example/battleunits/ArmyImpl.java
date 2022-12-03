@@ -54,7 +54,7 @@ public class ArmyImpl implements Army {
 
     @Override
     public String toString() {
-        StringJoiner sj = new StringJoiner(",\n ", "Army#%2d --->%n[".formatted(id), "]");
+        StringJoiner sj = new StringJoiner(",\n  ", "Army#%2d --->%n[ ".formatted(id), " ]");
         sj.setEmptyValue("Army#%2d[ DEAD ]".formatted(id));
         for (var warrior : army) {
             sj.add(warrior.toString());

@@ -16,6 +16,7 @@ public interface Healer extends Warrior, HealPower, ProcessCommandChain {
 
     @Override
     default void hit(Warrior opponent) {
+//        TODO think of handling Healer vs. Healer fight
         if (opponent instanceof Healer) {
         }
         //do nothing, has no attack points

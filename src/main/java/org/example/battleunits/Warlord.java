@@ -11,5 +11,5 @@ public interface Warlord extends Warrior, Defence {
         return new WarlordImpl();
     }
 
-    InfGenerator<Warrior> rearrangeArmy(InfGenerator<Warrior> army);
+    Iterable<Warrior> rearrangeArmy(InfGenerator<Warrior> army);
 }

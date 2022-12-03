@@ -37,16 +37,6 @@ public class ArmyImpl implements Army {
         return this;
     }
 
-    @Override
-    public boolean hasNext() {
-        return false;
-    }
-
-    @Override
-    public Warrior next() {
-        return null;
-    }
-
     private void addBattleUnit(Warrior warrior) {
         if (warrior instanceof Warlord warlord) {
             if (onlyOneWarlord != null) {
@@ -96,8 +86,8 @@ public class ArmyImpl implements Army {
     @Override
     public void moveUnits() {
         if (onlyOneWarlord != null) {
-            InfGenerator<Warrior> newArrangedArmy = onlyOneWarlord.rearrangeArmy(new StraightIterate(warriorInFront));
-            warriorInFront = warriorBehind = null;
+            Iterable<Warrior> newArrangedArmy = onlyOneWarlord.rearrangeArmy(new StraightIterate(warriorInFront));
+            army.clear();
              for (Warrior warrior : newArrangedArmy) {
                  addBattleUnit(warrior);
              }

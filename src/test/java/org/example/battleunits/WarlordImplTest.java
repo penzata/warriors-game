@@ -24,5 +24,7 @@ class WarlordImplTest {
                 .addBattleUnits(Defender::create, 4)
                 .addBattleUnits(Lancer::create, 3);
         army1.moveUnits();
+
+        log.atDebug().log("after rearranging: {}", army1);
     }
 }

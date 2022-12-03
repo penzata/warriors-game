@@ -37,13 +37,33 @@ public class WarlordImpl extends WarriorImpl implements Warlord {
     }
 
     @Override
-    public InfGenerator<Warrior> rearrangeArmy(InfGenerator<Warrior> army) {
-        Collection<Warrior> rearrangedArmy = new ArrayList<>();
+    public Iterable<Warrior> rearrangeArmy(InfGenerator<Warrior> army) {
+        Collection<Warrior> initialArmy = new ArrayList<>();
         for (Warrior warrior : army) {
             if (warrior != this) {
-                rearrangedArmy.add(warrior);
+                initialArmy.add(warrior);
             }
         }
-        return null;
+        Collection<Warrior> lancers = initialArmy.stream()
+                .filter(Lancer.class::isInstance)
+                .toList();
+        Collection<Warrior> healers = initialArmy.stream()
+                .filter(Healer.class::isInstance)
+                .toList();
+        Collection<Warrior> fighters = initialArmy.stream()
+                .filter(e -> !(e instanceof Lancer || e instanceof Healer))
+                .toList();
+
+        Collection<Warrior> rearrangedArmy = new ArrayList<>();
+        lancers.stream()
+                .limit(1)
+                .findFirst()
+                .ifPresent(rearrangedArmy::add);
+        rearrangedArmy.addAll(healers);
+        rearrangedArmy.addAll(lancers);
+        rearrangedArmy.addAll(fighters);
+        rearrangedArmy.add(Warlord.create());
+
+        return rearrangedArmy;
     }
 }

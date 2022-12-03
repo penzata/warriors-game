@@ -1,9 +1,15 @@
 package org.example.battleunits;
 
+import org.example.battleunits.subsidiary.CombatUnitType;
 import org.example.iterators.InfGenerator;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
+
+import static java.util.stream.Collectors.toCollection;
+import static org.example.battleunits.subsidiary.CombatUnitType.*;
 
 public class WarlordImpl extends WarriorImpl implements Warlord {
     private int defence;
@@ -37,32 +43,36 @@ public class WarlordImpl extends WarriorImpl implements Warlord {
     }
 
     @Override
-    public Iterable<Warrior> rearrangeArmy(InfGenerator<Warrior> army) {
-        Collection<Warrior> initialArmy = new ArrayList<>();
-        for (Warrior warrior : army) {
-            if (warrior != this) {
-                initialArmy.add(warrior);
-            }
-        }
-        Collection<Warrior> lancers = initialArmy.stream()
-                .filter(Lancer.class::isInstance)
-                .toList();
-        Collection<Warrior> healers = initialArmy.stream()
-                .filter(Healer.class::isInstance)
-                .toList();
-        Collection<Warrior> fighters = initialArmy.stream()
-                .filter(e -> !(e instanceof Lancer || e instanceof Healer))
-                .toList();
+    public CombatUnitType getCombatType() {
+        return CombatUnitType.WARLORD;
+    }
 
-        Collection<Warrior> rearrangedArmy = new ArrayList<>();
-        lancers.stream()
-                .limit(1)
+    @Override
+    public Iterable<Warrior> rearrangeArmy(InfGenerator<Warrior> army) {
+        Map<CombatUnitType, ArrayDeque<Warrior>> initialArmy = StreamSupport.stream(
+                        Spliterators.spliteratorUnknownSize(army, Spliterator.ORDERED), false)
+                .collect(Collectors.groupingBy(
+                        Warlord::classify,
+                        toCollection(ArrayDeque::new)
+                ));
+
+
+        int totalArmyNumber = initialArmy.values().stream()
+                .mapToInt(Collection::size).sum();
+        Collection<Warrior> rearrangedArmy = new ArrayList<>(totalArmyNumber);
+
+        Stream.of(LANCER, FIGHTER)
+                .map(initialArmy::get)
+                .filter(Objects::nonNull)
+                .map(ArrayDeque::pollFirst)
+                .filter(Objects::nonNull)
                 .findFirst()
                 .ifPresent(rearrangedArmy::add);
-        rearrangedArmy.addAll(healers);
-        rearrangedArmy.addAll(lancers);
-        rearrangedArmy.addAll(fighters);
-        rearrangedArmy.add(Warlord.create());
+
+        Stream.of(HEALER, LANCER, FIGHTER, WARLORD)
+                .map(initialArmy::get)
+                .filter(Objects::nonNull)
+                .forEach(rearrangedArmy::addAll);
 
         return rearrangedArmy;
     }

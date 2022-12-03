@@ -1,6 +1,7 @@
 package org.example.battleunits;
 
 import org.example.battleunits.characteristics.Defence;
+import org.example.battleunits.subsidiary.CombatUnitType;
 import org.example.iterators.InfGenerator;
 
 public interface Warlord extends Warrior, Defence {
@@ -9,6 +10,10 @@ public interface Warlord extends Warrior, Defence {
      */
     static Warlord create() {
         return new WarlordImpl();
+    }
+
+    static CombatUnitType classify(Warrior warrior) {
+        return warrior.getCombatType();
     }
 
     Iterable<Warrior> rearrangeArmy(InfGenerator<Warrior> army);

@@ -1,11 +1,13 @@
 package org.example.battleunits;
 
+import org.example.battleunits.subsidiary.CombatUnitType;
 import org.example.battleunits.weapons.Weapon;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 public class WarriorImpl implements Warrior {
+
     private static int idSequence = 0;
     /**
      * used to keep track on created objects at debugging
@@ -109,6 +111,12 @@ public class WarriorImpl implements Warrior {
             weapons.add(weapon);
         }
         return this;
+    }
+
+    @Override
+    public CombatUnitType getCombatType() {
+
+        return CombatUnitType.FIGHTER;
     }
 
     void healedBy(int healingPoints) {

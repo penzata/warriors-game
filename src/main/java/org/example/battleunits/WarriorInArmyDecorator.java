@@ -5,6 +5,7 @@ import org.example.battleunits.subsidiary.CombatUnitBehind;
 import org.example.battlecommands.CombatUnitHitCommand;
 import org.example.battlecommands.Command;
 import org.example.battlecommands.ProcessCommandChain;
+import org.example.battleunits.subsidiary.CombatUnitType;
 import org.example.battleunits.weapons.Weapon;
 
 public class WarriorInArmyDecorator implements Warrior, CombatUnitBehind, ProcessCommandChain {
@@ -67,6 +68,11 @@ public class WarriorInArmyDecorator implements Warrior, CombatUnitBehind, Proces
     @Override
     public Warrior equipWeapon(Weapon weapon) {
         return warriorUnit.equipWeapon(weapon);
+    }
+
+    @Override
+    public CombatUnitType getCombatType() {
+        return warriorUnit.getCombatType();
     }
 
     @Override

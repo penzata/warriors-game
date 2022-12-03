@@ -2,6 +2,7 @@ package org.example.battleunits;
 
 import org.example.battleunits.characteristics.Attack;
 import org.example.battleunits.characteristics.Health;
+import org.example.battleunits.subsidiary.CombatUnitType;
 import org.example.battleunits.weapons.EquippedWeaponBonusStats;
 import org.example.battleunits.weapons.Weapon;
 
@@ -29,4 +30,6 @@ public interface Warrior extends Attack, Health, EquippedWeaponBonusStats {
     default Warrior equipWeapon(Weapon weapon) {
         return this;
     }
+
+    CombatUnitType getCombatType();
 }

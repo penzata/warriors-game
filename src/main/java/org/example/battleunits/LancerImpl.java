@@ -1,6 +1,6 @@
 package org.example.battleunits;
 
-import org.example.battleunits.weapons.Weapon;
+import org.example.battleunits.subsidiary.CombatUnitType;
 
 public class LancerImpl extends WarriorImpl implements Lancer {
     /**
@@ -35,6 +35,11 @@ public class LancerImpl extends WarriorImpl implements Lancer {
     @Override
     public String toString() {
         return super.toString() + "{pierce:" + getPiercingAttack() + "%}";
+    }
+
+    @Override
+    public CombatUnitType getCombatType() {
+        return CombatUnitType.LANCER;
     }
 
     private void setPiercingAttack(int piercingDamage) {

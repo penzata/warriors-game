@@ -1,6 +1,7 @@
 package org.example.battleunits;
 
 import lombok.extern.slf4j.Slf4j;
+import org.example.battleunits.subsidiary.CombatUnitType;
 
 @Slf4j
 public class HealerImpl extends WarriorImpl implements Healer {
@@ -28,6 +29,11 @@ public class HealerImpl extends WarriorImpl implements Healer {
     @Override
     public String toString() {
         return super.toString() + "{heal:" + getHealPower() + "}";
+    }
+
+    @Override
+    public CombatUnitType getCombatType() {
+        return CombatUnitType.HEALER;
     }
 
     @Override

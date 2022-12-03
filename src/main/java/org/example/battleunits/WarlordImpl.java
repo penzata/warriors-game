@@ -2,6 +2,9 @@ package org.example.battleunits;
 
 import org.example.iterators.InfGenerator;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 public class WarlordImpl extends WarriorImpl implements Warlord {
     private int defence;
 
@@ -35,6 +38,12 @@ public class WarlordImpl extends WarriorImpl implements Warlord {
 
     @Override
     public InfGenerator<Warrior> rearrangeArmy(InfGenerator<Warrior> army) {
+        Collection<Warrior> rearrangedArmy = new ArrayList<>();
+        for (Warrior warrior : army) {
+            if (warrior != this) {
+                rearrangedArmy.add(warrior);
+            }
+        }
         return null;
     }
 }

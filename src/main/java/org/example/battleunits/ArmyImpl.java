@@ -1,5 +1,6 @@
 package org.example.battleunits;
 
+import lombok.extern.slf4j.Slf4j;
 import org.example.battleunits.weapons.Weapon;
 import org.example.iterators.AliveUnitIterate;
 import org.example.iterators.InfGenerator;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.StringJoiner;
 import java.util.function.Supplier;
 
+@Slf4j
 public class ArmyImpl implements Army {
     private static int idSequence = 0;
     /**
@@ -33,6 +35,16 @@ public class ArmyImpl implements Army {
             addBattleUnit(factory.get());
         }
         return this;
+    }
+
+    @Override
+    public boolean hasNext() {
+        return false;
+    }
+
+    @Override
+    public Warrior next() {
+        return null;
     }
 
     private void addBattleUnit(Warrior warrior) {
@@ -84,9 +96,9 @@ public class ArmyImpl implements Army {
     @Override
     public void moveUnits() {
         if (onlyOneWarlord != null) {
-            InfGenerator<Warrior> newArragendarmy = onlyOneWarlord.rearrangeArmy(this);
+            InfGenerator<Warrior> newArrangedArmy = onlyOneWarlord.rearrangeArmy(new StraightIterate(warriorInFront));
             warriorInFront = warriorBehind = null;
-             for (Warrior warrior : newArragendarmy) {
+             for (Warrior warrior : newArrangedArmy) {
                  addBattleUnit(warrior);
              }
         }

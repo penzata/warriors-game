@@ -4,20 +4,9 @@ import java.util.Iterator;
 
 public interface InfGenerator<T> extends Iterable<T>, Iterator<T> {
 
-    @Override
-    default boolean hasNext() {
-        return false;
-    }
+    boolean hasNext();
 
-    @Override
-    default T next() {
-        return null;
-    }
-
-    @Override
-    default void remove() {
-        Iterator.super.remove();
-    }
+    T next();
 
     @Override
     default Iterator<T> iterator() {

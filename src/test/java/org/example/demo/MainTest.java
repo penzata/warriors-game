@@ -100,4 +100,5 @@ class MainTest {
 
         Weapon customWeapon = Weapon.builder().healthStat(-10).attackStat(5).vampirismStat(40).build();
     }
+
 }

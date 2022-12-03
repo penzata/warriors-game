@@ -36,11 +36,11 @@ public class ArmyImpl implements Army {
     }
 
     private void addBattleUnit(Warrior warrior) {
-        if (warrior instanceof Warlord) {
+        if (warrior instanceof Warlord warlord) {
             if (onlyOneWarlord != null) {
                 return;
             }
-            onlyOneWarlord = (Warlord) warrior;
+            onlyOneWarlord = warlord;
         }
         WarriorInArmyDecorator wrapped = new WarriorInArmyDecorator(warrior);
         if (warriorInFront == null) {

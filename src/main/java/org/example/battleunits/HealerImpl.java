@@ -1,8 +1,8 @@
 package org.example.battleunits;
 
 public class HealerImpl extends WarriorImpl implements Healer {
-
     private int healPower;
+    private int medKit = 5;
 
     HealerImpl() {
         super(60, 0);
@@ -19,6 +19,7 @@ public class HealerImpl extends WarriorImpl implements Healer {
      */
     HealerImpl(HealerImpl healer) {
         super(healer);
+        this.healPower = 2;
     }
 
     @Override
@@ -28,13 +29,26 @@ public class HealerImpl extends WarriorImpl implements Healer {
 
     @Override
     public void heal(Warrior commandSender) {
+        //casting to Warrior concrete implementation because healedBy() is private method of the class
         WarriorImpl sender = (WarriorImpl) commandSender;
-        sender.healedBy(getHealPower());
+        if (sender.getHealth() < sender.getInitialHealth() && getMedKit() > 0) {
+            sender.healedBy(getHealPower());
+            setMedKits(getMedKit() - 1);
+        }
     }
 
     @Override
     public int getHealPower() {
         return Math.max(healPower + healPowerBonusFromWeapon(), 0);
+    }
+
+    @Override
+    public int getMedKit() {
+        return medKit;
+    }
+
+    private void setMedKits(int medKit) {
+        this.medKit = medKit;
     }
 
     private void setHealPower(int healthPoints) {

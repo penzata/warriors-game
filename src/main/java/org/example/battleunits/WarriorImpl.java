@@ -115,7 +115,7 @@ public class WarriorImpl implements Warrior {
         setHealth(Math.min(health + healingPoints, initialHealth));
     }
 
-    private int getInitialHealth() {
+    int getInitialHealth() {
 
         return initialHealth + healthBonusFromWeapon();
     }

@@ -21,8 +21,10 @@ public class Duel {
         log.atDebug().log("{} vs. {}", attacker, defender);
         while (attacker.isAlive() && defender.isAlive()) {
             attacker.hit(defender);
+            log.atTrace().log("{}'s health after taking hit: {}", defender, defender.getHealth());
             if (defender.isAlive()) {
                 defender.hit(attacker);
+                log.atTrace().log("{}'s health after taking hit: {}", attacker, attacker.getHealth());
             }
         }
         log.atDebug().log(() -> (attacker.isAlive() ? attacker : defender) + " won!!!");

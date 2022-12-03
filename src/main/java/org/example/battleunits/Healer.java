@@ -16,15 +16,17 @@ public interface Healer extends Warrior, HealPower, ProcessCommandChain {
 
     @Override
     default void hit(Warrior opponent) {
+        if (opponent instanceof Healer) {
+        }
         //do nothing, has no attack points
     }
 
     @Override
     default void processCommand(Command command, Warrior commandSender) {
         if (isAlive() && command.equals(CombatUnitHitCommand.HEAL)) {
-            heal(commandSender);
+                heal(commandSender);
+            }
         }
-    }
 
     void heal(Warrior commandSender);
 }

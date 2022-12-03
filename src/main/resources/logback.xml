@@ -17,7 +17,7 @@
     <logger name="org.example.battleunits.VampireImpl" level="debug"/>
     <logger name="org.example.battleunits.DefenderImpl" level="info"/>
 
-    <root level="debug">
+    <root level="info">
         <appender-ref ref="file" />
     </root>
 

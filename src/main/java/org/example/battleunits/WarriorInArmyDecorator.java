@@ -30,7 +30,7 @@ public class WarriorInArmyDecorator implements Warrior, CombatUnitBehind, Proces
             processor.processCommand(command, commandSender);
         }
         if (nextWarrior != null) {
-            nextWarrior.processCommand(command, nextWarrior.unwrap());
+            nextWarrior.processCommand(command, this.unwrap());
         }
     }
 

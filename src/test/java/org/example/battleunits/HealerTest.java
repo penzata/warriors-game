@@ -3,6 +3,7 @@ package org.example.battleunits;
 import org.example.battleunits.weapons.Weapon;
 import org.example.fighting.Battle;
 import org.example.battleunits.weapons.WeaponType;
+import org.example.fighting.Duel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -73,5 +74,22 @@ class HealerTest {
                 arguments(WeaponType.MAGIC_WAND, 90, 3, 5),
                 arguments(Weapon.builder().healthStat(-100).attackStat(-100).defenceStat(-100)
                         .vampirismStat(-100).healPowerStat(-100).build(), -40, 0, 0));
+    }
+
+    @Test
+    void HealerVsHealer() {
+        Healer secondHealer = Healer.create();
+        Duel.fight(healer, secondHealer);
+    }
+
+    @Test
+    @DisplayName("testing for breaking infinite loop when defender and healer fights defender and healer")
+    void ArmyDefenderWithHealerVSSecondArmyDefenderWithHealerAndFirstArmyWins() {
+        Army army1 = new ArmyImpl(Defender::create, 1)
+                .addBattleUnits(Healer::create, 1);
+        Army army2 = new ArmyImpl(Defender::create, 1)
+                .addBattleUnits(Healer::create, 1);
+
+        assertTrue(Battle.fight(army1, army2));
     }
 }

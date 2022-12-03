@@ -1,12 +1,11 @@
 package org.example.battleunits;
 
-import org.example.battleunits.characteristics.Attack;
-import org.example.battleunits.characteristics.Health;
+import org.example.battleunits.subsidiary.CanReceiveDamage;
 import org.example.battleunits.subsidiary.CombatUnitType;
 import org.example.battleunits.weapons.EquippedWeaponBonusStats;
 import org.example.battleunits.weapons.Weapon;
 
-public interface Warrior extends Attack, Health, EquippedWeaponBonusStats {
+public interface Warrior extends CanReceiveDamage, EquippedWeaponBonusStats {
 
     /**
      * @return Warrior object with default health(50) & attack(5).
@@ -19,13 +18,6 @@ public interface Warrior extends Attack, Health, EquippedWeaponBonusStats {
 
         opponent.receiveDamage(this);
     }
-
-    default void receiveDamage(Attack damageDealer) {
-
-        reduceHealth(damageDealer.getAttack());
-    }
-
-    void reduceHealth(int damage);
 
     default Warrior equipWeapon(Weapon weapon) {
         return this;

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+
+    <appender name="file" class="ch.qos.logback.core.FileAppender">
+        <param name="Append" value="false" />
+        <file>${user.dir}/logs/example.log</file>
+        <encoder>
+            <pattern>%msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="org.example.battleunits.ArmyImpl" level="error"/>
+    <logger name="org.example.fighting.Duel" level="debug"/>
+    <logger name="org.example.fighting.Battle" level="debug"/>
+    <logger name="org.example.battleunits.LancerImpl" level="info"/>
+    <logger name="org.example.battleunits.HealerImpl" level="info"/>
+    <logger name="org.example.battleunits.VampireImpl" level="debug"/>
+    <logger name="org.example.battleunits.DefenderImpl" level="info"/>
+
+    <root level="info">
+        <appender-ref ref="file" />
+    </root>
+
+</configuration>

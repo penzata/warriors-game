@@ -39,6 +39,7 @@ class WarriorTest {
         KnightImpl damageDealer = new KnightImpl();
         warrior.receiveDamage(damageDealer);
 
+
         assertEquals(43, warrior.getHealth());
     }
 

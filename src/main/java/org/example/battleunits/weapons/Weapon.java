@@ -18,6 +18,8 @@ public interface Weapon {
 
     int getPiercingAttackStat();
 
+    WeaponClass getWeaponClass();
+
 //    TODO make this method returns all the stats
     default int getCharacteristics(String characteristics) {
         return 0;

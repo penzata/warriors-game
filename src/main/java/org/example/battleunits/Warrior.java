@@ -8,7 +8,7 @@ import org.example.battleunits.subsidiary.CombatUnitType;
 import org.example.battleunits.weapons.EquippedWeaponBonusStats;
 import org.example.battleunits.weapons.Weapon;
 
-public interface Warrior extends Attack, Health, CanReceiveDamage, CanBeHealed, EquippedWeaponBonusStats {
+public interface Warrior extends Attack, Health, CanReceiveDamage, CanBeHealed, EquippedWeaponBonusStats, CombatUnit {
 
     /**
      * @return Warrior object with default health(50) & attack(5).

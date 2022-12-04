@@ -40,7 +40,7 @@ public class HealerImpl extends WarriorImpl implements Healer {
     public void heal(Warrior commandSender) {
         //casting to Warrior concrete implementation because healedBy() is private method of the class
         WarriorImpl sender = (WarriorImpl) commandSender;
-        if (sender.getHealth() < sender.getInitialHealth() && getMedKit() > 0) {
+        if ((sender.getHealth() < sender.getInitialHealth()) && (getMedKit() > 0)) {
             sender.healedBy(getHealPower());
             log.atTrace().log("[health of {} after been healed by healer]", sender);
             setMedKits(getMedKit() - 1);

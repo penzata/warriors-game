@@ -43,9 +43,10 @@ class WeaponTest {
         assertEquals(100, vampire.getVampirism());
 
         Weapon customWeapon = Weapon.builder()
-                .setHealthStat(-10).setAttackStat(5).setVampirismStat(40)
+                .setHealthStat(-10).setAttackStat(5)
+                .setVampirismStat(40).setWeaponClass(WeaponClass.DEFENSIVE)
                 .build();
-        log.atDebug().log("custom weapon: {}", customWeapon);
+        log.atDebug().log("{} chars: {}", customWeapon, customWeapon.getCharacteristics());
     }
 
     @Test

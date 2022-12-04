@@ -19,9 +19,12 @@ public interface Weapon {
     int getPiercingAttackStat();
 
     WeaponClass getWeaponClass();
+    
+    default String getCharacteristics() {
+        String chars = String.format("{health: %s, attack: %s, defence: %s" +
+                ", vampirism: %s, heal power: %s, class: %s}", getHealthStat(), getAttackStat(), getDefenceStat(),
+                getVampirismStat(), getHealPowerStat(), getWeaponClass());
 
-//    TODO make this method returns all the stats
-    default int getCharacteristics(String characteristics) {
-        return 0;
+        return chars;
     }
 }

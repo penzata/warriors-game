@@ -56,7 +56,7 @@ public class WeaponBuilder {
         return new Weapon() {
             @Override
             public String toString() {
-                return "CUSTOM_WEAPON#%2d".formatted(id);
+                return "CUSTOM_WEAPON#%02d".formatted(id);
             }
 
             @Override

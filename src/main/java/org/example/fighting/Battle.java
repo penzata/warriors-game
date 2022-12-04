@@ -8,6 +8,7 @@ import java.util.Iterator;
 
 @Slf4j
 public class Battle {
+    private static final String AFTER_THE_BATTLE = "- after the battle: ";
 
     private Battle() {
     }
@@ -27,8 +28,8 @@ public class Battle {
         while (attacker.hasNext() && defender.hasNext()) {
             Duel.fight(attacker.next(), defender.next());
         }
-        log.atDebug().log("- after the battle: {}", army1);
-        log.atDebug().log("- after the battle: {}", army2);
+        log.atDebug().log("{}{}", AFTER_THE_BATTLE, army1);
+        log.atDebug().log("{}{}", AFTER_THE_BATTLE, army2);
         log.atDebug().log(() -> (attacker.hasNext() ? "First" : "Second") + " army won!!!\n");
         return attacker.hasNext();
     }
@@ -57,8 +58,8 @@ public class Battle {
                 Duel.fight(it1.next(), it2.next());
             }
         }
-        log.atDebug().log("- after the battle: {}", army1);
-        log.atDebug().log("- after the battle: {}", army2);
+        log.atDebug().log("{}{}", AFTER_THE_BATTLE, army1);
+        log.atDebug().log("{}{}", AFTER_THE_BATTLE, army2);
         log.atDebug().log(() -> (res ? "First" : "Second") + " army won!!!\n");
         return res;
     }

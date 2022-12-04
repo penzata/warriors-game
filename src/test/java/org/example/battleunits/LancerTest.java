@@ -27,8 +27,11 @@ class LancerTest {
     @Test
     void LancerFightsArmyOfTwoAndMakesPiercingDamage() {
         Army oneLancerArmy = new ArmyImpl(Lancer::create, 1);
+//        Lancer needs to hit Warrior 9 times to kill him;
+//        creating custom Knight with 27 health;
+//        after piercing attack (9 x 3 (50% of 6att)) Knight should be dead with 0 health.
         Army army = new ArmyImpl(Warrior::create, 1)
-                .addBattleUnits(() -> new KnightImpl(25, 7), 1);
+                .addBattleUnits(() -> new KnightImpl(27, 7), 1);
 
         assertTrue(Battle.fight(oneLancerArmy, army));
     }

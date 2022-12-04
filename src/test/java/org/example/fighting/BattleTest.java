@@ -302,7 +302,7 @@ class BattleTest {
     }
 
     @DisplayName("different battles between two armies")
-    @ParameterizedTest(name = "battle{index}:  {0} vs {1} --> attacker army wins? --> {2}")
+    @ParameterizedTest(name = "battle{index}:  {0} vs. {1} --> attacker army wins? --> {2}")
     @MethodSource({"differentBattleArmies", "fullDefenderBattleArmies",
             "armiesWithVampires", "armiesWithLancers", "armiesWithHealers"})
     void BattleOneArmyAgainstAnotherWhoWinsOrLoses(ArmyImpl army1, ArmyImpl army2, Boolean expectedBattleResult) {
@@ -337,7 +337,7 @@ class BattleTest {
     }
 
     @DisplayName("straight battles between two armies")
-    @ParameterizedTest(name = "straight battle{index}:  {0} vs {1} --> attacker army wins? --> {2}")
+    @ParameterizedTest(name = "straight battle{index}:  {0} vs. {1} --> attacker army wins? --> {2}")
     @MethodSource({"straightBattle"})
     void StraightBattle_WhoWinsOrLoses(ArmyImpl army1, ArmyImpl army2, Boolean expectedBattleResult) {
         boolean battleResult = Battle.straightFight(army1, army2);
@@ -346,7 +346,7 @@ class BattleTest {
     }
 
     @DisplayName("battles between weapon equipped armies")
-    @ParameterizedTest(name = "battle{index} with weapons:  {0} vs {1} --> attacker army wins? --> {2}")
+    @ParameterizedTest(name = "battle{index} with weapons:  {0} vs. {1} --> attacker army wins? --> {2}")
     @MethodSource({"battleWithWeapons"})
     void BattleWithWeapons_WhoWinsOrLoses(ArmyImpl army1, ArmyImpl army2, Boolean expectedBattleResult) {
         boolean battleResult = Battle.straightFight(army1, army2);
@@ -355,7 +355,7 @@ class BattleTest {
     }
 
     @DisplayName("straight battles between weapon equipped armies")
-    @ParameterizedTest(name = "straight battle{index} with weapons:  {0} vs {1} --> attacker army wins? --> {2}")
+    @ParameterizedTest(name = "straight battle{index} with weapons:  {0} vs. {1} --> attacker army wins? --> {2}")
     @MethodSource({"straightBattleWithWeapons"})
     void StraightBattleWithWeapons_WhoWinsOrLoses(ArmyImpl army1, ArmyImpl army2, Boolean expectedBattleResult) {
         boolean battleResult = Battle.straightFight(army1, army2);

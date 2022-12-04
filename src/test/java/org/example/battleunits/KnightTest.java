@@ -10,26 +10,11 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class KnightTest {
     private Knight knight;
-
-    @BeforeEach
-    void init() {
-        knight = Knight.create();
-    }
-
-    @DisplayName("different weapons equipped by Knight")
-    @ParameterizedTest(name = "equipped {0}")
-    @MethodSource({"equipWeapon"})
-    void EquipDifferentWeaponsOnWarriorAndVerifyItsStats (Weapon weapon, int expectedHealth, int expectedAttack) {
-        knight.equipWeapon(weapon);
-
-        assertEquals(expectedHealth, knight.getHealth());
-        assertEquals(expectedAttack, knight.getAttack());
-    }
 
     static Stream<Arguments> equipWeapon() {
         return Stream.of(
@@ -38,7 +23,24 @@ class KnightTest {
                 arguments(WeaponType.GREAT_AXE, 35, 12),
                 arguments(WeaponType.KATANA, 30, 13),
                 arguments(WeaponType.MAGIC_WAND, 80, 10),
-                        arguments(Weapon.builder().setHealthStat(-100).setAttackStat(-100).setDefenceStat(-100)
-                                .setVampirismStat(-100).setHealPowerStat(-100).build(), -50, 0, 0));
+                arguments(Weapon.builder()
+                        .setHealthStat(-100).setAttackStat(-100).setDefenceStat(-100)
+                        .setVampirismStat(-100).setHealPowerStat(-100)
+                        .build(), -50, 0, 0));
+    }
+
+    @BeforeEach
+    void init() {
+        knight = CombatUnit.createKnight();
+    }
+
+    @DisplayName("different weapons equipped by Knight")
+    @ParameterizedTest(name = "equipped {0}")
+    @MethodSource({"equipWeapon"})
+    void EquipDifferentWeaponsOnWarriorAndVerifyItsStats(Weapon weapon, int expectedHealth, int expectedAttack) {
+        knight.equipWeapon(weapon);
+
+        assertEquals(expectedHealth, knight.getHealth());
+        assertEquals(expectedAttack, knight.getAttack());
     }
 }

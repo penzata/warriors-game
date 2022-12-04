@@ -1,7 +1,7 @@
 package org.example.fighting;
 
 import lombok.extern.slf4j.Slf4j;
-import org.example.battleunits.Warrior;
+import org.example.battleunits.CombatUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,7 +17,7 @@ public class Duel {
      * @param defender second warrior
      * @return TRUE if the first warrior is alive (and thus the other one is not anymore), else - FALSE
      */
-    public static boolean fight(Warrior attacker, Warrior defender) {
+    public static boolean fight(CombatUnit attacker, CombatUnit defender) {
         log.atDebug().log("{} vs. {}", attacker, defender);
         while (attacker.isAlive() && defender.isAlive()) {
             log.atTrace().log("{} hits --> {}", attacker, defender);

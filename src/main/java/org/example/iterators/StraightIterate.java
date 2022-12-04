@@ -1,21 +1,21 @@
 package org.example.iterators;
 
 import lombok.extern.slf4j.Slf4j;
-import org.example.battleunits.Warrior;
-import org.example.battleunits.WarriorInArmyDecorator;
+import org.example.battleunits.CombatUnit;
+import org.example.battleunits.CombatUnitInArmyDecorator;
 import org.example.exceptions.DoesntExistException;
 
 @Slf4j
-public class StraightIterate implements InfGenerator<Warrior> {
-    private WarriorInArmyDecorator nextUnitInLine;
+public class StraightIterate implements InfGenerator<CombatUnit> {
+    private CombatUnitInArmyDecorator nextUnitInLine;
 
-    public StraightIterate(WarriorInArmyDecorator warriorInFront) {
-        this.nextUnitInLine = warriorInFront;
+    public StraightIterate(CombatUnitInArmyDecorator combatUnitInFront) {
+        this.nextUnitInLine = combatUnitInFront;
     }
 
 
     @Override
-    public Warrior next() {
+    public CombatUnit next() {
         try {
             if (!hasNext()) {
                 throw new DoesntExistException("no more army units left");
@@ -24,15 +24,15 @@ public class StraightIterate implements InfGenerator<Warrior> {
             log.atError().log("{}", e.getMessage());
             e.printStackTrace();
         }
-        WarriorInArmyDecorator res = nextUnitInLine;
-        nextUnitInLine = nextUnitInLine.getWarriorBehind();
+        CombatUnitInArmyDecorator res = nextUnitInLine;
+        nextUnitInLine = nextUnitInLine.getCombatUnitBehind();
         return res.unwrap();
     }
 
     @Override
     public boolean hasNext() {
         while (nextUnitInLine != null && !nextUnitInLine.isAlive()) {
-            nextUnitInLine = nextUnitInLine.getWarriorBehind();
+            nextUnitInLine = nextUnitInLine.getCombatUnitBehind();
         }
         return nextUnitInLine != null;
     }

@@ -48,8 +48,8 @@ public class WarlordImpl extends WarriorImpl implements Warlord {
     }
 
     @Override
-    public Iterable<Warrior> rearrangeArmy(InfGenerator<Warrior> army) {
-        Map<CombatUnitType, ArrayDeque<Warrior>> initialArmy = StreamSupport
+    public Iterable<CombatUnit> rearrangeArmy(InfGenerator<CombatUnit> army) {
+        Map<CombatUnitType, ArrayDeque<CombatUnit>> initialArmy = StreamSupport
                 .stream(army.spliterator(), false)
                 .collect(Collectors.groupingBy(
                         Warlord::classify,
@@ -57,8 +57,9 @@ public class WarlordImpl extends WarriorImpl implements Warlord {
                 ));
 
         int totalArmyNumber = initialArmy.values().stream()
-                .mapToInt(Collection::size).sum();
-        Collection<Warrior> rearrangedArmy = new ArrayList<>(totalArmyNumber);
+                .mapToInt(Collection::size)
+                .sum();
+        Collection<CombatUnit> rearrangedArmy = new ArrayList<>(totalArmyNumber);
 
         Stream.of(LANCER, FIGHTER)
                 .map(initialArmy::get)

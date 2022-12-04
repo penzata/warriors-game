@@ -5,14 +5,7 @@ import org.example.battleunits.subsidiary.CanReceiveDamage;
 import org.example.battleunits.subsidiary.DealtDamageAwareness;
 
 
-public interface Vampire extends Warrior, Vampirism, DealtDamageAwareness {
-
-    /**
-     * @return Vampire object with default health(40), attack(4) & vampirism(50%).
-     */
-    static Vampire create() {
-        return new VampireImpl();
-    }
+public interface Vampire extends CombatUnit, Vampirism, DealtDamageAwareness {
 
     @Override
     default void hit(CanReceiveDamage opponent) {

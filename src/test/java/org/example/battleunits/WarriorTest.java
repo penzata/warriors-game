@@ -15,11 +15,24 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class WarriorTest {
-    private WarriorImpl warrior;
+    private Warrior warrior;
+
+    static Stream<Arguments> equipWeapon() {
+        return Stream.of(
+                arguments(WeaponType.SWORD, 55, 7),
+                arguments(WeaponType.SHIELD, 70, 4),
+                arguments(WeaponType.GREAT_AXE, 35, 10),
+                arguments(WeaponType.KATANA, 30, 11),
+                arguments(WeaponType.MAGIC_WAND, 80, 8),
+                arguments(Weapon.builder()
+                        .setHealthStat(-100).setAttackStat(-100).setDefenceStat(-100)
+                        .setVampirismStat(-100).setHealPowerStat(-100)
+                        .build(), -50, 0, 0));
+    }
 
     @BeforeEach
     void init() {
-        warrior = new WarriorImpl();
+        warrior = CombatUnit.createWarrior();
     }
 
     @Test
@@ -36,16 +49,15 @@ class WarriorTest {
 
     @Test
     void takeDamage() {
-        KnightImpl damageDealer = new KnightImpl();
+        Knight damageDealer = CombatUnit.createKnight();
         warrior.receiveDamage(damageDealer);
-
 
         assertEquals(43, warrior.getHealth());
     }
 
     @Test
     void hit() {
-        WarriorImpl opponentWarrior = new WarriorImpl();
+        Warrior opponentWarrior = CombatUnit.createWarrior();
         warrior.hit(opponentWarrior);
 
         assertEquals(45, opponentWarrior.getHealth());
@@ -54,21 +66,10 @@ class WarriorTest {
     @DisplayName("different weapons equipped by Warrior")
     @ParameterizedTest(name = "equipped {0}")
     @MethodSource({"equipWeapon"})
-    void EquipDifferentWeaponsOnWarriorAndVerifyItsStats (Weapon weapon, int expectedHealth, int expectedAttack) {
+    void EquipDifferentWeaponsOnWarriorAndVerifyItsStats(Weapon weapon, int expectedHealth, int expectedAttack) {
         warrior.equipWeapon(weapon);
 
         assertEquals(expectedHealth, warrior.getHealth());
         assertEquals(expectedAttack, warrior.getAttack());
-    }
-
-    static Stream<Arguments> equipWeapon() {
-        return Stream.of(
-                arguments(WeaponType.SWORD, 55, 7),
-                arguments(WeaponType.SHIELD, 70, 4),
-                arguments(WeaponType.GREAT_AXE, 35, 10),
-                arguments(WeaponType.KATANA, 30, 11),
-                arguments(WeaponType.MAGIC_WAND, 80, 8),
-                arguments(Weapon.builder().setHealthStat(-100).setAttackStat(-100).setDefenceStat(-100)
-                        .setVampirismStat(-100).setHealPowerStat(-100).build(), -50, 0, 0));
     }
 }

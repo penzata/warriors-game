@@ -1,13 +1,19 @@
 package org.example.battleunits;
 
-public interface CombatUnit {
-//    TODO think of leaving this interface or deleting it
+import org.example.battleunits.characteristics.Attack;
+import org.example.battleunits.characteristics.Health;
+import org.example.battleunits.subsidiary.CanBeHealed;
+import org.example.battleunits.subsidiary.CanReceiveDamage;
+import org.example.battleunits.subsidiary.CombatUnitType;
+import org.example.battleunits.weapons.EquippedWeaponBonusStats;
+import org.example.battleunits.weapons.Weapon;
 
+public interface CombatUnit extends Attack, Health, CanReceiveDamage, CanBeHealed, EquippedWeaponBonusStats {
     /**
      * @return Warrior object with default health(50) & attack(5).
      */
     static Warrior createWarrior() {
-        return new WarlordImpl();
+        return new WarriorImpl();
     }
 
     /**
@@ -51,4 +57,15 @@ public interface CombatUnit {
     static Warlord createWarlord() {
         return new WarlordImpl();
     }
+
+    default void hit(CanReceiveDamage opponent) {
+
+        opponent.receiveDamage(this);
+    }
+
+    default CombatUnit equipWeapon(Weapon weapon) {
+        return this;
+    }
+
+    CombatUnitType getCombatUnitType();
 }

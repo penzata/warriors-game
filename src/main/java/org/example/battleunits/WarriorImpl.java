@@ -49,11 +49,6 @@ public class WarriorImpl implements Warrior {
         return health + healthBonusFromWeapon();
     }
 
-    @Override
-    public void healedBy(int healingPoints) {
-        setHealth(Math.min(health + healingPoints, initialHealth));
-    }
-
     private void setHealth(int health) {
 
         this.health = Math.min(health, initialHealth);
@@ -71,14 +66,19 @@ public class WarriorImpl implements Warrior {
                 .mapToInt(Weapon::getHealthStat).sum();
     }
 
+    @Override
+    public int attackBonusFromWeapon() {
+        return weapons.stream()
+                .mapToInt(Weapon::getAttackStat).sum();
+    }
+
     private void setAttack(int attack) {
         this.attack = attack;
     }
 
     @Override
-    public int attackBonusFromWeapon() {
-        return weapons.stream()
-                .mapToInt(Weapon::getAttackStat).sum();
+    public void healedBy(int healingPoints) {
+        setHealth(Math.min(health + healingPoints, initialHealth));
     }
 
     @Override
@@ -116,7 +116,7 @@ public class WarriorImpl implements Warrior {
     }
 
     @Override
-    public Warrior equipWeapon(Weapon weapon) {
+    public CombatUnit equipWeapon(Weapon weapon) {
         if (isAlive()) {
             weapons.add(weapon);
         }

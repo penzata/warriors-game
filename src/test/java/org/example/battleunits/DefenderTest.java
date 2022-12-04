@@ -18,9 +18,22 @@ class DefenderTest {
 
     private Defender defender;
 
+    static Stream<Arguments> equipWeapon() {
+        return Stream.of(
+                arguments(WeaponType.SWORD, 65, 5, 2),
+                arguments(WeaponType.SHIELD, 80, 2, 4),
+                arguments(WeaponType.GREAT_AXE, 45, 8, 0),
+                arguments(WeaponType.KATANA, 40, 9, 0),
+                arguments(WeaponType.MAGIC_WAND, 90, 6, 2),
+                arguments(Weapon.builder()
+                        .setHealthStat(-100).setAttackStat(-100).setDefenceStat(-100)
+                        .setVampirismStat(-100).setHealPowerStat(-100)
+                        .build(), -40, 0, 0));
+    }
+
     @BeforeEach
     void init() {
-        defender = Defender.create();
+        defender = CombatUnit.createDefender();
     }
 
     @Test
@@ -41,23 +54,12 @@ class DefenderTest {
     @DisplayName("different weapons equipped by Defender")
     @ParameterizedTest(name = "equipped {0}")
     @MethodSource({"equipWeapon"})
-    void EquipDifferentWeaponsOnWarriorAndVerifyItsStats (Weapon weapon, int expectedHealth,
-                                                          int expectedAttack, int expectedDefence) {
+    void EquipDifferentWeaponsOnWarriorAndVerifyItsStats(Weapon weapon, int expectedHealth,
+                                                         int expectedAttack, int expectedDefence) {
         defender.equipWeapon(weapon);
 
         assertEquals(expectedHealth, defender.getHealth());
         assertEquals(expectedAttack, defender.getAttack());
         assertEquals(expectedDefence, defender.getDefence());
-    }
-
-    static Stream<Arguments> equipWeapon() {
-        return Stream.of(
-                arguments(WeaponType.SWORD, 65, 5, 2),
-                arguments(WeaponType.SHIELD, 80, 2, 4),
-                arguments(WeaponType.GREAT_AXE, 45, 8, 0),
-                arguments(WeaponType.KATANA, 40, 9, 0),
-                arguments(WeaponType.MAGIC_WAND, 90, 6, 2),
-                arguments(Weapon.builder().setHealthStat(-100).setAttackStat(-100).setDefenceStat(-100)
-                        .setVampirismStat(-100).setHealPowerStat(-100).build(), -40, 0, 0));
     }
 }

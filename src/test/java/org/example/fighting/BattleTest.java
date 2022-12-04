@@ -1,6 +1,9 @@
 package org.example.fighting;
 
-import org.example.battleunits.*;
+import org.example.battleunits.Army;
+import org.example.battleunits.ArmyImpl;
+import org.example.battleunits.CombatUnit;
+import org.example.battleunits.Rookie;
 import org.example.battleunits.weapons.Weapon;
 import org.example.battleunits.weapons.WeaponType;
 import org.junit.jupiter.api.DisplayName;
@@ -19,33 +22,33 @@ class BattleTest {
 
     static Stream<Arguments> differentBattleArmies() {
         return Stream.of(
-                arguments(new ArmyImpl(Warrior::create, 1), new ArmyImpl(Warrior::create, 2), false),
-                arguments(new ArmyImpl(Warrior::create, 2), new ArmyImpl(Warrior::create, 3), false),
-                arguments(new ArmyImpl(Warrior::create, 5), new ArmyImpl(Warrior::create, 7), false),
-                arguments(new ArmyImpl(Warrior::create, 20), new ArmyImpl(Warrior::create, 21), true),
-                arguments(new ArmyImpl(Warrior::create, 10), new ArmyImpl(Warrior::create, 11), true),
-                arguments(new ArmyImpl(Warrior::create, 11), new ArmyImpl(Warrior::create, 7), true));
+                arguments(new ArmyImpl(CombatUnit::createWarrior, 1), new ArmyImpl(CombatUnit::createWarrior, 2), false),
+                arguments(new ArmyImpl(CombatUnit::createWarrior, 5), new ArmyImpl(CombatUnit::createWarrior, 7), false),
+                arguments(new ArmyImpl(CombatUnit::createWarrior, 2), new ArmyImpl(CombatUnit::createWarrior, 3), false),
+                arguments(new ArmyImpl(CombatUnit::createWarrior, 20), new ArmyImpl(CombatUnit::createWarrior, 21), true),
+                arguments(new ArmyImpl(CombatUnit::createWarrior, 10), new ArmyImpl(CombatUnit::createWarrior, 11), true),
+                arguments(new ArmyImpl(CombatUnit::createWarrior, 11), new ArmyImpl(CombatUnit::createWarrior, 7), true));
     }
 
     static Stream<Arguments> fullDefenderBattleArmies() {
 //battle7
-        ArmyImpl army1 = new ArmyImpl(Warrior::create, 5)
-                .addBattleUnits(Defender::create, 9);
-        ArmyImpl army2 = new ArmyImpl(Warrior::create, 4);
+        Army army1 = new ArmyImpl(CombatUnit::createWarrior, 5)
+                .addBattleUnits(CombatUnit::createDefender, 9);
+        Army army2 = new ArmyImpl(CombatUnit::createWarrior, 4);
 //battle8
-        ArmyImpl army3 = new ArmyImpl(Defender::create, 5)
-                .addBattleUnits(Warrior::create, 20)
-                .addBattleUnits(Defender::create, 4);
-        ArmyImpl army4 = new ArmyImpl(Warrior::create, 21);
+        Army army3 = new ArmyImpl(CombatUnit::createDefender, 5)
+                .addBattleUnits(CombatUnit::createWarrior, 20)
+                .addBattleUnits(CombatUnit::createDefender, 4);
+        Army army4 = new ArmyImpl(CombatUnit::createWarrior, 21);
 //battle9
-        ArmyImpl army5 = new ArmyImpl(Warrior::create, 10)
-                .addBattleUnits(Defender::create, 15);
-        ArmyImpl army6 = new ArmyImpl(Warrior::create, 5);
+        Army army5 = new ArmyImpl(CombatUnit::createWarrior, 10)
+                .addBattleUnits(CombatUnit::createDefender, 15);
+        Army army6 = new ArmyImpl(CombatUnit::createWarrior, 5);
 //battle10
-        ArmyImpl army7 = new ArmyImpl(Defender::create, 2)
-                .addBattleUnits(Warrior::create, 1)
-                .addBattleUnits(Defender::create, 1);
-        ArmyImpl army8 = new ArmyImpl(Warrior::create, 5);
+        Army army7 = new ArmyImpl(CombatUnit::createDefender, 2)
+                .addBattleUnits(CombatUnit::createWarrior, 1)
+                .addBattleUnits(CombatUnit::createDefender, 1);
+        Army army8 = new ArmyImpl(CombatUnit::createWarrior, 5);
 
         return Stream.of(
                 arguments(army1, army2, true),
@@ -56,33 +59,33 @@ class BattleTest {
 
     static Stream<Arguments> armiesWithVampires() {
 //battle11
-        ArmyImpl army1 = new ArmyImpl(Defender::create, 5)
-                .addBattleUnits(Vampire::create, 6)
-                .addBattleUnits(Warrior::create, 7);
-        ArmyImpl army2 = new ArmyImpl(Warrior::create, 6)
-                .addBattleUnits(Defender::create, 6)
-                .addBattleUnits(Vampire::create, 6);
+        Army army1 = new ArmyImpl(CombatUnit::createDefender, 5)
+                .addBattleUnits(CombatUnit::createVampire, 6)
+                .addBattleUnits(CombatUnit::createWarrior, 7);
+        Army army2 = new ArmyImpl(CombatUnit::createWarrior, 6)
+                .addBattleUnits(CombatUnit::createDefender, 6)
+                .addBattleUnits(CombatUnit::createVampire, 6);
 //battle12
-        ArmyImpl army3 = new ArmyImpl(Defender::create, 2)
-                .addBattleUnits(Vampire::create, 3)
-                .addBattleUnits(Warrior::create, 4);
-        ArmyImpl army4 = new ArmyImpl(Warrior::create, 4)
-                .addBattleUnits(Defender::create, 4)
-                .addBattleUnits(Vampire::create, 3);
+        Army army3 = new ArmyImpl(CombatUnit::createDefender, 2)
+                .addBattleUnits(CombatUnit::createVampire, 3)
+                .addBattleUnits(CombatUnit::createWarrior, 4);
+        Army army4 = new ArmyImpl(CombatUnit::createWarrior, 4)
+                .addBattleUnits(CombatUnit::createDefender, 4)
+                .addBattleUnits(CombatUnit::createVampire, 3);
 //battle13
-        ArmyImpl army5 = new ArmyImpl(Defender::create, 11)
-                .addBattleUnits(Vampire::create, 3)
-                .addBattleUnits(Warrior::create, 4);
-        ArmyImpl army6 = new ArmyImpl(Warrior::create, 4)
-                .addBattleUnits(Defender::create, 4)
-                .addBattleUnits(Vampire::create, 13);
+        Army army5 = new ArmyImpl(CombatUnit::createDefender, 11)
+                .addBattleUnits(CombatUnit::createVampire, 3)
+                .addBattleUnits(CombatUnit::createWarrior, 4);
+        Army army6 = new ArmyImpl(CombatUnit::createWarrior, 4)
+                .addBattleUnits(CombatUnit::createDefender, 4)
+                .addBattleUnits(CombatUnit::createVampire, 13);
 //battle14
-        ArmyImpl army7 = new ArmyImpl(Defender::create, 9)
-                .addBattleUnits(Vampire::create, 3)
-                .addBattleUnits(Warrior::create, 8);
-        ArmyImpl army8 = new ArmyImpl(Warrior::create, 4)
-                .addBattleUnits(Defender::create, 4)
-                .addBattleUnits(Vampire::create, 13);
+        Army army7 = new ArmyImpl(CombatUnit::createDefender, 9)
+                .addBattleUnits(CombatUnit::createVampire, 3)
+                .addBattleUnits(CombatUnit::createWarrior, 8);
+        Army army8 = new ArmyImpl(CombatUnit::createWarrior, 4)
+                .addBattleUnits(CombatUnit::createDefender, 4)
+                .addBattleUnits(CombatUnit::createVampire, 13);
 
         return Stream.of(
                 arguments(army1, army2, false),
@@ -93,23 +96,23 @@ class BattleTest {
 
     static Stream<Arguments> armiesWithLancers() {
 //battle15
-        Army army1 = new ArmyImpl(Lancer::create, 5)
-                .addBattleUnits(Vampire::create, 3)
-                .addBattleUnits(Warrior::create, 4)
-                .addBattleUnits(Defender::create, 2);
-        Army army2 = new ArmyImpl(Warrior::create, 4)
-                .addBattleUnits(Defender::create, 4)
-                .addBattleUnits(Vampire::create, 6)
-                .addBattleUnits(Lancer::create, 5);
+        Army army1 = new ArmyImpl(CombatUnit::createLancer, 5)
+                .addBattleUnits(CombatUnit::createVampire, 3)
+                .addBattleUnits(CombatUnit::createWarrior, 4)
+                .addBattleUnits(CombatUnit::createDefender, 2);
+        Army army2 = new ArmyImpl(CombatUnit::createWarrior, 4)
+                .addBattleUnits(CombatUnit::createDefender, 4)
+                .addBattleUnits(CombatUnit::createVampire, 6)
+                .addBattleUnits(CombatUnit::createLancer, 5);
 //battle16
-        Army army3 = new ArmyImpl(Lancer::create, 7)
-                .addBattleUnits(Vampire::create, 3)
-                .addBattleUnits(Warrior::create, 4)
-                .addBattleUnits(Defender::create, 2);
-        Army army4 = new ArmyImpl(Warrior::create, 4)
-                .addBattleUnits(Defender::create, 4)
-                .addBattleUnits(Vampire::create, 6)
-                .addBattleUnits(Lancer::create, 4);
+        Army army3 = new ArmyImpl(CombatUnit::createLancer, 7)
+                .addBattleUnits(CombatUnit::createVampire, 3)
+                .addBattleUnits(CombatUnit::createWarrior, 4)
+                .addBattleUnits(CombatUnit::createDefender, 2);
+        Army army4 = new ArmyImpl(CombatUnit::createWarrior, 4)
+                .addBattleUnits(CombatUnit::createDefender, 4)
+                .addBattleUnits(CombatUnit::createVampire, 6)
+                .addBattleUnits(CombatUnit::createLancer, 4);
 
         return Stream.of(
                 arguments(army1, army2, false),
@@ -118,29 +121,29 @@ class BattleTest {
 
     static Stream<Arguments> armiesWithHealers() {
 //battle17
-        Army army1 = new ArmyImpl(Lancer::create, 7)
-                .addBattleUnits(Vampire::create, 3)
-                .addBattleUnits(Healer::create, 1)
-                .addBattleUnits(Warrior::create, 4)
-                .addBattleUnits(Healer::create, 1)
-                .addBattleUnits(Defender::create, 2);
-        Army army2 = new ArmyImpl(Warrior::create, 4)
-                .addBattleUnits(Defender::create, 1)
-                .addBattleUnits(Healer::create, 1)
-                .addBattleUnits(Vampire::create, 6)
-                .addBattleUnits(Lancer::create, 4);
+        Army army1 = new ArmyImpl(CombatUnit::createLancer, 7)
+                .addBattleUnits(CombatUnit::createVampire, 3)
+                .addBattleUnits(CombatUnit::createHealer, 1)
+                .addBattleUnits(CombatUnit::createWarrior, 4)
+                .addBattleUnits(CombatUnit::createHealer, 1)
+                .addBattleUnits(CombatUnit::createDefender, 2);
+        Army army2 = new ArmyImpl(CombatUnit::createWarrior, 4)
+                .addBattleUnits(CombatUnit::createDefender, 1)
+                .addBattleUnits(CombatUnit::createHealer, 1)
+                .addBattleUnits(CombatUnit::createVampire, 6)
+                .addBattleUnits(CombatUnit::createLancer, 4);
 //battle18
-        ArmyImpl army3 = new ArmyImpl(Lancer::create, 1)
-                .addBattleUnits(Warrior::create, 3)
-                .addBattleUnits(Healer::create, 1)
-                .addBattleUnits(Warrior::create, 4)
-                .addBattleUnits(Healer::create, 1)
-                .addBattleUnits(Warrior::create, 2);
-        ArmyImpl army4 = new ArmyImpl(Warrior::create, 4)
-                .addBattleUnits(Defender::create, 4)
-                .addBattleUnits(Healer::create, 1)
-                .addBattleUnits(Vampire::create, 6)
-                .addBattleUnits(Lancer::create, 4);
+        ArmyImpl army3 = new ArmyImpl(CombatUnit::createLancer, 1)
+                .addBattleUnits(CombatUnit::createWarrior, 3)
+                .addBattleUnits(CombatUnit::createHealer, 1)
+                .addBattleUnits(CombatUnit::createWarrior, 4)
+                .addBattleUnits(CombatUnit::createHealer, 1)
+                .addBattleUnits(CombatUnit::createWarrior, 2);
+        ArmyImpl army4 = new ArmyImpl(CombatUnit::createWarrior, 4)
+                .addBattleUnits(CombatUnit::createDefender, 4)
+                .addBattleUnits(CombatUnit::createHealer, 1)
+                .addBattleUnits(CombatUnit::createVampire, 6)
+                .addBattleUnits(CombatUnit::createLancer, 4);
 
         return Stream.of(
                 arguments(army1, army2, true),
@@ -149,48 +152,48 @@ class BattleTest {
 
     static Stream<Arguments> straightBattle() {
 //straight battle1
-        Army army1 = new ArmyImpl(Lancer::create, 5)
-                .addBattleUnits(Vampire::create, 3)
-                .addBattleUnits(Warrior::create, 4)
-                .addBattleUnits(Defender::create, 2);
-        Army army2 = new ArmyImpl(Warrior::create, 4)
-                .addBattleUnits(Defender::create, 4)
-                .addBattleUnits(Defender::create, 4)
-                .addBattleUnits(Vampire::create, 6)
-                .addBattleUnits(Lancer::create, 5);
+        Army army1 = new ArmyImpl(CombatUnit::createLancer, 5)
+                .addBattleUnits(CombatUnit::createVampire, 3)
+                .addBattleUnits(CombatUnit::createWarrior, 4)
+                .addBattleUnits(CombatUnit::createDefender, 2);
+        Army army2 = new ArmyImpl(CombatUnit::createWarrior, 4)
+                .addBattleUnits(CombatUnit::createDefender, 4)
+                .addBattleUnits(CombatUnit::createDefender, 4)
+                .addBattleUnits(CombatUnit::createVampire, 6)
+                .addBattleUnits(CombatUnit::createLancer, 5);
 //straight battle2
-        Army army3 = new ArmyImpl(Lancer::create, 7)
-                .addBattleUnits(Vampire::create, 3)
-                .addBattleUnits(Warrior::create, 4)
-                .addBattleUnits(Defender::create, 2);
-        Army army4 = new ArmyImpl(Warrior::create, 4)
-                .addBattleUnits(Defender::create, 4)
-                .addBattleUnits(Vampire::create, 6)
-                .addBattleUnits(Lancer::create, 4);
+        Army army3 = new ArmyImpl(CombatUnit::createLancer, 7)
+                .addBattleUnits(CombatUnit::createVampire, 3)
+                .addBattleUnits(CombatUnit::createWarrior, 4)
+                .addBattleUnits(CombatUnit::createDefender, 2);
+        Army army4 = new ArmyImpl(CombatUnit::createWarrior, 4)
+                .addBattleUnits(CombatUnit::createDefender, 4)
+                .addBattleUnits(CombatUnit::createVampire, 6)
+                .addBattleUnits(CombatUnit::createLancer, 4);
 //straight battle3
-        Army army5 = new ArmyImpl(Lancer::create, 7)
-                .addBattleUnits(Vampire::create, 3)
-                .addBattleUnits(Healer::create, 1)
-                .addBattleUnits(Warrior::create, 4)
-                .addBattleUnits(Healer::create, 1)
-                .addBattleUnits(Defender::create, 2);
-        Army army6 = new ArmyImpl(Warrior::create, 4)
-                .addBattleUnits(Defender::create, 4)
-                .addBattleUnits(Healer::create, 1)
-                .addBattleUnits(Vampire::create, 6)
-                .addBattleUnits(Lancer::create, 4);
+        Army army5 = new ArmyImpl(CombatUnit::createLancer, 7)
+                .addBattleUnits(CombatUnit::createVampire, 3)
+                .addBattleUnits(CombatUnit::createHealer, 1)
+                .addBattleUnits(CombatUnit::createWarrior, 4)
+                .addBattleUnits(CombatUnit::createHealer, 1)
+                .addBattleUnits(CombatUnit::createDefender, 2);
+        Army army6 = new ArmyImpl(CombatUnit::createWarrior, 4)
+                .addBattleUnits(CombatUnit::createDefender, 4)
+                .addBattleUnits(CombatUnit::createHealer, 1)
+                .addBattleUnits(CombatUnit::createVampire, 6)
+                .addBattleUnits(CombatUnit::createLancer, 4);
 //straight battle4
-        Army army7 = new ArmyImpl(Lancer::create, 4)
-                .addBattleUnits(Warrior::create, 3)
-                .addBattleUnits(Healer::create, 1)
-                .addBattleUnits(Warrior::create, 4)
-                .addBattleUnits(Healer::create, 1)
-                .addBattleUnits(Knight::create, 2);
-        Army army8 = new ArmyImpl(Warrior::create, 4)
-                .addBattleUnits(Defender::create, 4)
-                .addBattleUnits(Healer::create, 1)
-                .addBattleUnits(Vampire::create, 2)
-                .addBattleUnits(Lancer::create, 4);
+        Army army7 = new ArmyImpl(CombatUnit::createLancer, 4)
+                .addBattleUnits(CombatUnit::createWarrior, 3)
+                .addBattleUnits(CombatUnit::createHealer, 1)
+                .addBattleUnits(CombatUnit::createWarrior, 4)
+                .addBattleUnits(CombatUnit::createHealer, 1)
+                .addBattleUnits(CombatUnit::createKnight, 2);
+        Army army8 = new ArmyImpl(CombatUnit::createWarrior, 4)
+                .addBattleUnits(CombatUnit::createDefender, 4)
+                .addBattleUnits(CombatUnit::createHealer, 1)
+                .addBattleUnits(CombatUnit::createVampire, 2)
+                .addBattleUnits(CombatUnit::createLancer, 4);
 
 
         return Stream.of(
@@ -202,45 +205,45 @@ class BattleTest {
 
     static Stream<Arguments> battleWithWeapons() {
 //battle1 with weapons
-        Army army1 = new ArmyImpl(Knight::create, 1)
-                .addBattleUnits(Lancer::create, 1);
-        army1.equipWarriorAtPosition(0, WeaponType.MAGIC_WAND);
-        army1.equipWarriorAtPosition(1, WeaponType.GREAT_AXE);
-        Army army2 = new ArmyImpl(Vampire::create, 1)
-                .addBattleUnits(Healer::create, 1);
-        army2.equipWarriorAtPosition(0, WeaponType.MAGIC_WAND);
-        army2.equipWarriorAtPosition(1, WeaponType.GREAT_AXE);
+        Army army1 = new ArmyImpl(CombatUnit::createKnight, 1)
+                .addBattleUnits(CombatUnit::createLancer, 1);
+        army1.equipCombatUnitAtPosition(0, WeaponType.MAGIC_WAND);
+        army1.equipCombatUnitAtPosition(1, WeaponType.GREAT_AXE);
+        Army army2 = new ArmyImpl(CombatUnit::createVampire, 1)
+                .addBattleUnits(CombatUnit::createHealer, 1);
+        army2.equipCombatUnitAtPosition(0, WeaponType.MAGIC_WAND);
+        army2.equipCombatUnitAtPosition(1, WeaponType.GREAT_AXE);
 //battle2 with weapons
-        Army army3 = new ArmyImpl(Defender::create, 1)
-                .addBattleUnits(Warrior::create, 1);
-        army3.equipWarriorAtPosition(0, WeaponType.GREAT_AXE);
-        army3.equipWarriorAtPosition(1, WeaponType.GREAT_AXE);
-        Army army4 = new ArmyImpl(Knight::create, 1)
-                .addBattleUnits(Healer::create, 1);
-        army4.equipWarriorAtPosition(0, WeaponType.SWORD);
-        army4.equipWarriorAtPosition(1, WeaponType.SWORD);
+        Army army3 = new ArmyImpl(CombatUnit::createDefender, 1)
+                .addBattleUnits(CombatUnit::createWarrior, 1);
+        army3.equipCombatUnitAtPosition(0, WeaponType.GREAT_AXE);
+        army3.equipCombatUnitAtPosition(1, WeaponType.GREAT_AXE);
+        Army army4 = new ArmyImpl(CombatUnit::createKnight, 1)
+                .addBattleUnits(CombatUnit::createHealer, 1);
+        army4.equipCombatUnitAtPosition(0, WeaponType.SWORD);
+        army4.equipCombatUnitAtPosition(1, WeaponType.SWORD);
 //battle3 with weapons
-        Army army5 = new ArmyImpl(Defender::create, 2);
-        army5.equipWarriorAtPosition(0, WeaponType.KATANA);
-        army5.equipWarriorAtPosition(1, WeaponType.KATANA);
-        Army army6 = new ArmyImpl(Knight::create, 1)
-                .addBattleUnits(Vampire::create, 1);
-        army6.equipWarriorAtPosition(0, WeaponType.KATANA);
-        army6.equipWarriorAtPosition(1, WeaponType.KATANA);
+        Army army5 = new ArmyImpl(CombatUnit::createDefender, 2);
+        army5.equipCombatUnitAtPosition(0, WeaponType.KATANA);
+        army5.equipCombatUnitAtPosition(1, WeaponType.KATANA);
+        Army army6 = new ArmyImpl(CombatUnit::createKnight, 1)
+                .addBattleUnits(CombatUnit::createVampire, 1);
+        army6.equipCombatUnitAtPosition(0, WeaponType.KATANA);
+        army6.equipCombatUnitAtPosition(1, WeaponType.KATANA);
 //battle4 with weapons
         Weapon customWeapon1 = Weapon.builder().setHealthStat(-20).setAttackStat(6).setDefenceStat(1)
                 .setVampirismStat(40).setHealPowerStat(-2).build();
         Weapon customWeapon2 = Weapon.builder().setHealthStat(20).setAttackStat(-2).setDefenceStat(2)
                 .setVampirismStat(-55).setHealPowerStat(3).build();
-        Army army7 = new ArmyImpl(Knight::create, 3);
-        army7.equipWarriorAtPosition(0, customWeapon1);
-        army7.equipWarriorAtPosition(1, customWeapon1);
-        army7.equipWarriorAtPosition(2, customWeapon2);
-        Army army8 = new ArmyImpl(Warrior::create, 1)
-                .addBattleUnits(Defender::create, 2);
-        army7.equipWarriorAtPosition(0, customWeapon1);
-        army7.equipWarriorAtPosition(1, customWeapon2);
-        army7.equipWarriorAtPosition(2, customWeapon2);
+        Army army7 = new ArmyImpl(CombatUnit::createKnight, 3);
+        army7.equipCombatUnitAtPosition(0, customWeapon1);
+        army7.equipCombatUnitAtPosition(1, customWeapon1);
+        army7.equipCombatUnitAtPosition(2, customWeapon2);
+        Army army8 = new ArmyImpl(CombatUnit::createWarrior, 1)
+                .addBattleUnits(CombatUnit::createDefender, 2);
+        army7.equipCombatUnitAtPosition(0, customWeapon1);
+        army7.equipCombatUnitAtPosition(1, customWeapon2);
+        army7.equipCombatUnitAtPosition(2, customWeapon2);
 
         return Stream.of(
                 arguments(army1, army2, true),
@@ -251,48 +254,52 @@ class BattleTest {
 
     static Stream<Arguments> straightBattleWithWeapons() {
 //straight battle1 with weapons
-        Weapon customWeapon1 = Weapon.builder().setHealthStat(-20).setAttackStat(1).setDefenceStat(1)
-                .setVampirismStat(40).setHealPowerStat(-2).build();
-        Weapon customWeapon2 = Weapon.builder().setHealthStat(20).setAttackStat(2).setDefenceStat(2)
-                .setVampirismStat(-55).setHealPowerStat(3).build();
-        Army army1 = new ArmyImpl(Vampire::create, 1);
-        army1.equipWarriorAtPosition(0, customWeapon1);
-        army1.equipWarriorAtPosition(1, customWeapon1);
-        army1.equipWarriorAtPosition(2, customWeapon2);
-        Army army2 = new ArmyImpl(Warrior::create, 1)
-                .addBattleUnits(Defender::create, 2);
-        army2.equipWarriorAtPosition(0, customWeapon1);
-        army2.equipWarriorAtPosition(1, customWeapon2);
-        army2.equipWarriorAtPosition(2, customWeapon2);
+        Weapon customWeapon1 = Weapon.builder()
+                .setHealthStat(-20).setAttackStat(1).setDefenceStat(1)
+                .setVampirismStat(40).setHealPowerStat(-2)
+                .build();
+        Weapon customWeapon2 = Weapon.builder()
+                .setHealthStat(20).setAttackStat(2).setDefenceStat(2)
+                .setVampirismStat(-55).setHealPowerStat(3)
+                .build();
+        Army army1 = new ArmyImpl(CombatUnit::createVampire, 1);
+        army1.equipCombatUnitAtPosition(0, customWeapon1);
+        army1.equipCombatUnitAtPosition(1, customWeapon1);
+        army1.equipCombatUnitAtPosition(2, customWeapon2);
+        Army army2 = new ArmyImpl(CombatUnit::createWarrior, 1)
+                .addBattleUnits(CombatUnit::createDefender, 2);
+        army2.equipCombatUnitAtPosition(0, customWeapon1);
+        army2.equipCombatUnitAtPosition(1, customWeapon2);
+        army2.equipCombatUnitAtPosition(2, customWeapon2);
 //straight battle2 with weapons
-        Army army3 = new ArmyImpl(Vampire::create, 2)
+        Army army3 = new ArmyImpl(CombatUnit::createVampire, 2)
                 .addBattleUnits(Rookie::new, 2);
-        army3.equipWarriorAtPosition(0, WeaponType.KATANA);
-        army3.equipWarriorAtPosition(1, WeaponType.KATANA);
-        army3.equipWarriorAtPosition(2, WeaponType.SWORD);
-        Army army4 = new ArmyImpl(Warrior::create, 1)
-                .addBattleUnits(Defender::create, 2);
-        army4.equipWarriorAtPosition(0, WeaponType.KATANA);
-        army4.equipWarriorAtPosition(1, WeaponType.SWORD);
-        army4.equipWarriorAtPosition(2, WeaponType.SWORD);
+        army3.equipCombatUnitAtPosition(0, WeaponType.KATANA);
+        army3.equipCombatUnitAtPosition(1, WeaponType.KATANA);
+        army3.equipCombatUnitAtPosition(2, WeaponType.SWORD);
+        Army army4 = new ArmyImpl(CombatUnit::createWarrior, 1)
+                .addBattleUnits(CombatUnit::createDefender, 2);
+        army4.equipCombatUnitAtPosition(0, WeaponType.KATANA);
+        army4.equipCombatUnitAtPosition(1, WeaponType.SWORD);
+        army4.equipCombatUnitAtPosition(2, WeaponType.SWORD);
 //straight battle3 with weapons
-        Army army5 = new ArmyImpl(Vampire::create, 3);
-        army5.equipWarriorAtPosition(0, WeaponType.GREAT_AXE);
-        army5.equipWarriorAtPosition(1, WeaponType.GREAT_AXE);
-        army5.equipWarriorAtPosition(2, WeaponType.GREAT_AXE);
-        Army army6 = new ArmyImpl(Warrior::create, 1)
-                .addBattleUnits(Defender::create, 1);
-        army6.equipWarriorAtPosition(0, WeaponType.SWORD);
-        army6.equipWarriorAtPosition(1, WeaponType.SWORD);
+        Army army5 = new ArmyImpl(CombatUnit::createVampire, 3);
+        army5.equipCombatUnitAtPosition(0, WeaponType.GREAT_AXE);
+        army5.equipCombatUnitAtPosition(1, WeaponType.GREAT_AXE);
+        army5.equipCombatUnitAtPosition(2, WeaponType.GREAT_AXE);
+        Army army6 = new ArmyImpl(CombatUnit::createWarrior, 1)
+                .addBattleUnits(CombatUnit::createDefender, 1);
+        army6.equipCombatUnitAtPosition(0, WeaponType.SWORD);
+        army6.equipCombatUnitAtPosition(1, WeaponType.SWORD);
 //straight battle4 with weapons
         Army army7 = new ArmyImpl(Rookie::new, 3);
-        army7.equipWarriorAtPosition(0, WeaponType.KATANA);
-        army7.equipWarriorAtPosition(1, WeaponType.KATANA);
-        army7.equipWarriorAtPosition(2, WeaponType.KATANA);
-        Army army8 = new ArmyImpl(Defender::create, 1)
-                .addBattleUnits(Healer::create, 1);
-        army8.equipWarriorAtPosition(0, WeaponType.MAGIC_WAND);
-        army8.equipWarriorAtPosition(1, WeaponType.MAGIC_WAND);
+        army7.equipCombatUnitAtPosition(0, WeaponType.KATANA);
+        army7.equipCombatUnitAtPosition(1, WeaponType.KATANA);
+        army7.equipCombatUnitAtPosition(2, WeaponType.KATANA);
+        Army army8 = new ArmyImpl(CombatUnit::createDefender, 1)
+                .addBattleUnits(CombatUnit::createHealer, 1);
+        army8.equipCombatUnitAtPosition(0, WeaponType.MAGIC_WAND);
+        army8.equipCombatUnitAtPosition(1, WeaponType.MAGIC_WAND);
 
         return Stream.of(
                 arguments(army1, army2, false),
@@ -313,24 +320,24 @@ class BattleTest {
 
     @Test
     void LancerAndVampireAttackWarriorAndTwoDefendersAndLoses() {
-        Army army1 = new ArmyImpl(Lancer::create, 1)
-                .addBattleUnits(Vampire::create, 1);
-        Army army2 = new ArmyImpl(Warrior::create, 1)
-                .addBattleUnits(Defender::create, 2);
+        Army army1 = new ArmyImpl(CombatUnit::createLancer, 1)
+                .addBattleUnits(CombatUnit::createVampire, 1);
+        Army army2 = new ArmyImpl(CombatUnit::createWarrior, 1)
+                .addBattleUnits(CombatUnit::createDefender, 2);
 
         assertFalse(Battle.fight(army1, army2));
     }
 
     @Test
     void TryOutTrialForStraightFight() {
-        Army army1 = new ArmyImpl(Warrior::create, 1)
-                .addBattleUnits(Lancer::create, 1)
-                .addBattleUnits(Healer::create, 1);
-        Army army2 = new ArmyImpl(Vampire::create, 1)
-                .addBattleUnits(Knight::create, 1)
-                .addBattleUnits(Warrior::create, 1)
-                .addBattleUnits(Lancer::create, 1)
-                .addBattleUnits(Healer::create, 1);
+        Army army1 = new ArmyImpl(CombatUnit::createWarrior, 1)
+                .addBattleUnits(CombatUnit::createLancer, 1)
+                .addBattleUnits(CombatUnit::createHealer, 1);
+        Army army2 = new ArmyImpl(CombatUnit::createVampire, 1)
+                .addBattleUnits(CombatUnit::createKnight, 1)
+                .addBattleUnits(CombatUnit::createWarrior, 1)
+                .addBattleUnits(CombatUnit::createLancer, 1)
+                .addBattleUnits(CombatUnit::createHealer, 1);
 
         assertFalse(Battle.straightFight(army1, army2));
 

@@ -4,17 +4,11 @@ import org.example.battleunits.characteristics.Defence;
 import org.example.battleunits.subsidiary.CombatUnitType;
 import org.example.iterators.InfGenerator;
 
-public interface Warlord extends Warrior, Defence {
-    /**
-     * @return Warlord object with default health(100), attack(4) & defence(2).
-     */
-    static Warlord create() {
-        return new WarlordImpl();
+public interface Warlord extends CombatUnit, Defence {
+
+    static CombatUnitType classify(CombatUnit combatUnit) {
+        return combatUnit.getCombatUnitType();
     }
 
-    static CombatUnitType classify(Warrior warrior) {
-        return warrior.getCombatUnitType();
-    }
-
-    Iterable<Warrior> rearrangeArmy(InfGenerator<Warrior> army);
+    Iterable<CombatUnit> rearrangeArmy(InfGenerator<CombatUnit> army);
 }

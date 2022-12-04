@@ -2,7 +2,7 @@ package org.example.fighting;
 
 import lombok.extern.slf4j.Slf4j;
 import org.example.battleunits.Army;
-import org.example.battleunits.Warrior;
+import org.example.battleunits.CombatUnit;
 
 import java.util.Iterator;
 
@@ -22,8 +22,8 @@ public class Battle {
         log.atDebug().log("Normal Fight!!!");
         log.atDebug().log("First Army's lineup: {}", army1);
         log.atDebug().log("Second Army's lineup: {}", army2);
-        Iterator<Warrior> attacker = army1.getAliveUnit();
-        Iterator<Warrior> defender = army2.getAliveUnit();
+        Iterator<CombatUnit> attacker = army1.getAliveUnit();
+        Iterator<CombatUnit> defender = army2.getAliveUnit();
 
         while (attacker.hasNext() && defender.hasNext()) {
             Duel.fight(attacker.next(), defender.next());
@@ -42,8 +42,8 @@ public class Battle {
         boolean res;
 
         while (true) {
-            Iterator<Warrior> it1 = army1.nextInLine();
-            Iterator<Warrior> it2 = army2.nextInLine();
+            Iterator<CombatUnit> it1 = army1.nextInLine();
+            Iterator<CombatUnit> it2 = army2.nextInLine();
 
             if (!it1.hasNext()) {
                 res = false;

@@ -37,14 +37,4 @@ public class VampireImpl extends WarriorImpl implements Vampire {
     private void setVampirism(int vampirism) {
         this.vampirism = vampirism;
     }
-
-    /**
-     * @param selfHealing - vampire's self-healing (restores health by 50% of the dealt damage).
-     */
-    @Override
-    public void vampirism(int selfHealing) {
-        healedBy(selfHealing);
-        log.atTrace().log("[health after vampirism: {}]", getHealth());
-    }
-
 }

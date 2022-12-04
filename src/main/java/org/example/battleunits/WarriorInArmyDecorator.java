@@ -67,6 +67,11 @@ public class WarriorInArmyDecorator implements Warrior, CombatUnitBehind, Proces
     }
 
     @Override
+    public int getInitialHealth() {
+        return warriorUnit.getInitialHealth();
+    }
+
+    @Override
     public Warrior equipWeapon(Weapon weapon) {
         return warriorUnit.equipWeapon(weapon);
     }
@@ -109,5 +114,10 @@ public class WarriorInArmyDecorator implements Warrior, CombatUnitBehind, Proces
     @Override
     public int piercingAttackBonusFromWeapon() {
         return warriorUnit.piercingAttackBonusFromWeapon();
+    }
+
+    @Override
+    public void healedBy(int healingPoints) {
+        warriorUnit.healedBy(healingPoints);
     }
 }

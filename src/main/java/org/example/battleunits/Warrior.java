@@ -2,12 +2,13 @@ package org.example.battleunits;
 
 import org.example.battleunits.characteristics.Attack;
 import org.example.battleunits.characteristics.Health;
+import org.example.battleunits.subsidiary.CanBeHealed;
 import org.example.battleunits.subsidiary.CanReceiveDamage;
 import org.example.battleunits.subsidiary.CombatUnitType;
 import org.example.battleunits.weapons.EquippedWeaponBonusStats;
 import org.example.battleunits.weapons.Weapon;
 
-public interface Warrior extends Attack, Health, CanReceiveDamage, EquippedWeaponBonusStats {
+public interface Warrior extends Attack, Health, CanReceiveDamage, CanBeHealed, EquippedWeaponBonusStats {
 
     /**
      * @return Warrior object with default health(50) & attack(5).

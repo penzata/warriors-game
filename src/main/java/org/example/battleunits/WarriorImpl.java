@@ -49,6 +49,11 @@ public class WarriorImpl implements Warrior {
         return health + healthBonusFromWeapon();
     }
 
+    @Override
+    public void healedBy(int healingPoints) {
+        setHealth(Math.min(health + healingPoints, initialHealth));
+    }
+
     private void setHealth(int health) {
 
         this.health = Math.min(health, initialHealth);
@@ -106,6 +111,11 @@ public class WarriorImpl implements Warrior {
     }
 
     @Override
+    public int getInitialHealth() {
+        return initialHealth + healthBonusFromWeapon();
+    }
+
+    @Override
     public Warrior equipWeapon(Weapon weapon) {
         if (isAlive()) {
             weapons.add(weapon);
@@ -119,13 +129,9 @@ public class WarriorImpl implements Warrior {
         return CombatUnitType.FIGHTER;
     }
 
-    void healedBy(int healingPoints) {
-        setHealth(Math.min(health + healingPoints, initialHealth));
-    }
-
-    int getInitialHealth() {
-
-        return initialHealth + healthBonusFromWeapon();
-    }
+//    int getInitialHealth() {
+//
+//        return initialHealth + healthBonusFromWeapon();
+//    }
 
 }

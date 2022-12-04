@@ -1,9 +1,7 @@
 package org.example.battleunits;
 
-import lombok.extern.slf4j.Slf4j;
 import org.example.battleunits.subsidiary.CombatUnitType;
 
-@Slf4j
 public class HealerImpl extends WarriorImpl implements Healer {
     private int healPower;
     private int medKit = 10;
@@ -32,24 +30,17 @@ public class HealerImpl extends WarriorImpl implements Healer {
     }
 
     @Override
-    public CombatUnitType getCombatUnitType() {
-        return CombatUnitType.HEALER;
-    }
-
-    @Override
-    public void heal(Warrior commandSender) {
-        //casting to Warrior concrete implementation because healedBy() is private method of the class
-        WarriorImpl sender = (WarriorImpl) commandSender;
-        if ((sender.getHealth() < sender.getInitialHealth()) && (getMedKit() > 0)) {
-            sender.healedBy(getHealPower());
-            log.atTrace().log("[health of {} after been healed by healer]", sender);
-            setMedKits(getMedKit() - 1);
-        }
-    }
-
-    @Override
     public int getHealPower() {
         return Math.max(healPower + healPowerBonusFromWeapon(), 0);
+    }
+
+    private void setHealPower(int healthPoints) {
+        this.healPower = healthPoints;
+    }
+
+    @Override
+    public CombatUnitType getCombatUnitType() {
+        return CombatUnitType.HEALER;
     }
 
     @Override
@@ -57,11 +48,12 @@ public class HealerImpl extends WarriorImpl implements Healer {
         return medKit;
     }
 
-    private void setMedKits(int medKit) {
-        this.medKit = medKit;
+    @Override
+    public void changeMedKitQuantity(int quantity) {
+        setMedKits(quantity);
     }
 
-    private void setHealPower(int healthPoints) {
-        this.healPower = healthPoints;
+    private void setMedKits(int medKit) {
+        this.medKit = medKit;
     }
 }

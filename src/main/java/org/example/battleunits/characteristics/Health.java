@@ -7,4 +7,8 @@ public interface Health {
     }
 
     int getHealth();
+
+    void reduceHealth(int damage);
+
+    int getInitialHealth();
 }

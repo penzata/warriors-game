@@ -20,13 +20,11 @@ public class Duel {
     public static boolean fight(Warrior attacker, Warrior defender) {
         log.atDebug().log("{} vs. {}", attacker, defender);
         while (attacker.isAlive() && defender.isAlive()) {
-            log.atTrace().log("{} attacks -->", attacker);
+            log.atTrace().log("{} hits --> {}", attacker, defender);
             attacker.hit(defender);
-            log.atTrace().log("[opponent's health after taking hit: {}]", defender);
             if (defender.isAlive()) {
-                log.atTrace().log("{} attacks -->", defender);
+                log.atTrace().log("{} hits --> {}", defender, attacker);
                 defender.hit(attacker);
-                log.atTrace().log("[opponent's health after taking hit: {}]", attacker);
             }
         }
         log.atDebug().log(() -> (attacker.isAlive() ? attacker : defender) + " won!!!");

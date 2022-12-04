@@ -26,9 +26,17 @@ public interface Healer extends Warrior, HealPower, ProcessCommandChain {
     @Override
     default void processCommand(Command command, Warrior commandSender) {
         if (isAlive() && command.equals(CombatUnitHitCommand.HEAL)) {
-                heal(commandSender);
-            }
+            heal(commandSender);
         }
+    }
 
-    void heal(Warrior commandSender);
+    default void heal(Warrior commandSender) {
+        if ((commandSender.getHealth() < commandSender.getInitialHealth()) && (getMedKit() > 0)) {
+            commandSender.healedBy(getHealPower());
+            changeMedKitQuantity(getMedKit() - 1);
+        }
+    }
+
+    void changeMedKitQuantity(int quantity);
+
 }

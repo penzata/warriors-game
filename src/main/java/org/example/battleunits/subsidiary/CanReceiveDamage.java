@@ -10,5 +10,4 @@ public interface CanReceiveDamage extends Health {
         reduceHealth(damageDealer.getAttack());
     }
 
-    void reduceHealth(int damage);
 }

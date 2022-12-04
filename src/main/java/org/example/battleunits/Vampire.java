@@ -22,6 +22,10 @@ public interface Vampire extends Warrior, Vampirism, DealtDamageAwareness {
         vampirism(healingPoints);
     }
 
-    void vampirism(int selfHealing);
-
+    /**
+     * @param selfHealing - vampire's self-healing (restores health by 50% of the dealt damage).
+     */
+    default void vampirism(int selfHealing) {
+        healedBy(selfHealing);
+    }
 }

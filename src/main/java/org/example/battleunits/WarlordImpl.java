@@ -56,7 +56,6 @@ public class WarlordImpl extends WarriorImpl implements Warlord {
                         toCollection(ArrayDeque::new)
                 ));
 
-
         int totalArmyNumber = initialArmy.values().stream()
                 .mapToInt(Collection::size).sum();
         Collection<Warrior> rearrangedArmy = new ArrayList<>(totalArmyNumber);

@@ -16,32 +16,32 @@ package org.example.battleunits.weapons;
        WeaponBuilder() {
        }
 
-       public WeaponBuilder healthStat(int health) {
+       public WeaponBuilder setHealthStat(int health) {
             this.health = health;
             return this;
         }
 
-        public WeaponBuilder attackStat(int attack) {
+        public WeaponBuilder setAttackStat(int attack) {
             this.attack = attack;
             return this;
         }
 
-        public WeaponBuilder defenceStat(int defence) {
+        public WeaponBuilder setDefenceStat(int defence) {
             this.defence = defence;
             return this;
         }
 
-        public WeaponBuilder vampirismStat(int vampirism) {
+        public WeaponBuilder setVampirismStat(int vampirism) {
             this.vampirism = vampirism;
             return this;
         }
 
-        public WeaponBuilder piercingAttackStat(int piercingAttack) {
+        public WeaponBuilder setPiercingAttackStat(int piercingAttack) {
             this.piercingAttack = piercingAttack;
             return this;
         }
 
-        public WeaponBuilder healPowerStat(int healPower) {
+        public WeaponBuilder setHealPowerStat(int healPower) {
             this.healPower = healPower;
             return this;
         }

@@ -228,10 +228,10 @@ class BattleTest {
         army6.equipWarriorAtPosition(0, WeaponType.KATANA);
         army6.equipWarriorAtPosition(1, WeaponType.KATANA);
 //battle4 with weapons
-        Weapon customWeapon1 = Weapon.builder().healthStat(-20).attackStat(6).defenceStat(1)
-                .vampirismStat(40).healPowerStat(-2).build();
-        Weapon customWeapon2 = Weapon.builder().healthStat(20).attackStat(-2).defenceStat(2)
-                .vampirismStat(-55).healPowerStat(3).build();
+        Weapon customWeapon1 = Weapon.builder().setHealthStat(-20).setAttackStat(6).setDefenceStat(1)
+                .setVampirismStat(40).setHealPowerStat(-2).build();
+        Weapon customWeapon2 = Weapon.builder().setHealthStat(20).setAttackStat(-2).setDefenceStat(2)
+                .setVampirismStat(-55).setHealPowerStat(3).build();
         Army army7 = new ArmyImpl(Knight::create, 3);
         army7.equipWarriorAtPosition(0, customWeapon1);
         army7.equipWarriorAtPosition(1, customWeapon1);
@@ -251,10 +251,10 @@ class BattleTest {
 
     static Stream<Arguments> straightBattleWithWeapons() {
 //straight battle1 with weapons
-        Weapon customWeapon1 = Weapon.builder().healthStat(-20).attackStat(1).defenceStat(1)
-                .vampirismStat(40).healPowerStat(-2).build();
-        Weapon customWeapon2 = Weapon.builder().healthStat(20).attackStat(2).defenceStat(2)
-                .vampirismStat(-55).healPowerStat(3).build();
+        Weapon customWeapon1 = Weapon.builder().setHealthStat(-20).setAttackStat(1).setDefenceStat(1)
+                .setVampirismStat(40).setHealPowerStat(-2).build();
+        Weapon customWeapon2 = Weapon.builder().setHealthStat(20).setAttackStat(2).setDefenceStat(2)
+                .setVampirismStat(-55).setHealPowerStat(3).build();
         Army army1 = new ArmyImpl(Vampire::create, 1);
         army1.equipWarriorAtPosition(0, customWeapon1);
         army1.equipWarriorAtPosition(1, customWeapon1);
@@ -307,6 +307,7 @@ class BattleTest {
             "armiesWithVampires", "armiesWithLancers", "armiesWithHealers"})
     void BattleOneArmyAgainstAnotherWhoWinsOrLoses(ArmyImpl army1, ArmyImpl army2, Boolean expectedBattleResult) {
         boolean battleResult = Battle.fight(army1, army2);
+
         assertEquals(expectedBattleResult, battleResult);
     }
 
@@ -340,6 +341,7 @@ class BattleTest {
     @MethodSource({"straightBattle"})
     void StraightBattle_WhoWinsOrLoses(ArmyImpl army1, ArmyImpl army2, Boolean expectedBattleResult) {
         boolean battleResult = Battle.straightFight(army1, army2);
+
         assertEquals(expectedBattleResult, battleResult);
     }
 
@@ -348,6 +350,7 @@ class BattleTest {
     @MethodSource({"battleWithWeapons"})
     void BattleWithWeapons_WhoWinsOrLoses(ArmyImpl army1, ArmyImpl army2, Boolean expectedBattleResult) {
         boolean battleResult = Battle.straightFight(army1, army2);
+
         assertEquals(expectedBattleResult, battleResult);
     }
 
@@ -356,6 +359,7 @@ class BattleTest {
     @MethodSource({"straightBattleWithWeapons"})
     void StraightBattleWithWeapons_WhoWinsOrLoses(ArmyImpl army1, ArmyImpl army2, Boolean expectedBattleResult) {
         boolean battleResult = Battle.straightFight(army1, army2);
+
         assertEquals(expectedBattleResult, battleResult);
     }
 

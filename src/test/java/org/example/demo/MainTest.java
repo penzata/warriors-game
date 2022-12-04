@@ -98,7 +98,7 @@ class MainTest {
         System.out.println(defender);
         System.out.println(vampire);
 
-        Weapon customWeapon = Weapon.builder().healthStat(-10).attackStat(5).vampirismStat(40).build();
+        Weapon customWeapon = Weapon.builder().setHealthStat(-10).setAttackStat(5).setVampirismStat(40).build();
     }
 
     @Test

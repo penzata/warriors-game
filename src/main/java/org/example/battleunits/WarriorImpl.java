@@ -129,9 +129,4 @@ public class WarriorImpl implements Warrior {
         return CombatUnitType.FIGHTER;
     }
 
-//    int getInitialHealth() {
-//
-//        return initialHealth + healthBonusFromWeapon();
-//    }
-
 }

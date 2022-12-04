@@ -57,7 +57,7 @@ class DefenderTest {
                 arguments(WeaponType.GREAT_AXE, 45, 8, 0),
                 arguments(WeaponType.KATANA, 40, 9, 0),
                 arguments(WeaponType.MAGIC_WAND, 90, 6, 2),
-                arguments(Weapon.builder().healthStat(-100).attackStat(-100).defenceStat(-100)
-                        .vampirismStat(-100).healPowerStat(-100).build(), -40, 0, 0));
+                arguments(Weapon.builder().setHealthStat(-100).setAttackStat(-100).setDefenceStat(-100)
+                        .setVampirismStat(-100).setHealPowerStat(-100).build(), -40, 0, 0));
     }
 }

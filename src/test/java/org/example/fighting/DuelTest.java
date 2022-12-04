@@ -31,7 +31,7 @@ class DuelTest {
 
     static Stream<Arguments> duelWithWeapons() {
         return Stream.of(
-                arguments(Warrior.create(), Weapon.builder().healthStat(-10).attackStat(5).vampirismStat(40).build(),
+                arguments(Warrior.create(), Weapon.builder().setHealthStat(-10).setAttackStat(5).setVampirismStat(40).build(),
                         Vampire.create(), WeaponType.SWORD, true),
                 arguments(Defender.create(), WeaponType.SHIELD, Lancer.create(), WeaponType.GREAT_AXE, false),
                 arguments(Healer.create(), WeaponType.MAGIC_WAND, Knight.create(), WeaponType.KATANA, false));
@@ -96,19 +96,6 @@ class DuelTest {
         assertEquals(-4, warrior.getHealth());
     }
 
-    @Test
-    void DuelWithWeaponsBetweenWarriorAndKnight_AndKnightLoses() {
-        Warrior warrior = Warrior.create();
-        Knight knight = Knight.create();
-        warrior.equipWeapon(WeaponType.SWORD);
-        knight.equipWeapon(WeaponType.KATANA);
-        boolean result = Duel.fight(warrior, knight);
-
-        assertEquals(true, result);
-        assertEquals(3, warrior.getHealth());
-        assertEquals(-5, knight.getHealth());
-    }
-
     @DisplayName("different duels with weapons")
     @ParameterizedTest(name = "duel{index} with weapons:  {0} with {1} vs {2} with {3} --> attacker wins? --> {4}")
     @MethodSource("duelWithWeapons")
@@ -123,13 +110,39 @@ class DuelTest {
     }
 
     @Test
-    void DefenderWithShieldAndMagicWandFightsVampireWithShieldAndKatanaAndLoses() {
+    void DuelWithWeaponsBetweenWarriorAndKnight_AndKnightLoses() {
+        Warrior warrior = Warrior.create();
+        Knight knight = Knight.create();
+        warrior.equipWeapon(WeaponType.SWORD);
+        knight.equipWeapon(WeaponType.KATANA);
+        boolean result = Duel.fight(warrior, knight);
+
+        assertTrue(result);
+        assertEquals(3, warrior.getHealth());
+        assertEquals(-5, knight.getHealth());
+    }
+
+    @Test
+    void DefenderWithShieldAndMagicWandFightsVampireWithKatanaAndLoses() {
         Defender defender = Defender.create();
-        defender.equipWeapon(WeaponType.SHIELD).equipWeapon(WeaponType.MAGIC_WAND);
+        defender.equipWeapon(WeaponType.SHIELD)
+                .equipWeapon(WeaponType.MAGIC_WAND);
         Vampire vampire = Vampire.create();
-        vampire.equipWeapon(WeaponType.SHIELD).equipWeapon(WeaponType.KATANA);
+        vampire.equipWeapon(WeaponType.KATANA);
 
         assertFalse(Duel.fight(defender, vampire));
+    }
+
+    @Test
+    void DefenderWithShieldAndMagicWandAndSwordFightsVampireWithKatanaAndFinallyWins() {
+        Defender defender = Defender.create();
+        defender.equipWeapon(WeaponType.SHIELD)
+                .equipWeapon(WeaponType.MAGIC_WAND)
+                .equipWeapon(WeaponType.SWORD);
+        Vampire vampire = Vampire.create();
+        vampire.equipWeapon(WeaponType.KATANA);
+
+        assertTrue(Duel.fight(defender, vampire));
     }
 
 }

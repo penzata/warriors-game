@@ -72,8 +72,8 @@ class HealerTest {
                 arguments(WeaponType.GREAT_AXE, 45, 5, 2),
                 arguments(WeaponType.KATANA, 40, 6, 2),
                 arguments(WeaponType.MAGIC_WAND, 90, 3, 5),
-                arguments(Weapon.builder().healthStat(-100).attackStat(-100).defenceStat(-100)
-                        .vampirismStat(-100).healPowerStat(-100).build(), -40, 0, 0));
+                arguments(Weapon.builder().setHealthStat(-100).setAttackStat(-100).setDefenceStat(-100)
+                        .setVampirismStat(-100).setHealPowerStat(-100).build(), -40, 0, 0));
     }
 
     @Test

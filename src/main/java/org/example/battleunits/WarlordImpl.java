@@ -43,7 +43,7 @@ public class WarlordImpl extends WarriorImpl implements Warlord {
     }
 
     @Override
-    public CombatUnitType getCombatType() {
+    public CombatUnitType getCombatUnitType() {
         return CombatUnitType.WARLORD;
     }
 

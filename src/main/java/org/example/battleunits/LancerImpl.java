@@ -38,7 +38,7 @@ public class LancerImpl extends WarriorImpl implements Lancer {
     }
 
     @Override
-    public CombatUnitType getCombatType() {
+    public CombatUnitType getCombatUnitType() {
         return CombatUnitType.LANCER;
     }
 

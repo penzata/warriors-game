@@ -13,7 +13,7 @@ public interface Warlord extends Warrior, Defence {
     }
 
     static CombatUnitType classify(Warrior warrior) {
-        return warrior.getCombatType();
+        return warrior.getCombatUnitType();
     }
 
     Iterable<Warrior> rearrangeArmy(InfGenerator<Warrior> army);

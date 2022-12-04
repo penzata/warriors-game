@@ -32,7 +32,7 @@ public class HealerImpl extends WarriorImpl implements Healer {
     }
 
     @Override
-    public CombatUnitType getCombatType() {
+    public CombatUnitType getCombatUnitType() {
         return CombatUnitType.HEALER;
     }
 

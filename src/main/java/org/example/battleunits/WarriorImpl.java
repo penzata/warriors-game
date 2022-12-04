@@ -114,7 +114,7 @@ public class WarriorImpl implements Warrior {
     }
 
     @Override
-    public CombatUnitType getCombatType() {
+    public CombatUnitType getCombatUnitType() {
 
         return CombatUnitType.FIGHTER;
     }

@@ -4,7 +4,7 @@ import org.example.battleunits.Warrior;
 
 public interface DealtDamageAwareness extends Warrior {
 
-    default int getDealtDamage(Warrior opponent) {
+    default int getDealtDamage(CanReceiveDamage opponent) {
         int healthBeforeHit = opponent.getHealth();
         Warrior.super.hit(opponent);
         int healthAfterHit = opponent.getHealth();

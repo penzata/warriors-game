@@ -1,6 +1,7 @@
 package org.example.battleunits;
 
 import org.example.battleunits.characteristics.Attack;
+import org.example.battleunits.subsidiary.CanReceiveDamage;
 import org.example.battleunits.subsidiary.CombatUnitBehind;
 import org.example.battlecommands.CombatUnitHitCommand;
 import org.example.battlecommands.Command;
@@ -50,7 +51,7 @@ public class WarriorInArmyDecorator implements Warrior, CombatUnitBehind, Proces
     }
 
     @Override
-    public void hit(Warrior opponent) {
+    public void hit(CanReceiveDamage opponent) {
         warriorUnit.hit(opponent);
         processCommand(CombatUnitHitCommand.HEAL, this);
     }
@@ -71,8 +72,8 @@ public class WarriorInArmyDecorator implements Warrior, CombatUnitBehind, Proces
     }
 
     @Override
-    public CombatUnitType getCombatType() {
-        return warriorUnit.getCombatType();
+    public CombatUnitType getCombatUnitType() {
+        return warriorUnit.getCombatUnitType();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package org.example.battleunits;
 
 import org.example.battleunits.characteristics.Vampirism;
+import org.example.battleunits.subsidiary.CanReceiveDamage;
 import org.example.battleunits.subsidiary.DealtDamageAwareness;
 
 
@@ -14,7 +15,7 @@ public interface Vampire extends Warrior, Vampirism, DealtDamageAwareness {
     }
 
     @Override
-    default void hit(Warrior opponent) {
+    default void hit(CanReceiveDamage opponent) {
         int damageDealt = getDealtDamage(opponent);
         final int PERCENTS = 100;
         int healingPoints = (int) (damageDealt * getVampirism() / PERCENTS);

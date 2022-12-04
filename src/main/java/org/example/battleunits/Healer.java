@@ -4,6 +4,7 @@ import org.example.battleunits.characteristics.HealPower;
 import org.example.battlecommands.CombatUnitHitCommand;
 import org.example.battlecommands.Command;
 import org.example.battlecommands.ProcessCommandChain;
+import org.example.battleunits.subsidiary.CanReceiveDamage;
 
 public interface Healer extends Warrior, HealPower, ProcessCommandChain {
 
@@ -15,7 +16,7 @@ public interface Healer extends Warrior, HealPower, ProcessCommandChain {
     }
 
     @Override
-    default void hit(Warrior opponent) {
+    default void hit(CanReceiveDamage opponent) {
 //        TODO think of handling Healer vs. Healer fight
         if (opponent instanceof Healer) {
         }

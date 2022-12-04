@@ -3,6 +3,7 @@ package org.example.battleunits.weapons;
 import lombok.extern.slf4j.Slf4j;
 import org.example.battleunits.*;
 import org.example.fighting.Duel;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,42 +12,39 @@ import static org.junit.jupiter.api.Assertions.*;
 class WeaponTest {
 
     @Test
-    void printVampireWithKatana() {
+    void SomePrints() {
         Vampire vampire = CombatUnit.createVampire();
         vampire.equipWeapon(WeaponType.KATANA);
         log.atDebug().log("{} with katana: ", vampire);
-    }
-
-    @Test
-    void EquippingWeaponsProperly() {
-        Weapon shield = WeaponType.SHIELD;
-        Weapon katana = WeaponType.KATANA;
-
-        Knight knight = CombatUnit.createKnight();
-        Defender defender = CombatUnit.createDefender();
-        Vampire vampire = CombatUnit.createVampire();
-
-        knight.equipWeapon(shield).equipWeapon(shield);
-        defender.equipWeapon(shield).equipWeapon(katana);
-        vampire.equipWeapon(katana).equipWeapon(shield);
-
-        log.atDebug().log("{} with two shields: ", knight);
-        assertEquals(90, knight.getHealth());
-        assertEquals(5, knight.getAttack());
-        log.atDebug().log("{} with shield and katana: ", defender);
-        assertEquals(60, defender.getHealth());
-        assertEquals(8, defender.getAttack());
-        assertEquals(0, defender.getDefence());
-        log.atDebug().log("{} with katana and shield: ", vampire);
-        assertEquals(40, vampire.getHealth());
-        assertEquals(9, vampire.getAttack());
-        assertEquals(100, vampire.getVampirism());
 
         Weapon customWeapon = Weapon.builder()
                 .setHealthStat(-10).setAttackStat(5)
                 .setVampirismStat(40).setWeaponClass(WeaponClass.DEFENSIVE)
                 .build();
         log.atDebug().log("{} chars: {}", customWeapon, customWeapon.getCharacteristics());
+    }
+
+    @Test
+    void EquippingWeaponsProperly() {
+        Knight knight = CombatUnit.createKnight();
+        Defender defender = CombatUnit.createDefender();
+        Vampire vampire = CombatUnit.createVampire();
+
+        knight.equipWeapon(WeaponType.SHIELD).equipWeapon(WeaponType.SHIELD);
+        defender.equipWeapon(WeaponType.SHIELD).equipWeapon(WeaponType.KATANA);
+        vampire.equipWeapon(WeaponType.KATANA).equipWeapon(WeaponType.SHIELD);
+
+        log.atDebug().log("{} with two shields.", knight);
+        assertEquals(90, knight.getHealth());
+        assertEquals(5, knight.getAttack());
+        log.atDebug().log("{} with shield and katana.", defender);
+        assertEquals(60, defender.getHealth());
+        assertEquals(8, defender.getAttack());
+        assertEquals(0, defender.getDefence());
+        log.atDebug().log("{} with katana and shield.", vampire);
+        assertEquals(40, vampire.getHealth());
+        assertEquals(9, vampire.getAttack());
+        assertEquals(100, vampire.getVampirism());
     }
 
     @Test
@@ -94,6 +92,26 @@ class WeaponTest {
         vampire.equipWeapon(WeaponType.KATANA);
 
         assertTrue(Duel.fight(defender, vampire));
+    }
+
+    @Test
+    @DisplayName("weapon fight between defender and warrior," +
+            " after defender wins and equips another weapon, he only gets this weapon's health," +
+            " not accumulation of all the equipped weapons")
+    void DefenderFightsWarriorWithWeaponsAndWins() {
+        Defender defender = CombatUnit.createDefender();
+        defender.equipWeapon(WeaponType.SWORD);
+        Knight knight = CombatUnit.createKnight();
+        knight.equipWeapon(WeaponType.GREAT_AXE);
+        boolean result = Duel.fight(defender, knight);
+
+        assertTrue(result);
+
+        int healthBeforeEquipment = defender.getHealth();
+        defender.equipWeapon(WeaponType.SHIELD);
+
+        assertEquals(25, healthBeforeEquipment + 20);
+        log.atDebug().log("{}", defender);
     }
 
 }

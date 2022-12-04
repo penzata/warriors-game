@@ -19,7 +19,7 @@ public interface Weapon {
     int getPiercingAttackStat();
 
     WeaponClass getWeaponClass();
-    
+
     default String getCharacteristics() {
         String chars = String.format("{health: %s, attack: %s, defence: %s" +
                 ", vampirism: %s, heal power: %s, class: %s}", getHealthStat(), getAttackStat(), getDefenceStat(),

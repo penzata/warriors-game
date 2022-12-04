@@ -3,7 +3,6 @@ package org.example.battleunits;
 
 import lombok.extern.slf4j.Slf4j;
 import org.example.battleunits.weapons.Weapon;
-import org.example.battleunits.weapons.WeaponClass;
 import org.example.battleunits.weapons.WeaponType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -33,7 +32,7 @@ public class Rookie extends WarriorImpl {
                 arguments(WeaponType.MAGIC_WAND, 80, 4),
                 arguments(Weapon.builder()
                         .setHealthStat(-100).setAttackStat(-100).setDefenceStat(-100)
-                        .setVampirismStat(-100).setHealPowerStat(-100).setWeaponClass(WeaponClass.NEUTRAL)
+                        .setVampirismStat(-100).setHealPowerStat(-100)
                         .build(), -50, 0, 0));
     }
 

@@ -16,6 +16,7 @@ public class WarriorImpl implements Warrior {
     private final int initialHealth;
     private int health;
     private int attack;
+    //    private Map<Weapon, Integer> weapons = new LinkedHashMap<>();
     private Collection<Weapon> weapons = new ArrayList<>();
 
     WarriorImpl() {
@@ -87,6 +88,14 @@ public class WarriorImpl implements Warrior {
                 .mapToInt(Weapon::getDefenceStat).sum();
     }
 
+/*    @Override
+    public int defenceBonusFromWeapon() {
+        return weapons.entrySet()
+                .stream()
+                .mapToInt(w -> w.getKey().getDefenceStat() * w.getValue())
+                .sum();
+    }*/
+
     @Override
     public int vampirismBonusFromWeapon() {
         return weapons.stream()
@@ -118,6 +127,7 @@ public class WarriorImpl implements Warrior {
     @Override
     public CombatUnit equipWeapon(Weapon weapon) {
         if (isAlive()) {
+//            weapons.put(weapon, weapons.get(weapon) == null ? 1 : weapons.get(weapon) + 1);
             weapons.add(weapon);
         }
         return this;

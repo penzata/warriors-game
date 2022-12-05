@@ -8,7 +8,6 @@ import org.example.battleunits.subsidiary.CanReceiveDamage;
 import org.example.battleunits.subsidiary.CombatUnitBehind;
 import org.example.battleunits.subsidiary.CombatUnitType;
 import org.example.battleunits.weapons.Weapon;
-import org.example.battleunits.weapons.WeaponClass;
 
 public class CombatUnitInArmyDecorator implements CombatUnit, CombatUnitBehind, ProcessCommandChain {
     private CombatUnit combatUnit;

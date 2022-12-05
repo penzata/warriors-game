@@ -1,6 +1,7 @@
 package org.example.iterators;
 
 import lombok.extern.slf4j.Slf4j;
+import org.example.battleunits.Army;
 import org.example.battleunits.CombatUnit;
 import org.example.battleunits.CombatUnitInArmyDecorator;
 import org.example.exceptions.DoesntExistException;
@@ -32,6 +33,7 @@ public class StraightIterate implements InfGenerator<CombatUnit> {
     @Override
     public boolean hasNext() {
         while (nextUnitInLine != null && !nextUnitInLine.isAlive()) {
+
             nextUnitInLine = nextUnitInLine.getCombatUnitBehind();
         }
         return nextUnitInLine != null;

@@ -86,10 +86,12 @@ public class ArmyImpl implements Army {
     public void moveUnits() {
         if (onlyOneWarlord != null) {
             Iterable<CombatUnit> newArrangedArmy = onlyOneWarlord.rearrangeArmy(new StraightIterate(combatUnitInFront));
+            combatUnitInFront = null;
+            combatUnitBehind = null;
             army.clear();
             onlyOneWarlord = null;
-            for (CombatUnit combatUnit : newArrangedArmy) {
-                addBattleUnit(combatUnit);
+            for (CombatUnit unit : newArrangedArmy) {
+                addBattleUnit(unit);
             }
         }
     }

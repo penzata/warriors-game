@@ -19,6 +19,8 @@ public class Battle {
      * @return TRUE if there is someone still alive from the first army (and thus everyone is dead from the other), else - FALSE
      */
     public static boolean fight(Army army1, Army army2) {
+        army1.moveUnits();
+        army2.moveUnits();
         log.atDebug().log("Normal Fight!!!");
         log.atDebug().log("First Army's lineup: {}", army1);
         log.atDebug().log("Second Army's lineup: {}", army2);
@@ -27,6 +29,8 @@ public class Battle {
 
         while (attacker.hasNext() && defender.hasNext()) {
             Duel.fight(attacker.next(), defender.next());
+            army1.moveUnits();
+            army2.moveUnits();
         }
         log.atDebug().log("{}{}", AFTER_THE_BATTLE, army1);
         log.atDebug().log("{}{}", AFTER_THE_BATTLE, army2);
@@ -35,6 +39,8 @@ public class Battle {
     }
 
     public static boolean straightFight(Army army1, Army army2) {
+        army1.moveUnits();
+        army2.moveUnits();
         log.atDebug().log("Straight Fight!!!");
         log.atDebug().log("First Army's lineup: {}", army1);
         log.atDebug().log("Second Army's lineup: {}", army2);
@@ -56,6 +62,8 @@ public class Battle {
             log.atDebug().log("\nRound {}", roundCount++);
             while (it1.hasNext() && it2.hasNext()) {
                 Duel.fight(it1.next(), it2.next());
+                army1.moveUnits();
+                army2.moveUnits();
             }
         }
         log.atDebug().log("{}{}", AFTER_THE_BATTLE, army1);

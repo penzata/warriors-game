@@ -5,15 +5,18 @@ import org.example.battlecommands.Command;
 import org.example.battlecommands.ProcessCommandChain;
 import org.example.battleunits.characteristics.HealPower;
 import org.example.battleunits.subsidiary.CanReceiveDamage;
+import org.example.battleunits.weapons.WeaponType;
 
 public interface Healer extends CombatUnit, HealPower, ProcessCommandChain {
 
     @Override
     default void hit(CanReceiveDamage opponent) {
 //        TODO think of handling Healer vs. Healer fight
-        if (opponent instanceof Healer) {
-        }
-        //do nothing, has no attack points
+//        if (opponent instanceof Healer) {
+//            equipWeapon(WeaponType.KATANA);
+//            equipWeapon(WeaponType.KATANA);
+//            equipWeapon(WeaponType.KATANA);
+//        }
     }
 
     @Override

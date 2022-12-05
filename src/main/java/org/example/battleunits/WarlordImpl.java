@@ -49,8 +49,9 @@ public class WarlordImpl extends WarriorImpl implements Warlord {
 
     @Override
     public Iterable<CombatUnit> rearrangeArmy(InfGenerator<CombatUnit> army) {
-        Map<CombatUnitType, ArrayDeque<CombatUnit>> initialArmy = StreamSupport
-                .stream(army.spliterator(), false)
+        Map<CombatUnitType, ArrayDeque<CombatUnit>> initialArmy = Stream.generate(army::hasNext)
+                .takeWhile(b -> b)
+                .map(b -> army.next())
                 .collect(Collectors.groupingBy(
                         Warlord::classify,
                         toCollection(ArrayDeque::new)

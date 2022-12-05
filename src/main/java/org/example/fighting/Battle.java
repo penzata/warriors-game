@@ -31,11 +31,14 @@ public class Battle {
             Duel.fight(attacker.next(), defender.next());
             army1.moveUnits();
             army2.moveUnits();
+            attacker = army1.getAliveUnit();
+            defender = army2.getAliveUnit();
         }
         log.atDebug().log("{}{}", AFTER_THE_BATTLE, army1);
         log.atDebug().log("{}{}", AFTER_THE_BATTLE, army2);
-        log.atDebug().log(() -> (attacker.hasNext() ? "First" : "Second") + " army won!!!\n");
-        return attacker.hasNext();
+        Iterator<CombatUnit> finalAttacker = attacker;
+        log.atDebug().log(() -> (finalAttacker.hasNext() ? "First" : "Second") + " army won!!!\n");
+        return finalAttacker.hasNext();
     }
 
     public static boolean straightFight(Army army1, Army army2) {

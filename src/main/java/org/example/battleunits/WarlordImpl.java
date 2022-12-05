@@ -6,6 +6,7 @@ import org.example.iterators.InfGenerator;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import static java.util.stream.Collectors.toCollection;
 import static org.example.battleunits.subsidiary.CombatUnitType.*;
@@ -48,9 +49,8 @@ public class WarlordImpl extends WarriorImpl implements Warlord {
 
     @Override
     public Iterable<CombatUnit> rearrangeArmy(InfGenerator<CombatUnit> army) {
-        Map<CombatUnitType, ArrayDeque<CombatUnit>> initialArmy = Stream.generate(army::hasNext)
-                .takeWhile(b -> b)
-                .map(b -> army.next())
+        Map<CombatUnitType, ArrayDeque<CombatUnit>> initialArmy = StreamSupport
+                .stream(army.spliterator(), false)
                 .collect(Collectors.groupingBy(
                         Warlord::classify,
                         toCollection(ArrayDeque::new)

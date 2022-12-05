@@ -19,7 +19,7 @@ class WeaponTest {
 
         Weapon customWeapon = Weapon.builder()
                 .setHealthStat(-10).setAttackStat(5)
-                .setVampirismStat(40).setWeaponClass(WeaponClass.DEFENSIVE)
+                .setVampirismStat(40)
                 .build();
         log.atDebug().log("{} chars: {}", customWeapon, customWeapon.getCharacteristics());
     }
@@ -96,8 +96,8 @@ class WeaponTest {
 
     @Test
     @DisplayName("weapon fight between defender and warrior," +
-            " after defender wins and equips another weapon, he only gets this weapon's health," +
-            " not accumulation of all the equipped weapons")
+            " after defender wins, he picks another weapon" +
+            " and his health is raised only with last weapon's health stat points")
     void DefenderFightsWarriorWithWeaponsAndWins() {
         Defender defender = CombatUnit.createDefender();
         defender.equipWeapon(WeaponType.SWORD);

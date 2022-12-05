@@ -6,25 +6,22 @@ public interface Weapon {
         return new WeaponBuilder();
     }
 
-    int getHealthStat();
+    int getHealthStatFromWeapon();
 
-    int getAttackStat();
+    int getAttackStatFromWeapon();
 
-    int getDefenceStat();
+    int getDefenceStatFromWeapon();
 
-    int getVampirismStat();
+    int getVampirismStatFromWeapon();
 
-    int getHealPowerStat();
+    int getHealPowerStatFromWeapon();
 
-    int getPiercingAttackStat();
-
-    WeaponClass getWeaponClass();
+    int getPiercingAttackStatFromWeapon();
 
     default String getCharacteristics() {
-        String chars = String.format("{health: %s, attack: %s, defence: %s" +
-                ", vampirism: %s, heal power: %s, class: %s}", getHealthStat(), getAttackStat(), getDefenceStat(),
-                getVampirismStat(), getHealPowerStat(), getWeaponClass());
-
-        return chars;
+        return String.format("{health: %s, attack: %s, defence: %s" +
+                ", vampirism: %s, heal power: %s, class: %s}", getHealthStatFromWeapon(), getAttackStatFromWeapon(), getDefenceStatFromWeapon(),
+                getVampirismStatFromWeapon(), getHealPowerStatFromWeapon());
     }
+
 }

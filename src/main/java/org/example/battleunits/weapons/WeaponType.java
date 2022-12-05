@@ -9,16 +9,14 @@ public enum WeaponType implements Weapon {
      */
     SWORD(Weapon.builder()
             .setHealthStat(5)
-            .setAttackStat(2)
-            .setWeaponClass(WeaponClass.OFFENSIVE)),
+            .setAttackStat(2)),
     /**
      * Shield with +20 health, -1 attack, +2 defence, class - defensive.
      */
     SHIELD(Weapon.builder()
             .setHealthStat(20)
             .setAttackStat(-1)
-            .setDefenceStat(2)
-            .setWeaponClass(WeaponClass.DEFENSIVE)),
+            .setDefenceStat(2)),
     /**
      * Great Axe with -15 health, +5 attack, -2 defence, +10% vampirism, class - offensive.
      */
@@ -26,8 +24,7 @@ public enum WeaponType implements Weapon {
             .setHealthStat(-15)
             .setAttackStat(5)
             .setDefenceStat(-2)
-            .setVampirismStat(10)
-            .setWeaponClass(WeaponClass.OFFENSIVE)),
+            .setVampirismStat(10)),
     /**
      * Katana with -20 health, +6 attack, -5 defence, +50% vampirism, class - offensive.
      */
@@ -35,33 +32,28 @@ public enum WeaponType implements Weapon {
             .setHealthStat(-20)
             .setAttackStat(6)
             .setDefenceStat(-5)
-            .setVampirismStat(50)
-            .setWeaponClass(WeaponClass.OFFENSIVE)),
+            .setVampirismStat(50)),
     /**
      * Magic Wand with +30 health, +3 attack, +3 heal power, class - neutral.
      */
     MAGIC_WAND(Weapon.builder()
             .setHealthStat(30)
             .setAttackStat(3)
-            .setHealPowerStat(3)
-            .setWeaponClass(WeaponClass.NEUTRAL));
+            .setHealPowerStat(3));
 
-    private int healthStat;
-    private int attackStat;
-    private int defenceStat;
-    private int vampirismStat;
-    private int healPowerStat;
-    private int piercingAttackStat;
-    private WeaponClass weaponClass;
+    private int healthStatFromWeapon;
+    private int attackStatFromWeapon;
+    private int defenceStatFromWeapon;
+    private int vampirismStatFromWeapon;
+    private int healPowerStatFromWeapon;
+    private int piercingAttackStatFromWeapon;
 
     WeaponType(WeaponBuilder weaponBuilder) {
-        healthStat = weaponBuilder.health;
-        attackStat = weaponBuilder.attack;
-        defenceStat = weaponBuilder.defence;
-        vampirismStat = weaponBuilder.vampirism;
-        healPowerStat = weaponBuilder.healPower;
-        piercingAttackStat = weaponBuilder.piercingAttack;
-        weaponClass = weaponBuilder.weaponClass;
+        healthStatFromWeapon = weaponBuilder.health;
+        attackStatFromWeapon = weaponBuilder.attack;
+        defenceStatFromWeapon = weaponBuilder.defence;
+        vampirismStatFromWeapon = weaponBuilder.vampirism;
+        healPowerStatFromWeapon = weaponBuilder.healPower;
+        piercingAttackStatFromWeapon = weaponBuilder.piercingAttack;
     }
-
 }

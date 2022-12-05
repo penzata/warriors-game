@@ -31,7 +31,7 @@ public class HealerImpl extends WarriorImpl implements Healer {
 
     @Override
     public int getHealPower() {
-        return Math.max(healPower + healPowerBonusFromWeapon(), 0);
+        return Math.max(healPower + getHealPowerStatFromWeapon(), 0);
     }
 
     private void setHealPower(int healthPoints) {

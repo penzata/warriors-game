@@ -2,9 +2,11 @@ package org.example.battleunits;
 
 import org.example.battleunits.subsidiary.CombatUnitType;
 import org.example.battleunits.weapons.Weapon;
+import org.example.battleunits.weapons.WeaponClass;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class WarriorImpl implements Warrior {
 
@@ -17,7 +19,7 @@ public class WarriorImpl implements Warrior {
     private int health;
     private int attack;
     //    private Map<Weapon, Integer> weapons = new LinkedHashMap<>();
-    private Collection<Weapon> weapons = new ArrayList<>();
+    private List<Weapon> weapons = new ArrayList<>();
 
     WarriorImpl() {
         this(50, 5);
@@ -47,7 +49,7 @@ public class WarriorImpl implements Warrior {
 
     @Override
     public int getHealth() {
-        return health + healthBonusFromWeapon();
+        return health + getHealthStatFromWeapon();
     }
 
     private void setHealth(int health) {
@@ -58,19 +60,19 @@ public class WarriorImpl implements Warrior {
     @Override
     public int getAttack() {
 
-        return Math.max(attack + attackBonusFromWeapon(), 0);
+        return Math.max(attack + getAttackStatFromWeapon(), 0);
     }
 
     @Override
-    public int healthBonusFromWeapon() {
+    public int getHealthStatFromWeapon() {
         return weapons.stream()
-                .mapToInt(Weapon::getHealthStat).sum();
+                .mapToInt(Weapon::getHealthStatFromWeapon).sum();
     }
 
     @Override
-    public int attackBonusFromWeapon() {
+    public int getAttackStatFromWeapon() {
         return weapons.stream()
-                .mapToInt(Weapon::getAttackStat).sum();
+                .mapToInt(Weapon::getAttackStatFromWeapon).sum();
     }
 
     private void setAttack(int attack) {
@@ -83,9 +85,9 @@ public class WarriorImpl implements Warrior {
     }
 
     @Override
-    public int defenceBonusFromWeapon() {
+    public int getDefenceStatFromWeapon() {
         return weapons.stream()
-                .mapToInt(Weapon::getDefenceStat).sum();
+                .mapToInt(Weapon::getDefenceStatFromWeapon).sum();
     }
 
 /*    @Override
@@ -97,21 +99,21 @@ public class WarriorImpl implements Warrior {
     }*/
 
     @Override
-    public int vampirismBonusFromWeapon() {
+    public int getVampirismStatFromWeapon() {
         return weapons.stream()
-                .mapToInt(Weapon::getVampirismStat).sum();
+                .mapToInt(Weapon::getVampirismStatFromWeapon).sum();
     }
 
     @Override
-    public int healPowerBonusFromWeapon() {
+    public int getHealPowerStatFromWeapon() {
         return weapons.stream()
-                .mapToInt(Weapon::getHealPowerStat).sum();
+                .mapToInt(Weapon::getHealPowerStatFromWeapon).sum();
     }
 
     @Override
-    public int piercingAttackBonusFromWeapon() {
+    public int getPiercingAttackStatFromWeapon() {
         return weapons.stream()
-                .mapToInt(Weapon::getPiercingAttackStat).sum();
+                .mapToInt(Weapon::getPiercingAttackStatFromWeapon).sum();
     }
 
     @Override
@@ -121,7 +123,7 @@ public class WarriorImpl implements Warrior {
 
     @Override
     public int getInitialHealth() {
-        return initialHealth + healthBonusFromWeapon();
+        return initialHealth + getHealthStatFromWeapon();
     }
 
     @Override

@@ -29,7 +29,7 @@ public class LancerImpl extends WarriorImpl implements Lancer {
 
     @Override
     public int getPiercingAttack() {
-        return Math.max(piercingDamage + piercingAttackBonusFromWeapon(), 0);
+        return Math.max(piercingDamage + getPiercingAttackStatFromWeapon(), 0);
     }
 
     @Override

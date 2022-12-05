@@ -26,7 +26,7 @@ public class VampireImpl extends WarriorImpl implements Vampire {
 
     @Override
     public int getVampirism() {
-        return Math.max(vampirism + vampirismBonusFromWeapon(), 0);
+        return Math.max(vampirism + getVampirismStatFromWeapon(), 0);
     }
 
     @Override

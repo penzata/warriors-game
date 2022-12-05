@@ -27,6 +27,7 @@ public class Duel {
                 defender.hit(attacker);
             }
         }
+
         log.atDebug().log(() -> (attacker.isAlive() ? attacker : defender) + " won!!!");
         return attacker.isAlive();
     }

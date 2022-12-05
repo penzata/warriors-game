@@ -24,7 +24,7 @@ public class DefenderImpl extends WarriorImpl implements Defender {
     @Override
     public int getDefence() {
 
-        return Math.max(defence + defenceBonusFromWeapon(), 0);
+        return Math.max(defence + getDefenceStatFromWeapon(), 0);
     }
 
     @Override

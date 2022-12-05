@@ -4,4 +4,5 @@ public enum WeaponClass {
     OFFENSIVE,
     DEFENSIVE,
     NEUTRAL
+
 }

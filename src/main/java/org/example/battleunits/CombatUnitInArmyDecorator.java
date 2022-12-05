@@ -8,6 +8,7 @@ import org.example.battleunits.subsidiary.CanReceiveDamage;
 import org.example.battleunits.subsidiary.CombatUnitBehind;
 import org.example.battleunits.subsidiary.CombatUnitType;
 import org.example.battleunits.weapons.Weapon;
+import org.example.battleunits.weapons.WeaponClass;
 
 public class CombatUnitInArmyDecorator implements CombatUnit, CombatUnitBehind, ProcessCommandChain {
     private CombatUnit combatUnit;
@@ -87,33 +88,33 @@ public class CombatUnitInArmyDecorator implements CombatUnit, CombatUnitBehind, 
     }
 
     @Override
-    public int healthBonusFromWeapon() {
-        return combatUnit.healthBonusFromWeapon();
+    public int getHealthStatFromWeapon() {
+        return combatUnit.getHealthStatFromWeapon();
     }
 
     @Override
-    public int attackBonusFromWeapon() {
-        return combatUnit.attackBonusFromWeapon();
+    public int getAttackStatFromWeapon() {
+        return combatUnit.getAttackStatFromWeapon();
     }
 
     @Override
-    public int defenceBonusFromWeapon() {
-        return combatUnit.defenceBonusFromWeapon();
+    public int getDefenceStatFromWeapon() {
+        return combatUnit.getDefenceStatFromWeapon();
     }
 
     @Override
-    public int vampirismBonusFromWeapon() {
-        return combatUnit.vampirismBonusFromWeapon();
+    public int getVampirismStatFromWeapon() {
+        return combatUnit.getVampirismStatFromWeapon();
     }
 
     @Override
-    public int healPowerBonusFromWeapon() {
-        return combatUnit.healPowerBonusFromWeapon();
+    public int getHealPowerStatFromWeapon() {
+        return combatUnit.getHealPowerStatFromWeapon();
     }
 
     @Override
-    public int piercingAttackBonusFromWeapon() {
-        return combatUnit.piercingAttackBonusFromWeapon();
+    public int getPiercingAttackStatFromWeapon() {
+        return combatUnit.getPiercingAttackStatFromWeapon();
     }
 
     @Override

@@ -12,7 +12,6 @@ public class WeaponBuilder {
     int vampirism;
     int healPower;
     int piercingAttack;
-    WeaponClass weaponClass;
 
     WeaponBuilder() {
     }
@@ -47,11 +46,6 @@ public class WeaponBuilder {
         return this;
     }
 
-    public WeaponBuilder setWeaponClass(WeaponClass weaponClass) {
-        this.weaponClass = weaponClass;
-        return this;
-    }
-
     public Weapon build() {
         return new Weapon() {
             @Override
@@ -60,40 +54,34 @@ public class WeaponBuilder {
             }
 
             @Override
-            public int getHealthStat() {
+            public int getHealthStatFromWeapon() {
                 return health;
             }
 
             @Override
-            public int getAttackStat() {
+            public int getAttackStatFromWeapon() {
                 return attack;
             }
 
             @Override
-            public int getDefenceStat() {
+            public int getDefenceStatFromWeapon() {
                 return defence;
             }
 
             @Override
-            public int getVampirismStat() {
+            public int getVampirismStatFromWeapon() {
                 return vampirism;
             }
 
             @Override
-            public int getHealPowerStat() {
+            public int getHealPowerStatFromWeapon() {
                 return healPower;
             }
 
             @Override
-            public int getPiercingAttackStat() {
+            public int getPiercingAttackStatFromWeapon() {
                 return piercingAttack;
             }
-
-            @Override
-            public WeaponClass getWeaponClass() {
-                return weaponClass;
-            }
-
         };
     }
 

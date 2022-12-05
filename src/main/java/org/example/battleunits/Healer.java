@@ -12,11 +12,11 @@ public interface Healer extends CombatUnit, HealPower, ProcessCommandChain {
     @Override
     default void hit(CanReceiveDamage opponent) {
 //        TODO think of handling Healer vs. Healer fight
-//        if (opponent instanceof Healer) {
-//            equipWeapon(WeaponType.KATANA);
-//            equipWeapon(WeaponType.KATANA);
-//            equipWeapon(WeaponType.KATANA);
-//        }
+        if (opponent instanceof Healer) {
+            equipWeapon(WeaponType.KATANA);
+            equipWeapon(WeaponType.KATANA);
+            equipWeapon(WeaponType.KATANA);
+        }
     }
 
     @Override

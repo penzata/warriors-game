@@ -6,7 +6,6 @@ import org.example.iterators.InfGenerator;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
 
 import static java.util.stream.Collectors.toCollection;
 import static org.example.battleunits.subsidiary.CombatUnitType.*;

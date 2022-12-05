@@ -58,7 +58,6 @@ public interface CombatUnit extends Attack, Health, CanReceiveDamage, CanBeHeale
     }
 
     default void hit(CanReceiveDamage opponent) {
-
         opponent.receiveDamage(this);
     }
 

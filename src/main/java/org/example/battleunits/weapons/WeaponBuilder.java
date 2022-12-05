@@ -12,6 +12,8 @@ public class WeaponBuilder {
     int vampirism;
     int healPower;
     int piercingAttack;
+    int decreaseDurabilityStep;
+    int durability;
 
     WeaponBuilder() {
     }
@@ -43,6 +45,16 @@ public class WeaponBuilder {
 
     public WeaponBuilder setHealPowerStat(int healPower) {
         this.healPower = healPower;
+        return this;
+    }
+
+    public WeaponBuilder setDecreaseDurabilityStep(int decreaseDurabilityStep) {
+        this.decreaseDurabilityStep = decreaseDurabilityStep;
+        return this;
+    }
+
+    public WeaponBuilder setDurability(int durability) {
+        this.durability = durability;
         return this;
     }
 
@@ -82,7 +94,12 @@ public class WeaponBuilder {
             public int getPiercingAttackStatFromWeapon() {
                 return piercingAttack;
             }
+
+            @Override
+            public void decreaseDurability() {
+            }
         };
     }
+
 
 }

@@ -117,6 +117,11 @@ public class CombatUnitInArmyDecorator implements CombatUnit, CombatUnitBehind, 
     }
 
     @Override
+    public void decreaseDurability() {
+        combatUnit.decreaseDurability();
+    }
+
+    @Override
     public void healedBy(int healingPoints) {
         combatUnit.healedBy(healingPoints);
     }

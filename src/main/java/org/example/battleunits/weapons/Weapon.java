@@ -18,9 +18,12 @@ public interface Weapon {
 
     int getPiercingAttackStatFromWeapon();
 
+    void decreaseDurability();
+
+
     default String getCharacteristics() {
         return String.format("{health: %s, attack: %s, defence: %s" +
-                ", vampirism: %s, heal power: %s, class: %s}", getHealthStatFromWeapon(), getAttackStatFromWeapon(), getDefenceStatFromWeapon(),
+                ", vampirism: %s, heal power: %s}", getHealthStatFromWeapon(), getAttackStatFromWeapon(), getDefenceStatFromWeapon(),
                 getVampirismStatFromWeapon(), getHealPowerStatFromWeapon());
     }
 

@@ -2,10 +2,8 @@ package org.example.battleunits;
 
 import org.example.battleunits.subsidiary.CombatUnitType;
 import org.example.battleunits.weapons.Weapon;
-import org.example.battleunits.weapons.WeaponClass;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class WarriorImpl implements Warrior {
@@ -105,6 +103,11 @@ public class WarriorImpl implements Warrior {
     public int getPiercingAttackStatFromWeapon() {
         return weapons.stream()
                 .mapToInt(Weapon::getPiercingAttackStatFromWeapon).sum();
+    }
+
+    @Override
+    public void decreaseDurability() {
+
     }
 
     @Override

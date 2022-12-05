@@ -6,7 +6,6 @@ import org.example.battleunits.subsidiary.CanBeHealed;
 import org.example.battleunits.subsidiary.CanReceiveDamage;
 import org.example.battleunits.subsidiary.CombatUnitType;
 import org.example.battleunits.weapons.Weapon;
-import org.example.battleunits.weapons.WeaponClass;
 
 public interface CombatUnit extends Attack, Health, CanReceiveDamage, CanBeHealed, Weapon {
     /**

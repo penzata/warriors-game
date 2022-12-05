@@ -370,4 +370,84 @@ class BattleTest {
         assertEquals(expectedBattleResult, battleResult);
     }
 
+    @DisplayName("normal battles between armies with warlord")
+    @ParameterizedTest(name = "battle{index} with warlord:  {0} vs. {1} --> attacker army wins? --> {2}")
+    @MethodSource({"battleWithWarlord"})
+    void BattleWithWarlord_WhoWinsOrLoses(ArmyImpl army1, ArmyImpl army2, Boolean expectedBattleResult) {
+        boolean battleResult = Battle.straightFight(army1, army2);
+
+        assertEquals(expectedBattleResult, battleResult);
+    }
+
+    @DisplayName("straight battles between armies with warlord")
+    @ParameterizedTest(name = "straight battle{index} with warlord:  {0} vs. {1} --> attacker army wins? --> {2}")
+    @MethodSource({"straightBattleWithWarlord"})
+    void StraightBattleWithWarlord_WhoWinsOrLoses(ArmyImpl army1, ArmyImpl army2, Boolean expectedBattleResult) {
+        boolean battleResult = Battle.straightFight(army1, army2);
+
+        assertEquals(expectedBattleResult, battleResult);
+    }
+
+    static Stream<Arguments> battleWithWarlord() {
+        //battle1 with warlord
+        Army army1 = new ArmyImpl(CombatUnit::createWarlord, 1)
+                .addBattleUnits(CombatUnit::createWarrior, 2)
+                .addBattleUnits(CombatUnit::createLancer, 2)
+                .addBattleUnits(CombatUnit::createHealer, 2);
+        Army army2 = new ArmyImpl(CombatUnit::createWarlord, 1)
+                .addBattleUnits(CombatUnit::createVampire, 1)
+                .addBattleUnits(CombatUnit::createHealer, 2)
+                .addBattleUnits(CombatUnit::createKnight, 2);
+        army1.moveUnits();
+        army2.moveUnits();
+        //battle2 with warlord
+        Army army3 = new ArmyImpl(CombatUnit::createWarrior, 2)
+                .addBattleUnits(CombatUnit::createLancer, 2)
+                .addBattleUnits(CombatUnit::createDefender, 1)
+                .addBattleUnits(CombatUnit::createWarlord, 3);
+        Army army4 = new ArmyImpl(CombatUnit::createWarlord, 2)
+                .addBattleUnits(CombatUnit::createVampire, 1)
+                .addBattleUnits(CombatUnit::createHealer, 5)
+                .addBattleUnits(CombatUnit::createKnight, 2);
+        army3.moveUnits();
+        army4.moveUnits();
+        //battle3 with warlord
+        Army army5 = new ArmyImpl(CombatUnit::createWarrior, 2)
+                .addBattleUnits(CombatUnit::createLancer, 3)
+                .addBattleUnits(CombatUnit::createDefender, 1)
+                .addBattleUnits(CombatUnit::createWarlord, 4);
+        Army army6 = new ArmyImpl(CombatUnit::createWarlord, 1)
+                .addBattleUnits(CombatUnit::createVampire, 1)
+                .addBattleUnits(Rookie::new, 1)
+                .addBattleUnits(CombatUnit::createKnight, 1);
+        army5.equipCombatUnitAtPosition(0, WeaponType.SWORD);
+        army6.equipCombatUnitAtPosition(0, WeaponType.SHIELD);
+        army5.moveUnits();
+        army6.moveUnits();
+
+        return Stream.of(
+                arguments(army1, army2, true),
+                arguments(army3, army4, false),
+                arguments(army5, army6, true));
+
+    }
+
+    static Stream<Arguments> straightBattleWithWarlord() {
+        //straight battle1 with warlord
+        Army army1 = new ArmyImpl(CombatUnit::createWarrior, 2)
+                .addBattleUnits(CombatUnit::createLancer, 3)
+                .addBattleUnits(CombatUnit::createDefender, 1)
+                .addBattleUnits(CombatUnit::createWarlord, 1);
+        Army army2 = new ArmyImpl(CombatUnit::createWarlord, 5)
+                .addBattleUnits(CombatUnit::createVampire, 1)
+                .addBattleUnits(Rookie::new, 1)
+                .addBattleUnits(CombatUnit::createKnight, 1);
+        army1.equipCombatUnitAtPosition(0, WeaponType.SWORD);
+        army2.equipCombatUnitAtPosition(0, WeaponType.SHIELD);
+        army1.moveUnits();
+        army2.moveUnits();
+
+        return Stream.of(
+                arguments(army1, army2, false));
+    }
 }

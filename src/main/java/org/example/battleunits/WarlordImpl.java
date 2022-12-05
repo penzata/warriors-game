@@ -39,7 +39,7 @@ public class WarlordImpl extends WarriorImpl implements Warlord {
 
     @Override
     public int getDefence() {
-        return defence;
+        return Math.max(defence + getDefenceStatFromWeapon(), 0);
     }
 
     @Override

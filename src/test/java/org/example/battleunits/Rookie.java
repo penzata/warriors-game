@@ -2,8 +2,10 @@ package org.example.battleunits;
 
 
 import lombok.extern.slf4j.Slf4j;
+import org.example.battleunits.subsidiary.CombatUnitType;
 import org.example.battleunits.weapons.Weapon;
-import org.example.battleunits.weapons.WeaponType;
+import org.example.battleunits.weapons.WeaponFactory;
+import org.example.battleunits.weapons.WeaponImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -16,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 @Slf4j
-public class Rookie extends WarriorImpl {
+public class Rookie extends CombatUnitImpl {
     Rookie rookie;
 
     public Rookie() {
@@ -25,14 +27,14 @@ public class Rookie extends WarriorImpl {
 
     static Stream<Arguments> equipWeapon() {
         return Stream.of(
-                arguments(WeaponType.SWORD, 55, 3),
-                arguments(WeaponType.SHIELD, 70, 0),
-                arguments(WeaponType.GREAT_AXE, 35, 6),
-                arguments(WeaponType.KATANA, 30, 7),
-                arguments(WeaponType.MAGIC_WAND, 80, 4),
-                arguments(Weapon.builder()
-                        .setHealthStat(-100).setAttackStat(-100).setDefenceStat(-100)
-                        .setVampirismStat(-100).setHealPowerStat(-100)
+                arguments(WeaponFactory.SWORD, 55, 3),
+                arguments(WeaponFactory.SHIELD, 70, 0),
+                arguments(WeaponFactory.GREAT_AXE, 35, 6),
+                arguments(WeaponFactory.KATANA, 30, 7),
+                arguments(WeaponFactory.MAGIC_WAND, 80, 4),
+                arguments(WeaponImpl.builder()
+                        .healthStat(-100).attackStat(-100).defenceStat(-100)
+                        .vampirismStat(-100).healPowerStat(-100)
                         .build(), -50, 0, 0));
     }
 
@@ -51,4 +53,8 @@ public class Rookie extends WarriorImpl {
         assertEquals(expectedAttack, rookie.getAttack());
     }
 
+    @Override
+    public CombatUnitType getCombatUnitType() {
+        return CombatUnitType.FIGHTER;
+    }
 }

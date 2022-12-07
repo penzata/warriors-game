@@ -1,7 +1,8 @@
 package org.example.battleunits;
 
 import org.example.battleunits.weapons.Weapon;
-import org.example.battleunits.weapons.WeaponType;
+import org.example.battleunits.weapons.WeaponFactory;
+import org.example.battleunits.weapons.WeaponImpl;
 import org.example.fighting.Battle;
 import org.example.fighting.Duel;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,37 +22,40 @@ class HealerTest {
 
     static Stream<Arguments> equipWeapon() {
         return Stream.of(
-                arguments(WeaponType.SWORD, 65, 2, 2),
-                arguments(WeaponType.SHIELD, 80, 0, 2),
-                arguments(WeaponType.GREAT_AXE, 45, 5, 2),
-                arguments(WeaponType.KATANA, 40, 6, 2),
-                arguments(WeaponType.MAGIC_WAND, 90, 3, 5),
-                arguments(Weapon.builder()
-                        .setHealthStat(-100).setAttackStat(-100).setDefenceStat(-100)
-                        .setVampirismStat(-100).setHealPowerStat(-100)
+                arguments(WeaponFactory.SWORD, 65, 2, 2),
+                arguments(WeaponFactory.SHIELD, 80, 0, 2),
+                arguments(WeaponFactory.GREAT_AXE, 45, 5, 2),
+                arguments(WeaponFactory.KATANA, 40, 6, 2),
+                arguments(WeaponFactory.MAGIC_WAND, 90, 3, 5),
+                arguments(WeaponImpl.builder()
+                        .healthStat(-100)
+                        .attackStat(-100)
+                        .defenceStat(-100)
+                        .vampirismStat(-100)
+                        .healPowerStat(-100)
                         .build(), -40, 0, 0));
     }
 
     @BeforeEach
     void init() {
-        healer = CombatUnit.createHealer();
+        healer = new Healer();
     }
 
     @Test
     void WarriorFightsWarriorWithHealerAndLoses() {
-        Army warrior = new ArmyImpl(CombatUnit::createWarrior, 1);
-        Army warriorWithHealer = new ArmyImpl(CombatUnit::createWarrior, 1)
-                .addBattleUnits(CombatUnit::createHealer, 1);
+        Army warrior = new ArmyImpl(CombatUnitFactory::createWarrior, 1);
+        Army warriorWithHealer = new ArmyImpl(CombatUnitFactory::createWarrior, 1)
+                .addBattleUnits(CombatUnitFactory::createHealer, 1);
 
         assertFalse(Battle.fight(warrior, warriorWithHealer));
     }
 
     @Test
     void WhenLancerAttacksWarriorUnitWithTwoHealersBehind_ThenHealersChainHealing() {
-        Army army1 = new ArmyImpl(CombatUnit::createLancer, 1).
-                addBattleUnits(CombatUnit::createWarrior, 1);
-        ArmyImpl army2 = new ArmyImpl(CombatUnit::createVampire, 1).
-                addBattleUnits(CombatUnit::createHealer, 2);
+        Army army1 = new ArmyImpl(CombatUnitFactory::createLancer, 1).
+                addBattleUnits(CombatUnitFactory::createWarrior, 1);
+        ArmyImpl army2 = new ArmyImpl(CombatUnitFactory::createVampire, 1).
+                addBattleUnits(CombatUnitFactory::createHealer, 2);
         boolean result = Battle.fight(army1, army2);
 
         assertTrue(result);
@@ -59,8 +63,8 @@ class HealerTest {
 
     @Test
     void OneWarriorArmyVersusOneHealerArmyAndHealerDoesNotHealHimself() {
-        Army warrior = new ArmyImpl(CombatUnit::createWarrior, 1);
-        Army healer = new ArmyImpl(CombatUnit::createHealer, 1);
+        Army warrior = new ArmyImpl(CombatUnitFactory::createWarrior, 1);
+        Army healer = new ArmyImpl(CombatUnitFactory::createHealer, 1);
 
         assertTrue(Battle.fight(warrior, healer));
     }
@@ -79,17 +83,17 @@ class HealerTest {
 
     @Test
     void HealerVsHealer() {
-        Healer secondHealer = CombatUnit.createHealer();
+        CombatUnit secondHealer = CombatUnitFactory.createHealer();
         Duel.fight(healer, secondHealer);
     }
 
     @Test
     @DisplayName("testing for breaking infinite loop when defender and healer fights defender and healer")
     void ArmyDefenderWithHealerVSSecondArmyDefenderWithHealerAndFirstArmyWins() {
-        Army army1 = new ArmyImpl(CombatUnit::createDefender, 1)
-                .addBattleUnits(CombatUnit::createHealer, 1);
-        Army army2 = new ArmyImpl(CombatUnit::createDefender, 1)
-                .addBattleUnits(CombatUnit::createHealer, 1);
+        Army army1 = new ArmyImpl(CombatUnitFactory::createDefender, 1)
+                .addBattleUnits(CombatUnitFactory::createHealer, 1);
+        Army army2 = new ArmyImpl(CombatUnitFactory::createDefender, 1)
+                .addBattleUnits(CombatUnitFactory::createHealer, 1);
 
         assertTrue(Battle.fight(army1, army2));
     }

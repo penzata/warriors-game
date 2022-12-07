@@ -1,69 +1,33 @@
 package org.example.battleunits;
 
-import org.example.battleunits.characteristics.Attack;
-import org.example.battleunits.characteristics.Health;
-import org.example.battleunits.subsidiary.CanBeHealed;
-import org.example.battleunits.subsidiary.CanReceiveDamage;
 import org.example.battleunits.subsidiary.CombatUnitType;
 import org.example.battleunits.weapons.Weapon;
 
-public interface CombatUnit extends Attack, Health, CanReceiveDamage, CanBeHealed, Weapon {
-    /**
-     * @return Warrior object with default health(50) & attack(5).
-     */
-    static Warrior createWarrior() {
-        return new WarriorImpl();
+import java.util.List;
+
+public interface CombatUnit {
+
+    int getMaxHealth();
+
+    default boolean isAlive() {
+        return getHealth() > 0;
     }
 
-    /**
-     * @return Knight object with default health(50) & attack(7).
-     */
-    static Knight createKnight() {
-        return new KnightImpl();
-    }
+    int getHealth();
 
-    /**
-     * @return Defender object with default health(60), attack(3) & defence(2).
-     */
-    static Defender createDefender() {
-        return new DefenderImpl();
-    }
+    void heal(int healingPoints);
 
-    /**
-     * @return Vampire object with default health(40), attack(4) & vampirism(50%).
-     */
-    static Vampire createVampire() {
-        return new VampireImpl();
-    }
+    void hit(CombatUnit opponent);
 
-    /**
-     * @return Lancer object with default health(50), attack(6) & piercing attack(50%).
-     */
-    static Lancer createLancer() {
-        return new LancerImpl();
-    }
+    int receiveDamage(int damage);
 
-    /**
-     * @return Healer object with default health(60), attack(0) & heal power(2).
-     */
-    static Healer createHealer() {
-        return new HealerImpl();
-    }
+    int reduceHealth(int damageReceived);
 
-    /**
-     * @return Warlord object with default health(100), attack(4) & defence(2).
-     */
-    static Warlord createWarlord() {
-        return new WarlordImpl();
-    }
+    int getAttack();
 
-    default void hit(CanReceiveDamage opponent) {
-        opponent.receiveDamage(this);
-    }
+    CombatUnit equipWeapon(Weapon weapon);
 
-    default CombatUnit equipWeapon(Weapon weapon) {
-        return this;
-    }
+    List<Weapon> getWeapons();
 
     CombatUnitType getCombatUnitType();
 }

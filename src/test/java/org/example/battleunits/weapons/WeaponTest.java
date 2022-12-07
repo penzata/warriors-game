@@ -13,59 +13,36 @@ class WeaponTest {
 
     @Test
     void SomePrints() {
-        Vampire vampire = CombatUnit.createVampire();
-        vampire.equipWeapon(WeaponType.KATANA);
+        CombatUnit vampire = CombatUnitFactory.createVampire();
+        vampire.equipWeapon(WeaponFactory.KATANA);
         log.atDebug().log("{} with katana: ", vampire);
 
-        Weapon customWeapon = Weapon.builder()
-                .setHealthStat(-10).setAttackStat(5)
-                .setVampirismStat(40)
+        Weapon customWeapon = WeaponImpl.builder()
+                .healthStat(-10).attackStat(5)
+                .vampirismStat(40)
                 .build();
         log.atDebug().log("{} chars: {}", customWeapon, customWeapon.getCharacteristics());
-    }
-
-    @Test
-    void EquippingWeaponsProperly() {
-        Knight knight = CombatUnit.createKnight();
-        Defender defender = CombatUnit.createDefender();
-        Vampire vampire = CombatUnit.createVampire();
-
-        knight.equipWeapon(WeaponType.SHIELD).equipWeapon(WeaponType.SHIELD);
-        defender.equipWeapon(WeaponType.SHIELD).equipWeapon(WeaponType.KATANA);
-        vampire.equipWeapon(WeaponType.KATANA).equipWeapon(WeaponType.SHIELD);
-
-        log.atDebug().log("{} with two shields.", knight);
-        assertEquals(90, knight.getHealth());
-        assertEquals(5, knight.getAttack());
-        log.atDebug().log("{} with shield and katana.", defender);
-        assertEquals(60, defender.getHealth());
-        assertEquals(8, defender.getAttack());
-        assertEquals(0, defender.getDefence());
-        log.atDebug().log("{} with katana and shield.", vampire);
-        assertEquals(40, vampire.getHealth());
-        assertEquals(9, vampire.getAttack());
-        assertEquals(100, vampire.getVampirism());
     }
 
     @Test
     void RookieDiesFromWeaponOverEquipment() {
         Rookie rookie = new Rookie();
 
-        rookie.equipWeapon(WeaponType.SWORD);
+        rookie.equipWeapon(WeaponFactory.SWORD);
         log.atDebug().log("equip sword -> {}", rookie);
-        rookie.equipWeapon(WeaponType.KATANA);
+        rookie.equipWeapon(WeaponFactory.KATANA);
         log.atDebug().log("equip katana -> {}", rookie);
-        rookie.equipWeapon(WeaponType.GREAT_AXE);
+        rookie.equipWeapon(WeaponFactory.GREAT_AXE);
         log.atDebug().log("equip great axe -> {}", rookie);
-        rookie.equipWeapon(WeaponType.GREAT_AXE);
+        rookie.equipWeapon(WeaponFactory.GREAT_AXE);
         log.atDebug().log("equip great axe -> {}", rookie);
-        rookie.equipWeapon(WeaponType.KATANA);
+        rookie.equipWeapon(WeaponFactory.KATANA);
         log.atDebug().log("equip katana -> {}", rookie);
-        rookie.equipWeapon(WeaponType.MAGIC_WAND);
+        rookie.equipWeapon(WeaponFactory.MAGIC_WAND);
         log.atDebug().log("equip magic wand -> {}", rookie);
-        rookie.equipWeapon(WeaponType.SHIELD);
+        rookie.equipWeapon(WeaponFactory.SHIELD);
         log.atDebug().log("equip shield -> {}", rookie);
-        rookie.equipWeapon(WeaponType.KATANA);
+        rookie.equipWeapon(WeaponFactory.KATANA);
         log.atDebug().log("equip katana -> {}", rookie);
 
         assertEquals(-15, rookie.getHealth());
@@ -73,23 +50,23 @@ class WeaponTest {
 
     @Test
     void DefenderWithShieldAndMagicWandFightsVampireWithKatanaAndLoses() {
-        Defender defender = CombatUnit.createDefender();
-        defender.equipWeapon(WeaponType.SHIELD)
-                .equipWeapon(WeaponType.MAGIC_WAND);
-        Vampire vampire = CombatUnit.createVampire();
-        vampire.equipWeapon(WeaponType.KATANA);
+        CombatUnit defender = CombatUnitFactory.createDefender();
+        defender.equipWeapon(WeaponFactory.SHIELD)
+                .equipWeapon(WeaponFactory.MAGIC_WAND);
+        CombatUnit vampire = CombatUnitFactory.createVampire();
+        vampire.equipWeapon(WeaponFactory.KATANA);
 
         assertFalse(Duel.fight(defender, vampire));
     }
 
     @Test
     void DefenderWithShieldAndMagicWandAndSwordFightsVampireWithKatanaAndFinallyWins() {
-        Defender defender = CombatUnit.createDefender();
-        defender.equipWeapon(WeaponType.SHIELD)
-                .equipWeapon(WeaponType.MAGIC_WAND)
-                .equipWeapon(WeaponType.SWORD);
-        Vampire vampire = CombatUnit.createVampire();
-        vampire.equipWeapon(WeaponType.KATANA);
+        CombatUnit defender = CombatUnitFactory.createDefender();
+        defender.equipWeapon(WeaponFactory.SHIELD)
+                .equipWeapon(WeaponFactory.MAGIC_WAND)
+                .equipWeapon(WeaponFactory.SWORD);
+        CombatUnit vampire = CombatUnitFactory.createVampire();
+        vampire.equipWeapon(WeaponFactory.KATANA);
 
         assertTrue(Duel.fight(defender, vampire));
     }
@@ -99,16 +76,16 @@ class WeaponTest {
             " after defender wins, he picks another weapon" +
             " and his health is raised only with last weapon's health stat points")
     void DefenderFightsWarriorWithWeaponsAndWins() {
-        Defender defender = CombatUnit.createDefender();
-        defender.equipWeapon(WeaponType.SWORD);
-        Knight knight = CombatUnit.createKnight();
-        knight.equipWeapon(WeaponType.GREAT_AXE);
+        CombatUnit defender = CombatUnitFactory.createDefender();
+        defender.equipWeapon(WeaponFactory.SWORD);
+        CombatUnit knight = CombatUnitFactory.createKnight();
+        knight.equipWeapon(WeaponFactory.GREAT_AXE);
         boolean result = Duel.fight(defender, knight);
 
         assertTrue(result);
 
         int healthBeforeEquipment = defender.getHealth();
-        defender.equipWeapon(WeaponType.SHIELD);
+        defender.equipWeapon(WeaponFactory.SHIELD);
 
         assertEquals(25, healthBeforeEquipment + 20);
         log.atDebug().log("{}", defender);

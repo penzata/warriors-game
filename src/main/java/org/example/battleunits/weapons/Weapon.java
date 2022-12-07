@@ -2,29 +2,24 @@ package org.example.battleunits.weapons;
 
 public interface Weapon {
 
-    static WeaponBuilder builder() {
-        return new WeaponBuilder();
-    }
+    int getHealthStat();
 
-    int getHealthStatFromWeapon();
+    int getAttackStat();
 
-    int getAttackStatFromWeapon();
+    int getDefenceStat();
 
-    int getDefenceStatFromWeapon();
+    int getVampirismStat();
 
-    int getVampirismStatFromWeapon();
+    int getHealPowerStat();
 
-    int getHealPowerStatFromWeapon();
-
-    int getPiercingAttackStatFromWeapon();
+    int getPiercingAttackStat();
 
     void decreaseDurability();
 
-
     default String getCharacteristics() {
         return String.format("{health: %s, attack: %s, defence: %s" +
-                ", vampirism: %s, heal power: %s}", getHealthStatFromWeapon(), getAttackStatFromWeapon(), getDefenceStatFromWeapon(),
-                getVampirismStatFromWeapon(), getHealPowerStatFromWeapon());
+                ", vampirism: %s, heal power: %s}", getHealthStat(), getAttackStat(), getDefenceStat(),
+                getVampirismStat(), getHealPowerStat());
     }
 
 }

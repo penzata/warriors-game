@@ -3,14 +3,14 @@ package org.example.battleunits;
 import org.example.battlecommands.CombatUnitHitCommand;
 import org.example.battlecommands.Command;
 import org.example.battlecommands.ProcessCommandChain;
-import org.example.battleunits.characteristics.Attack;
-import org.example.battleunits.subsidiary.CanReceiveDamage;
 import org.example.battleunits.subsidiary.CombatUnitBehind;
 import org.example.battleunits.subsidiary.CombatUnitType;
 import org.example.battleunits.weapons.Weapon;
 
+import java.util.List;
+
 public class CombatUnitInArmyDecorator implements CombatUnit, CombatUnitBehind, ProcessCommandChain {
-    private CombatUnit combatUnit;
+    private final CombatUnit combatUnit;
     private CombatUnitInArmyDecorator nextCombatUnit;
 
     public CombatUnitInArmyDecorator(CombatUnit combatUnit) {
@@ -36,8 +36,8 @@ public class CombatUnitInArmyDecorator implements CombatUnit, CombatUnitBehind, 
         }
     }
 
-    public Warrior unwrap() {
-        return (WarriorImpl) combatUnit;
+    public CombatUnit unwrap() {
+        return combatUnit;
     }
 
     @Override
@@ -51,29 +51,39 @@ public class CombatUnitInArmyDecorator implements CombatUnit, CombatUnitBehind, 
     }
 
     @Override
-    public void hit(CanReceiveDamage opponent) {
+    public void hit(CombatUnit opponent) {
         combatUnit.hit(opponent);
         processCommand(CombatUnitHitCommand.HEAL, this);
     }
 
     @Override
-    public void receiveDamage(Attack damageDealer) {
-        combatUnit.receiveDamage(damageDealer);
+    public int receiveDamage(int damage) {
+        return combatUnit.receiveDamage(damage);
     }
 
     @Override
-    public void reduceHealth(int damage) {
-        combatUnit.reduceHealth(damage);
+    public void heal(int healingPoints) {
+        combatUnit.heal(healingPoints);
     }
 
     @Override
-    public int getInitialHealth() {
-        return combatUnit.getInitialHealth();
+    public int reduceHealth(int damageReceived) {
+        return combatUnit.reduceHealth(damageReceived);
+    }
+
+    @Override
+    public int getMaxHealth() {
+        return combatUnit.getMaxHealth();
     }
 
     @Override
     public CombatUnit equipWeapon(Weapon weapon) {
         return combatUnit.equipWeapon(weapon);
+    }
+
+    @Override
+    public List<Weapon> getWeapons() {
+        return combatUnit.getWeapons();
     }
 
     @Override
@@ -86,43 +96,4 @@ public class CombatUnitInArmyDecorator implements CombatUnit, CombatUnitBehind, 
         return combatUnit.toString();
     }
 
-    @Override
-    public int getHealthStatFromWeapon() {
-        return combatUnit.getHealthStatFromWeapon();
-    }
-
-    @Override
-    public int getAttackStatFromWeapon() {
-        return combatUnit.getAttackStatFromWeapon();
-    }
-
-    @Override
-    public int getDefenceStatFromWeapon() {
-        return combatUnit.getDefenceStatFromWeapon();
-    }
-
-    @Override
-    public int getVampirismStatFromWeapon() {
-        return combatUnit.getVampirismStatFromWeapon();
-    }
-
-    @Override
-    public int getHealPowerStatFromWeapon() {
-        return combatUnit.getHealPowerStatFromWeapon();
-    }
-
-    @Override
-    public int getPiercingAttackStatFromWeapon() {
-        return combatUnit.getPiercingAttackStatFromWeapon();
-    }
-
-    @Override
-    public void decreaseDurability() {
-        combatUnit.decreaseDurability();
-    }
-
-    @Override
-    public void healedBy(int healingPoints) {
-        combatUnit.healedBy(healingPoints);
-    }
 }

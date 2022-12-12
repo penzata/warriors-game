@@ -1,32 +1,23 @@
 package org.example.battleunits;
 
-import org.example.battleunits.characteristics.Attack;
-import org.example.battleunits.characteristics.Health;
-import org.example.battleunits.weapons.EquippedWeaponBonusStats;
-import org.example.battleunits.weapons.Weapon;
+import org.example.battleunits.subsidiary.CombatUnitType;
 
-public interface Warrior extends Attack, Health, EquippedWeaponBonusStats {
+public class Warrior extends CombatUnitImpl {
+    private static final int DEFAULT_HEALTH = 50;
+    private static final int DEFAULT_ATTACK = 5;
 
-    /**
-     * @return Warrior object with default health(50) & attack(5).
-     */
-    static Warrior create() {
-        return new WarriorImpl();
+    Warrior() {
+        super(DEFAULT_HEALTH, DEFAULT_ATTACK);
     }
 
-    default void hit(Warrior opponent) {
-
-        opponent.receiveDamage(this);
+    Warrior (int health, int attack) {
+        super(health, attack);
     }
 
-    default void receiveDamage(Attack damageDealer) {
+    @Override
+    public CombatUnitType getCombatUnitType() {
 
-        reduceHealth(damageDealer.getAttack());
+        return CombatUnitType.FIGHTER;
     }
 
-    void reduceHealth(int damage);
-
-    default Warrior equipWeapon(Weapon weapon) {
-        return this;
-    }
 }

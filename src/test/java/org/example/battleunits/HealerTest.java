@@ -1,8 +1,9 @@
 package org.example.battleunits;
 
 import org.example.battleunits.weapons.Weapon;
+import org.example.battleunits.weapons.WeaponFactory;
+import org.example.battleunits.weapons.WeaponImpl;
 import org.example.fighting.Battle;
-import org.example.battleunits.weapons.WeaponType;
 import org.example.fighting.Duel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -14,32 +15,47 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class HealerTest {
     private Healer healer;
 
+    static Stream<Arguments> equipWeapon() {
+        return Stream.of(
+                arguments(WeaponFactory.SWORD, 65, 2, 2),
+                arguments(WeaponFactory.SHIELD, 80, 0, 2),
+                arguments(WeaponFactory.GREAT_AXE, 45, 5, 2),
+                arguments(WeaponFactory.KATANA, 40, 6, 2),
+                arguments(WeaponFactory.MAGIC_WAND, 90, 3, 5),
+                arguments(WeaponImpl.builder()
+                        .healthStat(-100)
+                        .attackStat(-100)
+                        .defenceStat(-100)
+                        .vampirismStat(-100)
+                        .healPowerStat(-100)
+                        .build(), -40, 0, 0));
+    }
+
     @BeforeEach
     void init() {
-        healer = Healer.create();
+        healer = new Healer();
     }
 
     @Test
     void WarriorFightsWarriorWithHealerAndLoses() {
-        ArmyImpl warrior = new ArmyImpl(Warrior::create, 1);
-        ArmyImpl warriorWithHealer = new ArmyImpl(Warrior::create, 1)
-                .addBattleUnits(Healer::create, 1);
+        Army warrior = new ArmyImpl(CombatUnitFactory::createWarrior, 1);
+        Army warriorWithHealer = new ArmyImpl(CombatUnitFactory::createWarrior, 1)
+                .addBattleUnits(CombatUnitFactory::createHealer, 1);
 
         assertFalse(Battle.fight(warrior, warriorWithHealer));
     }
 
     @Test
     void WhenLancerAttacksWarriorUnitWithTwoHealersBehind_ThenHealersChainHealing() {
-        ArmyImpl army1 = new ArmyImpl(LancerImpl::new, 1).
-                addBattleUnits(WarriorImpl::new, 1);
-        ArmyImpl army2 = new ArmyImpl(VampireImpl::new, 1).
-                addBattleUnits(HealerImpl::new, 2);
+        Army army1 = new ArmyImpl(CombatUnitFactory::createLancer, 1).
+                addBattleUnits(CombatUnitFactory::createWarrior, 1);
+        ArmyImpl army2 = new ArmyImpl(CombatUnitFactory::createVampire, 1).
+                addBattleUnits(CombatUnitFactory::createHealer, 2);
         boolean result = Battle.fight(army1, army2);
 
         assertTrue(result);
@@ -47,8 +63,8 @@ class HealerTest {
 
     @Test
     void OneWarriorArmyVersusOneHealerArmyAndHealerDoesNotHealHimself() {
-        ArmyImpl warrior = new ArmyImpl(WarriorImpl::new, 1);
-        ArmyImpl healer = new ArmyImpl(HealerImpl::new, 1);
+        Army warrior = new ArmyImpl(CombatUnitFactory::createWarrior, 1);
+        Army healer = new ArmyImpl(CombatUnitFactory::createHealer, 1);
 
         assertTrue(Battle.fight(warrior, healer));
     }
@@ -56,8 +72,8 @@ class HealerTest {
     @DisplayName("different weapons equipped by Healer")
     @ParameterizedTest(name = "equipped {0}")
     @MethodSource({"equipWeapon"})
-    void EquipDifferentWeaponsOnWarriorAndVerifyItsStats (Weapon weapon, int expectedHealth,
-                                                          int expectedAttack, int expectedHealPower) {
+    void EquipDifferentWeaponsOnWarriorAndVerifyItsStats(Weapon weapon, int expectedHealth,
+                                                         int expectedAttack, int expectedHealPower) {
         healer.equipWeapon(weapon);
 
         assertEquals(expectedHealth, healer.getHealth());
@@ -65,30 +81,19 @@ class HealerTest {
         assertEquals(expectedHealPower, healer.getHealPower());
     }
 
-    static Stream<Arguments> equipWeapon() {
-        return Stream.of(
-                arguments(WeaponType.SWORD, 65, 2, 2),
-                arguments(WeaponType.SHIELD, 80, 0, 2),
-                arguments(WeaponType.GREAT_AXE, 45, 5, 2),
-                arguments(WeaponType.KATANA, 40, 6, 2),
-                arguments(WeaponType.MAGIC_WAND, 90, 3, 5),
-                arguments(Weapon.builder().healthStat(-100).attackStat(-100).defenceStat(-100)
-                        .vampirismStat(-100).healPowerStat(-100).build(), -40, 0, 0));
-    }
-
     @Test
     void HealerVsHealer() {
-        Healer secondHealer = Healer.create();
+        CombatUnit secondHealer = CombatUnitFactory.createHealer();
         Duel.fight(healer, secondHealer);
     }
 
     @Test
     @DisplayName("testing for breaking infinite loop when defender and healer fights defender and healer")
     void ArmyDefenderWithHealerVSSecondArmyDefenderWithHealerAndFirstArmyWins() {
-        Army army1 = new ArmyImpl(Defender::create, 1)
-                .addBattleUnits(Healer::create, 1);
-        Army army2 = new ArmyImpl(Defender::create, 1)
-                .addBattleUnits(Healer::create, 1);
+        Army army1 = new ArmyImpl(CombatUnitFactory::createDefender, 1)
+                .addBattleUnits(CombatUnitFactory::createHealer, 1);
+        Army army2 = new ArmyImpl(CombatUnitFactory::createDefender, 1)
+                .addBattleUnits(CombatUnitFactory::createHealer, 1);
 
         assertTrue(Battle.fight(army1, army2));
     }

@@ -3,7 +3,6 @@ package org.example.battleunits;
 import lombok.extern.slf4j.Slf4j;
 import org.example.battleunits.weapons.Weapon;
 import org.example.iterators.AliveUnitIterate;
-import org.example.iterators.InfGenerator;
 import org.example.iterators.StraightIterate;
 
 import java.util.ArrayList;
@@ -19,73 +18,63 @@ public class ArmyImpl implements Army {
      * used to keep track on created objects at debugging
      */
     private final int id = ++idSequence;
-    private WarriorInArmyDecorator warriorInFront;
-    private WarriorInArmyDecorator warriorBehind;
+    private CombatUnitInArmyDecorator combatUnitInFront;
+    private CombatUnitInArmyDecorator combatUnitBehind;
     private Warlord onlyOneWarlord;
-    private List<Warrior> army;
+    private List<CombatUnit> army;
 
 
-    public ArmyImpl(Supplier<Warrior> factory, Integer numberOfUnits) {
+    public ArmyImpl(Supplier<CombatUnit> factory, Integer numberOfUnits) {
         this.army = new ArrayList<>();
         addBattleUnits(factory, numberOfUnits);
     }
 
-    public ArmyImpl addBattleUnits(Supplier<Warrior> factory, Integer numberOfUnits) {
+    public ArmyImpl addBattleUnits(Supplier<CombatUnit> factory, Integer numberOfUnits) {
         for (int i = 0; i < numberOfUnits; i++) {
             addBattleUnit(factory.get());
         }
         return this;
     }
 
-    @Override
-    public boolean hasNext() {
-        return false;
-    }
-
-    @Override
-    public Warrior next() {
-        return null;
-    }
-
-    private void addBattleUnit(Warrior warrior) {
-        if (warrior instanceof Warlord warlord) {
+    private void addBattleUnit(CombatUnit combatUnit) {
+        if (combatUnit instanceof Warlord warlord) {
             if (onlyOneWarlord != null) {
                 return;
             }
             onlyOneWarlord = warlord;
         }
-        WarriorInArmyDecorator wrapped = new WarriorInArmyDecorator(warrior);
-        if (warriorInFront == null) {
-            warriorInFront = wrapped;
+        CombatUnitInArmyDecorator wrapped = new CombatUnitInArmyDecorator(combatUnit);
+        if (combatUnitInFront == null) {
+            combatUnitInFront = wrapped;
         } else {
-            warriorBehind.setWarriorBehind(wrapped);
+            combatUnitBehind.setCombatUnitBehind(wrapped);
         }
-        warriorBehind = wrapped;
+        combatUnitBehind = wrapped;
         this.army.add(wrapped);
     }
 
     @Override
     public String toString() {
-        StringJoiner sj = new StringJoiner(",\n  ", "Army#%2d --->%n[ ".formatted(id), " ]");
+        StringJoiner sj = new StringJoiner(",\n  ", "Army#%02d --->%n[ ".formatted(id), " ]");
         sj.setEmptyValue("Army#%2d[ DEAD ]".formatted(id));
-        for (var warrior : army) {
-            sj.add(warrior.toString());
+        for (CombatUnit combatUnit : army) {
+            sj.add(combatUnit.toString());
         }
         return sj.toString();
     }
 
     @Override
-    public Iterator<Warrior> nextInLine() {
-        return new StraightIterate(warriorInFront);
+    public Iterator<CombatUnit> nextInLine() {
+        return new StraightIterate(combatUnitInFront);
     }
 
     @Override
-    public Iterator<Warrior> getAliveUnit() {
-        return new AliveUnitIterate(warriorInFront);
+    public Iterator<CombatUnit> getAliveUnit() {
+        return new AliveUnitIterate(combatUnitInFront);
     }
 
     @Override
-    public void equipWarriorAtPosition(int position, Weapon weapon) {
+    public void equipCombatUnitAtPosition(int position, Weapon weapon) {
         try {
             army.get(position).equipWeapon(weapon);
         } catch (IndexOutOfBoundsException ex) {
@@ -96,11 +85,26 @@ public class ArmyImpl implements Army {
     @Override
     public void moveUnits() {
         if (onlyOneWarlord != null) {
-            InfGenerator<Warrior> newArrangedArmy = onlyOneWarlord.rearrangeArmy(new StraightIterate(warriorInFront));
-            warriorInFront = warriorBehind = null;
-             for (Warrior warrior : newArrangedArmy) {
-                 addBattleUnit(warrior);
-             }
+            Iterable<CombatUnit> newArrangedArmy = onlyOneWarlord.rearrangeArmy(new StraightIterate(combatUnitInFront));
+            combatUnitInFront = null;
+            combatUnitBehind = null;
+            army.clear();
+            onlyOneWarlord = null;
+            for (CombatUnit unit : newArrangedArmy) {
+                addBattleUnit(unit);
+            }
+        }
+    }
+
+    @Override
+    public void isEveryoneAlive() {
+        List<CombatUnit> deadUnits = new ArrayList<>();
+        for(CombatUnit unit : army) {
+            if (!unit.isAlive() && !deadUnits.contains(unit)) {
+                deadUnits.add(unit);
+                moveUnits();
+                return;
+            }
         }
     }
 }

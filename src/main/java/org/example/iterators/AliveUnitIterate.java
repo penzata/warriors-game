@@ -1,22 +1,23 @@
 package org.example.iterators;
 
 import lombok.extern.slf4j.Slf4j;
-import org.example.battleunits.Warrior;
-import org.example.battleunits.WarriorInArmyDecorator;
+import org.example.battleunits.Army;
+import org.example.battleunits.CombatUnit;
+import org.example.battleunits.CombatUnitInArmyDecorator;
 import org.example.exceptions.DoesntExistException;
 
 @Slf4j
-public class AliveUnitIterate implements InfGenerator<Warrior> {
+public class AliveUnitIterate implements InfGenerator<CombatUnit> {
 
-    private WarriorInArmyDecorator nextAlive;
+    private CombatUnitInArmyDecorator nextAlive;
 
-    public AliveUnitIterate(WarriorInArmyDecorator warriorInFront) {
-        this.nextAlive = warriorInFront;
+    public AliveUnitIterate(CombatUnitInArmyDecorator combatUnitInFront) {
+        this.nextAlive = combatUnitInFront;
     }
 
 
     @Override
-    public Warrior next() {
+    public CombatUnit next() {
         try {
             if (!hasNext()) {
                 throw new DoesntExistException("no more army units left");
@@ -34,7 +35,7 @@ public class AliveUnitIterate implements InfGenerator<Warrior> {
             if (nextAlive.isAlive()) {
                 return true;
             }
-            nextAlive = nextAlive.getWarriorBehind();
+            nextAlive = nextAlive.getCombatUnitBehind();
         }
         return false;
     }

@@ -5,19 +5,21 @@ import org.example.battleunits.weapons.Weapon;
 
 import java.util.Iterator;
 
-public interface Army extends InfGenerator<Warrior> {
+public interface Army extends InfGenerator<CombatUnit> {
 
     /**
      * @return iterator over Army for units-in-line order for turn-based fight.
      */
-    Iterator<Warrior> getAliveUnit();
+    Iterator<CombatUnit> getAliveUnit();
 
     /**
      * @return iterator over Army for one-on-one duel fights between army units based on theirs position in army.
      */
-    Iterator<Warrior> nextInLine();
+    Iterator<CombatUnit> nextInLine();
 
-    void equipWarriorAtPosition(int position, Weapon weapon);
+    void equipCombatUnitAtPosition(int position, Weapon weapon);
 
     void moveUnits();
+
+    void isEveryoneAlive();
 }

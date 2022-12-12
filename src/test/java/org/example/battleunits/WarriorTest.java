@@ -1,7 +1,8 @@
 package org.example.battleunits;
 
 import org.example.battleunits.weapons.Weapon;
-import org.example.battleunits.weapons.WeaponType;
+import org.example.battleunits.weapons.WeaponFactory;
+import org.example.battleunits.weapons.WeaponImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,36 +16,53 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class WarriorTest {
-    private WarriorImpl warrior;
+    private CombatUnit warrior;
+
+    static Stream<Arguments> equipWeapon() {
+        return Stream.of(
+                arguments(WeaponFactory.SWORD, 55, 7),
+                arguments(WeaponFactory.SHIELD, 70, 4),
+                arguments(WeaponFactory.GREAT_AXE, 35, 10),
+                arguments(WeaponFactory.KATANA, 30, 11),
+                arguments(WeaponFactory.MAGIC_WAND, 80, 8),
+                arguments(WeaponImpl.builder()
+                        .healthStat(-100)
+                        .attackStat(-100)
+                        .defenceStat(-100)
+                        .vampirismStat(-100)
+                        .healPowerStat(-100)
+                        .build(), -50, 0, 0));
+    }
 
     @BeforeEach
     void init() {
-        warrior = new WarriorImpl();
+        warrior = CombatUnitFactory.createWarrior();
     }
 
     @Test
     void isAlive() {
-        WarriorImpl warrior1 = new WarriorImpl(0, 5);
+        CombatUnitImpl warrior1 = new Warrior(0, 5);
+
         assertFalse(warrior1.isAlive());
 
-        WarriorImpl warrior2 = new WarriorImpl(-1, 5);
+        CombatUnitImpl warrior2 = new Warrior(-1, 5);
         assertFalse(warrior2.isAlive());
 
-        WarriorImpl warrior3 = new WarriorImpl(1, 5);
+        CombatUnitImpl warrior3 = new Warrior(1, 5);
         assertTrue(warrior3.isAlive());
     }
 
     @Test
     void takeDamage() {
-        KnightImpl damageDealer = new KnightImpl();
-        warrior.receiveDamage(damageDealer);
+        CombatUnit damageDealer = CombatUnitFactory.createKnight();
+        warrior.receiveDamage(damageDealer.getAttack());
 
         assertEquals(43, warrior.getHealth());
     }
 
     @Test
     void hit() {
-        WarriorImpl opponentWarrior = new WarriorImpl();
+        CombatUnit opponentWarrior = CombatUnitFactory.createWarrior();
         warrior.hit(opponentWarrior);
 
         assertEquals(45, opponentWarrior.getHealth());
@@ -53,21 +71,10 @@ class WarriorTest {
     @DisplayName("different weapons equipped by Warrior")
     @ParameterizedTest(name = "equipped {0}")
     @MethodSource({"equipWeapon"})
-    void EquipDifferentWeaponsOnWarriorAndVerifyItsStats (Weapon weapon, int expectedHealth, int expectedAttack) {
+    void EquipDifferentWeaponsOnWarriorAndVerifyItsStats(Weapon weapon, int expectedHealth, int expectedAttack) {
         warrior.equipWeapon(weapon);
 
         assertEquals(expectedHealth, warrior.getHealth());
         assertEquals(expectedAttack, warrior.getAttack());
-    }
-
-    static Stream<Arguments> equipWeapon() {
-        return Stream.of(
-                arguments(WeaponType.SWORD, 55, 7),
-                arguments(WeaponType.SHIELD, 70, 4),
-                arguments(WeaponType.GREAT_AXE, 35, 10),
-                arguments(WeaponType.KATANA, 30, 11),
-                arguments(WeaponType.MAGIC_WAND, 80, 8),
-                arguments(Weapon.builder().healthStat(-100).attackStat(-100).defenceStat(-100)
-                        .vampirismStat(-100).healPowerStat(-100).build(), -50, 0, 0));
     }
 }

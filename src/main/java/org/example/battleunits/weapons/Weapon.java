@@ -2,9 +2,7 @@ package org.example.battleunits.weapons;
 
 public interface Weapon {
 
-    static WeaponBuilder builder() {
-        return new WeaponBuilder();
-    }
+    String getName();
 
     int getHealthStat();
 
@@ -18,7 +16,13 @@ public interface Weapon {
 
     int getPiercingAttackStat();
 
-    default int getCharacteristics(String characteristics) {
-        return 0;
+    WeaponClass getWeaponClass();
+
+    default String getCharacteristics() {
+        return String.format("%s{health: %s, attack: %s, defence: %s" +
+                ", vampirism: %s, heal power: %s, weapon class: %s}",
+                getName(), getHealthStat(), getAttackStat(), getDefenceStat(),
+                getVampirismStat(), getHealPowerStat(), getWeaponClass());
     }
+
 }

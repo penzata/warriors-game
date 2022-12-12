@@ -1,11 +1,24 @@
 package org.example.battleunits;
 
-public interface Knight extends Warrior {
-    /**
-     * @return Knight object with default health(50) & attack(7).
-     */
-    static Knight create() {
-        return new KnightImpl();
+
+import org.example.battleunits.subsidiary.CombatUnitType;
+
+public class Knight extends CombatUnitImpl {
+    private static final int DEFAULT_HEALTH = 50;
+    private static final int DEFAULT_ATTACK = 7;
+
+    Knight() {
+        super(DEFAULT_HEALTH, DEFAULT_ATTACK);
+    }
+
+    Knight (int health, int attack) {
+        super(health, attack);
+    }
+
+    @Override
+    public CombatUnitType getCombatUnitType() {
+
+        return CombatUnitType.FIGHTER;
     }
 
 }

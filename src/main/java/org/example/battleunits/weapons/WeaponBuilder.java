@@ -1,87 +1,64 @@
 package org.example.battleunits.weapons;
 
-   public class WeaponBuilder {
-       private static int idSequence = 0;
-       /**
-        * used to keep track on created custom weapons at debugging
-        */
-       private final int id = ++idSequence;
-        int health;
-        int attack;
-        int defence;
-        int vampirism;
-        int healPower;
-        int piercingAttack;
+public class WeaponBuilder {
+    String name;
+    int healthStat;
+    int attackStat;
+    int defenceStat;
+    int vampirismStat;
+    int healPowerStat;
+    int piercingAttackStat;
+    WeaponClass weaponClass;
 
-       WeaponBuilder() {
-       }
-
-       public WeaponBuilder healthStat(int health) {
-            this.health = health;
-            return this;
-        }
-
-        public WeaponBuilder attackStat(int attack) {
-            this.attack = attack;
-            return this;
-        }
-
-        public WeaponBuilder defenceStat(int defence) {
-            this.defence = defence;
-            return this;
-        }
-
-        public WeaponBuilder vampirismStat(int vampirism) {
-            this.vampirism = vampirism;
-            return this;
-        }
-
-        public WeaponBuilder piercingAttackStat(int piercingAttack) {
-            this.piercingAttack = piercingAttack;
-            return this;
-        }
-
-        public WeaponBuilder healPowerStat(int healPower) {
-            this.healPower = healPower;
-            return this;
-        }
-
-        public Weapon build() {
-            return new Weapon() {
-                @Override
-                public String toString() {
-                    return "CUSTOM_WEAPON#%2d".formatted(id);
-                }
-
-                @Override
-                public int getHealthStat() {
-                    return health;
-                }
-
-                @Override
-                public int getAttackStat() {
-                    return attack;
-                }
-
-                @Override
-                public int getDefenceStat() {
-                    return defence;
-                }
-
-                @Override
-                public int getVampirismStat() {
-                    return vampirism;
-                }
-
-                @Override
-                public int getHealPowerStat() {
-                    return healPower;
-                }
-
-                @Override
-                public int getPiercingAttackStat() {
-                    return piercingAttack;
-                }
-            };
-        }
+    private WeaponBuilder() {
     }
+
+    public static WeaponBuilder newInstance() {
+        return new WeaponBuilder();
+    }
+
+    public WeaponBuilder name(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public WeaponBuilder healthStat(int healthStat) {
+        this.healthStat = healthStat;
+        return this;
+    }
+
+    public WeaponBuilder attackStat(int attackStat) {
+        this.attackStat = attackStat;
+        return this;
+    }
+
+    public WeaponBuilder defenceStat(int defenceStat) {
+        this.defenceStat = defenceStat;
+        return this;
+    }
+
+    public WeaponBuilder vampirismStat(int vampirismStat) {
+        this.vampirismStat = vampirismStat;
+        return this;
+    }
+
+    public WeaponBuilder healPowerStat(int healPowerStat) {
+        this.healPowerStat = healPowerStat;
+        return this;
+    }
+
+    public WeaponBuilder piercingAttackStat(int piercingAttackStat) {
+        this.piercingAttackStat = piercingAttackStat;
+        return this;
+    }
+
+    public WeaponBuilder weaponClass(WeaponClass weaponClass) {
+        this.weaponClass = weaponClass;
+        return this;
+    }
+
+    public Weapon build() {
+        return new WeaponImpl(this);
+    }
+
+}

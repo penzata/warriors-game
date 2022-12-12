@@ -3,6 +3,7 @@ package org.example.battleunits;
 import org.example.battleunits.subsidiary.CombatUnitType;
 import org.example.battleunits.weapons.Weapon;
 
+import java.util.Deque;
 import java.util.List;
 
 public interface CombatUnit {
@@ -27,7 +28,7 @@ public interface CombatUnit {
 
     CombatUnit equipWeapon(Weapon weapon);
 
-    List<Weapon> getWeapons();
+    Deque<Weapon> getWeaponsEquipped();
 
     CombatUnitType getCombatUnitType();
 }

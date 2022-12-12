@@ -31,7 +31,7 @@ public class Vampire extends CombatUnitImpl implements Vampirism {
     }
 
     private int getVampirismStatFromWeapon() {
-        return getWeapons().stream()
+        return getWeaponsEquipped().stream()
                 .mapToInt(Weapon::getVampirismStat)
                 .sum();
     }

@@ -2,7 +2,9 @@ package org.example.battleunits;
 
 import org.example.battleunits.weapons.Weapon;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 
 public abstract class CombatUnitImpl implements CombatUnit {
@@ -15,7 +17,7 @@ public abstract class CombatUnitImpl implements CombatUnit {
     private final int maxHealth;
     private int health;
     private int attack;
-    private List<Weapon> weapons = new ArrayList<>();
+    private Deque<Weapon> weaponsEquipped = new ArrayDeque<>();
 
     CombatUnitImpl(int health, int attack) {
         this.maxHealth = health;
@@ -48,12 +50,12 @@ public abstract class CombatUnitImpl implements CombatUnit {
     }
 
     private int getHealthStatFromWeapon() {
-        return weapons.stream()
+        return weaponsEquipped.stream()
                 .mapToInt(Weapon::getHealthStat).sum();
     }
 
     private int getAttackStatFromWeapon() {
-        return weapons.stream()
+        return weaponsEquipped.stream()
                 .mapToInt(Weapon::getAttackStat).sum();
     }
 
@@ -73,6 +75,7 @@ public abstract class CombatUnitImpl implements CombatUnit {
 
     @Override
     public void hit(CombatUnit opponent) {
+
         opponent.receiveDamage(this.getAttack());
     }
 
@@ -90,14 +93,15 @@ public abstract class CombatUnitImpl implements CombatUnit {
     @Override
     public CombatUnit equipWeapon(Weapon weapon) {
         if (isAlive()) {
-            weapons.add(weapon);
+            weaponsEquipped.add(weapon);
         }
         return this;
     }
 
     @Override
-    public List<Weapon> getWeapons() {
-        return weapons;
+    public Deque<Weapon> getWeaponsEquipped() {
+
+        return weaponsEquipped;
     }
 
 }

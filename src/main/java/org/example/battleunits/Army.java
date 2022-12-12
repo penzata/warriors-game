@@ -20,4 +20,6 @@ public interface Army extends InfGenerator<CombatUnit> {
     void equipCombatUnitAtPosition(int position, Weapon weapon);
 
     void moveUnits();
+
+    void isEveryoneAlive();
 }

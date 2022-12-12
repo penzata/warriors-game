@@ -1,37 +1,32 @@
 package org.example.battleunits.weapons;
 
-import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-@Builder
 public class WeaponImpl implements Weapon {
 
+    private String name;
     private int healthStat;
     private int attackStat;
     private int defenceStat;
     private int vampirismStat;
     private int healPowerStat;
     private int piercingAttackStat;
-    private int decreaseDurabilityStep;
-    private int durabilityStat;
+    private WeaponClass weaponClass;
 
-    @Override
-    public void decreaseDurability() {
-        if (durabilityStat > 0 && decreaseDurabilityStep > 0) {
-            durabilityStat -= decreaseDurabilityStep;
-        }
-        if (durabilityStat <= 0) {
-            breakWeapon();
-        }
+    WeaponImpl(WeaponBuilder weaponBuilder) {
+        name = weaponBuilder.name;
+        healthStat = weaponBuilder.healthStat;
+        attackStat = weaponBuilder.attackStat;
+        defenceStat = weaponBuilder.defenceStat;
+        vampirismStat = weaponBuilder.vampirismStat;
+        healPowerStat = weaponBuilder.healPowerStat;
+        piercingAttackStat = weaponBuilder.piercingAttackStat;
+        weaponClass = weaponBuilder.weaponClass;
     }
 
-    private void breakWeapon() {
-        healthStat = 0;
-        attackStat = 0;
-        defenceStat = 0;
-        vampirismStat = 0;
-        healPowerStat = 0;
-        piercingAttackStat = 0;
+    public static WeaponBuilder builder() {
+        return WeaponBuilder.newInstance();
     }
+
 }

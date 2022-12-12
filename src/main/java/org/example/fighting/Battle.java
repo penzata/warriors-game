@@ -29,8 +29,8 @@ public class Battle {
 
         while (attacker.hasNext() && defender.hasNext()) {
             Duel.fight(attacker.next(), defender.next());
-            army1.moveUnits();
-            army2.moveUnits();
+            army1.isEveryoneAlive();
+            army2.isEveryoneAlive();
             attacker = army1.getAliveUnit();
             defender = army2.getAliveUnit();
         }
@@ -65,8 +65,8 @@ public class Battle {
             log.atDebug().log("\nRound {}", roundCount++);
             while (it1.hasNext() && it2.hasNext()) {
                 Duel.fight(it1.next(), it2.next());
-                army1.moveUnits();
-                army2.moveUnits();
+                army1.isEveryoneAlive();
+                army2.isEveryoneAlive();
             }
         }
         log.atDebug().log("{}{}", AFTER_THE_BATTLE, army1);

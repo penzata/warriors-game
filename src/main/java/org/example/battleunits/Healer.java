@@ -36,7 +36,7 @@ public class Healer extends CombatUnitImpl implements HealPower, ProcessCommandC
     }
 
     private int getHealPowerStatFromWeapon() {
-        return getWeapons().stream()
+        return getWeaponsEquipped().stream()
                 .mapToInt(Weapon::getHealPowerStat)
                 .sum();
     }

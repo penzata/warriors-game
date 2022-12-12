@@ -95,4 +95,16 @@ public class ArmyImpl implements Army {
             }
         }
     }
+
+    @Override
+    public void isEveryoneAlive() {
+        List<CombatUnit> deadUnits = new ArrayList<>();
+        for(CombatUnit unit : army) {
+            if (!unit.isAlive() && !deadUnits.contains(unit)) {
+                deadUnits.add(unit);
+                moveUnits();
+                return;
+            }
+        }
+    }
 }

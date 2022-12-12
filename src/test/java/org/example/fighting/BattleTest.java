@@ -316,8 +316,6 @@ class BattleTest {
                 .addBattleUnits(CombatUnitFactory::createVampire, 1)
                 .addBattleUnits(CombatUnitFactory::createHealer, 2)
                 .addBattleUnits(CombatUnitFactory::createKnight, 2);
-        army1.moveUnits();
-        army2.moveUnits();
         //battle2 with warlord
         Army army3 = new ArmyImpl(CombatUnitFactory::createWarrior, 2)
                 .addBattleUnits(CombatUnitFactory::createLancer, 2)
@@ -327,8 +325,6 @@ class BattleTest {
                 .addBattleUnits(CombatUnitFactory::createVampire, 1)
                 .addBattleUnits(CombatUnitFactory::createHealer, 5)
                 .addBattleUnits(CombatUnitFactory::createKnight, 2);
-        army3.moveUnits();
-        army4.moveUnits();
         //battle3 with warlord
         Army army5 = new ArmyImpl(CombatUnitFactory::createWarrior, 2)
                 .addBattleUnits(CombatUnitFactory::createLancer, 3)
@@ -340,8 +336,6 @@ class BattleTest {
                 .addBattleUnits(CombatUnitFactory::createKnight, 1);
         army5.equipCombatUnitAtPosition(0, WeaponFactory.SWORD);
         army6.equipCombatUnitAtPosition(0, WeaponFactory.SHIELD);
-        army5.moveUnits();
-        army6.moveUnits();
 
         return Stream.of(
                 arguments(army1, army2, true),
@@ -362,8 +356,6 @@ class BattleTest {
                 .addBattleUnits(CombatUnitFactory::createKnight, 1);
         army1.equipCombatUnitAtPosition(0, WeaponFactory.SWORD);
         army2.equipCombatUnitAtPosition(0, WeaponFactory.SHIELD);
-        army1.moveUnits();
-        army2.moveUnits();
 
         return Stream.of(
                 arguments(army1, army2, false));

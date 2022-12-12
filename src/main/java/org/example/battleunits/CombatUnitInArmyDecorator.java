@@ -7,6 +7,7 @@ import org.example.battleunits.subsidiary.CombatUnitBehind;
 import org.example.battleunits.subsidiary.CombatUnitType;
 import org.example.battleunits.weapons.Weapon;
 
+import java.util.Deque;
 import java.util.List;
 
 public class CombatUnitInArmyDecorator implements CombatUnit, CombatUnitBehind, ProcessCommandChain {
@@ -82,8 +83,8 @@ public class CombatUnitInArmyDecorator implements CombatUnit, CombatUnitBehind, 
     }
 
     @Override
-    public List<Weapon> getWeapons() {
-        return combatUnit.getWeapons();
+    public Deque<Weapon> getWeaponsEquipped() {
+        return combatUnit.getWeaponsEquipped();
     }
 
     @Override

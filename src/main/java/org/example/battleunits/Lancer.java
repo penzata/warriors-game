@@ -30,7 +30,7 @@ public class Lancer extends CombatUnitImpl implements PiercingAttack {
     }
 
     private int getPiercingAttackStatFromWeapon() {
-        return getWeapons().stream()
+        return getWeaponsEquipped().stream()
                 .mapToInt(Weapon::getPiercingAttackStat)
                 .sum();
     }

@@ -40,7 +40,7 @@ public class Warlord extends CombatUnitImpl implements Defence {
     }
 
     private int getDefenceStatFromWeapon() {
-        return getWeapons().stream()
+        return getWeaponsEquipped().stream()
                 .mapToInt(Weapon::getDefenceStat)
                 .sum();
     }

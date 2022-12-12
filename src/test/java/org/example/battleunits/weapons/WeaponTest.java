@@ -21,7 +21,8 @@ class WeaponTest {
                 .healthStat(-10).attackStat(5)
                 .vampirismStat(40)
                 .build();
-        log.atDebug().log("{} chars: {}", customWeapon, customWeapon.getCharacteristics());
+        log.atDebug().log("{}", customWeapon.getCharacteristics());
+        log.atDebug().log("{}", WeaponFactory.KATANA.getCharacteristics());
     }
 
     @Test

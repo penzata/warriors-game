@@ -1,3 +1,5 @@
+Design patterns' sandbox program.
+
 Simple game about fighting:
 
 1) one-on-one duel;
